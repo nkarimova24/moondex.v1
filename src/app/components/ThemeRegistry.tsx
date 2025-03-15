@@ -19,11 +19,12 @@ export default function ThemeRegistry({ children }: { children: React.ReactNode 
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setCache(createEmotionCache()); 
+    setCache(createEmotionCache());
     setMounted(true);
   }, []);
 
-  if (!mounted) return <>{children}</>; 
+  if (!mounted) return <>{children}</>;
+
   return (
     <CacheProvider value={cache}>
       <ThemeProvider theme={theme}>

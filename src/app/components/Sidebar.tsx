@@ -88,9 +88,13 @@ export default function Sidebar() {
                       <List component="div" disablePadding>
                         {seriesSets.map((set) => (
                           <ListItem key={set.id} disablePadding>
-                            <ListItemButton component={Link} href={`/sets/${set.id}`} sx={{ pl: 4 }}>
-                              <ListItemText primary={set.name} />
-                            </ListItemButton>
+                          
+                          {/* Routingssss to check latersssss*/}
+                          <ListItemButton component={Link} href={`/pages/pokedex?setId=${set.id}`} sx={{ pl: 4 }}>
+                          <ListItemText primary={set.name} />
+                         </ListItemButton>
+
+
                           </ListItem>
                         ))}
                       </List>
