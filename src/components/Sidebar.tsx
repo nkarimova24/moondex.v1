@@ -14,69 +14,23 @@ import {
 } from "@mui/material";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
-
-interface PokemonSet {
-  id: string;
-  name: string;
-  series: string;
-  releaseDate: string; 
-}
-
+import { fetchPokemonSets, PokemonSet } from "@/lib/api";
 
 export default function Sidebar() {
   const [sets, setSets] = useState<{ [key: string]: PokemonSet[] }>({});
   const [loading, setLoading] = useState(true);
-  const [expandedMain, setExpandedMain] = useState(false); // Hoofdknop toggle
+  const [expandedMain, setExpandedMain] = useState(false);
   const [expandedSeries, setExpandedSeries] = useState<{ [key: string]: boolean }>({});
 
   useEffect(() => {
-    const fetchSets = async () => {
-      try {
-        const response = await fetch("https://api.pokemontcg.io/v2/sets");
-        const data = await response.json();
-  
-        // Filter sets met een geldige releaseDate
-        const validSets: PokemonSet[] = data.data.filter(
-          (set: PokemonSet) => set.releaseDate
-        );
-  
-        // Sorteer sets op releaseDate (nieuwste eerst)
-        const sortedSets = validSets.sort((a, b) => {
-          return new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime();
-        });
-  
-        // Groepeer sets per serie
-        const groupedSets = sortedSets.reduce<{ [key: string]: PokemonSet[] }>(
-          (acc, set) => {
-            if (!acc[set.series]) acc[set.series] = [];
-            acc[set.series].push(set);
-            return acc;
-          },
-          {}
-        );
-  
-        // Sorteer series op basis van de nieuwste set binnen elke serie
-        const sortedSeries = Object.entries(groupedSets)
-          .sort(([_, setsA], [__, setsB]) => {
-            const latestSetA = new Date(setsA[0].releaseDate).getTime();
-            const latestSetB = new Date(setsB[0].releaseDate).getTime();
-            return latestSetB - latestSetA;
-          });
-  
-        // Zet de gesorteerde series en sets
-        setSets(Object.fromEntries(sortedSeries));
-
-      } catch (error) {
-        console.error("Error fetching Pokémon sets:", error);
-      } finally {
-        setLoading(false);
-      }
+    const loadSets = async () => {
+      const fetchedSets = await fetchPokemonSets();
+      setSets(fetchedSets);
+      setLoading(false);
     };
-  
-    fetchSets();
+
+    loadSets();
   }, []);
-  
-  // groupedSets is already calculated in useEffect and stored in sets
 
   const handleMainToggle = () => {
     setExpandedMain((prev) => !prev);
@@ -102,14 +56,12 @@ export default function Sidebar() {
     >
       <Box>
         <List>
-          {/* Home Link */}
           <ListItem disablePadding>
             <ListItemButton component={Link} href="/">
               <ListItemText primary="Home" />
             </ListItemButton>
           </ListItem>
 
-          {/* Sets & Series Main btn */}
           <ListItem disablePadding>
             <ListItemButton onClick={handleMainToggle}>
               <ListItemText primary="Sets & Series" sx={{ fontWeight: "bold" }} />
@@ -117,7 +69,6 @@ export default function Sidebar() {
             </ListItemButton>
           </ListItem>
 
-          {/* Sets & Series list */}
           <Collapse in={expandedMain} timeout="auto" unmountOnExit>
             {loading ? (
               <Box display="flex" justifyContent="center" p={2}>
