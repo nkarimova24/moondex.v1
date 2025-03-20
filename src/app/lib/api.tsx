@@ -1,4 +1,3 @@
-
 export interface PokemonSet {
   id: string;
   name: string;
@@ -62,9 +61,16 @@ export const fetchPokemonSets = async (): Promise<{ [key: string]: PokemonSet[] 
   }
 };
 
-export const fetchCardsBySet = async (setId: string): Promise<PokemonCard[]> => {
+export const fetchCardsBySet = async (setId: string, searchTerm?: string): Promise<PokemonCard[]> => {
   try {
-    const response = await fetchWithAuth(`https://api.pokemontcg.io/v2/cards?q=set.id:${setId}`);
+    let query = `set.id:${setId}`;
+    
+    if (searchTerm && searchTerm.trim() !== '') {
+      const sanitizedTerm = searchTerm.trim().replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      query += ` name:"*${sanitizedTerm}*"`;
+    }
+    
+    const response = await fetchWithAuth(`https://api.pokemontcg.io/v2/cards?q=${encodeURIComponent(query)}`);
     const data = await response.json();
     return data.data;
   } catch (error) {
