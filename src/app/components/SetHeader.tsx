@@ -10,7 +10,7 @@ interface SetHeaderProps {
 
 export default function SetHeader({ setInfo }: SetHeaderProps) {
   return (
-    <div className="bg-gray-100 rounded-lg shadow-md p-4 mb-6">
+    <div className="rounded-lg shadow-md p-4 mb-6">
       <div className="flex flex-col md:flex-row items-center gap-4">
         {/* Logo */}
         <div className="flex-shrink-0">

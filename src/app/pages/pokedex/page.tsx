@@ -24,7 +24,6 @@ export default function PokeDex() {
       setLoading(true);
       
       try {
-        // Parallel data fetching voor betere performance
         const [fetchedCards, fetchedSetInfo] = await Promise.all([
           fetchCardsBySet(setId),
           fetchSetDetails(setId)
