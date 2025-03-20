@@ -1,4 +1,3 @@
-// app/pokedex/page.tsx
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
@@ -138,12 +137,16 @@ export default function PokeDex() {
     <div className="container mx-auto px-4">
       {setInfo && <SetHeader setInfo={setInfo} />}
       
-      <SetSearchbar 
-        onSearch={handleSearch} 
-        value={searchTerm}
-        placeholder="Zoek naar kaarten in deze set..." 
-        isLoading={isSearching || loading}
-      />
+    <div className="grid grid-cols-12 gap-4 mb-6">
+     <div className="col-span-4 col-start-1">
+    <SetSearchbar 
+      onSearch={handleSearch} 
+      value={searchTerm}
+      placeholder="Zoek naar kaarten in deze set..." 
+      isLoading={isSearching || loading}
+    />
+  </div>
+</div>
       
       {loadingState || renderResults()}
     </div>
