@@ -4,6 +4,19 @@ export interface PokemonSet {
   name: string;
   series: string;
   releaseDate: string;
+  printedTotal?: number;
+  total?: number;
+  legalities?: {
+    unlimited?: string;
+    standard?: string;
+    expanded?: string;
+  };
+  ptcgoCode?: string;
+  updatedAt?: string;
+  images?: {
+    symbol?: string;
+    logo?: string;
+  };
 }
 
 export interface PokemonCard {
@@ -57,5 +70,16 @@ export const fetchCardsBySet = async (setId: string): Promise<PokemonCard[]> => 
   } catch (error) {
     console.error("Error fetching cards:", error);
     return [];
+  }
+};
+
+export const fetchSetDetails = async (setId: string): Promise<PokemonSet | null> => {
+  try {
+    const response = await fetchWithAuth(`https://api.pokemontcg.io/v2/sets/${setId}`);
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.error("Error fetching set details:", error);
+    return null;
   }
 };

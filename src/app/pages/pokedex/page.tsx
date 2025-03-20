@@ -2,13 +2,16 @@
 
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { fetchCardsBySet, PokemonCard } from "@/app/lib/api";
+import { fetchCardsBySet, fetchSetDetails, PokemonCard, PokemonSet } from "@/app/lib/api";
 import CardGrid from "@/app/components/CardGrid";
+import SetHeader from "@/app/components/SetHeader";
+
 
 export default function PokeDex() {
   const searchParams = useSearchParams();
   const [setId, setSetId] = useState<string | null>(null);
   const [cards, setCards] = useState<PokemonCard[]>([]);
+  const [setInfo, setSetInfo] = useState<PokemonSet | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -16,20 +19,27 @@ export default function PokeDex() {
   }, [searchParams]);
 
   useEffect(() => {
-    const loadCards = async () => {
+    const loadData = async () => {
       if (!setId) return;
       setLoading(true);
+      
       try {
-        const fetchedCards = await fetchCardsBySet(setId);
+        // Parallel data fetching voor betere performance
+        const [fetchedCards, fetchedSetInfo] = await Promise.all([
+          fetchCardsBySet(setId),
+          fetchSetDetails(setId)
+        ]);
+        
         setCards(fetchedCards);
+        setSetInfo(fetchedSetInfo);
       } catch (error) {
-        console.error("Error loading cards:", error);
+        console.error("Error loading data:", error);
       } finally {
         setLoading(false);
       }
     };
 
-    loadCards();
+    loadData();
   }, [setId]);
 
   if (!setId) {
@@ -49,10 +59,11 @@ export default function PokeDex() {
   }
 
   return (
-    <div className="container mx-auto">
-      <h1 className="text-2xl font-bold my-4">Pokemon Cards</h1>
+    <div className="container mx-auto px-4">
+      {setInfo && <SetHeader setInfo={setInfo} />}
+      
       {cards.length === 0 ? (
-        <p className="text-center text-lg text-gray-600">No cards found for this set.</p>
+        <p className="text-center text-lg text-gray-600 my-12">Geen kaarten gevonden voor deze set.</p>
       ) : (
         <CardGrid cards={cards} />
       )}
