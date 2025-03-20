@@ -13,7 +13,7 @@ interface SetSearchbarProps {
 export default function SetSearchbar({ 
   onSearch, 
   value, 
-  placeholder = "Search", 
+  placeholder = "Searching for cards in this set..", 
   isLoading = false 
 }: SetSearchbarProps) {
   const [localSearchTerm, setLocalSearchTerm] = useState(value);
@@ -42,18 +42,14 @@ export default function SetSearchbar({
   };
   
   return (
-    <div className="relative w-full max-w-md mx-auto mb-6">
-      <div className={`flex items-center border-2 border-gray-300 rounded-md overflow-hidden focus-within:border-blue-500 bg-white ${isLoading ? 'opacity-70' : ''}`}>
-        <span className="p-2 text-gray-500">
-          <Search size={20} />
-        </span>
-        
+    <div className="w-full">
+      <div className={`flex items-center border-2 border-gray-700 rounded-md overflow-hidden focus-within:border-blue-500 bg-[#333] ${isLoading ? 'opacity-70' : ''}`}>
         <input
           type="text"
           value={localSearchTerm}
           onChange={handleChange}
           placeholder={placeholder}
-          className="py-2 px-3 flex-grow outline-none text-gray-800"
+          className="py-2 px-3 pl-4 flex-grow outline-none text-white bg-transparent"
           aria-label="Zoek naar kaarten"
           disabled={isLoading}
         />
@@ -61,13 +57,22 @@ export default function SetSearchbar({
         {localSearchTerm && (
           <button 
             onClick={handleClear}
-            className="p-2 text-gray-500 hover:text-gray-700"
+            className="p-2 text-gray-400 hover:text-blue-400 transition-colors"
             aria-label="Zoekopdracht wissen"
             disabled={isLoading}
           >
             <X size={20} />
           </button>
         )}
+        
+        <button 
+          onClick={() => onSearch(localSearchTerm)}
+          className="p-2 pr-4 text-gray-400 hover:text-blue-400 transition-colors"
+          aria-label="Zoeken"
+          disabled={isLoading}
+        >
+          <Search size={20} />
+        </button>
       </div>
     </div>
   );

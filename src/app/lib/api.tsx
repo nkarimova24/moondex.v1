@@ -36,6 +36,8 @@ export interface PokemonCard {
   }[];
 }
 
+export type SearchType = "pokemon" | "trainer" | "energy" | "all";
+
 const API_KEY = process.env.NEXT_PUBLIC_POKEMON_TCG_API_KEY;
 
 const fetchWithAuth = async (url: string) => {
@@ -73,16 +75,34 @@ export const fetchPokemonSets = async (): Promise<{ [key: string]: PokemonSet[] 
   }
 };
 
-export const fetchCardsBySet = async (setId: string, searchTerm?: string): Promise<PokemonCard[]> => {
+export const fetchCardsBySet = async (
+  setId: string, 
+  searchTerm?: string, 
+  cardType: SearchType = "all"
+): Promise<PokemonCard[]> => {
   try {
     let query = `set.id:${setId}`;
     
-    if (searchTerm && searchTerm.trim() !== '') {
-      const sanitizedTerm = searchTerm.trim().replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-      query += ` name:"*${sanitizedTerm}*"`;
+    if (cardType !== "all") {
+      if (cardType === "pokemon") {
+        query += " supertype:pokémon";
+      } else if (cardType === "trainer") {
+        query += " supertype:trainer";
+      } else if (cardType === "energy") {
+        query += " supertype:energy";
+      }
     }
     
-    // Voeg orderBy toe om op kaartnummer te sorteren (van laag naar hoog)
+    if (searchTerm && searchTerm.trim() !== '') {
+      const sanitizedTerm = searchTerm.trim().replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      
+      if (/^\d+$/.test(sanitizedTerm)) {
+        query += ` number:${sanitizedTerm}`;
+      } else {
+        query += ` name:"*${sanitizedTerm}*"`;
+      }
+    }
+    
     const response = await fetchWithAuth(`https://api.pokemontcg.io/v2/cards?q=${encodeURIComponent(query)}&orderBy=number`);
     const data = await response.json();
     return data.data;
@@ -103,57 +123,12 @@ export const fetchSetDetails = async (setId: string): Promise<PokemonSet | null>
   }
 };
 
-export const searchPokemonByName = async (
-  pokemonName: string, 
-  page = 1, 
+export const searchCardsByType = async (
+  searchTerm: string,
+  cardType: SearchType = "all",
+  page = 1,
   pageSize = 20
 ): Promise<{
-  cards: PokemonCard[];
-  totalCount: number;
-  page: number;
-  pageSize: number;
-  totalPages: number;
-}> => {
-  try {
-    if (!pokemonName || pokemonName.trim() === '') {
-      return {
-        cards: [],
-        totalCount: 0,
-        page,
-        pageSize,
-        totalPages: 0
-      };
-    }
-    
-    const sanitizedName = pokemonName.trim().replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    
-    const query = `name:"*${sanitizedName}*" supertype:pokémon`;
-    
-    const response = await fetchWithAuth(
-      `https://api.pokemontcg.io/v2/cards?q=${encodeURIComponent(query)}&page=${page}&pageSize=${pageSize}&orderBy=set.releaseDate,number`
-    );
-    const data = await response.json();
-    
-    return {
-      cards: data.data || [],
-      totalCount: data.totalCount || 0,
-      page: data.page || page,
-      pageSize: data.pageSize || pageSize,
-      totalPages: data.totalPages || 0
-    };
-  } catch (error) {
-    console.error("Error searching Pokémon:", error);
-    return {
-      cards: [],
-      totalCount: 0,
-      page,
-      pageSize,
-      totalPages: 0
-    };
-  }
-};
-
-export const searchCards = async (searchTerm: string, page = 1, pageSize = 20): Promise<{
   cards: PokemonCard[];
   totalCount: number;
   page: number;
@@ -172,7 +147,23 @@ export const searchCards = async (searchTerm: string, page = 1, pageSize = 20): 
     }
     
     const sanitizedTerm = searchTerm.trim().replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    const query = `name:"*${sanitizedTerm}*"`;
+    let query = "";
+    
+    if (/^\d+$/.test(sanitizedTerm)) {
+      query = `number:${sanitizedTerm}`;
+    } else {
+      query = `name:"*${sanitizedTerm}*"`;
+    }
+    
+    if (cardType !== "all") {
+      if (cardType === "pokemon") {
+        query += " supertype:pokémon";
+      } else if (cardType === "trainer") {
+        query += " supertype:trainer";
+      } else if (cardType === "energy") {
+        query += " supertype:energy";
+      }
+    }
     
     const response = await fetchWithAuth(
       `https://api.pokemontcg.io/v2/cards?q=${encodeURIComponent(query)}&page=${page}&pageSize=${pageSize}&orderBy=set.releaseDate,number`
@@ -196,4 +187,32 @@ export const searchCards = async (searchTerm: string, page = 1, pageSize = 20): 
       totalPages: 0
     };
   }
+};
+
+export const searchPokemonByName = async (
+  pokemonName: string, 
+  page = 1, 
+  pageSize = 20
+): Promise<{
+  cards: PokemonCard[];
+  totalCount: number;
+  page: number;
+  pageSize: number;
+  totalPages: number;
+}> => {
+  return searchCardsByType(pokemonName, "pokemon", page, pageSize);
+};
+
+export const searchCards = async (
+  searchTerm: string, 
+  page = 1, 
+  pageSize = 20
+): Promise<{
+  cards: PokemonCard[];
+  totalCount: number;
+  page: number;
+  pageSize: number;
+  totalPages: number;
+}> => {
+  return searchCardsByType(searchTerm, "all", page, pageSize);
 };

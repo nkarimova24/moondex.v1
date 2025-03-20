@@ -1,28 +1,27 @@
-// app/pokedex/page.tsx
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import { useSearchParams } from "next/navigation";
 import { 
   fetchCardsBySet, 
   fetchSetDetails, 
-  searchPokemonByName,
-  searchCards, 
+  searchCardsByType,
   PokemonCard, 
-  PokemonSet 
+  PokemonSet
 } from "@/app/lib/api";
 import CardGrid from "@/app/components/CardGrid";
 import SetHeader from "@/app/components/SetHeader";
 import SetSearchbar from "@/app/components/SetSearchbar";
-import { ArrowLeft, ArrowRight } from "lucide-react";
 
 export default function PokeDex() {
   const searchParams = useSearchParams();
+  const loadMoreRef = useRef<HTMLDivElement>(null);
   
   const [setId, setSetId] = useState<string | null>(null);
   const [cards, setCards] = useState<PokemonCard[]>([]);
   const [setInfo, setSetInfo] = useState<PokemonSet | null>(null);
   const [loading, setLoading] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [isSearching, setIsSearching] = useState(false);
   const [displayedCards, setDisplayedCards] = useState<PokemonCard[]>([]);
@@ -34,9 +33,9 @@ export default function PokeDex() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [totalResults, setTotalResults] = useState(0);
+  const [hasMore, setHasMore] = useState(false);
 
   useEffect(() => {
-
     const pokemonSearchParam = searchParams.get("pokemonSearch");
     if (pokemonSearchParam) {
       setPokemonSearchTerm(pokemonSearchParam);
@@ -52,7 +51,6 @@ export default function PokeDex() {
         setIsPokemonSearch(false);
         setSetId(null); 
       } else {
-
         setIsGlobalSearch(false);
         setIsPokemonSearch(false);
         setGlobalSearchTerm('');
@@ -62,6 +60,9 @@ export default function PokeDex() {
     }
     
     setCurrentPage(1);
+    setCards([]);
+    setDisplayedCards([]);
+    setHasMore(false);
   }, [searchParams]);
 
   useEffect(() => {
@@ -82,80 +83,122 @@ export default function PokeDex() {
     loadSetInfo();
   }, [setId, isGlobalSearch, isPokemonSearch]);
   
-  const loadCards = useCallback(async () => {
+  const loadCards = useCallback(async (page = 1, append = false) => {
+    console.log("Loading cards for page:", page, "append:", append);
+    
     if (!setId && !isGlobalSearch && !isPokemonSearch) return;
-    setLoading(true);
+    
+    if (page === 1) {
+      setLoading(true);
+    } else {
+      setLoadingMore(true);
+    }
     
     try {
       if (isPokemonSearch) {
-
-        const results = await searchPokemonByName(pokemonSearchTerm, currentPage, 24);
-        setCards(results.cards);
-        setTotalPages(results.totalPages);
+        const results = await searchCardsByType(pokemonSearchTerm, "all", page, 24);
+        console.log(`Loaded ${results.cards.length} cards for page ${page}`, results);
+        
+        const calculatedTotalPages = Math.ceil(results.totalCount / results.pageSize);
+        console.log(`API reported totalPages: ${results.totalPages}, Calculated totalPages: ${calculatedTotalPages}`);
+        
+        if (append) {
+          setCards(prev => {
+            const newCards = [...prev, ...results.cards];
+            console.log(`Appended cards: ${prev.length} + ${results.cards.length} = ${newCards.length}`);
+            return newCards;
+          });
+        } else {
+          setCards(results.cards);
+        }
+        
+        setTotalPages(calculatedTotalPages);
         setTotalResults(results.totalCount);
+        setHasMore(page < calculatedTotalPages);
       } else if (isGlobalSearch) {
-
-        const results = await searchCards(globalSearchTerm, currentPage, 24);
-        setCards(results.cards);
-        setTotalPages(results.totalPages);
+        const results = await searchCardsByType(globalSearchTerm, "all", page, 24);
+        console.log(`Loaded ${results.cards.length} cards for page ${page}`, results);
+        
+        const calculatedTotalPages = Math.ceil(results.totalCount / results.pageSize);
+        console.log(`API reported totalPages: ${results.totalPages}, Calculated totalPages: ${calculatedTotalPages}`);
+        
+        if (append) {
+          setCards(prev => {
+            const newCards = [...prev, ...results.cards];
+            console.log(`Appended cards: ${prev.length} + ${results.cards.length} = ${newCards.length}`);
+            return newCards;
+          });
+        } else {
+          setCards(results.cards);
+        }
+        
+        setTotalPages(calculatedTotalPages);
         setTotalResults(results.totalCount);
+        setHasMore(page < calculatedTotalPages);
       } else {
-
         const fetchedCards = await fetchCardsBySet(setId!, searchTerm);
         setCards(fetchedCards);
         setTotalPages(1); 
         setTotalResults(fetchedCards.length);
+        setHasMore(false);
       }
     } catch (error) {
       console.error("Error loading cards:", error);
     } finally {
       setLoading(false);
+      setLoadingMore(false);
     }
-  }, [setId, searchTerm, isGlobalSearch, isPokemonSearch, globalSearchTerm, pokemonSearchTerm, currentPage]);
+  }, [
+    setId, 
+    searchTerm, 
+    isGlobalSearch, 
+    isPokemonSearch, 
+    globalSearchTerm, 
+    pokemonSearchTerm
+  ]);
   
   useEffect(() => {
-    loadCards();
+    loadCards(1, false);
   }, [loadCards]);
 
   useEffect(() => {
-    if (!loading) {
+    console.log("Cards updated:", cards.length);
+    if (!loading && !loadingMore) {
       setDisplayedCards(cards);
       setIsSearching(false);
     }
-  }, [cards, loading]);
+  }, [cards, loading, loadingMore]);
   
   const handleSearch = useCallback((term: string) => {
     if (isGlobalSearch || isPokemonSearch) return; 
     
     setIsSearching(true);
     setSearchTerm(term);
-  }, [isGlobalSearch, isPokemonSearch]);
-  
-  const handlePreviousPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage(prev => prev - 1);
-      window.scrollTo(0, 0);
-    }
-  };
 
-  const handleNextPage = () => {
-    if (currentPage < totalPages) {
-      setCurrentPage(prev => prev + 1);
-      window.scrollTo(0, 0);
-    }
-  };
+    setCurrentPage(1);
+    setCards([]);
+  }, [isGlobalSearch, isPokemonSearch]);
+
+  const handleLoadMore = useCallback(() => {
+    if (loadingMore || !hasMore) return;
+    
+    const nextPage = currentPage + 1;
+    console.log("Manually loading more cards, page:", nextPage);
+    setCurrentPage(nextPage);
+    loadCards(nextPage, true);
+  }, [currentPage, loadingMore, hasMore, loadCards]);
 
   const renderEmptyState = () => {
     return (
       <div className="text-center py-12">
         <p className="text-lg text-gray-300">
           {isPokemonSearch 
-            ? `Geen Pokémon gevonden met naam "${pokemonSearchTerm}".`
+            ? `No cards found for "${pokemonSearchTerm}".`
             : isGlobalSearch 
-              ? `Geen kaarten gevonden voor "${globalSearchTerm}".`
+              ? `No cards found for "${globalSearchTerm}".`
               : searchTerm 
-                ? `Geen kaarten gevonden voor "${searchTerm}" in deze set.` 
-                : "Geen kaarten gevonden voor deze set."}
+                ? `No cards found for"${searchTerm}" in this set.` 
+                : "No cards found in this set."}
         </p>
         {(isPokemonSearch || isGlobalSearch || searchTerm) && (
           <button 
@@ -168,7 +211,7 @@ export default function PokeDex() {
             }}
             className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors"
           >
-            {isPokemonSearch || isGlobalSearch ? "Terug" : "Zoekopdracht wissen"}
+            {isPokemonSearch || isGlobalSearch ? "Back" : "Delete searchterm"}
           </button>
         )}
       </div>
@@ -176,10 +219,10 @@ export default function PokeDex() {
   };
 
   const renderLoadingState = () => {
-    if (loading && !isSearching) {
+    if (loading && !loadingMore) {
       return (
         <div className="flex justify-center items-center h-64">
-          <p className="text-lg text-gray-300">Kaarten worden geladen...</p>
+          <p className="text-lg text-gray-300">Cards are loading</p>
         </div>
       );
     }
@@ -187,7 +230,7 @@ export default function PokeDex() {
     if (isSearching) {
       return (
         <div className="flex justify-center items-center h-64">
-          <p className="text-lg text-gray-300">Search</p>
+          <p className="text-lg text-gray-300">Searching for cards</p>
         </div>
       );
     }
@@ -195,48 +238,10 @@ export default function PokeDex() {
     return null;
   };
 
-  const renderPagination = () => {
-    if ((!isGlobalSearch && !isPokemonSearch) || totalPages <= 1) return null;
-    
-    return (
-      <div className="flex justify-center items-center mt-8 gap-4">
-        <button 
-          onClick={handlePreviousPage}
-          disabled={currentPage === 1}
-          className={`flex items-center px-4 py-2 rounded-md ${
-            currentPage === 1 
-              ? 'bg-gray-700 text-gray-500 cursor-not-allowed' 
-              : 'bg-blue-500 text-white hover:bg-blue-600'
-          }`}
-        >
-          <ArrowLeft size={16} className="mr-2" />
-          Vorige
-        </button>
-        
-        <span className="text-gray-300">
-          Pagina {currentPage} van {totalPages}
-        </span>
-        
-        <button 
-          onClick={handleNextPage}
-          disabled={currentPage === totalPages}
-          className={`flex items-center px-4 py-2 rounded-md ${
-            currentPage === totalPages 
-              ? 'bg-gray-700 text-gray-500 cursor-not-allowed' 
-              : 'bg-blue-500 text-white hover:bg-blue-600'
-          }`}
-        >
-          Volgende
-          <ArrowRight size={16} className="ml-2" />
-        </button>
-      </div>
-    );
-  };
-
   if (!setId && !isGlobalSearch && !isPokemonSearch) {
     return (
       <div className="flex justify-center items-center h-64">
-        <p className="text-lg text-gray-300">Geen set geselecteerd. Selecteer een set om kaarten te bekijken.</p>
+        <p className="text-lg text-gray-300">No set selected, select a set to search for a specific card.</p>
       </div>
     );
   }
@@ -245,30 +250,30 @@ export default function PokeDex() {
   
   return (
     <div className="container mx-auto px-4 py-4">
-      {isPokemonSearch ? (
-        <h1 className="text-2xl font-bold mb-4 text-white">
-          Pokémon zoekresultaten voor "{pokemonSearchTerm}"
-        </h1>
-      ) : isGlobalSearch ? (
-        <h1 className="text-2xl font-bold mb-4 text-white">
-          Zoekresultaten voor "{globalSearchTerm}"
-        </h1>
-      ) : (
-        setInfo && <SetHeader setInfo={setInfo} />
-      )}
-      
-      {!isGlobalSearch && !isPokemonSearch && (
-       <div className="grid grid-cols-12 gap-4 mb-6">
-       <div className="col-span-4 col-start-1">
-      <SetSearchbar 
-        onSearch={handleSearch} 
-        value={searchTerm}
-        placeholder="Zoek naar kaarten in deze set..." 
-        isLoading={isSearching || loading}
-      />
-    </div>
-  </div>
-      )}
+      <div className="sticky top-0 z-10 bg-[#262626] pb-4 pt-2">
+        {isPokemonSearch ? (
+          <h1 className="text-2xl font-bold mb-4 text-white">
+            Searchresults for "{pokemonSearchTerm}"
+          </h1>
+        ) : isGlobalSearch ? (
+          <h1 className="text-2xl font-bold mb-4 text-white">
+            Searchresults for "{globalSearchTerm}"
+          </h1>
+        ) : (
+          setInfo && <SetHeader setInfo={setInfo} />
+        )}
+        
+        {!isGlobalSearch && !isPokemonSearch && (
+          <div className="mb-2">
+            <SetSearchbar 
+              onSearch={handleSearch} 
+              value={searchTerm}
+              placeholder="Search cards in this set..." 
+              isLoading={isSearching || loading}
+            />
+          </div>
+        )}
+      </div>
       
       {loadingState || (
         <>
@@ -277,18 +282,36 @@ export default function PokeDex() {
           ) : (
             <div>
               <p className="mb-4 text-gray-400">
-     
+                {totalResults} {totalResults === 1 ? "kaart" : "kaarten"} found
                 {isPokemonSearch 
-                  ? ` voor Pokémon "${pokemonSearchTerm}"`
+                  ? ` for "${pokemonSearchTerm}"`
                   : isGlobalSearch 
-                    ? ` voor "${globalSearchTerm}"` 
-                    : searchTerm && ` voor "${searchTerm}"`}
-                {(isPokemonSearch || isGlobalSearch) && totalPages > 1 && ` - Pagina ${currentPage} van ${totalPages}`}
+                    ? ` for "${globalSearchTerm}"` 
+                    : searchTerm && ` for "${searchTerm}"`}
+                {totalResults > displayedCards.length && ` (${displayedCards.length} displayed)`}
               </p>
               
               <CardGrid cards={displayedCards} />
               
-              {renderPagination()}
+              <div className="my-8">
+                {totalResults > displayedCards.length && (
+                  <button
+                    onClick={handleLoadMore}
+                    className="w-full py-3 text-white bg-blue-600 rounded-md hover:bg-blue-700 disabled:bg-gray-600 disabled:text-gray-400"
+                    disabled={loadingMore}
+                  >
+                    {loadingMore 
+                      ? "Laden..." 
+                      : `(${displayedCards.length} of ${totalResults})`}
+                  </button>
+                )}
+                
+                {!loadingMore && displayedCards.length >= totalResults && totalResults > 0 && (
+                  <div className="text-center text-gray-500 mt-4">
+                    All cards are loaded
+                  </div>
+                )}
+              </div>
             </div>
           )}
         </>

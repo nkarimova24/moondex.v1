@@ -30,54 +30,56 @@ export default function GlobalSearchbar({ isLoading = false }: GlobalSearchbarPr
   };
   
   return (
-    <div className="w-full py-3 px-4">
+    <div className="w-full py-3 px-4 border-b border-[#333]">
       <div className="flex justify-end">
-        <form onSubmit={handleSubmit} className="relative w-full max-w-md">
-          <div 
-            className={`flex items-center border-2 rounded-full overflow-hidden transition-all duration-200 ${
-              isFocused 
-                ? 'bg-[#262626] shadow-lg' 
-                : 'border-[#444] bg-[#333] shadow'
-            }`}
-          >
-            <button 
-              type="submit"
-              className="p-2 pl-4 text-gray-400 hover:text-blue-400 transition-colors"
-              disabled={isLoading}
-              aria-label="Zoeken"
+        <div className="relative w-full max-w-md">
+          <form onSubmit={handleSubmit} className="relative">
+            <div 
+              className={`flex items-center border-2 rounded-full overflow-hidden transition-all duration-200 ${
+                isFocused 
+                  ? 'bg-[#262626] shadow-lg' 
+                  : 'border-[#444] bg-[#333] shadow'
+              }`}
             >
-              <Search size={20} />
-            </button>
-            
-            <input
-              type="text"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              onFocus={() => setIsFocused(true)}
-              onBlur={() => setIsFocused(false)}
-              placeholder="Search"
-              className="py-2 px-3 flex-grow outline-none text-white bg-transparent text-lg"
-              aria-label="Zoek Pokémon op naam"
-              disabled={isLoading}
-            />
-            
-            {searchTerm && (
-              <button 
-                onClick={handleClear}
-                type="button"
-                className="p-2 pr-4 text-gray-400 hover:text-blue-400 transition-colors"
-                aria-label="Zoekopdracht wissen"
+              <input
+                type="text"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                onFocus={() => setIsFocused(true)}
+                onBlur={() => setIsFocused(false)}
+                placeholder="Search.."
+                className="py-2 px-3 pl-4 flex-grow outline-none text-white bg-transparent text-lg"
+                aria-label="Zoek kaarten"
                 disabled={isLoading}
+              />
+              
+              {searchTerm && (
+                <button 
+                  onClick={handleClear}
+                  type="button"
+                  className="p-2 text-gray-400 hover:text-blue-400 transition-colors"
+                  aria-label="Zoekopdracht wissen"
+                  disabled={isLoading}
+                >
+                  <X size={20} />
+                </button>
+              )}
+              
+              <button 
+                type="submit"
+                className="p-2 pr-4 text-gray-400 hover:text-blue-400 transition-colors"
+                disabled={isLoading}
+                aria-label="Zoeken"
               >
-                <X size={20} />
+                <Search size={20} />
               </button>
+            </div>
+            
+            {isLoading && (
+              <div className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-500 animate-pulse"></div>
             )}
-          </div>
-          
-          {isLoading && (
-            <div className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-500 animate-pulse"></div>
-          )}
-        </form>
+          </form>
+        </div>
       </div>
     </div>
   );

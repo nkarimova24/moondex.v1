@@ -15,15 +15,20 @@ const theme = createTheme({
 const createEmotionCache = () => createCache({ key: "mui", prepend: true });
 
 export default function ThemeRegistry({ children }: { children: React.ReactNode }) {
-  const [cache, setCache] = useState(createEmotionCache);
   const [mounted, setMounted] = useState(false);
+  
+  const [cache] = useState(() => {
+
+    return typeof window !== 'undefined' ? createEmotionCache() : null;
+  });
 
   useEffect(() => {
-    setCache(createEmotionCache());
     setMounted(true);
   }, []);
 
-  if (!mounted) return <>{children}</>;
+  if (!mounted || !cache) {
+    return <div style={{ visibility: 'hidden' }}>{children}</div>;
+  }
 
   return (
     <CacheProvider value={cache}>
