@@ -187,7 +187,7 @@ export default function PokeDex() {
     if (isSearching) {
       return (
         <div className="flex justify-center items-center h-64">
-          <p className="text-lg text-gray-300">Zoeken naar kaarten...</p>
+          <p className="text-lg text-gray-300">Search</p>
         </div>
       );
     }
@@ -277,7 +277,7 @@ export default function PokeDex() {
           ) : (
             <div>
               <p className="mb-4 text-gray-400">
-                {totalResults} {totalResults === 1 ? "kaart" : "kaarten"} gevonden
+     
                 {isPokemonSearch 
                   ? ` voor Pokémon "${pokemonSearchTerm}"`
                   : isGlobalSearch 

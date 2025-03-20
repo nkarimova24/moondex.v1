@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Search, X } from 'lucide-react';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 
 interface GlobalSearchbarProps {
   isLoading?: boolean;
@@ -10,9 +10,14 @@ interface GlobalSearchbarProps {
 
 export default function GlobalSearchbar({ isLoading = false }: GlobalSearchbarProps) {
   const [searchTerm, setSearchTerm] = useState('');
+  const [isFocused, setIsFocused] = useState(false);
   const router = useRouter();
+  const pathname = usePathname();
   
-  // Handle search submission
+  useEffect(() => {
+    setSearchTerm('');
+  }, [pathname]);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchTerm.trim()) {
@@ -20,47 +25,60 @@ export default function GlobalSearchbar({ isLoading = false }: GlobalSearchbarPr
     }
   };
   
-  // Reset the search
   const handleClear = () => {
     setSearchTerm('');
   };
   
   return (
-    <div className="w-full bg-[#1a1a1a] py-3 px-4 sticky top-0 z-10 border-b border-[#333]">
-      <form onSubmit={handleSubmit}>
-        <div className={`flex items-center border border-[#444] rounded-md overflow-hidden focus-within:border-[#666] bg-[#333] ${isLoading ? 'opacity-70' : ''}`}>
-          <button 
-            type="submit"
-            className="p-2 text-gray-400 hover:text-white"
-            disabled={isLoading}
-            aria-label="Zoeken"
+    <div className="w-full py-3 px-4">
+      <div className="flex justify-end">
+        <form onSubmit={handleSubmit} className="relative w-full max-w-md">
+          <div 
+            className={`flex items-center border-2 rounded-full overflow-hidden transition-all duration-200 ${
+              isFocused 
+                ? 'bg-[#262626] shadow-lg' 
+                : 'border-[#444] bg-[#333] shadow'
+            }`}
           >
-            <Search size={20} />
-          </button>
-          
-          <input
-            type="text"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            placeholder="Zoek Pokémon op naam..."
-            className="py-2 px-3 flex-grow outline-none text-white bg-transparent"
-            aria-label="Zoek Pokémon op naam"
-            disabled={isLoading}
-          />
-          
-          {searchTerm && (
             <button 
-              onClick={handleClear}
-              type="button"
-              className="p-2 text-gray-400 hover:text-white"
-              aria-label="Zoekopdracht wissen"
+              type="submit"
+              className="p-2 pl-4 text-gray-400 hover:text-blue-400 transition-colors"
               disabled={isLoading}
+              aria-label="Zoeken"
             >
-              <X size={20} />
+              <Search size={20} />
             </button>
+            
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              onFocus={() => setIsFocused(true)}
+              onBlur={() => setIsFocused(false)}
+              placeholder="Search"
+              className="py-2 px-3 flex-grow outline-none text-white bg-transparent text-lg"
+              aria-label="Zoek Pokémon op naam"
+              disabled={isLoading}
+            />
+            
+            {searchTerm && (
+              <button 
+                onClick={handleClear}
+                type="button"
+                className="p-2 pr-4 text-gray-400 hover:text-blue-400 transition-colors"
+                aria-label="Zoekopdracht wissen"
+                disabled={isLoading}
+              >
+                <X size={20} />
+              </button>
+            )}
+          </div>
+          
+          {isLoading && (
+            <div className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-500 animate-pulse"></div>
           )}
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   );
 }

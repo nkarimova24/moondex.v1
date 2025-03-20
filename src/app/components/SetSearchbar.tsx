@@ -13,7 +13,7 @@ interface SetSearchbarProps {
 export default function SetSearchbar({ 
   onSearch, 
   value, 
-  placeholder = "Zoek naar kaarten...", 
+  placeholder = "Search", 
   isLoading = false 
 }: SetSearchbarProps) {
   const [localSearchTerm, setLocalSearchTerm] = useState(value);

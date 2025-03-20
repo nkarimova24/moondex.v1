@@ -21,6 +21,7 @@ export interface PokemonSet {
 export interface PokemonCard {
   id: string;
   name: string;
+  number: string;
   images: { small: string; large: string };
   supertype?: string;
   subtypes?: string[];
@@ -81,7 +82,8 @@ export const fetchCardsBySet = async (setId: string, searchTerm?: string): Promi
       query += ` name:"*${sanitizedTerm}*"`;
     }
     
-    const response = await fetchWithAuth(`https://api.pokemontcg.io/v2/cards?q=${encodeURIComponent(query)}`);
+    // Voeg orderBy toe om op kaartnummer te sorteren (van laag naar hoog)
+    const response = await fetchWithAuth(`https://api.pokemontcg.io/v2/cards?q=${encodeURIComponent(query)}&orderBy=number`);
     const data = await response.json();
     return data.data;
   } catch (error) {
@@ -125,11 +127,10 @@ export const searchPokemonByName = async (
     
     const sanitizedName = pokemonName.trim().replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     
-    // We voegen supertype:Pokémon toe om alleen Pokémon kaarten te krijgen (geen trainers, energie, etc.)
     const query = `name:"*${sanitizedName}*" supertype:pokémon`;
     
     const response = await fetchWithAuth(
-      `https://api.pokemontcg.io/v2/cards?q=${encodeURIComponent(query)}&page=${page}&pageSize=${pageSize}&orderBy=name`
+      `https://api.pokemontcg.io/v2/cards?q=${encodeURIComponent(query)}&page=${page}&pageSize=${pageSize}&orderBy=set.releaseDate,number`
     );
     const data = await response.json();
     
@@ -174,7 +175,7 @@ export const searchCards = async (searchTerm: string, page = 1, pageSize = 20): 
     const query = `name:"*${sanitizedTerm}*"`;
     
     const response = await fetchWithAuth(
-      `https://api.pokemontcg.io/v2/cards?q=${encodeURIComponent(query)}&page=${page}&pageSize=${pageSize}`
+      `https://api.pokemontcg.io/v2/cards?q=${encodeURIComponent(query)}&page=${page}&pageSize=${pageSize}&orderBy=set.releaseDate,number`
     );
     const data = await response.json();
     
