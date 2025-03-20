@@ -1,3 +1,4 @@
+// app/pokedex/page.tsx
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
@@ -41,9 +42,8 @@ export default function PokeDex() {
       setPokemonSearchTerm(pokemonSearchParam);
       setIsPokemonSearch(true);
       setIsGlobalSearch(false);
-      setSetId(null);
+      setSetId(null); 
     } 
-
     else {
       const globalSearchParam = searchParams.get("globalSearch");
       if (globalSearchParam) {
@@ -82,7 +82,6 @@ export default function PokeDex() {
     loadSetInfo();
   }, [setId, isGlobalSearch, isPokemonSearch]);
   
-  // Functie om kaarten te laden - aangepast voor alle zoekmodi
   const loadCards = useCallback(async () => {
     if (!setId && !isGlobalSearch && !isPokemonSearch) return;
     setLoading(true);
@@ -104,7 +103,7 @@ export default function PokeDex() {
 
         const fetchedCards = await fetchCardsBySet(setId!, searchTerm);
         setCards(fetchedCards);
-        setTotalPages(1);
+        setTotalPages(1); 
         setTotalResults(fetchedCards.length);
       }
     } catch (error) {
@@ -114,11 +113,9 @@ export default function PokeDex() {
     }
   }, [setId, searchTerm, isGlobalSearch, isPokemonSearch, globalSearchTerm, pokemonSearchTerm, currentPage]);
   
-
   useEffect(() => {
     loadCards();
   }, [loadCards]);
-
 
   useEffect(() => {
     if (!loading) {
@@ -148,7 +145,6 @@ export default function PokeDex() {
     }
   };
 
-  // Renderlogica voor lege state
   const renderEmptyState = () => {
     return (
       <div className="text-center py-12">
@@ -165,10 +161,8 @@ export default function PokeDex() {
           <button 
             onClick={() => {
               if (isPokemonSearch || isGlobalSearch) {
-                // Navigeer terug bij globale zoekopdrachten
                 window.history.back();
               } else {
-                // Wis zoekopdracht bij set-specifieke zoekopdrachten
                 setSearchTerm('');
               }
             }}
@@ -264,16 +258,16 @@ export default function PokeDex() {
       )}
       
       {!isGlobalSearch && !isPokemonSearch && (
-        <div className="grid grid-cols-12 gap-4 mb-6">
-        <div className="col-span-4 col-start-1">
-       <SetSearchbar 
-         onSearch={handleSearch} 
-         value={searchTerm}
-         placeholder="Zoek naar kaarten in deze set..." 
-         isLoading={isSearching || loading}
-       />
-     </div>
-   </div>
+       <div className="grid grid-cols-12 gap-4 mb-6">
+       <div className="col-span-4 col-start-1">
+      <SetSearchbar 
+        onSearch={handleSearch} 
+        value={searchTerm}
+        placeholder="Zoek naar kaarten in deze set..." 
+        isLoading={isSearching || loading}
+      />
+    </div>
+  </div>
       )}
       
       {loadingState || (

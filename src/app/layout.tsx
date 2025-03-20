@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Sidebar from "@/app/components/Sidebar";
 import ThemeRegistry from "@/app/components/ThemeRegistry"; 
+import GlobalSearchbar from "@/app/components/GlobalSearchbar";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -30,7 +31,10 @@ export default function RootLayout({
       >
         <ThemeRegistry> 
           <Sidebar />
-          <main style={{ marginLeft: "240px", padding: "20px" }}>{children}</main>
+          <div style={{ marginLeft: "240px" }}>
+            <GlobalSearchbar />
+            <main style={{ padding: "20px" }}>{children}</main>
+          </div>
         </ThemeRegistry>
       </body>
     </html>

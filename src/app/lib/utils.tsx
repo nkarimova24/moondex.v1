@@ -1,5 +1,3 @@
-// app/lib/utils.ts
-
 //format date
 export function formatDate(dateString: string): string {
     if (!dateString) return "";

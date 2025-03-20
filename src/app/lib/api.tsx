@@ -22,6 +22,17 @@ export interface PokemonCard {
   id: string;
   name: string;
   images: { small: string; large: string };
+  supertype?: string;
+  subtypes?: string[];
+  hp?: string;
+  types?: string[];
+  evolvesFrom?: string;
+  evolvesTo?: string[];
+  abilities?: {
+    name: string;
+    text: string;
+    type: string;
+  }[];
 }
 
 const API_KEY = process.env.NEXT_PUBLIC_POKEMON_TCG_API_KEY;
@@ -87,5 +98,101 @@ export const fetchSetDetails = async (setId: string): Promise<PokemonSet | null>
   } catch (error) {
     console.error("Error fetching set details:", error);
     return null;
+  }
+};
+
+export const searchPokemonByName = async (
+  pokemonName: string, 
+  page = 1, 
+  pageSize = 20
+): Promise<{
+  cards: PokemonCard[];
+  totalCount: number;
+  page: number;
+  pageSize: number;
+  totalPages: number;
+}> => {
+  try {
+    if (!pokemonName || pokemonName.trim() === '') {
+      return {
+        cards: [],
+        totalCount: 0,
+        page,
+        pageSize,
+        totalPages: 0
+      };
+    }
+    
+    const sanitizedName = pokemonName.trim().replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    
+    // We voegen supertype:Pokémon toe om alleen Pokémon kaarten te krijgen (geen trainers, energie, etc.)
+    const query = `name:"*${sanitizedName}*" supertype:pokémon`;
+    
+    const response = await fetchWithAuth(
+      `https://api.pokemontcg.io/v2/cards?q=${encodeURIComponent(query)}&page=${page}&pageSize=${pageSize}&orderBy=name`
+    );
+    const data = await response.json();
+    
+    return {
+      cards: data.data || [],
+      totalCount: data.totalCount || 0,
+      page: data.page || page,
+      pageSize: data.pageSize || pageSize,
+      totalPages: data.totalPages || 0
+    };
+  } catch (error) {
+    console.error("Error searching Pokémon:", error);
+    return {
+      cards: [],
+      totalCount: 0,
+      page,
+      pageSize,
+      totalPages: 0
+    };
+  }
+};
+
+export const searchCards = async (searchTerm: string, page = 1, pageSize = 20): Promise<{
+  cards: PokemonCard[];
+  totalCount: number;
+  page: number;
+  pageSize: number;
+  totalPages: number;
+}> => {
+  try {
+    if (!searchTerm || searchTerm.trim() === '') {
+      return {
+        cards: [],
+        totalCount: 0,
+        page,
+        pageSize,
+        totalPages: 0
+      };
+    }
+    
+    const sanitizedTerm = searchTerm.trim().replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const query = `name:"*${sanitizedTerm}*"`;
+    
+    const response = await fetchWithAuth(
+      `https://api.pokemontcg.io/v2/cards?q=${encodeURIComponent(query)}&page=${page}&pageSize=${pageSize}`
+    );
+    const data = await response.json();
+    
+    return {
+      cards: data.data || [],
+      totalCount: data.totalCount || 0,
+      page: data.page || page,
+      pageSize: data.pageSize || pageSize,
+      totalPages: data.totalPages || 0
+    };
+  } catch (error) {
+    console.error("Error searching cards:", error);
+    return {
+      cards: [],
+      totalCount: 0,
+      page,
+      pageSize,
+      totalPages: 0
+    };
   }
 };
