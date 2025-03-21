@@ -282,7 +282,7 @@ export default function PokeDex() {
           ) : (
             <div>
               <p className="mb-4 text-gray-400">
-                {totalResults} {totalResults === 1 ? "kaart" : "kaarten"} found
+                {totalResults} {totalResults === 1 ? "card" : "cards"} found
                 {isPokemonSearch 
                   ? ` for "${pokemonSearchTerm}"`
                   : isGlobalSearch 
@@ -294,24 +294,24 @@ export default function PokeDex() {
               <CardGrid cards={displayedCards} />
               
               <div className="my-8">
-                {totalResults > displayedCards.length && (
-                  <button
-                    onClick={handleLoadMore}
-                    className="w-full py-3 text-white bg-blue-600 rounded-md hover:bg-blue-700 disabled:bg-gray-600 disabled:text-gray-400"
-                    disabled={loadingMore}
-                  >
-                    {loadingMore 
-                      ? "Laden..." 
-                      : `(${displayedCards.length} of ${totalResults})`}
-                  </button>
-                )}
-                
-                {!loadingMore && displayedCards.length >= totalResults && totalResults > 0 && (
-                  <div className="text-center text-gray-500 mt-4">
-                    All cards are loaded
-                  </div>
-                )}
-              </div>
+              {totalResults > displayedCards.length && (
+                <button
+                  onClick={handleLoadMore}
+                  className="w-full py-3 text-white bg-[#8A3F3F] rounded-md hover:bg-[#6E2F2F] disabled:bg-gray-600 disabled:text-gray-400"
+                  disabled={loadingMore}
+                >
+                  {loadingMore 
+                    ? "Loading more cards..." 
+                    : `(${displayedCards.length} of ${totalResults})`}
+                </button>
+              )}
+              
+              {!loadingMore && displayedCards.length >= totalResults && totalResults > 0 && (
+                <div className="text-center text-gray-500 mt-4">
+                  All cards are loaded
+                </div>
+              )}
+            </div>
             </div>
           )}
         </>
