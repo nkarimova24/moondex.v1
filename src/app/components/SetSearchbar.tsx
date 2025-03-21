@@ -42,8 +42,8 @@ export default function SetSearchbar({
   };
   
   return (
-    <div className="w-full">
-      <div className={`flex items-center border-2 border-gray-700 rounded-md overflow-hidden focus-within:border-blue-500 bg-[#333] ${isLoading ? 'opacity-70' : ''}`}>
+    <div className="w-full max-w-sm">
+      <div className={`flex items-center border-2 border-gray-700 rounded-md overflow-hidden focus-within:border-[#8A3F3F] bg-[#333] ${isLoading ? 'opacity-70' : ''}`}>
         <input
           type="text"
           value={localSearchTerm}

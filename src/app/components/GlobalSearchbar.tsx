@@ -37,8 +37,8 @@ export default function GlobalSearchbar({ isLoading = false }: GlobalSearchbarPr
             <div 
               className={`flex items-center border-2 rounded-full overflow-hidden transition-all duration-200 ${
                 isFocused 
-                  ? 'bg-[#262626] shadow-lg' 
-                  : 'border-[#444] bg-[#333] shadow'
+                  ? 'bg-[#262626] shadow-lg border-[#8A3F3F]' 
+                  : 'border-gray-700 bg-[#333] shadow'
               }`}
             >
               <input
