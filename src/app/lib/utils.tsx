@@ -6,7 +6,7 @@ export function formatDate(dateString: string): string {
     
     if (isNaN(date.getTime())) return dateString;
     
-    return date.toLocaleDateString('nl-NL', {
+    return date.toLocaleDateString('en-US', {
       day: 'numeric',
       month: 'long',
       year: 'numeric'
