@@ -36,7 +36,7 @@ export default function CardGrid({ cards }: CardGridProps) {
         {cards.map((card) => (
           <div 
             key={card.id} 
-            className="flex flex-col rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 bg-gray-800 cursor-pointer"
+            className="flex flex-col rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 cursor-pointer"
             onClick={() => setSelectedCard(card)}
           >
             <div className="relative">

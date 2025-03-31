@@ -69,19 +69,19 @@ export default function SetHeader({ setInfo }: SetHeaderProps) {
         </div>
         
         <div className="flex gap-6 mt-2 md:mt-0">
-          <div className="flex flex-col items-center">
+          {/* <div className="flex flex-col items-center">
             <span className="text-sm text-gray-400">Printed Total</span>
             <span className="text-xl font-bold text-white">{setInfo.printedTotal}</span>
-          </div>
+          </div> */}
           
           <div className="flex flex-col items-center">
             <span className="text-sm text-gray-400">Total</span>
             <span className="text-xl font-bold text-white">{setInfo.total}</span>
-            {setInfo.total && setInfo.printedTotal && setInfo.total > setInfo.printedTotal && (
+            {/* {setInfo.total && setInfo.printedTotal && setInfo.total > setInfo.printedTotal && (
               <span className="text-xs text-gray-400">
                 (incl. {setInfo.total - setInfo.printedTotal} secret)
               </span>
-            )}
+            )} */}
           </div>
           
           <div className="flex flex-col items-center">

@@ -254,7 +254,7 @@ export default function PokeDex() {
     <div className="container mx-auto px-4 py-4">
       <div className="sticky top-0 z-10 bg-[#262626] pt-2">
         {!isPokemonSearch && !isGlobalSearch && setInfo && (
-          <div className="mb-2">
+          <div className={headerVisible ? "mb-4" : "mb-2"}>
             <div className="flex justify-between items-center mb-2">
               <h2 className="text-xl font-semibold text-white"></h2>
               <button 
@@ -266,8 +266,10 @@ export default function PokeDex() {
               </button>
             </div>
             
-            {headerVisible && (
+            {headerVisible ? (
               <SetHeader setInfo={setInfo} />
+            ) : (
+              <div className="border-b border-gray-700 pb-2 mb-4"></div>
             )}
           </div>
         )}
@@ -283,7 +285,7 @@ export default function PokeDex() {
         ) : null}
         
         {!isGlobalSearch && !isPokemonSearch && (
-          <div className="mb-4 pb-2">
+          <div className={`pb-4 ${headerVisible ? "" : "mt-2"}`}>
             <SetSearchbar 
               onSearch={handleSearch} 
               value={searchTerm}
