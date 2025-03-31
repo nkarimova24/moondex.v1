@@ -78,7 +78,7 @@ export default function CardDetails({ card, allCards, onClose, onNavigate }: Car
           className="absolute top-2 right-2 p-2 text-gray-400 hover:text-white z-10 bg-gray-700 rounded-full"
           aria-label="Close"
         >
-          <X size={24} />
+          <X size={6} />
         </button>
 
         {/* Navigation buttons */}
@@ -114,21 +114,21 @@ export default function CardDetails({ card, allCards, onClose, onNavigate }: Car
 
           {/* Card details */}
           <div className="w-full md:w-3/5 p-6 overflow-y-auto max-h-[80vh]">
-            <h2 className="text-2xl font-bold text-white mb-2">{card.name}</h2>
-            
-            {/* Card navigation info */}
-            <div className="text-sm text-gray-400 mb-3">
-              Card {currentIndex + 1} of {allCards.length}
+          <div className="flex items-center justify-between mb-2">
+            <h2 className="text-2xl font-bold text-white">
+                {card.name}
+            </h2>
+            <span className="text-gray-400 text-lg ml-2">
+                #{card.number}
+            </span>
             </div>
-            
+                        
             {/* Card type & Number */}
             <div className="flex justify-between mb-4">
               <div className="text-gray-300">
                 {card.supertype} {card.subtypes?.join(", ")}
               </div>
-              <div className="text-gray-400">
-                #{card.number}
-              </div>
+           
             </div>
             
             {/* HP & Types if Pokemon */}
