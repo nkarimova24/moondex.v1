@@ -12,10 +12,12 @@ import {
 import CardGrid from "@/app/components/CardGrid";
 import SetHeader from "@/app/components/SetHeader";
 import SetSearchbar from "@/app/components/SetSearchbar";
+import { ChevronUp, ChevronDown } from "lucide-react";
 
 export default function PokeDex() {
   const searchParams = useSearchParams();
   const loadMoreRef = useRef<HTMLDivElement>(null);
+  const [headerVisible, setHeaderVisible] = useState(true);
   
   const [setId, setSetId] = useState<string | null>(null);
   const [cards, setCards] = useState<PokemonCard[]>([]);
@@ -250,25 +252,42 @@ export default function PokeDex() {
   
   return (
     <div className="container mx-auto px-4 py-4">
-      <div className="sticky top-0 z-10 bg-[#262626] pb-4 pt-2">
+      <div className="sticky top-0 z-10 bg-[#262626] pt-2">
+        {!isPokemonSearch && !isGlobalSearch && setInfo && (
+          <div className="mb-2">
+            <div className="flex justify-between items-center mb-2">
+              <h2 className="text-xl font-semibold text-white"></h2>
+              <button 
+                onClick={() => setHeaderVisible(!headerVisible)}
+                className="p-1 text-gray-400 hover:text-white bg-gray-700 rounded-full"
+                aria-label={headerVisible ? "Hide set info" : "Show set info"}
+              >
+                {headerVisible ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+              </button>
+            </div>
+            
+            {headerVisible && (
+              <SetHeader setInfo={setInfo} />
+            )}
+          </div>
+        )}
+
         {isPokemonSearch ? (
           <h1 className="text-2xl font-bold mb-4 text-white">
-            Searchresults for "{pokemonSearchTerm}"
+            Zoekresultaten voor "{pokemonSearchTerm}"
           </h1>
         ) : isGlobalSearch ? (
           <h1 className="text-2xl font-bold mb-4 text-white">
-            Searchresults for "{globalSearchTerm}"
+            Zoekresultaten voor "{globalSearchTerm}"
           </h1>
-        ) : (
-          setInfo && <SetHeader setInfo={setInfo} />
-        )}
+        ) : null}
         
         {!isGlobalSearch && !isPokemonSearch && (
-          <div className="mb-2">
+          <div className="mb-4 pb-2">
             <SetSearchbar 
               onSearch={handleSearch} 
               value={searchTerm}
-              placeholder="Search cards in this set..." 
+              placeholder="Zoek naar kaarten in deze set..." 
               isLoading={isSearching || loading}
             />
           </div>
@@ -282,13 +301,13 @@ export default function PokeDex() {
           ) : (
             <div>
               <p className="mb-4 text-gray-400">
-                {totalResults} {totalResults === 1 ? "card" : "cards"} found
+                {totalResults} {totalResults === 1 ? "kaart" : "kaarten"} gevonden
                 {isPokemonSearch 
-                  ? ` for "${pokemonSearchTerm}"`
+                  ? ` voor "${pokemonSearchTerm}"`
                   : isGlobalSearch 
-                    ? ` for "${globalSearchTerm}"` 
-                    : searchTerm && ` for "${searchTerm}"`}
-                {totalResults > displayedCards.length && ` (${displayedCards.length} displayed)`}
+                    ? ` voor "${globalSearchTerm}"` 
+                    : searchTerm && ` voor "${searchTerm}"`}
+                {totalResults > displayedCards.length && ` (${displayedCards.length} geladen)`}
               </p>
               
               <CardGrid cards={displayedCards} />

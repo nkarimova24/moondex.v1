@@ -94,16 +94,6 @@ export default function SetHeader({ setInfo }: SetHeaderProps) {
               <span className="text-xl font-bold text-gray-500">N/A</span>
             )}
           </div>
-          
-          {setInfo.images?.symbol && (
-            <div className="ml-4 flex items-center">
-              <img 
-                src={setInfo.images.symbol} 
-                alt={`${setInfo.name} symbol`} 
-                className="h-10 w-10 object-contain"
-              />
-            </div>
-          )}
         </div>
       </div>
       
