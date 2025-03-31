@@ -120,6 +120,9 @@ export default function CardDetails({ card, allCards, onClose, onNavigate }: Car
             </h2>
             <span className="text-gray-400 text-lg ml-2">
                 #{card.number}
+                {card.set && (
+                  <span className="text-gray-500 text-sm ml-1">{card.set.name}</span> 
+                )}
             </span>
             </div>
                         
@@ -127,6 +130,7 @@ export default function CardDetails({ card, allCards, onClose, onNavigate }: Car
             <div className="flex justify-between mb-4">
               <div className="text-gray-300">
                 {card.supertype} {card.subtypes?.join(", ")}
+        
               </div>
            
             </div>

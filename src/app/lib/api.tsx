@@ -34,6 +34,13 @@ export interface PokemonCard {
     text: string;
     type: string;
   }[];
+  set?: {
+    id: string;
+    name: string;
+    series: string;
+    printedTotal?: number;
+    total?: number;
+  }
   cardmarket?: {
     url?: string;
     updatedAt?: string;
