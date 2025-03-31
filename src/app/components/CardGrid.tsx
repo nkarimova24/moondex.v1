@@ -11,19 +11,27 @@ interface CardGridProps {
 export default function CardGrid({ cards }: CardGridProps) {
   const [selectedCard, setSelectedCard] = useState<PokemonCard | null>(null);
 
+  // Function to format price
   const formatPrice = (price?: number) => {
     if (price === undefined || price === 0) return "N/A";
     return `€${price.toFixed(2)}`;
   };
 
+  // Get the most relevant price from cardmarket data
   const getCardPrice = (card: PokemonCard) => {
     if (!card.cardmarket?.prices) return "N/A";
     
+    // Prioritize these prices in order (trend price is usually most reliable)
     return formatPrice(
       card.cardmarket.prices.trendPrice || 
       card.cardmarket.prices.averageSellPrice || 
       card.cardmarket.prices.lowPrice
     );
+  };
+
+  // Handle navigation between cards
+  const handleCardNavigation = (card: PokemonCard) => {
+    setSelectedCard(card);
   };
 
   return (
@@ -61,7 +69,9 @@ export default function CardGrid({ cards }: CardGridProps) {
       {selectedCard && (
         <CardDetails 
           card={selectedCard} 
+          allCards={cards}
           onClose={() => setSelectedCard(null)} 
+          onNavigate={handleCardNavigation}
         />
       )}
     </>

@@ -1,18 +1,51 @@
 "use client";
 
 import { PokemonCard } from "@/app/lib/api";
-import { X } from "lucide-react";
+import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import { useEffect } from "react";
 
 interface CardDetailsProps {
   card: PokemonCard;
+  allCards: PokemonCard[];
   onClose: () => void;
+  onNavigate: (card: PokemonCard) => void;
 }
 
-export default function CardDetails({ card, onClose }: CardDetailsProps) {
+export default function CardDetails({ card, allCards, onClose, onNavigate }: CardDetailsProps) {
+  const currentIndex = allCards.findIndex(c => c.id === card.id);
+  const hasPrevious = currentIndex > 0;
+  const hasNext = currentIndex < allCards.length - 1;
 
-    useEffect(() => {
-        
+  const goToPrevious = () => {
+    if (hasPrevious) {
+      onNavigate(allCards[currentIndex - 1]);
+    }
+  };
+
+  const goToNext = () => {
+    if (hasNext) {
+      onNavigate(allCards[currentIndex + 1]);
+    }
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft' && hasPrevious) {
+        goToPrevious();
+      } else if (e.key === 'ArrowRight' && hasNext) {
+        goToNext();
+      } else if (e.key === 'Escape') {
+        onClose();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [currentIndex, allCards]); 
+
+  useEffect(() => {
     const originalStyle = window.getComputedStyle(document.body).overflow;
     document.body.style.overflow = "hidden";
     
@@ -48,6 +81,27 @@ export default function CardDetails({ card, onClose }: CardDetailsProps) {
           <X size={24} />
         </button>
 
+        {/* Navigation buttons */}
+        {hasPrevious && (
+          <button 
+            onClick={goToPrevious}
+            className="absolute left-2 top-1/2 transform -translate-y-1/2 p-2 text-gray-400 hover:text-white z-10 bg-gray-700 rounded-full opacity-80 hover:opacity-100"
+            aria-label="Previous card"
+          >
+            <ChevronLeft size={24} />
+          </button>
+        )}
+        
+        {hasNext && (
+          <button 
+            onClick={goToNext}
+            className="absolute right-2 top-1/2 transform -translate-y-1/2 p-2 text-gray-400 hover:text-white z-10 bg-gray-700 rounded-full opacity-80 hover:opacity-100"
+            aria-label="Next card"
+          >
+            <ChevronRight size={24} />
+          </button>
+        )}
+
         <div className="flex flex-col md:flex-row">
           {/* Card image */}
           <div className="w-full md:w-2/5 p-4 flex items-center justify-center bg-gray-900">
@@ -61,6 +115,11 @@ export default function CardDetails({ card, onClose }: CardDetailsProps) {
           {/* Card details */}
           <div className="w-full md:w-3/5 p-6 overflow-y-auto max-h-[80vh]">
             <h2 className="text-2xl font-bold text-white mb-2">{card.name}</h2>
+            
+            {/* Card navigation info */}
+            <div className="text-sm text-gray-400 mb-3">
+              Card {currentIndex + 1} of {allCards.length}
+            </div>
             
             {/* Card type & Number */}
             <div className="flex justify-between mb-4">
@@ -89,7 +148,7 @@ export default function CardDetails({ card, onClose }: CardDetailsProps) {
               </div>
             )}
             
-            {/* Evolution line */}
+            {/* Evolution line if available */}
             {(card.evolvesFrom || (card.evolvesTo && card.evolvesTo.length > 0)) && (
               <div className="mb-4 p-3 bg-gray-700 rounded-md">
                 <h3 className="text-lg font-semibold text-white mb-1">Evolution</h3>
@@ -108,7 +167,7 @@ export default function CardDetails({ card, onClose }: CardDetailsProps) {
               </div>
             )}
             
-            {/* Abilities */}
+            {/* Abilities if any */}
             {card.abilities && card.abilities.length > 0 && (
               <div className="mb-4">
                 <h3 className="text-lg font-semibold text-white mb-1">Abilities</h3>
