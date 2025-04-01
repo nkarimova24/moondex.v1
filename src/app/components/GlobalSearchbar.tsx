@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import { Search, X } from 'lucide-react';
+import { Search, X, Loader2 } from 'lucide-react';
 import { useRouter, usePathname } from 'next/navigation';
 
 interface GlobalSearchbarProps {
@@ -21,7 +21,7 @@ export default function GlobalSearchbar({ isLoading = false }: GlobalSearchbarPr
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchTerm.trim()) {
-      router.push(`/pokedex?pokemonSearch=${encodeURIComponent(searchTerm.trim())}`);
+      router.push(`/pokedex?globalSearch=${encodeURIComponent(searchTerm.trim())}`);
     }
   };
   
@@ -30,53 +30,80 @@ export default function GlobalSearchbar({ isLoading = false }: GlobalSearchbarPr
   };
   
   return (
-    <div className="w-full py-3 px-4 border-b border-[#333]">
-      <div className="flex justify-end">
-        <div className="relative w-full max-w-md">
+    <div className="w-full py-4 px-6" style={{ borderBottom: "1px solid rgba(60, 60, 60, 0.6)", height: "64px", display: "flex", alignItems: "center" }}>
+      <div className="flex items-center justify-end w-full">
+        <div className="relative max-w-md ml-auto">
           <form onSubmit={handleSubmit} className="relative">
             <div 
-              className={`flex items-center border-2 rounded-full overflow-hidden transition-all duration-200 ${
-                isFocused 
-                  ? 'bg-[#262626] shadow-lg border-[#8A3F3F]' 
-                  : 'border-gray-700 bg-[#333] shadow'
+              className={`flex items-center rounded-md overflow-hidden transition-all duration-200 ${
+                isFocused ? 'ring-2 ring-opacity-40' : 'ring-0'
               }`}
+              style={{ 
+                backgroundColor: "#2A2A2A",
+                boxShadow: "0 2px 6px rgba(0, 0, 0, 0.15)",
+                border: "1px solid #3A3A3A",
+              }}
             >
+              <div className="flex items-center justify-center pl-3">
+                {isLoading ? (
+                  <Loader2 size={18} className="text-gray-400 animate-spin" />
+                ) : (
+                  <Search size={18} className="text-gray-400" />
+                )}
+              </div>
+              
               <input
                 type="text"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 onFocus={() => setIsFocused(true)}
                 onBlur={() => setIsFocused(false)}
-                placeholder="Search.."
-                className="py-2 px-3 pl-4 flex-grow outline-none text-white bg-transparent text-lg"
-                aria-label="Zoek kaarten"
+                placeholder="Search for any Pokémon card..."
+                className="py-2 px-3 flex-grow outline-none text-white bg-transparent placeholder-gray-500 text-sm"
+                aria-label="Search all cards"
                 disabled={isLoading}
+                style={{ caretColor: "#8A3F3F" }}
               />
               
               {searchTerm && (
                 <button 
                   onClick={handleClear}
                   type="button"
-                  className="p-2 text-gray-400 hover:text-blue-400 transition-colors"
-                  aria-label="Zoekopdracht wissen"
+                  className="p-2 text-gray-400 hover:text-white transition-colors"
+                  aria-label="Clear search"
                   disabled={isLoading}
+                  style={{ 
+                    backgroundColor: isLoading ? "transparent" : "rgba(0, 0, 0, 0.1)"
+                  }}
                 >
-                  <X size={20} />
+                  <X size={18} />
                 </button>
               )}
               
               <button 
                 type="submit"
-                className="p-2 pr-4 text-gray-400 hover:text-blue-400 transition-colors"
-                disabled={isLoading}
-                aria-label="Zoeken"
+                className="py-2 px-4 transition-colors"
+                disabled={isLoading || !searchTerm.trim()}
+                aria-label="Search"
+                style={{ 
+                  backgroundColor: "#8A3F3F",
+                  color: "white",
+                  opacity: (isLoading || !searchTerm.trim()) ? 0.7 : 1,
+                  cursor: (isLoading || !searchTerm.trim()) ? "not-allowed" : "pointer",
+                }}
               >
-                <Search size={20} />
+                Search
               </button>
             </div>
             
             {isLoading && (
-              <div className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-500 animate-pulse"></div>
+              <div 
+                className="absolute bottom-0 left-0 h-0.5 animate-pulse" 
+                style={{ 
+                  width: "100%", 
+                  backgroundColor: "#8A3F3F" 
+                }}
+              ></div>
             )}
           </form>
         </div>

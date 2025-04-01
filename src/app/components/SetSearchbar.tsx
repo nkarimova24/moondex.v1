@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import { Search, X } from 'lucide-react';
+import { Search, X, Loader2 } from 'lucide-react';
 
 interface SetSearchbarProps {
   onSearch: (searchTerm: string) => void;
@@ -13,10 +13,11 @@ interface SetSearchbarProps {
 export default function SetSearchbar({ 
   onSearch, 
   value, 
-  placeholder = "Searching for cards in this set..", 
+  placeholder = "Search for cards in this set...", 
   isLoading = false 
 }: SetSearchbarProps) {
   const [localSearchTerm, setLocalSearchTerm] = useState(value);
+  const [isFocused, setIsFocused] = useState(false);
   
   useEffect(() => {
     setLocalSearchTerm(value);
@@ -42,36 +43,67 @@ export default function SetSearchbar({
   };
   
   return (
-    <div className="w-full max-w-sm">
-      <div className={`flex items-center border-2 border-gray-700 rounded-md overflow-hidden focus-within:border-[#8A3F3F] bg-[#333] ${isLoading ? 'opacity-70' : ''}`}>
+    <div className="w-full max-w-md">
+      <div 
+        className={`flex items-center rounded-md overflow-hidden transition-all duration-200 ${
+          isFocused 
+            ? 'ring-2 ring-opacity-50' 
+            : 'ring-0'
+        }`}
+        style={{ 
+          backgroundColor: "#2A2A2A",
+          boxShadow: "0 2px 6px rgba(0, 0, 0, 0.1)",
+          border: "1px solid #3A3A3A",
+        }}
+      >
+        <div className="flex items-center justify-center pl-3">
+          {isLoading ? (
+            <Loader2 size={18} className="text-gray-400 animate-spin" />
+          ) : (
+            <Search size={18} className="text-gray-400" />
+          )}
+        </div>
+        
         <input
           type="text"
           value={localSearchTerm}
           onChange={handleChange}
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
           placeholder={placeholder}
-          className="py-2 px-3 pl-4 flex-grow outline-none text-white bg-transparent"
-          aria-label="Zoek naar kaarten"
+          className="py-2.5 px-3 flex-grow outline-none text-white bg-transparent placeholder-gray-500 text-sm"
+          aria-label="Search cards"
           disabled={isLoading}
+          style={{ caretColor: "#8A3F3F" }}
         />
         
         {localSearchTerm && (
           <button 
             onClick={handleClear}
-            className="p-2 text-gray-400 hover:text-blue-400 transition-colors"
-            aria-label="Zoekopdracht wissen"
+            className="p-2 text-gray-400 hover:text-white transition-colors"
+            aria-label="Clear search"
             disabled={isLoading}
+            style={{ 
+              backgroundColor: isLoading ? "transparent" : "rgba(0, 0, 0, 0.1)"
+            }}
           >
-            <X size={20} />
+            <X size={18} />
           </button>
         )}
         
         <button 
           onClick={() => onSearch(localSearchTerm)}
-          className="p-2 pr-4 text-gray-400 hover:text-blue-400 transition-colors"
-          aria-label="Zoeken"
+          className="py-2.5 px-4 transition-colors"
+          aria-label="Search"
           disabled={isLoading}
+          style={{ 
+            backgroundColor: "#8A3F3F",
+            color: "white",
+            opacity: isLoading ? 0.7 : 1,
+            cursor: isLoading ? "not-allowed" : "pointer",
+          }}
         >
-          <Search size={20} />
+          Search
         </button>
       </div>
     </div>

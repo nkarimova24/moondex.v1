@@ -60,7 +60,7 @@ export default function Sidebar() {
       {/* Header with Logo/Title */}
       <Box
         sx={{
-          background: "linear-gradient(to right, #8A3F3F, #6A2F2F)",
+          background: "linear-gradient(to right,rgb(97, 43, 43), #8A3F3F)",
           padding: "16px 12px",
           display: "flex",
           alignItems: "center",

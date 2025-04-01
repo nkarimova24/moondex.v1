@@ -12,7 +12,7 @@ import {
 import CardGrid from "@/app/components/CardGrid";
 import SetHeader from "@/app/components/SetHeader";
 import SetSearchbar from "@/app/components/SetSearchbar";
-import { ChevronUp, ChevronDown } from "lucide-react";
+import HeaderToggleButton from "@/app/components/HeaderToggleButton";
 
 export default function PokeDex() {
   const searchParams = useSearchParams();
@@ -252,25 +252,18 @@ export default function PokeDex() {
   
   return (
     <div className="container mx-auto px-4 py-4">
-      <div className="sticky top-0 z-10 bg-[#262626] pt-2">
+      <div className="sticky top-0 z-10 bg-[#1A1A1A]">
         {!isPokemonSearch && !isGlobalSearch && setInfo && (
-          <div className={headerVisible ? "mb-4" : "mb-2"}>
-            <div className="flex justify-between items-center mb-2">
-              <h2 className="text-xl font-semibold text-white"></h2>
-              <button 
-                onClick={() => setHeaderVisible(!headerVisible)}
-                className="p-1 text-gray-400 hover:text-white bg-gray-700 rounded-full"
-                aria-label={headerVisible ? "Hide set info" : "Show set info"}
-              >
-                {headerVisible ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
-              </button>
-            </div>
+          <div className="relative pt-0">
+            {/* Render the SetHeader if visible */}
+            {headerVisible && <SetHeader setInfo={setInfo} />}
             
-            {headerVisible ? (
-              <SetHeader setInfo={setInfo} />
-            ) : (
-              <div className="border-b border-gray-700 pb-2 mb-4"></div>
-            )}
+            {/* Add the toggle button */}
+            <HeaderToggleButton 
+              isVisible={headerVisible} 
+              onClick={() => setHeaderVisible(!headerVisible)}
+              setName={setInfo.name}
+            />
           </div>
         )}
 
@@ -285,7 +278,7 @@ export default function PokeDex() {
         ) : null}
         
         {!isGlobalSearch && !isPokemonSearch && (
-          <div className={`pb-4 ${headerVisible ? "" : "mt-2"}`}>
+          <div className="pb-4">
             <SetSearchbar 
               onSearch={handleSearch} 
               value={searchTerm}
@@ -303,7 +296,7 @@ export default function PokeDex() {
           ) : (
             <div>
               <p className="mb-4 text-gray-400">
-                {totalResults} {totalResults === 1 ? "kaart" : "kaarten"} gevonden
+                {totalResults} {totalResults === 1 ? "card" : "cards"} found
                 {isPokemonSearch 
                   ? ` voor "${pokemonSearchTerm}"`
                   : isGlobalSearch 
