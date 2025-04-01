@@ -263,7 +263,7 @@ export default function PokeDex() {
             <SetSearchbar 
               onSearch={handleSearch} 
               value={searchTerm}
-              placeholder="Zoek naar kaarten in deze set..." 
+              placeholder="Search for a card in this set..." 
               isLoading={isSearching || loading}
             />
           </div>
