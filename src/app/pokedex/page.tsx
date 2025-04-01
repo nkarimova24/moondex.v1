@@ -13,6 +13,7 @@ import CardGrid from "@/app/components/CardGrid";
 import SetHeader from "@/app/components/SetHeader";
 import SetSearchbar from "@/app/components/SetSearchbar";
 import HeaderToggleButton from "@/app/components/HeaderToggleButton";
+import ToTopButton from "@/app/components/ToTopButton"; 
 
 export default function PokeDex() {
   const searchParams = useSearchParams();
@@ -86,8 +87,6 @@ export default function PokeDex() {
   }, [setId, isGlobalSearch, isPokemonSearch]);
   
   const loadCards = useCallback(async (page = 1, append = false) => {
-    console.log("Loading cards for page:", page, "append:", append);
-    
     if (!setId && !isGlobalSearch && !isPokemonSearch) return;
     
     if (page === 1) {
@@ -99,17 +98,10 @@ export default function PokeDex() {
     try {
       if (isPokemonSearch) {
         const results = await searchCardsByType(pokemonSearchTerm, "all", page, 24);
-        console.log(`Loaded ${results.cards.length} cards for page ${page}`, results);
-        
         const calculatedTotalPages = Math.ceil(results.totalCount / results.pageSize);
-        console.log(`API reported totalPages: ${results.totalPages}, Calculated totalPages: ${calculatedTotalPages}`);
         
         if (append) {
-          setCards(prev => {
-            const newCards = [...prev, ...results.cards];
-            console.log(`Appended cards: ${prev.length} + ${results.cards.length} = ${newCards.length}`);
-            return newCards;
-          });
+          setCards(prev => [...prev, ...results.cards]);
         } else {
           setCards(results.cards);
         }
@@ -119,17 +111,10 @@ export default function PokeDex() {
         setHasMore(page < calculatedTotalPages);
       } else if (isGlobalSearch) {
         const results = await searchCardsByType(globalSearchTerm, "all", page, 24);
-        console.log(`Loaded ${results.cards.length} cards for page ${page}`, results);
-        
         const calculatedTotalPages = Math.ceil(results.totalCount / results.pageSize);
-        console.log(`API reported totalPages: ${results.totalPages}, Calculated totalPages: ${calculatedTotalPages}`);
         
         if (append) {
-          setCards(prev => {
-            const newCards = [...prev, ...results.cards];
-            console.log(`Appended cards: ${prev.length} + ${results.cards.length} = ${newCards.length}`);
-            return newCards;
-          });
+          setCards(prev => [...prev, ...results.cards]);
         } else {
           setCards(results.cards);
         }
@@ -164,7 +149,6 @@ export default function PokeDex() {
   }, [loadCards]);
 
   useEffect(() => {
-    console.log("Cards updated:", cards.length);
     if (!loading && !loadingMore) {
       setDisplayedCards(cards);
       setIsSearching(false);
@@ -185,7 +169,6 @@ export default function PokeDex() {
     if (loadingMore || !hasMore) return;
     
     const nextPage = currentPage + 1;
-    console.log("Manually loading more cards, page:", nextPage);
     setCurrentPage(nextPage);
     loadCards(nextPage, true);
   }, [currentPage, loadingMore, hasMore, loadCards]);
@@ -328,6 +311,8 @@ export default function PokeDex() {
           )}
         </>
       )}
+
+      <ToTopButton />
     </div>
   );
 }
