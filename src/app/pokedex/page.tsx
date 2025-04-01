@@ -251,84 +251,89 @@ export default function PokeDex() {
   const loadingState = renderLoadingState();
   
   return (
-    <div className="container mx-auto px-4 py-4">
-      <div className="sticky top-0 z-10 bg-[#1E1E1E]">
-        {!isPokemonSearch && !isGlobalSearch && setInfo && (
-          <div className="relative pt-0">
-            
-            {headerVisible && <SetHeader setInfo={setInfo} />}
-            
+    <div className="w-full">
+      {!isPokemonSearch && !isGlobalSearch && setInfo && headerVisible && (
+        <div className="w-full">
+          <SetHeader setInfo={setInfo} />
+        </div>
+      )}
+
+      <div className="w-full">
+        <div className="sticky top-0 z-10 bg-[#1A1A1A]">
+          {!isPokemonSearch && !isGlobalSearch && setInfo && (
+            <div className="w-full">
             <HeaderToggleButton 
               isVisible={headerVisible} 
               onClick={() => setHeaderVisible(!headerVisible)}
               setName={setInfo.name}
             />
           </div>
-        )}
+          )}
 
-        {isPokemonSearch ? (
-          <h1 className="text-2xl font-bold mb-4 text-white">
-            Zoekresultaten voor "{pokemonSearchTerm}"
-          </h1>
-        ) : isGlobalSearch ? (
-          <h1 className="text-2xl font-bold mb-4 text-white">
-            Zoekresultaten voor "{globalSearchTerm}"
-          </h1>
-        ) : null}
-        
-        {!isGlobalSearch && !isPokemonSearch && (
-          <div className="pb-4">
-            <SetSearchbar 
-              onSearch={handleSearch} 
-              value={searchTerm}
-              placeholder="Zoek naar kaarten in deze set..." 
-              isLoading={isSearching || loading}
-            />
-          </div>
-        )}
-      </div>
-      
-      {loadingState || (
-        <>
-          {displayedCards.length === 0 ? (
-            renderEmptyState()
-          ) : (
-            <div>
-              <p className="mb-4 text-gray-400">
-                {totalResults} {totalResults === 1 ? "card" : "cards"} found
-                {isPokemonSearch 
-                  ? ` voor "${pokemonSearchTerm}"`
-                  : isGlobalSearch 
-                    ? ` voor "${globalSearchTerm}"` 
-                    : searchTerm && ` voor "${searchTerm}"`}
-                {totalResults > displayedCards.length && ` (${displayedCards.length} geladen)`}
-              </p>
-              
-              <CardGrid cards={displayedCards} />
-              
-              <div className="my-8">
-              {totalResults > displayedCards.length && (
-                <button
-                  onClick={handleLoadMore}
-                  className="w-full py-3 text-white bg-[#8A3F3F] rounded-md hover:bg-[#6E2F2F] disabled:bg-gray-600 disabled:text-gray-400"
-                  disabled={loadingMore}
-                >
-                  {loadingMore 
-                    ? "Loading more cards..." 
-                    : `(${displayedCards.length} of ${totalResults})`}
-                </button>
-              )}
-              
-              {!loadingMore && displayedCards.length >= totalResults && totalResults > 0 && (
-                <div className="text-center text-gray-500 mt-4">
-                  All cards are loaded
-                </div>
-              )}
-            </div>
+          {isPokemonSearch ? (
+            <h1 className="text-2xl font-bold mb-4 text-white">
+              Zoekresultaten voor "{pokemonSearchTerm}"
+            </h1>
+          ) : isGlobalSearch ? (
+            <h1 className="text-2xl font-bold mb-4 text-white">
+              Zoekresultaten voor "{globalSearchTerm}"
+            </h1>
+          ) : null}
+
+          {!isGlobalSearch && !isPokemonSearch && (
+            <div className="pb-4">
+              <SetSearchbar 
+                onSearch={handleSearch} 
+                value={searchTerm}
+                placeholder="Zoek naar kaarten in deze set..." 
+                isLoading={isSearching || loading}
+              />
             </div>
           )}
-        </>
-      )}
+        </div>
+
+        {loadingState || (
+          <>
+            {displayedCards.length === 0 ? (
+              renderEmptyState()
+            ) : (
+              <div>
+                <p className="mb-4 text-gray-400">
+                  {totalResults} {totalResults === 1 ? "card" : "cards"} found
+                  {isPokemonSearch 
+                    ? ` voor "${pokemonSearchTerm}"`
+                    : isGlobalSearch 
+                      ? ` voor "${globalSearchTerm}"` 
+                      : searchTerm && ` voor "${searchTerm}"`}
+                  {totalResults > displayedCards.length && ` (${displayedCards.length} geladen)`}
+                </p>
+
+                <CardGrid cards={displayedCards} />
+
+                <div className="my-8">
+                  {totalResults > displayedCards.length && (
+                    <button
+                      onClick={handleLoadMore}
+                      className="w-full py-3 text-white bg-[#8A3F3F] rounded-md hover:bg-[#6E2F2F] disabled:bg-gray-600 disabled:text-gray-400"
+                      disabled={loadingMore}
+                    >
+                      {loadingMore 
+                        ? "Loading more cards..." 
+                        : `(${displayedCards.length} of ${totalResults})`}
+                    </button>
+                  )}
+
+                  {!loadingMore && displayedCards.length >= totalResults && totalResults > 0 && (
+                    <div className="text-center text-gray-500 mt-4">
+                      All cards are loaded
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+          </>
+        )}
+      </div>
     </div>
   );
 }

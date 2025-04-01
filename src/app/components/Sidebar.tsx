@@ -25,7 +25,6 @@ export default function Sidebar() {
   const [expandedMain, setExpandedMain] = useState(false);
   const [expandedSeries, setExpandedSeries] = useState<string | null>(null);
   
-  // Create refs for each series item and the sidebar container
   const seriesRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
   const sidebarContainerRef = useRef<HTMLDivElement | null>(null);
 
@@ -39,20 +38,16 @@ export default function Sidebar() {
     loadSets();
   }, []);
 
-  // Effect to scroll the sidebar container to the active series
   useEffect(() => {
     if (expandedSeries && seriesRefs.current[expandedSeries] && sidebarContainerRef.current) {
       const container = sidebarContainerRef.current;
       const element = seriesRefs.current[expandedSeries];
       
-      // Get element's position relative to the container
       const containerRect = container.getBoundingClientRect();
       const elementRect = element.getBoundingClientRect();
       
-      // Calculate the scroll position with a small offset
       const scrollPosition = elementRect.top - containerRect.top + container.scrollTop - 10;
       
-      // Scroll the container, not the window
       setTimeout(() => {
         container.scrollTo({ 
           top: scrollPosition, 
@@ -64,15 +59,12 @@ export default function Sidebar() {
 
   const handleMainToggle = () => {
     setExpandedMain((prev) => !prev);
-    // If we're closing the main menu, also close any open series
     if (expandedMain) {
       setExpandedSeries(null);
     }
   };
 
   const handleSeriesToggle = (series: string) => {
-    // If the clicked series is already open, close it
-    // Otherwise, open the clicked series and close any other open series
     setExpandedSeries((prev) => (prev === series ? null : series));
   };
 
@@ -92,7 +84,6 @@ export default function Sidebar() {
         },
       }}
     >
-      {/* Header with Logo/Title */}
       <Box
         sx={{
           background: "linear-gradient(to right,rgb(97, 43, 43), #8A3F3F)",
@@ -101,7 +92,7 @@ export default function Sidebar() {
           alignItems: "center",
           justifyContent: "center",
           boxShadow: "0 2px 4px rgba(0,0,0,0.2)",
-          flexShrink: 0, // Prevent header from shrinking
+          flexShrink: 0,
         }}
       >
         <Typography 
@@ -118,12 +109,11 @@ export default function Sidebar() {
 
       <Divider sx={{ opacity: 0.2 }} />
 
-      {/* Scrollable container */}
       <Box 
         ref={sidebarContainerRef}
         sx={{ 
           overflowY: 'auto',
-          flexGrow: 1, // Allow this section to grow and fill available space
+          flexGrow: 1, 
         }}
       >
         <List sx={{ padding: 0 }}>
