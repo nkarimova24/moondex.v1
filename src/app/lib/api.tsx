@@ -40,6 +40,13 @@ export interface PokemonCard {
     series: string;
     printedTotal?: number;
     total?: number;
+    ptcgoCode?: string;
+    releaseDate?: string;
+    updatedAt?: string;
+    images?: {
+      symbol?: string;
+      logo?: string;
+    };
   }
   cardmarket?: {
     url?: string;
