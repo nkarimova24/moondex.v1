@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Search, X, Loader2 } from 'lucide-react';
-import { useRouter, usePathname } from 'next/navigation';
+import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 
 interface GlobalSearchbarProps {
   isLoading?: boolean;
@@ -13,6 +13,11 @@ export default function GlobalSearchbar({ isLoading = false }: GlobalSearchbarPr
   const [isFocused, setIsFocused] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
+  const searchParams = useSearchParams();
+  
+  const isSetPage = searchParams.has('setId');
+  
+  const stickyClass = isSetPage ? '' : 'sticky top-0';
   
   useEffect(() => {
     setSearchTerm('');
@@ -30,7 +35,17 @@ export default function GlobalSearchbar({ isLoading = false }: GlobalSearchbarPr
   };
   
   return (
-    <div className="w-full py-4 px-6" style={{ borderBottom: "1px solid rgba(60, 60, 60, 0.6)", height: "64px", display: "flex", alignItems: "center" }}>
+    <div 
+      className={`w-full py-4 px-6 z-30 ${stickyClass}`}
+      style={{ 
+        borderBottom: "1px solid rgba(60, 60, 60, 0.6)", 
+        height: "64px", 
+        display: "flex", 
+        alignItems: "center",
+        backgroundColor: "#1A1A1A",
+        boxShadow: "0 2px 10px rgba(0, 0, 0, 0.15)"
+      }}
+    >
       <div className="flex items-center justify-end w-full">
         <div className="relative max-w-md ml-auto">
           <form onSubmit={handleSubmit} className="relative">

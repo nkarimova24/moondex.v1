@@ -252,13 +252,12 @@ export default function PokeDex() {
   
   return (
     <div className="container mx-auto px-4 py-4">
-      <div className="sticky top-0 z-10 bg-[#1A1A1A]">
+      <div className="sticky top-0 z-10 bg-[#1E1E1E]">
         {!isPokemonSearch && !isGlobalSearch && setInfo && (
           <div className="relative pt-0">
-            {/* Render the SetHeader if visible */}
+            
             {headerVisible && <SetHeader setInfo={setInfo} />}
             
-            {/* Add the toggle button */}
             <HeaderToggleButton 
               isVisible={headerVisible} 
               onClick={() => setHeaderVisible(!headerVisible)}

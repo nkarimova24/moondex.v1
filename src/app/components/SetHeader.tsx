@@ -61,7 +61,7 @@ export default function SetHeader({ setInfo }: SetHeaderProps) {
       }}
     >
       <div className="flex flex-col md:flex-row items-center gap-4">
-        {/* Set Logo */}
+        {/* Set Logo Coming Soooon */}
         <div className="flex-shrink-0">
           {setInfo.images?.logo && (
             <div className="h-16 md:h-20 relative">

@@ -31,15 +31,14 @@ export default function RootLayout({
       >
         <ThemeRegistry> 
           <Sidebar />
+          
           <div style={{ marginLeft: "240px" }}>
-            <div style={{ 
-              backgroundColor: "#232323", 
-              borderBottom: "1px solid #333",
-              boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)" 
-            }}>
-              <GlobalSearchbar />
-            </div>
-            <main style={{ padding: "20px" }}>{children}</main>
+            {/* GlobalSearchbar is now sticky within itself */}
+            <GlobalSearchbar />
+            
+            <main style={{ padding: "20px" }}>
+              {children}
+            </main>
           </div>
         </ThemeRegistry>
       </body>
