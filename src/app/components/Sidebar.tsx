@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import {
   Box,
@@ -23,7 +23,11 @@ export default function Sidebar() {
   const [sets, setSets] = useState<{ [key: string]: PokemonSet[] }>({});
   const [loading, setLoading] = useState(true);
   const [expandedMain, setExpandedMain] = useState(false);
-  const [expandedSeries, setExpandedSeries] = useState<{ [key: string]: boolean }>({});
+  const [expandedSeries, setExpandedSeries] = useState<string | null>(null);
+  
+  // Create refs for each series item and the sidebar container
+  const seriesRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
+  const sidebarContainerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const loadSets = async () => {
@@ -35,12 +39,41 @@ export default function Sidebar() {
     loadSets();
   }, []);
 
+  // Effect to scroll the sidebar container to the active series
+  useEffect(() => {
+    if (expandedSeries && seriesRefs.current[expandedSeries] && sidebarContainerRef.current) {
+      const container = sidebarContainerRef.current;
+      const element = seriesRefs.current[expandedSeries];
+      
+      // Get element's position relative to the container
+      const containerRect = container.getBoundingClientRect();
+      const elementRect = element.getBoundingClientRect();
+      
+      // Calculate the scroll position with a small offset
+      const scrollPosition = elementRect.top - containerRect.top + container.scrollTop - 10;
+      
+      // Scroll the container, not the window
+      setTimeout(() => {
+        container.scrollTo({ 
+          top: scrollPosition, 
+          behavior: 'smooth' 
+        });
+      }, 100);
+    }
+  }, [expandedSeries]);
+
   const handleMainToggle = () => {
     setExpandedMain((prev) => !prev);
+    // If we're closing the main menu, also close any open series
+    if (expandedMain) {
+      setExpandedSeries(null);
+    }
   };
 
   const handleSeriesToggle = (series: string) => {
-    setExpandedSeries((prev) => ({ ...prev, [series]: !prev[series] }));
+    // If the clicked series is already open, close it
+    // Otherwise, open the clicked series and close any other open series
+    setExpandedSeries((prev) => (prev === series ? null : series));
   };
 
   return (
@@ -54,6 +87,8 @@ export default function Sidebar() {
           background: "linear-gradient(to bottom, #242424, #1A1A1A)",
           color: "#fff",
           borderRight: "1px solid rgba(138, 63, 63, 0.3)",
+          display: "flex",
+          flexDirection: "column",
         },
       }}
     >
@@ -66,6 +101,7 @@ export default function Sidebar() {
           alignItems: "center",
           justifyContent: "center",
           boxShadow: "0 2px 4px rgba(0,0,0,0.2)",
+          flexShrink: 0, // Prevent header from shrinking
         }}
       >
         <Typography 
@@ -82,7 +118,14 @@ export default function Sidebar() {
 
       <Divider sx={{ opacity: 0.2 }} />
 
-      <Box>
+      {/* Scrollable container */}
+      <Box 
+        ref={sidebarContainerRef}
+        sx={{ 
+          overflowY: 'auto',
+          flexGrow: 1, // Allow this section to grow and fill available space
+        }}
+      >
         <List sx={{ padding: 0 }}>
           <ListItem disablePadding>
             <ListItemButton 
@@ -149,14 +192,17 @@ export default function Sidebar() {
             ) : (
               <List component="div" disablePadding>
                 {Object.entries(sets).map(([series, seriesSets]) => (
-                  <div key={series}>
+                  <div 
+                    key={series}
+                    ref={el => { seriesRefs.current[series] = el; }}
+                  >
                     <ListItem disablePadding>
                       <ListItemButton 
                         onClick={() => handleSeriesToggle(series)} 
                         sx={{ 
                           pl: 3,
                           py: 1.5,
-                          backgroundColor: expandedSeries[series] ? "rgba(138, 63, 63, 0.05)" : "transparent",
+                          backgroundColor: expandedSeries === series ? "rgba(138, 63, 63, 0.05)" : "transparent",
                           "&:hover": {
                             backgroundColor: "rgba(138, 63, 63, 0.1)",
                           }
@@ -167,16 +213,16 @@ export default function Sidebar() {
                           primaryTypographyProps={{ 
                             fontWeight: 500,
                             fontSize: "14px",
-                            color: expandedSeries[series] ? "#8A3F3F" : "#E0E0E0"
+                            color: expandedSeries === series ? "#8A3F3F" : "#E0E0E0"
                           }} 
                         />
-                        {expandedSeries[series] ? 
+                        {expandedSeries === series ? 
                           <ExpandLess sx={{ color: "#8A3F3F", fontSize: 20 }} /> : 
                           <ExpandMore sx={{ color: "#8A3F3F", fontSize: 20 }} />
                         }
                       </ListItemButton>
                     </ListItem>
-                    <Collapse in={expandedSeries[series]} timeout="auto" unmountOnExit>
+                    <Collapse in={expandedSeries === series} timeout="auto" unmountOnExit>
                       <List component="div" disablePadding sx={{ backgroundColor: "rgba(0,0,0,0.15)" }}>
                         {seriesSets.map((set) => (
                           <ListItem key={set.id} disablePadding>
@@ -265,11 +311,11 @@ export default function Sidebar() {
       {/* Footer */}
       <Box 
         sx={{ 
-          marginTop: "auto", 
           padding: "16px",
           textAlign: "center",
           borderTop: "1px solid rgba(255,255,255,0.05)",
-          backgroundColor: "rgba(0,0,0,0.2)"
+          backgroundColor: "rgba(0,0,0,0.2)",
+          flexShrink: 0, 
         }}
       >
         <Typography variant="caption" sx={{ color: "rgba(255,255,255,0.5)", fontSize: "11px" }}>
