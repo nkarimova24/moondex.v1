@@ -14,6 +14,7 @@ import SetHeader from "@/app/components/SetHeader";
 import SetSearchbar from "@/app/components/SetSearchbar";
 import HeaderToggleButton from "@/app/components/HeaderToggleButton";
 import ToTopButton from "@/app/components/ToTopButton"; 
+import CardFilters from "@/app/components/CardFilters";
 
 export default function PokeDex() {
   const searchParams = useSearchParams();
@@ -28,6 +29,7 @@ export default function PokeDex() {
   const [searchTerm, setSearchTerm] = useState('');
   const [isSearching, setIsSearching] = useState(false);
   const [displayedCards, setDisplayedCards] = useState<PokemonCard[]>([]);
+  const [sortOption, setSortOption] = useState("number-asc");
   
   const [isPokemonSearch, setIsPokemonSearch] = useState(false);
   const [isGlobalSearch, setIsGlobalSearch] = useState(false);
@@ -149,11 +151,78 @@ export default function PokeDex() {
   }, [loadCards]);
 
   useEffect(() => {
+    if (cards.length === 0) {
+      setDisplayedCards([]);
+      return;
+    }
+    
+    let sortedCards = [...cards];
+    
+    switch (sortOption) {
+      case 'number-asc':
+        sortedCards.sort((a, b) => parseInt(a.number || '0') - parseInt(b.number || '0'));
+        break;
+      case 'number-desc':
+        sortedCards.sort((a, b) => parseInt(b.number || '0') - parseInt(a.number || '0'));
+        break;
+      case 'name-asc':
+        sortedCards.sort((a, b) => a.name.localeCompare(b.name));
+        break;
+      case 'name-desc':
+        sortedCards.sort((a, b) => b.name.localeCompare(a.name));
+        break;
+      case 'price-asc':
+        sortedCards.sort((a, b) => {
+          const priceA = a.cardmarket?.prices?.trendPrice || 
+                       a.cardmarket?.prices?.averageSellPrice || 
+                       a.cardmarket?.prices?.lowPrice || 0;
+          const priceB = b.cardmarket?.prices?.trendPrice || 
+                       b.cardmarket?.prices?.averageSellPrice || 
+                       b.cardmarket?.prices?.lowPrice || 0;
+          return priceA - priceB;
+        });
+        break;
+      case 'price-desc':
+        sortedCards.sort((a, b) => {
+          const priceA = a.cardmarket?.prices?.trendPrice || 
+                       a.cardmarket?.prices?.averageSellPrice || 
+                       a.cardmarket?.prices?.lowPrice || 0;
+          const priceB = b.cardmarket?.prices?.trendPrice || 
+                       b.cardmarket?.prices?.averageSellPrice || 
+                       b.cardmarket?.prices?.lowPrice || 0;
+          return priceB - priceA;
+        });
+        break;
+      case 'rarity':
+
+      const rarityOrder: { [key: string]: number } = {
+          'Common': 1,
+          'Uncommon': 2,
+          'Rare': 3,
+          'Rare Holo': 4,
+          'Rare Ultra': 5,
+          'Rare Rainbow': 6,
+          'Rare Secret': 7,
+          'Promo': 8
+        };
+        
+        sortedCards.sort((a, b) => {
+          const rarityA = a.rarity ? rarityOrder[a.rarity] || 0 : 0;
+          const rarityB = b.rarity ? rarityOrder[b.rarity] || 0 : 0;
+          return rarityB - rarityA;
+        });
+        break;
+      case 'hp-desc':
+        sortedCards.sort((a, b) => parseInt(b.hp || '0', 10) - parseInt(a.hp || '0', 10));
+        break;
+    }
+
+    setDisplayedCards(sortedCards);
+    
     if (!loading && !loadingMore) {
-      setDisplayedCards(cards);
       setIsSearching(false);
     }
-  }, [cards, loading, loadingMore]);
+  }, [cards, sortOption, loading, loadingMore]);
   
   const handleSearch = useCallback((term: string) => {
     if (isGlobalSearch || isPokemonSearch) return; 
@@ -172,6 +241,10 @@ export default function PokeDex() {
     setCurrentPage(nextPage);
     loadCards(nextPage, true);
   }, [currentPage, loadingMore, hasMore, loadCards]);
+
+  const handleSortChange = (value: string) => {
+    setSortOption(value);
+  };
 
   const renderEmptyState = () => {
     return (
@@ -260,12 +333,26 @@ export default function PokeDex() {
         
         {!isGlobalSearch && !isPokemonSearch && (
           <div className="pb-4">
-            <SetSearchbar 
-              onSearch={handleSearch} 
-              value={searchTerm}
-              placeholder="Search for a card in this set..." 
-              isLoading={isSearching || loading}
-            />
+            <div className="flex flex-col md:flex-row gap-3 items-center">
+              <div className="w-full md:w-8/12">
+                <SetSearchbar 
+                  onSearch={handleSearch} 
+                  value={searchTerm}
+                  placeholder="Search for a card in this set..." 
+                  isLoading={isSearching || loading}
+                />
+              </div>
+              
+              {!loading && cards.length > 0 && (
+                <div className="w-full md:w-4/12">
+                  <CardFilters
+                    value={sortOption}
+                    onChange={handleSortChange}
+                    disabled={loading || loadingMore}
+                  />
+                </div>
+              )}
+            </div>
           </div>
         )}
       </div>

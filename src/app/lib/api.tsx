@@ -5,6 +5,7 @@ export interface PokemonSet {
   releaseDate: string;
   printedTotal?: number;
   total?: number;
+
   legalities?: {
     unlimited?: string;
     standard?: string;
@@ -25,6 +26,7 @@ export interface PokemonCard {
   images: { small: string; large: string };
   supertype?: string;
   subtypes?: string[];
+  rarity?: string;
   hp?: string;
   types?: string[];
   evolvesFrom?: string;
