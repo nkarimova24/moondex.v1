@@ -11,19 +11,45 @@ interface CardGridProps {
 export default function CardGrid({ cards }: CardGridProps) {
   const [selectedCard, setSelectedCard] = useState<PokemonCard | null>(null);
 
-  const formatPrice = (price?: number) => {
+  const formatEuroPrice = (price?: number) => {
     if (price === undefined || price === 0) return "N/A";
     return `€${price.toFixed(2)}`;
   };
 
+  const formatUsdPrice = (price?: number) => {
+    if (price === undefined || price === 0) return "N/A";
+    return `$${price.toFixed(2)}`;
+  };
+
   const getCardPrice = (card: PokemonCard) => {
-    if (!card.cardmarket?.prices) return "N/A";
+    // First check TCGPlayer prices (USD)
+    if (card.tcgplayer?.prices) {
+      // Try to get market price from the most relevant price type
+      const normal = card.tcgplayer.prices.normal;
+      const holofoil = card.tcgplayer.prices.holofoil;
+      const reverseHolo = card.tcgplayer.prices.reverseHolofoil;
+      
+      // Check for market price in the following order of preference
+      if (holofoil?.market) return formatUsdPrice(holofoil.market);
+      if (normal?.market) return formatUsdPrice(normal.market);
+      if (reverseHolo?.market) return formatUsdPrice(reverseHolo.market);
+      
+      // If no market price, try low price
+      if (holofoil?.low) return formatUsdPrice(holofoil.low);
+      if (normal?.low) return formatUsdPrice(normal.low);
+      if (reverseHolo?.low) return formatUsdPrice(reverseHolo.low);
+    }
     
-    return formatPrice(
-      card.cardmarket.prices.trendPrice || 
-      card.cardmarket.prices.averageSellPrice || 
-      card.cardmarket.prices.lowPrice
-    );
+    // Fall back to CardMarket prices (EUR)
+    if (card.cardmarket?.prices) {
+      return formatEuroPrice(
+        card.cardmarket.prices.trendPrice || 
+        card.cardmarket.prices.averageSellPrice || 
+        card.cardmarket.prices.lowPrice
+      );
+    }
+    
+    return "N/A";
   };
 
   const handleCardNavigation = (card: PokemonCard) => {

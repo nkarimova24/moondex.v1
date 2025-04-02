@@ -71,6 +71,47 @@ export interface PokemonCard {
       reverseHoloAvg30?: number;
     };
   };
+  tcgplayer?: {
+    url?: string;
+    updatedAt?: string;
+    prices?: {
+      normal?: {
+        low?: number;
+        mid?: number;
+        high?: number;
+        market?: number;
+        directLow?: number;
+      };
+      holofoil?: {
+        low?: number;
+        mid?: number;
+        high?: number;
+        market?: number;
+        directLow?: number;
+      };
+      reverseHolofoil?: {
+        low?: number;
+        mid?: number;
+        high?: number;
+        market?: number;
+        directLow?: number;
+      };
+      "1stEditionHolofoil"?: {
+        low?: number;
+        mid?: number;
+        high?: number;
+        market?: number;
+        directLow?: number;
+      };
+      "1stEditionNormal"?: {
+        low?: number;
+        mid?: number;
+        high?: number;
+        market?: number;
+        directLow?: number;
+      };
+    };
+  }
 }
 
 export type SearchType = "pokemon" | "trainer" | "energy" | "all";

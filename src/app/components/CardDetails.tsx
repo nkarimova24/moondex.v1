@@ -55,9 +55,9 @@ export default function CardDetails({ card, allCards, onClose, onNavigate }: Car
     };
   }, []);
 
-  const formatPrice = (price?: number) => {
+   const formatPrice = (price?: number) => {
     if (price === undefined || price === 0) return "N/A";
-    return `€${price.toFixed(2)}`;
+    return `$${price.toFixed(2)}`;
   };
 
   const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {

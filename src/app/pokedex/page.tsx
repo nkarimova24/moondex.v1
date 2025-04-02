@@ -159,62 +159,47 @@ export default function PokeDex() {
     let sortedCards = [...cards];
     
     switch (sortOption) {
-      case 'number-asc':
-        sortedCards.sort((a, b) => parseInt(a.number || '0') - parseInt(b.number || '0'));
-        break;
-      case 'number-desc':
-        sortedCards.sort((a, b) => parseInt(b.number || '0') - parseInt(a.number || '0'));
-        break;
-      case 'name-asc':
-        sortedCards.sort((a, b) => a.name.localeCompare(b.name));
-        break;
-      case 'name-desc':
-        sortedCards.sort((a, b) => b.name.localeCompare(a.name));
-        break;
       case 'price-asc':
         sortedCards.sort((a, b) => {
-          const priceA = a.cardmarket?.prices?.trendPrice || 
-                       a.cardmarket?.prices?.averageSellPrice || 
-                       a.cardmarket?.prices?.lowPrice || 0;
-          const priceB = b.cardmarket?.prices?.trendPrice || 
-                       b.cardmarket?.prices?.averageSellPrice || 
-                       b.cardmarket?.prices?.lowPrice || 0;
+          const priceA =
+            a.cardmarket?.prices?.trendPrice ||
+            a.cardmarket?.prices?.averageSellPrice ||
+            a.cardmarket?.prices?.lowPrice ||
+            a.tcgplayer?.prices?.normal?.market || // Fallback to TCGPlayer prices
+            a.tcgplayer?.prices?.normal?.low || 0;
+    
+          const priceB =
+            b.cardmarket?.prices?.trendPrice ||
+            b.cardmarket?.prices?.averageSellPrice ||
+            b.cardmarket?.prices?.lowPrice ||
+            b.tcgplayer?.prices?.normal?.market || // Fallback to TCGPlayer prices
+            b.tcgplayer?.prices?.normal?.low || 0;
+    
           return priceA - priceB;
         });
         break;
+    
       case 'price-desc':
         sortedCards.sort((a, b) => {
-          const priceA = a.cardmarket?.prices?.trendPrice || 
-                       a.cardmarket?.prices?.averageSellPrice || 
-                       a.cardmarket?.prices?.lowPrice || 0;
-          const priceB = b.cardmarket?.prices?.trendPrice || 
-                       b.cardmarket?.prices?.averageSellPrice || 
-                       b.cardmarket?.prices?.lowPrice || 0;
+          const priceA =
+            a.cardmarket?.prices?.trendPrice ||
+            a.cardmarket?.prices?.averageSellPrice ||
+            a.cardmarket?.prices?.lowPrice ||
+            a.tcgplayer?.prices?.normal?.market || // Fallback to TCGPlayer prices
+            a.tcgplayer?.prices?.normal?.low || 0;
+    
+          const priceB =
+            b.cardmarket?.prices?.trendPrice ||
+            b.cardmarket?.prices?.averageSellPrice ||
+            b.cardmarket?.prices?.lowPrice ||
+            b.tcgplayer?.prices?.normal?.market || 
+            b.tcgplayer?.prices?.normal?.low || 0;
+    
           return priceB - priceA;
         });
         break;
-      case 'rarity':
+    
 
-      const rarityOrder: { [key: string]: number } = {
-          'Common': 1,
-          'Uncommon': 2,
-          'Rare': 3,
-          'Rare Holo': 4,
-          'Rare Ultra': 5,
-          'Rare Rainbow': 6,
-          'Rare Secret': 7,
-          'Promo': 8
-        };
-        
-        sortedCards.sort((a, b) => {
-          const rarityA = a.rarity ? rarityOrder[a.rarity] || 0 : 0;
-          const rarityB = b.rarity ? rarityOrder[b.rarity] || 0 : 0;
-          return rarityB - rarityA;
-        });
-        break;
-      case 'hp-desc':
-        sortedCards.sort((a, b) => parseInt(b.hp || '0', 10) - parseInt(a.hp || '0', 10));
-        break;
     }
 
     setDisplayedCards(sortedCards);
