@@ -73,7 +73,8 @@ export default function CardFilters({ value, onChange, disabled = false }: CardF
         <MenuItem value="name-desc">Name (Z to A)</MenuItem>
         <MenuItem value="price-asc">Price (Low to High)</MenuItem>
         <MenuItem value="price-desc">Price (High to Low)</MenuItem>
-        <MenuItem value="rarity">Rarity (Highest first)</MenuItem>
+        <MenuItem value="rarity-desc">Rarity (Highest First)</MenuItem>
+        <MenuItem value="rarity-asc">Rarity (Lowest First)</MenuItem>
         <MenuItem value="hp-desc">HP (High to Low)</MenuItem>
       </Select>
     </FormControl>

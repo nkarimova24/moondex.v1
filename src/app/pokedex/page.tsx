@@ -9,6 +9,7 @@ import {
   PokemonCard, 
   PokemonSet
 } from "@/app/lib/api";
+import { sortCards } from "@/app/lib/sortUtils"; 
 import CardGrid from "@/app/components/CardGrid";
 import SetHeader from "@/app/components/SetHeader";
 import SetSearchbar from "@/app/components/SetSearchbar";
@@ -156,52 +157,7 @@ export default function PokeDex() {
       return;
     }
     
-    let sortedCards = [...cards];
-    
-    switch (sortOption) {
-      case 'price-asc':
-        sortedCards.sort((a, b) => {
-          const priceA =
-            a.cardmarket?.prices?.trendPrice ||
-            a.cardmarket?.prices?.averageSellPrice ||
-            a.cardmarket?.prices?.lowPrice ||
-            a.tcgplayer?.prices?.normal?.market || // Fallback to TCGPlayer prices
-            a.tcgplayer?.prices?.normal?.low || 0;
-    
-          const priceB =
-            b.cardmarket?.prices?.trendPrice ||
-            b.cardmarket?.prices?.averageSellPrice ||
-            b.cardmarket?.prices?.lowPrice ||
-            b.tcgplayer?.prices?.normal?.market || // Fallback to TCGPlayer prices
-            b.tcgplayer?.prices?.normal?.low || 0;
-    
-          return priceA - priceB;
-        });
-        break;
-    
-      case 'price-desc':
-        sortedCards.sort((a, b) => {
-          const priceA =
-            a.cardmarket?.prices?.trendPrice ||
-            a.cardmarket?.prices?.averageSellPrice ||
-            a.cardmarket?.prices?.lowPrice ||
-            a.tcgplayer?.prices?.normal?.market || // Fallback to TCGPlayer prices
-            a.tcgplayer?.prices?.normal?.low || 0;
-    
-          const priceB =
-            b.cardmarket?.prices?.trendPrice ||
-            b.cardmarket?.prices?.averageSellPrice ||
-            b.cardmarket?.prices?.lowPrice ||
-            b.tcgplayer?.prices?.normal?.market || 
-            b.tcgplayer?.prices?.normal?.low || 0;
-    
-          return priceB - priceA;
-        });
-        break;
-    
-
-    }
-
+    const sortedCards = sortCards(cards, sortOption);
     setDisplayedCards(sortedCards);
     
     if (!loading && !loadingMore) {

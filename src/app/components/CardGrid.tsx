@@ -22,25 +22,22 @@ export default function CardGrid({ cards }: CardGridProps) {
   };
 
   const getCardPrice = (card: PokemonCard) => {
-    // First check TCGPlayer prices (USD)
+
     if (card.tcgplayer?.prices) {
-      // Try to get market price from the most relevant price type
+
       const normal = card.tcgplayer.prices.normal;
       const holofoil = card.tcgplayer.prices.holofoil;
       const reverseHolo = card.tcgplayer.prices.reverseHolofoil;
       
-      // Check for market price in the following order of preference
       if (holofoil?.market) return formatUsdPrice(holofoil.market);
       if (normal?.market) return formatUsdPrice(normal.market);
       if (reverseHolo?.market) return formatUsdPrice(reverseHolo.market);
       
-      // If no market price, try low price
       if (holofoil?.low) return formatUsdPrice(holofoil.low);
       if (normal?.low) return formatUsdPrice(normal.low);
       if (reverseHolo?.low) return formatUsdPrice(reverseHolo.low);
     }
     
-    // Fall back to CardMarket prices (EUR)
     if (card.cardmarket?.prices) {
       return formatEuroPrice(
         card.cardmarket.prices.trendPrice || 
