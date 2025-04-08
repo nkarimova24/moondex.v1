@@ -81,6 +81,7 @@ export default function Sidebar() {
           borderRight: "1px solid rgba(138, 63, 63, 0.3)",
           display: "flex",
           flexDirection: "column",
+          zIndex: -10,
         },
       }}
     >
@@ -93,6 +94,7 @@ export default function Sidebar() {
           justifyContent: "center",
           boxShadow: "0 2px 4px rgba(0,0,0,0.2)",
           flexShrink: 0,
+      
         }}
       >
         <Typography 
