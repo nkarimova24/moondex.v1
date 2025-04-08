@@ -13,19 +13,52 @@ import {
   CircularProgress,
   Typography,
   Divider,
+  IconButton,
+  useMediaQuery
 } from "@mui/material";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
+import MenuIcon from "@mui/icons-material/Menu";
+import CloseIcon from "@mui/icons-material/Close";
 import { fetchPokemonSets, PokemonSet } from "@/app/lib/api";
 
-export default function Sidebar() {
+interface SidebarProps {
+  isOpen?: boolean;
+  onToggle?: () => void;
+}
+
+export default function Sidebar({ isOpen: propIsOpen, onToggle }: SidebarProps) {
   const [sets, setSets] = useState<{ [key: string]: PokemonSet[] }>({});
   const [loading, setLoading] = useState(true);
   const [expandedMain, setExpandedMain] = useState(false);
   const [expandedSeries, setExpandedSeries] = useState<string | null>(null);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   
   const seriesRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
   const sidebarContainerRef = useRef<HTMLDivElement | null>(null);
+  
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 960); 
+    };
+    
+    checkMobile();
+    
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+  
+  const isOpen = propIsOpen !== undefined ? propIsOpen : mobileOpen;
+  
+  const handleDrawerToggle = () => {
+    if (onToggle) {
+      onToggle();
+    } else {
+      setMobileOpen(!mobileOpen);
+    }
+  };
 
   useEffect(() => {
     const loadSets = async () => {
@@ -67,33 +100,41 @@ export default function Sidebar() {
     setExpandedSeries((prev) => (prev === series ? null : series));
   };
 
-  return (
-    <Drawer
-  variant="permanent"
-  sx={{
-    width: 240,
-    flexShrink: 0,
-    zIndex: 1000, // Lower z-index than CardFilters
-    "& .MuiDrawer-paper": {
-      width: 240,
-      background: "linear-gradient(to bottom, #242424, #1A1A1A)",
-      color: "#fff",
-      borderRight: "1px solid rgba(138, 63, 63, 0.3)",
-      display: "flex",
-      flexDirection: "column",
-    },
-  }}
->
+  // Mobile sidebar toggle button (fixed position)
+  const toggleButton = isMobile && (
+    <IconButton
+      color="inherit"
+      aria-label="toggle sidebar"
+      onClick={handleDrawerToggle}
+      sx={{
+        position: 'fixed',
+        bottom: 16,
+        left: 16,
+        zIndex: 1300,
+        backgroundColor: '#8A3F3F',
+        '&:hover': {
+          backgroundColor: '#612B2B',
+        },
+        boxShadow: '0 2px 8px rgba(0,0,0,0.3)',
+        width: 50,
+        height: 50,
+      }}
+    >
+      {isOpen ? <CloseIcon /> : <MenuIcon />}
+    </IconButton>
+  );
+
+  const drawerContent = (
+    <>
       <Box
         sx={{
           background: "linear-gradient(to right,rgb(97, 43, 43), #8A3F3F)",
           padding: "16px 12px",
           display: "flex",
           alignItems: "center",
-          justifyContent: "center",
+          justifyContent: "space-between",
           boxShadow: "0 2px 4px rgba(0,0,0,0.2)",
           flexShrink: 0,
-      
         }}
       >
         <Typography 
@@ -106,6 +147,16 @@ export default function Sidebar() {
         >
           Moondex
         </Typography>
+        
+        {isMobile && (
+          <IconButton 
+            size="small" 
+            onClick={handleDrawerToggle}
+            sx={{ color: 'white' }}
+          >
+            <CloseIcon />
+          </IconButton>
+        )}
       </Box>
 
       <Divider sx={{ opacity: 0.2 }} />
@@ -128,6 +179,7 @@ export default function Sidebar() {
                   backgroundColor: "rgba(138, 63, 63, 0.15)",
                 }
               }}
+              onClick={isMobile ? handleDrawerToggle : undefined}
             >
               <ListItemText 
                 primary="Home" 
@@ -230,6 +282,7 @@ export default function Sidebar() {
                                   pl: "calc(1rem - 3px)"
                                 }
                               }}
+                              onClick={isMobile ? handleDrawerToggle : undefined}
                             >
                               <ListItemText 
                                 primary={set.name} 
@@ -253,49 +306,6 @@ export default function Sidebar() {
           </Collapse>
           
           <Divider sx={{ opacity: 0.1, my: 1 }} />
-          
-          {/* Additional menu items */}
-          {/* <ListItem disablePadding>
-            <ListItemButton 
-              component={Link} 
-              href="/favorites"
-              sx={{ 
-                padding: "12px 16px",
-                "&:hover": {
-                  backgroundColor: "rgba(138, 63, 63, 0.15)",
-                }
-              }}
-            >
-              <ListItemText 
-                primary="Favorites" 
-                primaryTypographyProps={{ 
-                  fontWeight: 500,
-                  fontSize: "15px" 
-                }} 
-              />
-            </ListItemButton>
-          </ListItem> */}
-          
-          {/* <ListItem disablePadding>
-            <ListItemButton 
-              component={Link} 
-              href="/advanced-search"
-              sx={{ 
-                padding: "12px 16px",
-                "&:hover": {
-                  backgroundColor: "rgba(138, 63, 63, 0.15)",
-                }
-              }}
-            >
-              <ListItemText 
-                primary="Advanced Search" 
-                primaryTypographyProps={{ 
-                  fontWeight: 500,
-                  fontSize: "15px" 
-                }} 
-              />
-            </ListItemButton>
-          </ListItem> */}
         </List>
       </Box>
       
@@ -311,6 +321,60 @@ export default function Sidebar() {
           © 2025 MOONDEX
         </Typography>
       </Box>
-    </Drawer>
+    </>
+  );
+
+  return (
+    <>
+      {toggleButton}
+      
+      {/* Desktop permanent drawer */}
+      {!isMobile && (
+        <Drawer
+          variant="permanent"
+          sx={{
+            width: 240,
+            flexShrink: 0,
+            zIndex: 1000, 
+            display: { xs: 'none', sm: 'block' },
+            "& .MuiDrawer-paper": {
+              width: 240,
+              background: "linear-gradient(to bottom, #242424, #1A1A1A)",
+              color: "#fff",
+              borderRight: "1px solid rgba(138, 63, 63, 0.3)",
+              display: "flex",
+              flexDirection: "column",
+            },
+          }}
+        >
+          {drawerContent}
+        </Drawer>
+      )}
+      
+      {/* Mobile temporary drawer */}
+      {isMobile && (
+        <Drawer
+          variant="temporary"
+          open={isOpen}
+          onClose={handleDrawerToggle}
+          ModalProps={{
+            keepMounted: true, 
+          }}
+          sx={{
+            display: { xs: 'block', sm: 'none' },
+            '& .MuiDrawer-paper': {
+              width: 280,
+              background: "linear-gradient(to bottom, #242424, #1A1A1A)",
+              color: "#fff",
+              borderRight: "1px solid rgba(138, 63, 63, 0.3)",
+              display: "flex",
+              flexDirection: "column",
+            },
+          }}
+        >
+          {drawerContent}
+        </Drawer>
+      )}
+    </>
   );
 }

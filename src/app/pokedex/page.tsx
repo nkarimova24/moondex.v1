@@ -19,7 +19,6 @@ import CardFilters from "@/app/components/CardFilters";
 
 export default function PokeDex() {
   const searchParams = useSearchParams();
-  // Removed unused loadMoreRef
   const [headerVisible, setHeaderVisible] = useState(true);
   
   const [setId, setSetId] = useState<string | null>(null);
@@ -38,7 +37,6 @@ export default function PokeDex() {
   const [globalSearchTerm, setGlobalSearchTerm] = useState('');
   const [pokemonSearchTerm, setPokemonSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  // Removed unused totalPages
   const [totalResults, setTotalResults] = useState(0);
   const [hasMore, setHasMore] = useState(false);
 
@@ -258,7 +256,7 @@ export default function PokeDex() {
   if (!setId && !isGlobalSearch && !isPokemonSearch) {
     return (
       <div className="flex justify-center items-center h-64">
-        <p className="text-lg text-gray-300">No set selected, select a set to search for a specific card.</p>
+        <p className="text-lg text-gray-300 px-4 text-center">No set selected, select a set to search for a specific card.</p>
       </div>
     );
   }
@@ -266,8 +264,8 @@ export default function PokeDex() {
   const loadingState = renderLoadingState();
   
   return (
-    <div className="container mx-auto px-4 py-4">
-      <div className="sticky top-0 z-10 bg-[#1A1A1A]">
+    <div className="container mx-auto px-2 sm:px-4 py-2 sm:py-4">
+      <div className="sticky top-0 z-10 bg-[#1A1A1A] pb-2 sm:pb-4">
         {!isPokemonSearch && !isGlobalSearch && setInfo && (
           <div className="relative pt-0">
             {headerVisible && <SetHeader setInfo={setInfo} />}
@@ -281,19 +279,19 @@ export default function PokeDex() {
         )}
 
         {isPokemonSearch ? (
-          <h1 className="text-2xl font-bold mb-4 text-white">
+          <h1 className="text-xl sm:text-2xl font-bold mb-2 sm:mb-4 text-white px-2">
             Searchresults for &quot;{pokemonSearchTerm}&quot;
           </h1>
         ) : isGlobalSearch ? (
-          <h1 className="text-2xl font-bold mb-4 text-white">
+          <h1 className="text-xl sm:text-2xl font-bold mb-2 sm:mb-4 text-white px-2">
             Searchresults for &quot;{globalSearchTerm}&quot;
           </h1>
         ) : null}
         
         {!isGlobalSearch && !isPokemonSearch && (
-          <div className="pb-4">
-            <div className="flex flex-col md:flex-row gap-3 items-center">
-              <div className="w-full md:w-8/12">
+          <div className="pb-2 sm:pb-4 px-2">
+            <div className="flex flex-col sm:flex-row gap-3 items-center">
+              <div className="w-full sm:w-8/12">
                 <SetSearchbar 
                   onSearch={handleSearch} 
                   value={searchTerm}
@@ -303,7 +301,7 @@ export default function PokeDex() {
               </div>
               
               {!loading && cards.length > 0 && (
-                <div className="w-full md:w-4/12 flex justify-end">
+                <div className="w-full sm:w-4/12 flex justify-center sm:justify-end">
                   <CardFilters
                     value={sortOption}
                     onChange={handleSortChange}
@@ -323,8 +321,8 @@ export default function PokeDex() {
           {displayedCards.length === 0 ? (
             renderEmptyState()
           ) : (
-            <div>
-              <p className="mb-4 text-gray-400">
+            <div className="px-2">
+              <p className="mb-2 sm:mb-4 text-sm sm:text-base text-gray-400">
                 {displayedCards.length} {displayedCards.length === 1 ? "card" : "cards"} found
                 {selectedType !== "All Types" && ` (${selectedType} type)`}
                 {isPokemonSearch 
@@ -332,16 +330,16 @@ export default function PokeDex() {
                   : isGlobalSearch 
                     ? ` for "${globalSearchTerm}"` 
                     : searchTerm && ` for "${searchTerm}"`}
-                {totalResults > displayedCards.length && selectedType === "All Types" && ` (${displayedCards.length} geladen)`}
+                {totalResults > displayedCards.length && selectedType === "All Types" && ` (${displayedCards.length} loaded)`}
               </p>
               
               <CardGrid cards={displayedCards} />
               
-              <div className="my-8">
+              <div className="my-4 sm:my-8">
               {totalResults > displayedCards.length && selectedType === "All Types" && (
                 <button
                   onClick={handleLoadMore}
-                  className="w-full py-3 text-white bg-[#8A3F3F] rounded-md hover:bg-[#6E2F2F] disabled:bg-gray-600 disabled:text-gray-400"
+                  className="w-full py-2 sm:py-3 text-white bg-[#8A3F3F] rounded-md hover:bg-[#6E2F2F] disabled:bg-gray-600 disabled:text-gray-400 text-sm sm:text-base"
                   disabled={loadingMore}
                 >
                   {loadingMore 
@@ -352,7 +350,7 @@ export default function PokeDex() {
               
               {(!loadingMore && displayedCards.length >= totalResults && totalResults > 0 && selectedType === "All Types") || 
                (selectedType !== "All Types" && displayedCards.length > 0) ? (
-                <div className="text-center text-gray-500 mt-4">
+                <div className="text-center text-gray-500 mt-4 text-sm sm:text-base">
                   {selectedType !== "All Types" 
                     ? `Showing all ${selectedType} type cards` 
                     : "All cards are loaded"}

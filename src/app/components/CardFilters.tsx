@@ -262,9 +262,9 @@ export default function CardFilters({
   const activeFilterCount = selectedType !== "All Types" ? 1 : 0;
 
   const handleResetFilters = () => {
-    onChange(""); // Reset the sort option
+    onChange(""); 
     if (onTypeChange) {
-      onTypeChange("All Types"); // Reset the type filter
+      onTypeChange("All Types");
     }
   };
 
