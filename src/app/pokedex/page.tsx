@@ -152,14 +152,12 @@ export default function PokeDex() {
     loadCards(1, false);
   }, [loadCards]);
 
-  // Filter cards by type and then sort them
   useEffect(() => {
     if (cards.length === 0) {
       setDisplayedCards([]);
       return;
     }
     
-    // First, filter by type if needed
     let filteredCards = [...cards];
     
     if (selectedType !== "All Types") {
@@ -168,7 +166,6 @@ export default function PokeDex() {
       );
     }
     
-    // Then sort the filtered cards
     const sortedCards = sortCards(filteredCards, sortOption);
     setDisplayedCards(sortedCards);
     
@@ -309,7 +306,7 @@ export default function PokeDex() {
               </div>
               
               {!loading && cards.length > 0 && (
-                <div className="w-full md:w-4/12">
+                <div className="w-full md:w-4/12 flex justify-end">
                   <CardFilters
                     value={sortOption}
                     onChange={handleSortChange}
