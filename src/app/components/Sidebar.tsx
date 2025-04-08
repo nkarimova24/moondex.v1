@@ -70,21 +70,21 @@ export default function Sidebar() {
 
   return (
     <Drawer
-      variant="permanent"
-      sx={{
-        width: 240,
-        flexShrink: 0,
-        "& .MuiDrawer-paper": {
-          width: 240,
-          background: "linear-gradient(to bottom, #242424, #1A1A1A)",
-          color: "#fff",
-          borderRight: "1px solid rgba(138, 63, 63, 0.3)",
-          display: "flex",
-          flexDirection: "column",
-          zIndex: -10,
-        },
-      }}
-    >
+  variant="permanent"
+  sx={{
+    width: 240,
+    flexShrink: 0,
+    zIndex: 1000, // Lower z-index than CardFilters
+    "& .MuiDrawer-paper": {
+      width: 240,
+      background: "linear-gradient(to bottom, #242424, #1A1A1A)",
+      color: "#fff",
+      borderRight: "1px solid rgba(138, 63, 63, 0.3)",
+      display: "flex",
+      flexDirection: "column",
+    },
+  }}
+>
       <Box
         sx={{
           background: "linear-gradient(to right,rgb(97, 43, 43), #8A3F3F)",

@@ -285,11 +285,11 @@ export default function PokeDex() {
 
         {isPokemonSearch ? (
           <h1 className="text-2xl font-bold mb-4 text-white">
-            Zoekresultaten voor "{pokemonSearchTerm}"
+            Searchresults for "{pokemonSearchTerm}"
           </h1>
         ) : isGlobalSearch ? (
           <h1 className="text-2xl font-bold mb-4 text-white">
-            Zoekresultaten voor "{globalSearchTerm}"
+            Searchresults for "{globalSearchTerm}"
           </h1>
         ) : null}
         
@@ -331,10 +331,10 @@ export default function PokeDex() {
                 {displayedCards.length} {displayedCards.length === 1 ? "card" : "cards"} found
                 {selectedType !== "All Types" && ` (${selectedType} type)`}
                 {isPokemonSearch 
-                  ? ` voor "${pokemonSearchTerm}"`
+                  ? ` for "${pokemonSearchTerm}"`
                   : isGlobalSearch 
-                    ? ` voor "${globalSearchTerm}"` 
-                    : searchTerm && ` voor "${searchTerm}"`}
+                    ? ` for "${globalSearchTerm}"` 
+                    : searchTerm && ` for "${searchTerm}"`}
                 {totalResults > displayedCards.length && selectedType === "All Types" && ` (${displayedCards.length} geladen)`}
               </p>
               
