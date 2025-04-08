@@ -32,7 +32,8 @@ function FilterPanel({
   onChange, 
   selectedType = "All Types", 
   onTypeChange, 
-  disabled = false 
+  disabled = false,
+  onReset
 }: { 
   open: boolean; 
   onClose: () => void; 
@@ -41,8 +42,9 @@ function FilterPanel({
   selectedType?: string; 
   onTypeChange?: (type: string) => void; 
   disabled?: boolean; 
+  onReset: () => void;
 }) {
-  // Early return if not open
+
   if (!open) return null;
   
   const getTypeColor = (type: string): string => {
@@ -99,7 +101,6 @@ function FilterPanel({
           p: 2,
           overflowY: 'auto',
           boxShadow: '4px 0px 10px rgba(0, 0, 0, 0.3)',
-          borderRight: '1px solid rgba(255, 255, 255, 0.1)',
           pointerEvents: 'auto', 
         }}
         elevation={24}
@@ -190,7 +191,7 @@ function FilterPanel({
         )}
 
         {/* Panel footer */}
-        <Box sx={{ mt: 3 }}>
+        {/* <Box sx={{ mt: 3 }}>
           <Button 
             variant="contained" 
             fullWidth
@@ -203,6 +204,23 @@ function FilterPanel({
             }}
           >
             Apply Filters
+          </Button>
+        </Box> */}
+        <Box sx={{ mt: 3 }}>
+          <Button 
+            variant="outlined" 
+            fullWidth
+            onClick={onReset} 
+            sx={{
+              borderColor: "rgba(255, 255, 255, 0.2)",
+              color: "white",
+              "&:hover": {
+                backgroundColor: "rgba(138, 63, 63, 0.15)",
+                borderColor: "rgba(138, 63, 63, 0.5)",
+              },
+            }}
+          >
+            Reset Filters
           </Button>
         </Box>
       </Paper>
@@ -243,6 +261,13 @@ export default function CardFilters({
 
   const activeFilterCount = selectedType !== "All Types" ? 1 : 0;
 
+  const handleResetFilters = () => {
+    onChange(""); // Reset the sort option
+    if (onTypeChange) {
+      onTypeChange("All Types"); // Reset the type filter
+    }
+  };
+
   return (
     <Box sx={{ position: 'relative', mb: 2 }}>
       {/* Filter toggle button with counter */}
@@ -279,6 +304,7 @@ export default function CardFilters({
           selectedType={selectedType}
           onTypeChange={onTypeChange}
           disabled={disabled}
+          onReset={handleResetFilters}
         />,
         portalElement
       )}
