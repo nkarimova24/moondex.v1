@@ -116,6 +116,38 @@ export interface PokemonCard {
 
 export type SearchType = "pokemon" | "trainer" | "energy" | "all";
 
+// Define all Pokémon card types with their associated colors
+export const POKEMON_TYPES = [
+  "All Types",
+  "Colorless",
+  "Darkness",
+  "Dragon",
+  "Fairy",
+  "Fighting",
+  "Fire",
+  "Grass",
+  "Lightning",
+  "Metal",
+  "Psychic",
+  "Water"
+];
+
+// Type color mapping for UI elements
+export const TYPE_COLORS: { [key: string]: string } = {
+  "All Types": "#777777",
+  "Colorless": "#A8A878",
+  "Darkness": "#705848",
+  "Dragon": "#7038F8",
+  "Fairy": "#EE99AC",
+  "Fighting": "#C03028",
+  "Fire": "#F08030",
+  "Grass": "#78C850",
+  "Lightning": "#F8D030",
+  "Metal": "#B8B8D0",
+  "Psychic": "#F85888",
+  "Water": "#6890F0"
+};
+
 const API_KEY = process.env.NEXT_PUBLIC_POKEMON_TCG_API_KEY;
 
 const fetchWithAuth = async (url: string) => {
@@ -294,4 +326,3 @@ export const searchCards = async (
 }> => {
   return searchCardsByType(searchTerm, "all", page, pageSize);
 };
-

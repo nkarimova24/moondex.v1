@@ -9,7 +9,7 @@ import {
   PokemonCard, 
   PokemonSet
 } from "@/app/lib/api";
-import { sortCards } from "@/app/lib/sortUtils"; 
+import { sortCards } from "@/app/lib/sortUtils";
 import CardGrid from "@/app/components/CardGrid";
 import SetHeader from "@/app/components/SetHeader";
 import SetSearchbar from "@/app/components/SetSearchbar";
@@ -31,6 +31,7 @@ export default function PokeDex() {
   const [isSearching, setIsSearching] = useState(false);
   const [displayedCards, setDisplayedCards] = useState<PokemonCard[]>([]);
   const [sortOption, setSortOption] = useState("number-asc");
+  const [selectedType, setSelectedType] = useState("All Types");
   
   const [isPokemonSearch, setIsPokemonSearch] = useState(false);
   const [isGlobalSearch, setIsGlobalSearch] = useState(false);
@@ -151,19 +152,30 @@ export default function PokeDex() {
     loadCards(1, false);
   }, [loadCards]);
 
+  // Filter cards by type and then sort them
   useEffect(() => {
     if (cards.length === 0) {
       setDisplayedCards([]);
       return;
     }
     
-    const sortedCards = sortCards(cards, sortOption);
+    // First, filter by type if needed
+    let filteredCards = [...cards];
+    
+    if (selectedType !== "All Types") {
+      filteredCards = filteredCards.filter(card => 
+        card.types && card.types.includes(selectedType)
+      );
+    }
+    
+    // Then sort the filtered cards
+    const sortedCards = sortCards(filteredCards, sortOption);
     setDisplayedCards(sortedCards);
     
     if (!loading && !loadingMore) {
       setIsSearching(false);
     }
-  }, [cards, sortOption, loading, loadingMore]);
+  }, [cards, sortOption, selectedType, loading, loadingMore]);
   
   const handleSearch = useCallback((term: string) => {
     if (isGlobalSearch || isPokemonSearch) return; 
@@ -186,6 +198,10 @@ export default function PokeDex() {
   const handleSortChange = (value: string) => {
     setSortOption(value);
   };
+  
+  const handleTypeChange = (type: string) => {
+    setSelectedType(type);
+  };
 
   const renderEmptyState = () => {
     return (
@@ -195,22 +211,30 @@ export default function PokeDex() {
             ? `No cards found for "${pokemonSearchTerm}".`
             : isGlobalSearch 
               ? `No cards found for "${globalSearchTerm}".`
-              : searchTerm 
-                ? `No cards found for"${searchTerm}" in this set.` 
-                : "No cards found in this set."}
+              : selectedType !== "All Types"
+                ? `No ${selectedType} type cards found${searchTerm ? ` matching "${searchTerm}"` : ""} in this set.`
+                : searchTerm 
+                  ? `No cards found for "${searchTerm}" in this set.` 
+                  : "No cards found in this set."}
         </p>
-        {(isPokemonSearch || isGlobalSearch || searchTerm) && (
+        {(isPokemonSearch || isGlobalSearch || searchTerm || selectedType !== "All Types") && (
           <button 
             onClick={() => {
               if (isPokemonSearch || isGlobalSearch) {
                 window.history.back();
+              } else if (selectedType !== "All Types") {
+                setSelectedType("All Types");
               } else {
                 setSearchTerm('');
               }
             }}
             className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors"
           >
-            {isPokemonSearch || isGlobalSearch ? "Back" : "Delete searchterm"}
+            {isPokemonSearch || isGlobalSearch 
+              ? "Back" 
+              : selectedType !== "All Types" 
+                ? "Show All Types" 
+                : "Delete searchterm"}
           </button>
         )}
       </div>
@@ -289,6 +313,8 @@ export default function PokeDex() {
                   <CardFilters
                     value={sortOption}
                     onChange={handleSortChange}
+                    selectedType={selectedType}
+                    onTypeChange={handleTypeChange}
                     disabled={loading || loadingMore}
                   />
                 </div>
@@ -305,19 +331,20 @@ export default function PokeDex() {
           ) : (
             <div>
               <p className="mb-4 text-gray-400">
-                {totalResults} {totalResults === 1 ? "card" : "cards"} found
+                {displayedCards.length} {displayedCards.length === 1 ? "card" : "cards"} found
+                {selectedType !== "All Types" && ` (${selectedType} type)`}
                 {isPokemonSearch 
                   ? ` voor "${pokemonSearchTerm}"`
                   : isGlobalSearch 
                     ? ` voor "${globalSearchTerm}"` 
                     : searchTerm && ` voor "${searchTerm}"`}
-                {totalResults > displayedCards.length && ` (${displayedCards.length} geladen)`}
+                {totalResults > displayedCards.length && selectedType === "All Types" && ` (${displayedCards.length} geladen)`}
               </p>
               
               <CardGrid cards={displayedCards} />
               
               <div className="my-8">
-              {totalResults > displayedCards.length && (
+              {totalResults > displayedCards.length && selectedType === "All Types" && (
                 <button
                   onClick={handleLoadMore}
                   className="w-full py-3 text-white bg-[#8A3F3F] rounded-md hover:bg-[#6E2F2F] disabled:bg-gray-600 disabled:text-gray-400"
@@ -329,11 +356,14 @@ export default function PokeDex() {
                 </button>
               )}
               
-              {!loadingMore && displayedCards.length >= totalResults && totalResults > 0 && (
+              {(!loadingMore && displayedCards.length >= totalResults && totalResults > 0 && selectedType === "All Types") || 
+               (selectedType !== "All Types" && displayedCards.length > 0) ? (
                 <div className="text-center text-gray-500 mt-4">
-                  All cards are loaded
+                  {selectedType !== "All Types" 
+                    ? `Showing all ${selectedType} type cards` 
+                    : "All cards are loaded"}
                 </div>
-              )}
+              ) : null}
             </div>
             </div>
           )}
