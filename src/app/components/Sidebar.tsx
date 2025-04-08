@@ -17,7 +17,6 @@ import {
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import { fetchPokemonSets, PokemonSet } from "@/app/lib/api";
-import Image from "next/image";
 
 export default function Sidebar() {
   const [sets, setSets] = useState<{ [key: string]: PokemonSet[] }>({});

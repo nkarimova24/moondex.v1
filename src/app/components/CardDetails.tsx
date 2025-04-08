@@ -1,8 +1,10 @@
 "use client";
 
+import { useCallback } from "react";
 import { PokemonCard } from "@/app/lib/api";
-import { X, ChevronLeft, ChevronRight, Heart, Share2, Info } from "lucide-react";
+import { X, ChevronLeft, ChevronRight, Heart } from "lucide-react";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 interface CardDetailsProps {
   card: PokemonCard;
@@ -17,17 +19,17 @@ export default function CardDetails({ card, allCards, onClose, onNavigate }: Car
   const hasPrevious = currentIndex > 0;
   const hasNext = currentIndex < allCards.length - 1;
 
-  const goToPrevious = () => {
+  const goToPrevious = useCallback(() => {
     if (hasPrevious) {
       onNavigate(allCards[currentIndex - 1]);
     }
-  };
+  }, [hasPrevious, onNavigate, allCards, currentIndex]);
 
-  const goToNext = () => {
+  const goToNext = useCallback(() => {
     if (hasNext) {
       onNavigate(allCards[currentIndex + 1]);
     }
-  };
+  }, [hasNext, onNavigate, allCards, currentIndex]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -39,21 +41,22 @@ export default function CardDetails({ card, allCards, onClose, onNavigate }: Car
         onClose();
       }
     };
-
+  
     window.addEventListener('keydown', handleKeyDown);
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [currentIndex, allCards]); 
+  }, [goToPrevious, goToNext, hasPrevious, hasNext, onClose]);
 
   useEffect(() => {
     const originalStyle = window.getComputedStyle(document.body).overflow;
     document.body.style.overflow = "hidden";
-    
+
     return () => {
       document.body.style.overflow = originalStyle;
     };
   }, []);
+
 
    const formatPrice = (price?: number) => {
     if (price === undefined || price === 0) return "N/A";
@@ -88,6 +91,23 @@ export default function CardDetails({ card, allCards, onClose, onNavigate }: Car
     return typeColors[type] || "#8A3F3F";
   };
 
+  const getRarityColor = (rarity?: string): string => {
+    if (!rarity) return "#4e4e4e";
+    
+    const rarityColors: Record<string, string> = {
+      "Common": "#4e4e4e",
+      "Uncommon": "#2e7d32",
+      "Rare": "#1565c0",
+      "Rare Holo": "#4527a0",
+      "Rare Holo EX": "#6a1b9a",
+      "Rare Ultra": "#ff8f00",
+      "Rare Rainbow": "linear-gradient(to right, #ec407a, #673ab7, #3949ab)",
+      "Rare Secret": "linear-gradient(to right, #ff9800, #f44336)"
+    };
+    
+    return rarityColors[rarity] || "#4e4e4e";
+  };
+
   const primaryTypeColor = card.types && card.types.length > 0 
     ? getTypeColor(card.types[0]) 
     : "#8A3F3F";
@@ -96,18 +116,17 @@ export default function CardDetails({ card, allCards, onClose, onNavigate }: Car
 
   return (
     <div 
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75"
-      onClick={handleBackdropClick}
-      style={{ left: '240px' }}
+    className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75"
+    onClick={(e) => e.target === e.currentTarget && onClose()}
+    style={{ left: '240px' }}
+  >
+    <div 
+      className="relative w-full max-w-4xl rounded-lg shadow-2xl overflow-hidden"
+      style={{ 
+        background: "linear-gradient(to bottom, #2D2D2D, #1A1A1A)",
+        maxHeight: "90vh" 
+      }}
     >
-      <div 
-        className="relative w-full max-w-4xl rounded-lg shadow-2xl overflow-hidden"
-        style={{ 
-          background: "linear-gradient(to bottom, #2D2D2D, #1A1A1A)",
-     
-          maxHeight: "90vh" 
-        }}
-      >
         {/* Top bar */}
         <div className="flex justify-between items-center px-4 py-3" 
           style={{ 
@@ -131,12 +150,6 @@ export default function CardDetails({ card, allCards, onClose, onNavigate }: Car
             >
               <Heart size={20} fill={isFavorite ? "white" : "none"} />
             </button>
-            {/* <button
-              className="p-1.5 text-white/90 hover:text-white transition-colors"
-              aria-label="Share"
-            >
-              <Share2 size={20} />
-            </button> */}
             <button 
               onClick={onClose}
               className="p-1.5 text-white/90 hover:text-white transition-colors"
@@ -155,26 +168,51 @@ export default function CardDetails({ card, allCards, onClose, onNavigate }: Car
             }}
           >
             <div className="relative">
-              <img 
-                src={card.images.large || card.images.small} 
+              <Image
+                src={card.images.large || card.images.small}
                 alt={card.name}
+                width={400}
+                height={560}
                 className="max-h-[55vh] object-contain drop-shadow-xl transform transition-transform duration-300 hover:scale-105"
+                priority
               />
             </div>
           </div>
 
           {/* Card details */}
           <div className="w-full md:w-3/5 p-6 overflow-y-auto" style={{ color: "#E0E0E0" }}>
-            <div 
-              className="mb-5 py-1 px-3 rounded-md inline-block"
-              style={{ 
-                background: `linear-gradient(to right, ${primaryTypeColor}, ${primaryTypeColor}80)`,
-                boxShadow: "0 1px 3px rgba(0,0,0,0.2)" 
-              }}
-            >
-              <span className="text-white font-medium">
-                {card.supertype} {card.subtypes?.join(", ")}
-              </span>
+            <div className="flex justify-between items-center mb-4">
+              <div 
+                className="py-1 px-3 rounded-md inline-block"
+                style={{ 
+                  background: `linear-gradient(to right, ${primaryTypeColor}, ${primaryTypeColor}80)`,
+                  boxShadow: "0 1px 3px rgba(0,0,0,0.2)" 
+                }}
+              >
+                <span className="text-white font-medium">
+                  {card.supertype} {card.subtypes?.join(", ")}
+                </span>
+              </div>
+              
+              {/* Added rarity display */}
+              {card.rarity && (
+                <div 
+                  className="py-1 px-3 rounded-md"
+                  style={{ 
+                    background: typeof getRarityColor(card.rarity) === 'string' 
+                      ? getRarityColor(card.rarity) 
+                      : 'transparent',
+                    backgroundImage: typeof getRarityColor(card.rarity) !== 'string' 
+                      ? getRarityColor(card.rarity) 
+                      : 'none',
+                    boxShadow: "0 1px 3px rgba(0,0,0,0.2)" 
+                  }}
+                >
+                  <span className="text-white font-medium text-sm">
+                    {card.rarity}
+                  </span>
+                </div>
+              )}
             </div>
             
             {/* HP & Types */}

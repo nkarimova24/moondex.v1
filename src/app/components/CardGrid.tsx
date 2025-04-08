@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { PokemonCard } from "@/app/lib/api";
 import CardDetails from "./CardDetails";
+import Image from "next/image";
 
 interface CardGridProps {
   cards: PokemonCard[];
@@ -10,87 +11,87 @@ interface CardGridProps {
 
 export default function CardGrid({ cards }: CardGridProps) {
   const [selectedCard, setSelectedCard] = useState<PokemonCard | null>(null);
-
-  const formatEuroPrice = (price?: number) => {
-    if (price === undefined || price === 0) return "N/A";
-    return `€${price.toFixed(2)}`;
-  };
-
-  const formatUsdPrice = (price?: number) => {
-    if (price === undefined || price === 0) return "N/A";
-    return `$${price.toFixed(2)}`;
-  };
-
-  const getCardPrice = (card: PokemonCard) => {
-
-    if (card.tcgplayer?.prices) {
-
-      const normal = card.tcgplayer.prices.normal;
-      const holofoil = card.tcgplayer.prices.holofoil;
-      const reverseHolo = card.tcgplayer.prices.reverseHolofoil;
-      
-      if (holofoil?.market) return formatUsdPrice(holofoil.market);
-      if (normal?.market) return formatUsdPrice(normal.market);
-      if (reverseHolo?.market) return formatUsdPrice(reverseHolo.market);
-      
-      if (holofoil?.low) return formatUsdPrice(holofoil.low);
-      if (normal?.low) return formatUsdPrice(normal.low);
-      if (reverseHolo?.low) return formatUsdPrice(reverseHolo.low);
-    }
-    
-    if (card.cardmarket?.prices) {
-      return formatEuroPrice(
-        card.cardmarket.prices.trendPrice || 
-        card.cardmarket.prices.averageSellPrice || 
-        card.cardmarket.prices.lowPrice
-      );
-    }
-    
-    return "N/A";
-  };
-
-  const handleCardNavigation = (card: PokemonCard) => {
+  
+  const handleCardClick = (card: PokemonCard) => {
     setSelectedCard(card);
   };
-
+  
+  const handleCloseDetails = () => {
+    setSelectedCard(null);
+  };
+  
+  const handleNavigate = (card: PokemonCard) => {
+    setSelectedCard(card);
+  };
+  
+  if (cards.length === 0) {
+    return null;
+  }
+  
+  const getRarityColor = (rarity?: string): string => {
+    if (!rarity) return "bg-gray-700";
+    
+    const rarityColors: Record<string, string> = {
+      "Common": "bg-gray-700",
+      "Uncommon": "bg-emerald-700",
+      "Rare": "bg-blue-700",
+      "Rare Holo": "bg-indigo-700",
+      "Rare Holo EX": "bg-purple-700",
+      "Rare Ultra": "bg-amber-700",
+      "Rare Rainbow": "bg-gradient-to-r from-pink-600 via-purple-600 to-indigo-600",
+      "Rare Secret": "bg-gradient-to-r from-amber-600 to-rose-600"
+    };
+    
+    return rarityColors[rarity] || "bg-gray-700";
+  };
+  
   return (
     <>
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
         {cards.map((card) => (
           <div 
-            key={card.id} 
-            className="flex flex-col rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 cursor-pointer"
-            onClick={() => setSelectedCard(card)}
+            key={card.id}
+            className="relative rounded-lg bg-[#252525] overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+            onClick={() => handleCardClick(card)}
           >
-            <div className="relative">
-              <img 
-                src={card.images.small} 
-                alt={card.name} 
-                className="w-full object-contain"
+            <div className="aspect-[63/88] relative">
+              <Image
+                src={card.images.small}
+                alt={card.name}
+                width={245}  
+                height={342}
+                className="w-full h-full object-contain transform transition-transform " //hover:scale-105
                 loading="lazy"
               />
             </div>
             
-            <div className="p-2 mt-auto">
-              <div className="flex justify-between items-center">
-                <div className="text-sm font-medium text-gray-200 truncate" title={card.name}>
-                  {card.name}
-                </div>
-                <div className="text-sm font-medium text-green-400">
-                  {getCardPrice(card)}
-                </div>
+            <div className="p-2">
+              <div className="flex justify-between items-start">
+                <h3 className="text-white font-medium text-sm truncate w-4/5">{card.name}</h3>
+                <span className="text-xs text-gray-400">#{card.number}</span>
               </div>
+              
+              {card.cardmarket?.prices?.trendPrice && (
+                <div className="mt-1">
+                  <span 
+                    className={`text-xs px-1.5 py-0.5 bg-[#8A3F3F] text-white text-xs px-1.5 py-0.5 rounded-full`}
+                    title={`Trend price: $${card.cardmarket.prices.trendPrice.toFixed(2)}`}
+                    >
+                      ${card.cardmarket.prices.trendPrice.toFixed(2)}
+                  </span>
+                </div>
+              )}
             </div>
           </div>
         ))}
       </div>
-
+      
       {selectedCard && (
         <CardDetails 
           card={selectedCard} 
           allCards={cards}
-          onClose={() => setSelectedCard(null)} 
-          onNavigate={handleCardNavigation}
+          onClose={handleCloseDetails}
+          onNavigate={handleNavigate}
         />
       )}
     </>

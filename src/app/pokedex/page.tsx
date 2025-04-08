@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback, useRef } from "react";
+import { useEffect, useState, useCallback} from "react";
 import { useSearchParams } from "next/navigation";
 import { 
   fetchCardsBySet, 
@@ -19,7 +19,7 @@ import CardFilters from "@/app/components/CardFilters";
 
 export default function PokeDex() {
   const searchParams = useSearchParams();
-  const loadMoreRef = useRef<HTMLDivElement>(null);
+  // Removed unused loadMoreRef
   const [headerVisible, setHeaderVisible] = useState(true);
   
   const [setId, setSetId] = useState<string | null>(null);
@@ -38,7 +38,7 @@ export default function PokeDex() {
   const [globalSearchTerm, setGlobalSearchTerm] = useState('');
   const [pokemonSearchTerm, setPokemonSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(0);
+  // Removed unused totalPages
   const [totalResults, setTotalResults] = useState(0);
   const [hasMore, setHasMore] = useState(false);
 
@@ -110,7 +110,6 @@ export default function PokeDex() {
           setCards(results.cards);
         }
         
-        setTotalPages(calculatedTotalPages);
         setTotalResults(results.totalCount);
         setHasMore(page < calculatedTotalPages);
       } else if (isGlobalSearch) {
@@ -123,13 +122,11 @@ export default function PokeDex() {
           setCards(results.cards);
         }
         
-        setTotalPages(calculatedTotalPages);
         setTotalResults(results.totalCount);
         setHasMore(page < calculatedTotalPages);
       } else {
         const fetchedCards = await fetchCardsBySet(setId!, searchTerm);
         setCards(fetchedCards);
-        setTotalPages(1); 
         setTotalResults(fetchedCards.length);
         setHasMore(false);
       }
@@ -285,11 +282,11 @@ export default function PokeDex() {
 
         {isPokemonSearch ? (
           <h1 className="text-2xl font-bold mb-4 text-white">
-            Searchresults for "{pokemonSearchTerm}"
+            Searchresults for &quot;{pokemonSearchTerm}&quot;
           </h1>
         ) : isGlobalSearch ? (
           <h1 className="text-2xl font-bold mb-4 text-white">
-            Searchresults for "{globalSearchTerm}"
+            Searchresults for &quot;{globalSearchTerm}&quot;
           </h1>
         ) : null}
         

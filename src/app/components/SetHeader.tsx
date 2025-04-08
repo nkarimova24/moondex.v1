@@ -1,9 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { PokemonSet, PokemonCard, fetchCardsBySet } from "@/app/lib/api";
+import { PokemonSet, fetchCardsBySet } from "@/app/lib/api";
 import { formatDate } from "@/app/lib/utils";
 import { CircularProgress } from "@mui/material";
+import Image from "next/image";
 
 interface SetHeaderProps {
   setInfo: PokemonSet;
@@ -66,14 +67,16 @@ export default function SetHeader({ setInfo }: SetHeaderProps) {
       <div className="flex flex-col md:flex-row items-center gap-4">
         {/* Set Logo */}
         <div className="flex-shrink-0">
-          {setInfo.images?.logo && (
-            <div className="h-16 md:h-20 relative">
-              <img
-                src={setInfo.images.logo}
-                alt={`${setInfo.name} logo`}
-                className="h-full object-contain"
-              />
-            </div>
+        {setInfo.images?.logo && (
+        <div className="h-16 md:h-20 relative">
+          <Image
+            src={setInfo.images.logo}
+            alt={`${setInfo.name} logo`}
+            width={80} 
+            height={80} 
+            className="h-full object-contain"
+          />
+        </div>
           )}
         </div>
 
