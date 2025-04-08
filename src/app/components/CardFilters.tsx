@@ -1,27 +1,19 @@
 "use client";
 
+import { useState } from "react";
 import { 
-  FormControl, 
-  InputLabel, 
-  Select, 
-  MenuItem, 
   Box, 
   Chip, 
-  ToggleButton, 
-  ToggleButtonGroup, 
+  Button,
+  Drawer,
+  IconButton,
   Typography,
-  Divider
+  Divider,
+  ButtonGroup
 } from "@mui/material";
 import { POKEMON_TYPES, TYPE_COLORS } from "@/app/lib/api";
-import { 
-  ArrowDownward, 
-  ArrowUpward, 
-  AttachMoney, 
-  LocalFireDepartment, 
-  SortByAlpha, 
-  Tag 
-} from "@mui/icons-material";
-import { useState } from "react";
+import FilterListIcon from '@mui/icons-material/FilterList';
+import CloseIcon from '@mui/icons-material/Close';
 
 interface CardFilters {
   value: string;
@@ -31,17 +23,6 @@ interface CardFilters {
   disabled?: boolean;
 }
 
-const SORT_OPTIONS = [
-  { value: "number-asc", label: "Number", icon: <ArrowUpward fontSize="small" /> },
-  { value: "number-desc", label: "Number", icon: <ArrowDownward fontSize="small" /> },
-  { value: "name-asc", label: "Name", icon: <SortByAlpha fontSize="small" /> },
-  { value: "name-desc", label: "Name", icon: <SortByAlpha fontSize="small" sx={{ transform: 'scaleY(-1)' }} /> },
-  { value: "price-asc", label: "Price", icon: <AttachMoney fontSize="small" /> },
-  { value: "price-desc", label: "Price", icon: <AttachMoney fontSize="small" sx={{ fontWeight: 'bold' }} /> },
-  { value: "rarity-asc", label: "Rarity", icon: <Tag fontSize="small" /> },
-  { value: "rarity-desc", label: "Rarity", icon: <Tag fontSize="small" sx={{ fontWeight: 'bold' }} /> }
-];
-
 export default function CardFilters({ 
   value, 
   onChange, 
@@ -49,199 +30,138 @@ export default function CardFilters({
   onTypeChange,
   disabled = false 
 }: CardFilters) {
-  const isSortActive = (optionValue: string) => {
-    return value === optionValue;
-  };
 
-  const handleSortChange = (newValue: string) => {
-    onChange(newValue);
-  };
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const getTypeColor = (type: string): string => {
     return TYPE_COLORS[type] || TYPE_COLORS["All Types"];
   };
 
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
-  
-  if (typeof window !== 'undefined') {
-    window.addEventListener('resize', () => {
-      setIsMobile(window.innerWidth < 768);
-    });
-  }
+  const sortOptions = [
+    { value: "number-asc", label: "#↑", group: "number" },
+    { value: "number-desc", label: "#↓", group: "number" },
+    { value: "name-asc", label: "A→Z", group: "name" },
+    { value: "name-desc", label: "Z→A", group: "name" },
+    { value: "price-asc", label: "€↑", group: "price" },
+    { value: "price-desc", label: "€↓", group: "price" },
+    { value: "rarity-asc", label: "★↑", group: "rarity" },
+    { value: "rarity-desc", label: "★↓", group: "rarity" }
+  ];
+
+  const sortGroups = {
+    number: sortOptions.filter(opt => opt.group === "number"),
+    name: sortOptions.filter(opt => opt.group === "name"),
+    price: sortOptions.filter(opt => opt.group === "price"),
+    rarity: sortOptions.filter(opt => opt.group === "rarity")
+  };
+
+  const activeFilterCount = selectedType !== "All Types" ? 1 : 0;
 
   return (
-    <Box sx={{ mb: 4 }}>
-      {/* Sort Controls */}
-      <Box sx={{ mb: 2 }}>
-        <Typography variant="subtitle2" sx={{ mb: 1, color: 'rgba(255, 255, 255, 0.7)' }}>
-          Sort By
-        </Typography>
+    <>
+      {/* Filter toggle button with counter */}
+      <Button
+        startIcon={<FilterListIcon />}
+        onClick={() => setSidebarOpen(true)}
+        variant="outlined"
+        size="small"
+        sx={{
+          mb: 2,
+          borderColor: "rgba(255, 255, 255, 0.2)",
+          color: activeFilterCount > 0 ? "white" : "rgba(255, 255, 255, 0.7)",
+          backgroundColor: activeFilterCount > 0 ? "rgba(138, 63, 63, 0.3)" : "transparent",
+          "&:hover": {
+            backgroundColor: "rgba(138, 63, 63, 0.15)",
+            borderColor: "rgba(138, 63, 63, 0.5)",
+          },
+          "& .MuiButton-startIcon": {
+            marginRight: 0.5,
+          }
+        }}
+        disabled={disabled}
+      >
+        Filters {activeFilterCount > 0 && `(${activeFilterCount})`}
+      </Button>
 
-        {isMobile ? (
-          // Mobile View: Dropdown
-          <FormControl 
-            variant="outlined"
-            size="small"
-            fullWidth
-            disabled={disabled}
-            sx={{ 
-              "& .MuiInputLabel-root": {
-                color: "rgba(255, 255, 255, 0.7)",
-              },
-              "& .MuiOutlinedInput-root": {
-                color: "white",
-                "& fieldset": {
-                  borderColor: "rgba(255, 255, 255, 0.2)",
-                },
-                "&:hover fieldset": {
-                  borderColor: "rgba(138, 63, 63, 0.5)",
-                },
-                "&.Mui-focused fieldset": {
-                  borderColor: "#8A3F3F",
-                }
-              },
-              "& .MuiSelect-icon": {
-                color: "rgba(255, 255, 255, 0.5)",
-              }
-            }}
+      {/* Filter sidebar */}
+      <Drawer
+        anchor="right"
+        open={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
+        PaperProps={{
+          sx: {
+            width: { xs: '80%', sm: '350px' },
+            backgroundColor: '#1A1A1A',
+            color: 'white',
+            p: 2
+          }
+        }}
+      >
+        {/* Sidebar header */}
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
+          <Typography variant="h6">Filters</Typography>
+          <IconButton 
+            onClick={() => setSidebarOpen(false)}
+            sx={{ color: 'white' }}
           >
-            <Select
-              value={value}
-              onChange={(e) => onChange(e.target.value)}
-              MenuProps={{
-                PaperProps: {
-                  sx: {
-                    backgroundColor: "#2A2A2A",
-                    color: "white",
-                  }
-                }
-              }}
-            >
-              <MenuItem value="number-asc">Number (Low to High)</MenuItem>
-              <MenuItem value="number-desc">Number (High to Low)</MenuItem>
-              <MenuItem value="name-asc">Name (A to Z)</MenuItem>
-              <MenuItem value="name-desc">Name (Z to A)</MenuItem>
-              <MenuItem value="price-asc">Price (Low to High)</MenuItem>
-              <MenuItem value="price-desc">Price (High to Low)</MenuItem>
-              <MenuItem value="rarity-desc">Rarity (Highest First)</MenuItem>
-              <MenuItem value="rarity-asc">Rarity (Lowest First)</MenuItem>
-            </Select>
-          </FormControl>
-        ) : (
-          // Desktop View: Horizontal buttons
-          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
-            {SORT_OPTIONS.map((option) => (
-              <ToggleButton
-                key={option.value}
-                value={option.value}
-                selected={isSortActive(option.value)}
-                onChange={() => handleSortChange(option.value)}
-                size="small"
-                sx={{
-                  borderColor: "rgba(255, 255, 255, 0.2)",
-                  color: isSortActive(option.value) ? "white" : "rgba(255, 255, 255, 0.7)",
-                  backgroundColor: isSortActive(option.value) ? "#8A3F3F" : "transparent",
-                  "&:hover": {
-                    backgroundColor: isSortActive(option.value) ? "#6E2F2F" : "rgba(138, 63, 63, 0.15)",
-                  },
-                  "&.Mui-selected": {
-                    backgroundColor: "#8A3F3F",
-                    "&:hover": {
-                      backgroundColor: "#6E2F2F",
-                    }
-                  }
-                }}
-                disabled={disabled}
-              >
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-                  {option.icon}
-                  {option.label}
-                </Box>
-              </ToggleButton>
-            ))}
-          </Box>
-        )}
-      </Box>
+            <CloseIcon />
+          </IconButton>
+        </Box>
 
-      {/* Divider */}
-      <Divider sx={{ my: 2, borderColor: 'rgba(255, 255, 255, 0.1)' }} />
+        <Divider sx={{ backgroundColor: 'rgba(255, 255, 255, 0.1)', mb: 3 }} />
 
-      {/* Type Filters */}
-      {onTypeChange && (
-        <Box>
-          <Typography variant="subtitle2" sx={{ mb: 1, color: 'rgba(255, 255, 255, 0.7)' }}>
-            Filter by Type
-          </Typography>
-
-          {isMobile ? (
-            <FormControl 
-              variant="outlined"
-              size="small"
-              fullWidth
-              disabled={disabled}
-              sx={{ 
-                "& .MuiOutlinedInput-root": {
-                  color: "white",
-                  "& fieldset": {
+        {/* Sort options section */}
+        <Typography variant="subtitle1" gutterBottom>Sort By</Typography>
+        
+        {Object.entries(sortGroups).map(([groupName, options]) => (
+          <Box key={groupName} sx={{ mb: 2 }}>
+            <Typography variant="subtitle2" sx={{ color: 'rgba(255, 255, 255, 0.7)', mb: 1 }}>
+              {groupName.charAt(0).toUpperCase() + groupName.slice(1)}
+            </Typography>
+            
+            <ButtonGroup size="small" fullWidth>
+              {options.map((option) => (
+                <Button
+                  key={option.value}
+                  variant={value === option.value ? "contained" : "outlined"}
+                  onClick={() => {
+                    onChange(option.value);
+                    // Optionally close the sidebar after selection
+                    // setSidebarOpen(false);
+                  }}
+                  disabled={disabled}
+                  sx={{
                     borderColor: "rgba(255, 255, 255, 0.2)",
-                  },
-                  "&:hover fieldset": {
-                    borderColor: "rgba(138, 63, 63, 0.5)",
-                  },
-                  "&.Mui-focused fieldset": {
-                    borderColor: "#8A3F3F",
-                  }
-                }
-              }}
-            >
-              <Select
-                value={selectedType}
-                onChange={(e) => onTypeChange(e.target.value)}
-                renderValue={(selected) => (
-                  <Chip 
-                    label={selected} 
-                    size="small" 
-                    sx={{ 
-                      backgroundColor: getTypeColor(selected),
-                      color: selected === "Darkness" ? "white" : "black",
-                      fontWeight: "bold"
-                    }} 
-                  />
-                )}
-                MenuProps={{
-                  PaperProps: {
-                    sx: {
-                      backgroundColor: "#2A2A2A",
-                      color: "white",
+                    color: value === option.value ? "white" : "rgba(255, 255, 255, 0.7)",
+                    backgroundColor: value === option.value ? "#8A3F3F" : "transparent",
+                    "&:hover": {
+                      backgroundColor: value === option.value ? "#6E2F2F" : "rgba(138, 63, 63, 0.15)",
                     }
-                  }
-                }}
-              >
-                {POKEMON_TYPES.map((type) => (
-                  <MenuItem key={type} value={type} sx={{ display: 'flex', alignItems: 'center' }}>
-                    <Chip 
-                      label={type} 
-                      size="small" 
-                      sx={{ 
-                        backgroundColor: getTypeColor(type),
-                        color: type === "Darkness" ? "white" : "black",
-                        fontWeight: "bold",
-                        mr: 1
-                      }} 
-                    />
-                    {type}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          ) : (
-            // Desktop View: Horizontal type chips
+                  }}
+                >
+                  {option.label}
+                </Button>
+              ))}
+            </ButtonGroup>
+          </Box>
+        ))}
+
+        <Divider sx={{ backgroundColor: 'rgba(255, 255, 255, 0.1)', my: 2 }} />
+
+        {/* Type filter section */}
+        {onTypeChange && (
+          <>
+            <Typography variant="subtitle1" gutterBottom>Type</Typography>
             <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
               {POKEMON_TYPES.map((type) => (
                 <Chip 
                   key={type}
                   label={type}
-                  onClick={() => onTypeChange(type)}
+                  onClick={() => {
+                    onTypeChange(type);
+                    // Optionally close the sidebar after selection
+                    // setSidebarOpen(false);
+                  }}
                   color={type === selectedType ? "primary" : "default"}
                   sx={{
                     backgroundColor: type === selectedType ? getTypeColor(type) : 'rgba(255, 255, 255, 0.1)',
@@ -251,6 +171,7 @@ export default function CardFilters({
                     fontWeight: type === selectedType ? "bold" : "normal",
                     border: type === selectedType ? '2px solid white' : 'none',
                     cursor: 'pointer',
+                    mb: 1,
                     "&:hover": {
                       backgroundColor: type === selectedType 
                         ? getTypeColor(type) 
@@ -261,9 +182,25 @@ export default function CardFilters({
                 />
               ))}
             </Box>
-          )}
+          </>
+        )}
+
+        <Box sx={{ mt: 4 }}>
+          <Button 
+            variant="contained" 
+            fullWidth 
+            onClick={() => setSidebarOpen(false)}
+            sx={{
+              backgroundColor: "#8A3F3F",
+              "&:hover": {
+                backgroundColor: "#6E2F2F",
+              }
+            }}
+          >
+            Apply Filters
+          </Button>
         </Box>
-      )}
-    </Box>
+      </Drawer>
+    </>
   );
 }
