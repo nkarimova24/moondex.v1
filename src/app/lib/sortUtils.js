@@ -3,8 +3,8 @@
 
 /**
  * Sorts cards by their number in ascending order
- * @param {Array} cards - Array of PokemonCard objects
- * @returns {Array} Sorted array of cards
+ * @param {Array} cards 
+ * @returns {Array} 
  */
 export const sortByNumberAsc = (cards) => {
   return [...cards].sort((a, b) => {
@@ -16,8 +16,8 @@ export const sortByNumberAsc = (cards) => {
 
 /**
  * Sorts cards by their number in descending order
- * @param {Array} cards - Array of PokemonCard objects
- * @returns {Array} Sorted array of cards
+ * @param {Array} cards 
+ * @returns {Array} 
  */
 export const sortByNumberDesc = (cards) => {
   return [...cards].sort((a, b) => {
@@ -29,8 +29,8 @@ export const sortByNumberDesc = (cards) => {
 
 /**
  * Sorts cards by their name in ascending order (A-Z)
- * @param {Array} cards - Array of PokemonCard objects
- * @returns {Array} Sorted array of cards
+ * @param {Array} cards 
+ * @returns {Array} 
  */
 export const sortByNameAsc = (cards) => {
   return [...cards].sort((a, b) => {
@@ -40,8 +40,8 @@ export const sortByNameAsc = (cards) => {
 
 /**
  * Sorts cards by their name in descending order (Z-A)
- * @param {Array} cards - Array of PokemonCard objects
- * @returns {Array} Sorted array of cards
+ * @param {Array} cards 
+ * @returns {Array} 
  */
 export const sortByNameDesc = (cards) => {
   return [...cards].sort((a, b) => {
@@ -51,8 +51,8 @@ export const sortByNameDesc = (cards) => {
 
 /**
  * Gets the price for a card considering multiple price sources
- * @param {Object} card - PokemonCard object
- * @returns {number} Card price or 0 if not available
+ * @param {Object} card 
+ * @returns {number} 
  */
 export const getCardPrice = (card) => {
   return card.cardmarket?.prices?.trendPrice ||
@@ -65,8 +65,8 @@ export const getCardPrice = (card) => {
 
 /**
  * Sorts cards by their price in ascending order (low to high)
- * @param {Array} cards - Array of PokemonCard objects
- * @returns {Array} Sorted array of cards
+ * @param {Array} cards 
+ * @returns {Array} 
  */
 export const sortByPriceAsc = (cards) => {
   return [...cards].sort((a, b) => {
@@ -78,8 +78,8 @@ export const sortByPriceAsc = (cards) => {
 
 /**
  * Sorts cards by their price in descending order (high to low)
- * @param {Array} cards - Array of PokemonCard objects
- * @returns {Array} Sorted array of cards
+ * @param {Array} cards 
+ * @returns {Array}
  */
 export const sortByPriceDesc = (cards) => {
   return [...cards].sort((a, b) => {
