@@ -311,16 +311,78 @@ export default function Sidebar({ isOpen: propIsOpen, onToggle }: SidebarProps) 
       
       {/* Footer */}
       <Box 
-        sx={{ 
-          padding: "16px",
+  sx={{ 
+    padding: "16px",
+    textAlign: "center",
+    flexShrink: 0,
+  }}
+>
+  {/* Login/Register Buttons */}
+  <Box sx={{ 
+    display: 'flex', 
+    justifyContent: 'space-between', 
+    mb: 2,
+    gap: 1
+  }}>
+    <Link 
+      href="/auth/signin" 
+      style={{ 
+        textDecoration: 'none', 
+        width: '50%' 
+      }}
+    >
+      <Box 
+        sx={{
+          padding: "8px 12px",
+          backgroundColor: "#8A3F3F",
+          borderRadius: "4px",
+          color: "#fff",
+          fontWeight: 500,
+          fontSize: "13px",
           textAlign: "center",
-          flexShrink: 0, 
+          transition: "background-color 0.2s",
+          "&:hover": {
+            backgroundColor: "#612B2B",
+          }
         }}
+        onClick={isMobile ? handleDrawerToggle : undefined}
       >
-        <Typography variant="caption" sx={{ color: "rgba(255,255,255,0.5)", fontSize: "11px" }}>
-          © 2025 MOONDEX
-        </Typography>
+        Login
       </Box>
+    </Link>
+    <Link 
+      href="/register" 
+      style={{ 
+        textDecoration: 'none',
+        width: '50%'
+      }}
+    >
+      <Box 
+        sx={{
+          padding: "8px 12px",
+          backgroundColor: "rgba(138, 63, 63, 0.2)",
+          border: "1px solid #8A3F3F",
+          borderRadius: "4px",
+          color: "#fff",
+          fontWeight: 500,
+          fontSize: "13px",
+          textAlign: "center",
+          transition: "all 0.2s",
+          "&:hover": {
+            backgroundColor: "rgba(138, 63, 63, 0.3)",
+          }
+        }}
+        onClick={isMobile ? handleDrawerToggle : undefined}
+      >
+        Register
+      </Box>
+    </Link>
+  </Box>
+  
+  <Typography variant="caption" sx={{ color: "rgba(255,255,255,0.5)", fontSize: "11px" }}>
+    © 2025 MOONDEX
+  </Typography>
+</Box>
     </>
   );
 
