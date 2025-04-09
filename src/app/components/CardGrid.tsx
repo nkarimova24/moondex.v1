@@ -51,6 +51,23 @@ export default function CardGrid({ cards, isSidebarOpen = false }: CardGridProps
     return null;
   }
   
+  // const getRarityColor = (rarity?: string): string => {
+  //   if (!rarity) return "bg-gray-700";
+    
+  //   const rarityColors: Record<string, string> = {
+  //     "Common": "bg-gray-700",
+  //     "Uncommon": "bg-emerald-700",
+  //     "Rare": "bg-blue-700",
+  //     "Rare Holo": "bg-indigo-700",
+  //     "Rare Holo EX": "bg-purple-700",
+  //     "Rare Ultra": "bg-amber-700",
+  //     "Rare Rainbow": "bg-gradient-to-r from-pink-600 via-purple-600 to-indigo-600",
+  //     "Rare Secret": "bg-gradient-to-r from-amber-600 to-rose-600"
+  //   };
+    
+  //   return rarityColors[rarity] || "bg-gray-700";
+  // };
+  
   const gridColsClass = isMobile
     ? "grid-cols-2" 
     : isSidebarOpen

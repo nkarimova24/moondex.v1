@@ -1,5 +1,6 @@
 "use client";
 
+import { Suspense } from 'react';
 import { useEffect, useState, useCallback} from "react";
 import { useSearchParams } from "next/navigation";
 import { 
@@ -17,7 +18,7 @@ import HeaderToggleButton from "@/app/components/HeaderToggleButton";
 import ToTopButton from "@/app/components/ToTopButton"; 
 import CardFilters from "@/app/components/CardFilters";
 
-export default function PokeDex() {
+function PokeDexContent() {
   const searchParams = useSearchParams();
   const [headerVisible, setHeaderVisible] = useState(true);
   
@@ -364,5 +365,13 @@ export default function PokeDex() {
 
       <ToTopButton />
     </div>
+  );
+}
+
+export default function PokeDex() {
+  return (
+    <Suspense fallback={<div className="text-gray-400 text-center py-12">Loading PokeDex...</div>}>
+      <PokeDexContent />
+    </Suspense>
   );
 }
