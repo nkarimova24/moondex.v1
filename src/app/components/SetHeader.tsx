@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { PokemonSet, fetchCardsBySet } from "@/app/lib/api";
+import { fetchCardsBySet } from "@/app/lib/api/pokemon";
+import { PokemonSet} from "@/app/lib/api/types";
 import { formatDate } from "@/app/lib/utils";
 import { CircularProgress } from "@mui/material";
 import Image from "next/image";

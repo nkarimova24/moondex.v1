@@ -2,33 +2,9 @@
 
 import { createContext, useState, useEffect, useContext, ReactNode } from 'react';
 import { useRouter } from 'next/navigation';
-import * as api from '@/app/lib/api';
-
-interface User {
-  id: number;
-  name: string;
-  email: string;
-  created_at?: string;
-  updated_at?: string;
-}
-
-interface LoginCredentials {
-  email: string;
-  password: string;
-}
-
-interface RegisterData {
-  name: string;
-  email: string;
-  password: string;
-  password_confirmation: string;
-}
-
-interface AuthResult {
-  success: boolean;
-  message?: string;
-  errors?: Record<string, string>;
-}
+import Cookies from 'js-cookie';
+import * as api from '@/app/lib/api/';
+import { User, LoginCredentials, RegisterData, AuthResult } from '@/app/lib/api/types';
 
 interface AuthContextType {
   user: User | null;
@@ -52,10 +28,24 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   
   useEffect(() => {
     const checkAuth = async () => {
+      setLoading(true);
       try {
+        const token = Cookies.get('auth_token');
+        
+        if (!token) {
+          setUser(null);
+          setLoading(false);
+          return;
+        }
+        
         const result = await api.getCurrentUser();
+        
         if (result.success && result.user) {
+          console.log('Auth check successful, user found:', result.user.name);
           setUser(result.user);
+        } else {
+          console.log('Auth check failed, no valid user found');
+          setUser(null);
         }
       } catch (error) {
         console.error('Auth check error:', error);
@@ -65,68 +55,87 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     };
     
     checkAuth();
+    
+    const interval = setInterval(checkAuth, 5 * 60 * 1000);
+    
+    return () => clearInterval(interval);
   }, []);
   
-  // Register user
+  // Register a new user
   const register = async (userData: RegisterData): Promise<AuthResult> => {
+    setLoading(true);
     try {
       const result = await api.register(userData);
       
       if (result.success && result.user) {
+        console.log('Registration successful:', result.user.name);
         setUser(result.user);
+        return result;
       }
       
-      return { 
-        success: result.success,
-        message: result.message,
-        errors: result.errors
-      };
+      return result;
     } catch (error: any) {
+      console.error('Registration error in context:', error);
       return { 
         success: false, 
-        message: 'Registration failed',
+        message: 'Registration failed due to an unexpected error',
       };
+    } finally {
+      setLoading(false);
     }
   };
 
   // Login user
   const login = async (credentials: LoginCredentials): Promise<AuthResult> => {
+    setLoading(true);
     try {
       const result = await api.login(credentials);
       
       if (result.success && result.user) {
+        console.log('Login successful:', result.user.name);
         setUser(result.user);
+        return result;
       }
       
-      return { 
-        success: result.success,
-        message: result.message,
-        errors: result.errors
-      };
+      return result;
     } catch (error: any) {
+      console.error('Login error in context:', error);
       return { 
         success: false, 
-        message: 'Login failed',
+        message: 'Login failed due to an unexpected error',
       };
+    } finally {
+      setLoading(false);
     }
   };
 
   // Logout user
   const logout = async () => {
-    await api.logout();
-    setUser(null);
-    router.push('/login');
+    setLoading(true);
+    try {
+      await api.logout();
+      setUser(null);
+      router.push('/signin');
+    } catch (error) {
+      console.error('Logout error:', error);
+      setUser(null);
+      Cookies.remove('auth_token');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const contextValue: AuthContextType = {
+    user, 
+    loading, 
+    isAuthenticated: !!user,
+    register, 
+    login, 
+    logout
   };
 
   return (
-    <AuthContext.Provider value={{ 
-      user, 
-      loading, 
-      isAuthenticated: !!user,
-      register, 
-      login, 
-      logout
-    }}>
+    <AuthContext.Provider value={contextValue}>
       {children}
     </AuthContext.Provider>
   );

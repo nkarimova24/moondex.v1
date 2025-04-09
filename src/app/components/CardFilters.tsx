@@ -12,7 +12,7 @@ import {
   ButtonGroup,
   Paper
 } from "@mui/material";
-import { POKEMON_TYPES, TYPE_COLORS } from "@/app/lib/api";
+import { POKEMON_TYPES, TYPE_COLORS } from "@/app/lib/api/types";
 import FilterListIcon from '@mui/icons-material/FilterList';
 import CloseIcon from '@mui/icons-material/Close';
 
@@ -24,7 +24,6 @@ interface CardFilters {
   disabled?: boolean;
 }
 
-// Filter panel component that will be rendered in the portal
 function FilterPanel({ 
   open, 
   onClose, 

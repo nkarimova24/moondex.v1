@@ -6,9 +6,9 @@ import {
   fetchCardsBySet, 
   fetchSetDetails, 
   searchCardsByType,
-  PokemonCard, 
-  PokemonSet
-} from "@/app/lib/api";
+
+} from "@/app/lib/api/pokemon";
+import { PokemonCard, PokemonSet } from "@/app/lib/api/types";
 import { sortCards } from "@/app/lib/sortUtils";
 import CardGrid from "@/app/components/CardGrid";
 import SetHeader from "@/app/components/SetHeader";
