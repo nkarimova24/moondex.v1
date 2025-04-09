@@ -16,7 +16,6 @@ import {
   IconButton,
   Button,
   Stack,
-  useMediaQuery
 } from "@mui/material";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
@@ -48,7 +47,7 @@ export default function Sidebar({ isOpen: propIsOpen, onToggle }: SidebarProps) 
   
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth < 960); 
+      setIsMobile(window.innerWidth < 768); 
     };
     
     checkMobile();

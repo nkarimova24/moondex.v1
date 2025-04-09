@@ -74,6 +74,13 @@ export default function CardDetails({ card, allCards, onClose, onNavigate }: Car
     return `$${price.toFixed(2)}`;
   };
 
+  // const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
+  //   if (e.target === e.currentTarget) {
+  //     onClose();
+  //   }
+  // };
+
+
   const getTypeColor = (type?: string) => {
     if (!type) return "#8A3F3F";
     
