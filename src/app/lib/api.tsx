@@ -152,12 +152,10 @@ export const TYPE_COLORS: { [key: string]: string } = {
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-// APIs URLs
 const POKEMON_TCG_API_URL = 'https://api.pokemontcg.io/v2';
 const LARAVEL_API_URL = process.env.NEXT_PUBLIC_LARAVEL_API_URL || 'http://localhost:8000/api';
 const API_KEY = process.env.NEXT_PUBLIC_POKEMON_TCG_API_KEY;
 
-// Laravel Auth API Client
 const authApiClient = axios.create({
   baseURL: LARAVEL_API_URL,
   headers: {
@@ -165,7 +163,6 @@ const authApiClient = axios.create({
   },
 });
 
-// Add token to auth requests
 authApiClient.interceptors.request.use(
   (config) => {
     const token = Cookies.get('auth_token');
@@ -178,7 +175,6 @@ authApiClient.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-// Pokemon TCG API helper
 const fetchWithAuth = async (url: string) => {
   const headers: HeadersInit = {
     'Content-Type': 'application/json',
