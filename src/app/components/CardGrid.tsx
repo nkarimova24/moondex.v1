@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { PokemonCard } from "@/app/lib/api";
 import CardDetails from "./CardDetails";
+import CardFoil from "./CardFoil";
 import Image from "next/image";
 
 interface CardGridProps {
@@ -50,23 +51,6 @@ export default function CardGrid({ cards, isSidebarOpen = false }: CardGridProps
     return null;
   }
   
-  // const getRarityColor = (rarity?: string): string => {
-  //   if (!rarity) return "bg-gray-700";
-    
-  //   const rarityColors: Record<string, string> = {
-  //     "Common": "bg-gray-700",
-  //     "Uncommon": "bg-emerald-700",
-  //     "Rare": "bg-blue-700",
-  //     "Rare Holo": "bg-indigo-700",
-  //     "Rare Holo EX": "bg-purple-700",
-  //     "Rare Ultra": "bg-amber-700",
-  //     "Rare Rainbow": "bg-gradient-to-r from-pink-600 via-purple-600 to-indigo-600",
-  //     "Rare Secret": "bg-gradient-to-r from-amber-600 to-rose-600"
-  //   };
-    
-  //   return rarityColors[rarity] || "bg-gray-700";
-  // };
-  
   const gridColsClass = isMobile
     ? "grid-cols-2" 
     : isSidebarOpen
@@ -105,16 +89,32 @@ export default function CardGrid({ cards, isSidebarOpen = false }: CardGridProps
                 <span className="text-xs text-gray-400">#{card.number}</span>
               </div>
               
-              {card.cardmarket?.prices?.trendPrice && (
-                <div className="mt-1">
+              <div className="mt-1 flex flex-wrap gap-1">
+                {/* Card Foil indicator */}
+                {card.tcgplayer?.prices && (
+                  <>
+                    {card.tcgplayer.prices.normal && (
+                      <CardFoil foilType="normal" />
+                    )}
+                    {card.tcgplayer.prices.holofoil && (
+                      <CardFoil foilType="holo" />
+                    )}
+                    {card.tcgplayer.prices.reverseHolofoil && (
+                      <CardFoil foilType="reverse holo" />
+                    )}
+                  </>
+                )}
+                
+                {/* Price indicator */}
+                {card.cardmarket?.prices?.trendPrice && (
                   <span 
                     className="text-xs px-1.5 py-0.5 bg-[#8A3F3F] text-white rounded-full"
                     title={`Trend price: $${card.cardmarket.prices.trendPrice.toFixed(2)}`}
                   >
                     ${card.cardmarket.prices.trendPrice.toFixed(2)}
                   </span>
-                </div>
-              )}
+                )}
+              </div>
             </div>
           </div>
         ))}
