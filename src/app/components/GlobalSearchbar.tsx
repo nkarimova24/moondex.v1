@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { Search, X, Loader2 } from 'lucide-react';
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 
@@ -9,6 +9,14 @@ interface GlobalSearchbarProps {
 }
 
 export default function GlobalSearchbar({ isLoading = false }: GlobalSearchbarProps) {
+  return (
+    <Suspense fallback={<div className="text-gray-400">Loading search bar...</div>}>
+      <InnerGlobalSearchbar isLoading={isLoading} />
+    </Suspense>
+  );
+}
+
+function InnerGlobalSearchbar({ isLoading }: GlobalSearchbarProps) {
   const [searchTerm, setSearchTerm] = useState('');
   const [isFocused, setIsFocused] = useState(false);
   const router = useRouter();
