@@ -1,3 +1,4 @@
+
 export interface PokemonSet {
   id: string;
   name: string;
@@ -148,8 +149,36 @@ export const TYPE_COLORS: { [key: string]: string } = {
   "Water": "#6890F0"
 };
 
+import axios from 'axios';
+import Cookies from 'js-cookie';
+
+// APIs URLs
+const POKEMON_TCG_API_URL = 'https://api.pokemontcg.io/v2';
+const LARAVEL_API_URL = process.env.NEXT_PUBLIC_LARAVEL_API_URL || 'http://localhost:8000/api';
 const API_KEY = process.env.NEXT_PUBLIC_POKEMON_TCG_API_KEY;
 
+// Laravel Auth API Client
+const authApiClient = axios.create({
+  baseURL: LARAVEL_API_URL,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
+
+// Add token to auth requests
+authApiClient.interceptors.request.use(
+  (config) => {
+    const token = Cookies.get('auth_token');
+    if (token) {
+      config.headers = config.headers || {};
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
+
+// Pokemon TCG API helper
 const fetchWithAuth = async (url: string) => {
   const headers: HeadersInit = {
     'Content-Type': 'application/json',
@@ -162,9 +191,116 @@ const fetchWithAuth = async (url: string) => {
   return fetch(url, { headers });
 };
 
+// ===== AUTH API FUNCTIONS =====
+
+interface RegisterData {
+  name: string;
+  email: string;
+  password: string;
+  password_confirmation: string;
+}
+
+interface LoginCredentials {
+  email: string;
+  password: string;
+}
+
+interface AuthResult {
+  success: boolean;
+  message?: string;
+  errors?: Record<string, string>;
+  user?: any;
+  token?: string;
+}
+
+/**
+ * Register a new user
+ */
+export const login = async (credentials: LoginCredentials): Promise<AuthResult> => {
+  try {
+    const { data } = await authApiClient.post('/login', credentials);
+    
+    if (data.status === 'success' && data.data.token) {
+      Cookies.set('auth_token', data.data.token, { expires: 7 });
+      return { 
+        success: true,
+        user: {
+          name: data.data.name,
+          email: data.data.email
+        },
+        token: data.data.token
+      };
+    }
+    return { success: false, message: 'Login failed' };
+  } catch (error: any) {
+    return { 
+      success: false, 
+      message: error.response?.data?.error || 'Login failed',
+      errors: error.response?.data?.error || {}
+    };
+  }
+};
+
+export const register = async (userData: RegisterData): Promise<AuthResult> => {
+  try {
+    const { data } = await authApiClient.post('/register', userData);
+    
+    if (data.status === 'success' && data.data.token) {
+      Cookies.set('auth_token', data.data.token, { expires: 7 });
+      return { 
+        success: true,
+        user: {
+          name: data.data.name,
+          email: data.data.email
+        },
+        token: data.data.token
+      };
+    }
+    return { success: false, message: 'Registration failed' };
+  } catch (error: any) {
+    return { 
+      success: false, 
+      message: error.response?.data?.error || 'Registration failed',
+      errors: error.response?.data?.error || {}
+    };
+  }
+};
+/**
+ * Logout the current user
+ */
+export const logout = async (): Promise<boolean> => {
+  try {
+    await authApiClient.post('/logout');
+    Cookies.remove('auth_token');
+    return true;
+  } catch (error) {
+    console.error('Logout error:', error);
+    Cookies.remove('auth_token');
+    return false;
+  }
+};
+
+/**
+ * Get the current authenticated user
+ */
+export const getCurrentUser = async () => {
+  try {
+    const { data } = await authApiClient.get('/user');
+    return { success: true, user: data };
+  } catch (error) {
+    Cookies.remove('auth_token');
+    return { success: false };
+  }
+};
+
+// ===== POKEMON TCG API FUNCTIONS =====
+
+/**
+ * Fetch all Pokemon card sets grouped by series
+ */
 export const fetchPokemonSets = async (): Promise<{ [key: string]: PokemonSet[] }> => {
   try {
-    const response = await fetchWithAuth("https://api.pokemontcg.io/v2/sets");
+    const response = await fetchWithAuth(`${POKEMON_TCG_API_URL}/sets`);
     const data = await response.json();
 
     const validSets: PokemonSet[] = data.data.filter((set: PokemonSet) => set.releaseDate);
@@ -185,6 +321,9 @@ export const fetchPokemonSets = async (): Promise<{ [key: string]: PokemonSet[] 
   }
 };
 
+/**
+ * Fetch cards from a specific set
+ */
 export const fetchCardsBySet = async (
   setId: string, 
   searchTerm?: string, 
@@ -213,7 +352,7 @@ export const fetchCardsBySet = async (
       }
     }
     
-    const response = await fetchWithAuth(`https://api.pokemontcg.io/v2/cards?q=${encodeURIComponent(query)}&orderBy=number`);
+    const response = await fetchWithAuth(`${POKEMON_TCG_API_URL}/cards?q=${encodeURIComponent(query)}&orderBy=number`);
     const data = await response.json();
     return data.data;
   } catch (error) {
@@ -222,9 +361,12 @@ export const fetchCardsBySet = async (
   }
 };
 
+/**
+ * Fetch details for a specific set
+ */
 export const fetchSetDetails = async (setId: string): Promise<PokemonSet | null> => {
   try {
-    const response = await fetchWithAuth(`https://api.pokemontcg.io/v2/sets/${setId}`);
+    const response = await fetchWithAuth(`${POKEMON_TCG_API_URL}/sets/${setId}`);
     const data = await response.json();
     return data.data;
   } catch (error) {
@@ -233,6 +375,9 @@ export const fetchSetDetails = async (setId: string): Promise<PokemonSet | null>
   }
 };
 
+/**
+ * Search cards by type and term
+ */
 export const searchCardsByType = async (
   searchTerm: string,
   cardType: SearchType = "all",
@@ -276,7 +421,7 @@ export const searchCardsByType = async (
     }
     
     const response = await fetchWithAuth(
-      `https://api.pokemontcg.io/v2/cards?q=${encodeURIComponent(query)}&page=${page}&pageSize=${pageSize}&orderBy=set.releaseDate,number`
+      `${POKEMON_TCG_API_URL}/cards?q=${encodeURIComponent(query)}&page=${page}&pageSize=${pageSize}&orderBy=set.releaseDate,number`
     );
     const data = await response.json();
     
@@ -299,6 +444,9 @@ export const searchCardsByType = async (
   }
 };
 
+/**
+ * Search Pokemon cards by name
+ */
 export const searchPokemonByName = async (
   pokemonName: string, 
   page = 1, 
@@ -313,6 +461,9 @@ export const searchPokemonByName = async (
   return searchCardsByType(pokemonName, "pokemon", page, pageSize);
 };
 
+/**
+ * Search all cards by term
+ */
 export const searchCards = async (
   searchTerm: string, 
   page = 1, 
@@ -326,3 +477,6 @@ export const searchCards = async (
 }> => {
   return searchCardsByType(searchTerm, "all", page, pageSize);
 };
+
+// Export the auth client for direct use
+export { authApiClient };

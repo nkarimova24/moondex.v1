@@ -5,6 +5,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import Sidebar from "@/app/components/Sidebar";
 import ThemeRegistry from "@/app/components/ThemeRegistry"; 
 import GlobalSearchbar from "@/app/components/GlobalSearchbar";
+import { AuthProvider } from "@/context/AuthContext";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -23,20 +24,16 @@ export default function RootLayout({
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
   
-  // Check for mobile view
   useEffect(() => {
     const checkMobile = () => {
-      const mobile = window.innerWidth < 768; // Use 768px as the breakpoint
+      const mobile = window.innerWidth < 768; 
       setIsMobile(mobile);
     };
     
-    // Initial check
     checkMobile();
     
-    // Add event listener for window resize
     window.addEventListener('resize', checkMobile);
     
-    // Cleanup
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
@@ -52,24 +49,26 @@ export default function RootLayout({
         style={{ backgroundColor: "#1A1A1A" }}
       >
         <ThemeRegistry>
-          <Sidebar 
-            isOpen={sidebarOpen} 
-            onToggle={handleToggleSidebar}
-            isMobile={isMobile}
-          />
-          
-          <div 
-            style={{ 
-              marginLeft: isMobile ? 0 : "240px",
-              transition: "margin 0.3s ease-in-out"
-            }}
-          >
-            <GlobalSearchbar />
+          <AuthProvider>
+            <Sidebar 
+              isOpen={sidebarOpen} 
+              onToggle={handleToggleSidebar}
+              isMobile={isMobile}
+            />
             
-            <main style={{ padding: "20px" }}>
-              {children}
-            </main>
-          </div>
+            <div 
+              style={{ 
+                marginLeft: isMobile ? 0 : (sidebarOpen ? "240px" : "0px"),
+                transition: "margin 0.3s ease-in-out"
+              }}
+            >
+              <GlobalSearchbar />
+              
+              <main style={{ padding: "20px" }}>
+                {children}
+              </main>
+            </div>
+          </AuthProvider>
         </ThemeRegistry>
       </body>
     </html>

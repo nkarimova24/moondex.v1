@@ -14,13 +14,19 @@ import {
   Typography,
   Divider,
   IconButton,
+  Button,
+  Stack,
   useMediaQuery
 } from "@mui/material";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
+import LoginIcon from "@mui/icons-material/Login";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import LogoutIcon from "@mui/icons-material/Logout";
 import { fetchPokemonSets, PokemonSet } from "@/app/lib/api";
+import { useAuth } from "@/context/AuthContext";
 
 interface SidebarProps {
   isOpen?: boolean;
@@ -35,6 +41,7 @@ export default function Sidebar({ isOpen: propIsOpen, onToggle }: SidebarProps) 
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   
+  const { user, isAuthenticated, logout } = useAuth();
   const seriesRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
   const sidebarContainerRef = useRef<HTMLDivElement | null>(null);
   
@@ -100,7 +107,13 @@ export default function Sidebar({ isOpen: propIsOpen, onToggle }: SidebarProps) 
     setExpandedSeries((prev) => (prev === series ? null : series));
   };
 
-  // Mobile sidebar toggle button (fixed position)
+  const handleLogout = async () => {
+    await logout();
+    if (isMobile) {
+      handleDrawerToggle();
+    }
+  };
+
   const toggleButton = isMobile && (
     <IconButton
       color="inherit"
@@ -122,6 +135,76 @@ export default function Sidebar({ isOpen: propIsOpen, onToggle }: SidebarProps) 
     >
       {isOpen ? <CloseIcon /> : <MenuIcon />}
     </IconButton>
+  );
+
+  const authButtons = (
+    <Box sx={{ 
+      padding: "16px",
+      borderTop: "1px solid rgba(255,255,255,0.1)",
+      flexShrink: 0, 
+    }}>
+      {isAuthenticated ? (
+        <Box>
+          <Typography variant="body2" sx={{ mb: 1.5, color: "rgba(255,255,255,0.8)", fontWeight: 500 }}>
+            Welcome, {user?.name}
+          </Typography>
+          <Button
+            fullWidth
+            variant="outlined"
+            color="error"
+            startIcon={<LogoutIcon />}
+            onClick={handleLogout}
+            sx={{ 
+              borderColor: 'rgba(138, 63, 63, 0.5)',
+              color: 'rgba(138, 63, 63, 0.9)',
+              '&:hover': {
+                borderColor: '#8A3F3F',
+                backgroundColor: 'rgba(138, 63, 63, 0.1)'
+              }
+            }}
+          >
+            Logout
+          </Button>
+        </Box>
+      ) : (
+        <Stack spacing={1.5}>
+          <Button
+            fullWidth
+            variant="contained"
+            component={Link}
+            href="/signin"
+            startIcon={<LoginIcon />}
+            onClick={isMobile ? handleDrawerToggle : undefined}
+            sx={{ 
+              backgroundColor: '#8A3F3F',
+              '&:hover': {
+                backgroundColor: '#612B2B',
+              }
+            }}
+          >
+            Sign In
+          </Button>
+          <Button
+            fullWidth
+            variant="outlined"
+            component={Link}
+            href="/signup"
+            startIcon={<PersonAddIcon />}
+            onClick={isMobile ? handleDrawerToggle : undefined}
+            sx={{ 
+              borderColor: 'rgba(138, 63, 63, 0.5)',
+              color: 'rgba(138, 63, 63, 0.9)',
+              '&:hover': {
+                borderColor: '#8A3F3F',
+                backgroundColor: 'rgba(138, 63, 63, 0.1)'
+              }
+            }}
+          >
+            Sign Up
+          </Button>
+        </Stack>
+      )}
+    </Box>
   );
 
   const drawerContent = (
@@ -308,6 +391,9 @@ export default function Sidebar({ isOpen: propIsOpen, onToggle }: SidebarProps) 
           <Divider sx={{ opacity: 0.1, my: 1 }} />
         </List>
       </Box>
+      
+      {/* Authentication Buttons */}
+      {authButtons}
       
       {/* Footer */}
       <Box 
