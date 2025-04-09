@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { PokemonCard } from "@/app/lib/api";
 import CardDetails from "./CardDetails";
-import CardFoil from "./CardFoil";
+import FoilContainer from "./FoilContainer";
 import Image from "next/image";
 
 interface CardGridProps {
@@ -89,31 +89,32 @@ export default function CardGrid({ cards, isSidebarOpen = false }: CardGridProps
                 <span className="text-xs text-gray-400">#{card.number}</span>
               </div>
               
-              <div className="mt-1 flex flex-wrap gap-1">
-                {/* Card Foil indicator */}
-                {card.tcgplayer?.prices && (
-                  <>
-                    {card.tcgplayer.prices.normal && (
-                      <CardFoil foilType="normal" />
-                    )}
-                    {card.tcgplayer.prices.holofoil && (
-                      <CardFoil foilType="holo" />
-                    )}
-                    {card.tcgplayer.prices.reverseHolofoil && (
-                      <CardFoil foilType="reverse holo" />
-                    )}
-                  </>
-                )}
-                
-                {/* Price indicator */}
+              <div className="mt-1 flex flex-wrap items-center justify-between">
+                {/* Price indicator - now on the left */}
                 {card.cardmarket?.prices?.trendPrice && (
                   <span 
                     className="text-xs px-1.5 py-0.5 bg-[#8A3F3F] text-white rounded-full"
-                    title={`Trend price: $${card.cardmarket.prices.trendPrice.toFixed(2)}`}
+                    title={`Trend price: ${card.cardmarket.prices.trendPrice.toFixed(2)}`}
                   >
                     ${card.cardmarket.prices.trendPrice.toFixed(2)}
                   </span>
                 )}
+                
+                {/* Card Foil indicator - now on the right */}
+                {card.tcgplayer?.prices && (() => {
+                  // Create an array of available foil types for this card
+                  const foilTypes = [];
+                  if (card.tcgplayer.prices.normal) foilTypes.push("normal");
+                  if (card.tcgplayer.prices.holofoil) foilTypes.push("holo");
+                  if (card.tcgplayer.prices.reverseHolofoil) foilTypes.push("reverse holo");
+                  
+                  return foilTypes.length > 0 ? (
+                    <FoilContainer 
+                      foilTypes={foilTypes} 
+                      cardId={card.id}
+                    />
+                  ) : null;
+                })()}
               </div>
             </div>
           </div>

@@ -19,19 +19,15 @@ export default function CardDetails({ card, allCards, onClose, onNavigate }: Car
   const hasPrevious = currentIndex > 0;
   const hasNext = currentIndex < allCards.length - 1;
 
-  // Check for mobile view
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
     };
     
-    // Initial check
     checkMobile();
     
-    // Add event listener for window resize
     window.addEventListener('resize', checkMobile);
     
-    // Cleanup
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
@@ -122,16 +118,13 @@ export default function CardDetails({ card, allCards, onClose, onNavigate }: Car
 
   const toggleFavorite = () => setIsFavorite(!isFavorite);
 
-  // Helper function to determine style for rarity display
   const getRarityStyle = (rarity?: string) => {
     const colorValue = getRarityColor(rarity || "");
     
-    // Check if the value is a gradient
     if (colorValue.startsWith("linear-gradient")) {
       return { backgroundImage: colorValue, boxShadow: "0 1px 3px rgba(0,0,0,0.2)" };
     }
     
-    // Otherwise, it's a solid color
     return { backgroundColor: colorValue, boxShadow: "0 1px 3px rgba(0,0,0,0.2)" };
   };
 
