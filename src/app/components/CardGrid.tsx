@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { PokemonCard } from "@/app/lib/api/types";
 import CardDetails from "./CardDetails";
-// import FoilContainer from "./FoilContainer";
+import FoilContainer from "./FoilContainer";
 import Image from "next/image";
 
 interface CardGridProps {
@@ -51,22 +51,22 @@ export default function CardGrid({ cards, isSidebarOpen = false }: CardGridProps
     return null;
   }
   
-  // const getRarityColor = (rarity?: string): string => {
-  //   if (!rarity) return "bg-gray-700";
+  const getRarityColor = (rarity?: string): string => {
+    if (!rarity) return "bg-gray-700";
     
-  //   const rarityColors: Record<string, string> = {
-  //     "Common": "bg-gray-700",
-  //     "Uncommon": "bg-emerald-700",
-  //     "Rare": "bg-blue-700",
-  //     "Rare Holo": "bg-indigo-700",
-  //     "Rare Holo EX": "bg-purple-700",
-  //     "Rare Ultra": "bg-amber-700",
-  //     "Rare Rainbow": "bg-gradient-to-r from-pink-600 via-purple-600 to-indigo-600",
-  //     "Rare Secret": "bg-gradient-to-r from-amber-600 to-rose-600"
-  //   };
+    const rarityColors: Record<string, string> = {
+      "Common": "bg-gray-700",
+      "Uncommon": "bg-emerald-700",
+      "Rare": "bg-blue-700",
+      "Rare Holo": "bg-indigo-700",
+      "Rare Holo EX": "bg-purple-700",
+      "Rare Ultra": "bg-amber-700",
+      "Rare Rainbow": "bg-gradient-to-r from-pink-600 via-purple-600 to-indigo-600",
+      "Rare Secret": "bg-gradient-to-r from-amber-600 to-rose-600"
+    };
     
-  //   return rarityColors[rarity] || "bg-gray-700";
-  // };
+    return rarityColors[rarity] || "bg-gray-700";
+  };
   
   const gridColsClass = isMobile
     ? "grid-cols-2" 
@@ -119,17 +119,17 @@ export default function CardGrid({ cards, isSidebarOpen = false }: CardGridProps
                 
                 {/* Card Foil indicator*/}
                 {card.tcgplayer?.prices && (() => {
-                  // const foilTypes = [];
-                  // if (card.tcgplayer.prices.normal) foilTypes.push("normal");
-                  // if (card.tcgplayer.prices.holofoil) foilTypes.push("holo");
-                  // if (card.tcgplayer.prices.reverseHolofoil) foilTypes.push("reverse holo");
+                  const foilTypes = [];
+                  if (card.tcgplayer.prices.normal) foilTypes.push("normal");
+                  if (card.tcgplayer.prices.holofoil) foilTypes.push("holo");
+                  if (card.tcgplayer.prices.reverseHolofoil) foilTypes.push("reverse holo");
                   
-                  // return foilTypes.length > 0 ? (
-                  //   <FoilContainer 
-                  //     foilTypes={foilTypes} 
-                  //     cardId={card.id}
-                  //   />
-                  // ) : null;
+                  return foilTypes.length > 0 ? (
+                    <FoilContainer 
+                      foilTypes={foilTypes} 
+                      cardId={card.id}
+                    />
+                  ) : null;
 
                   return null; // Ensure a valid ReactNode or null is returned
                 })()}
