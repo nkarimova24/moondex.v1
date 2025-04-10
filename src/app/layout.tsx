@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { Geist, Geist_Mono } from "next/font/google";
 import Sidebar from "@/app/components/Sidebar";
-import ThemeRegistry from "@/app/components/ThemeRegistry"; 
+import ThemeRegistry from "@/app/components/ThemeRegistry";
 import GlobalSearchbar from "@/app/components/GlobalSearchbar";
 import { AuthProvider } from "@/context/AuthContext";
 import "./globals.css";
@@ -23,17 +23,17 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
-  
+
   useEffect(() => {
     const checkMobile = () => {
       const mobile = window.innerWidth < 768; 
       setIsMobile(mobile);
     };
-    
+
     checkMobile();
-    
+
     window.addEventListener('resize', checkMobile);
-    
+
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
@@ -50,10 +50,9 @@ export default function RootLayout({
       >
         <ThemeRegistry>
           <AuthProvider>
-            <Sidebar 
-              isOpen={sidebarOpen} 
+            <Sidebar
+              isOpen={sidebarOpen}
               onToggle={handleToggleSidebar}
-              isMobile={isMobile}
             />
             
             <div 
@@ -63,7 +62,7 @@ export default function RootLayout({
               }}
             >
               <GlobalSearchbar />
-              
+
               <main style={{ padding: "20px" }}>
                 {children}
               </main>
