@@ -18,7 +18,6 @@ export default function Home() {
     const loadRecentSets = async () => {
       try {
         const setsData = await fetchPokemonSets();
-        // Flatten the grouped sets and take the 5 most recent ones
         const allSets = Object.values(setsData).flat();
         const recent = allSets.slice(0, 5);
         setRecentSets(recent);
@@ -92,7 +91,7 @@ export default function Home() {
       <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-2xl sm:text-3xl font-bold text-white text-center mb-12">
-            Explore the World of Pokémon TCG
+            Explore the World of Moondex
           </h2>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -168,9 +167,11 @@ export default function Home() {
                 >
                   <div className="h-32 bg-gradient-to-r from-[#3A3A3A] to-[#2A2A2A] flex items-center justify-center p-4">
                     {set.images?.logo ? (
-                      <img 
+                      <Image 
                         src={set.images.logo} 
-                        alt={set.name} 
+                        alt={set.name}
+                        width={200}
+                        height={100}
                         className="max-h-full max-w-full object-contain"
                       />
                     ) : (
@@ -200,13 +201,13 @@ export default function Home() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link 
-              href="#" 
+              href="#" //to add in the future
               className="px-6 py-3 bg-[#8A3F3F] text-white font-medium rounded-lg hover:bg-[#612B2B] transition-colors"
             >
               Sign In
             </Link>
             <Link 
-              href="#" 
+              href="#" //to add in the future
               className="px-6 py-3 bg-transparent border border-[#8A3F3F] text-[#8A3F3F] font-medium rounded-lg hover:bg-[#8A3F3F]/10 transition-colors"
             >
               Create Account
