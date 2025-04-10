@@ -1,0 +1,12 @@
+# This file is needed for the app to work on a standard apache server.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Allow access to static assets
+  RewriteCond %{REQUEST_URI} !\.(gif|jpg|jpeg|png|svg|css|js|ico|webp|woff|woff2|ttf|eot|otf|pdf|txt|xml|json)$ [NC]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+
+  # Redirect all other requests to index.html
+  RewriteRule ^ index.html [L]
+</IfModule>

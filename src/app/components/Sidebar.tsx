@@ -48,7 +48,7 @@ export default function Sidebar({ isOpen: propIsOpen, onToggle }: SidebarProps) 
   
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth < 960); 
+      setIsMobile(window.innerWidth < 768); 
     };
     
     checkMobile();
@@ -169,7 +169,7 @@ export default function Sidebar({ isOpen: propIsOpen, onToggle }: SidebarProps) 
         </Box>
       ) : (
         <Stack spacing={1.5}>
-          <Button
+          {/* <Button
             fullWidth
             variant="contained"
             component={Link}
@@ -184,8 +184,8 @@ export default function Sidebar({ isOpen: propIsOpen, onToggle }: SidebarProps) 
             }}
           >
             Sign In
-          </Button>
-          <Button
+          </Button> */}
+          {/* <Button
             fullWidth
             variant="outlined"
             component={Link}
@@ -202,7 +202,7 @@ export default function Sidebar({ isOpen: propIsOpen, onToggle }: SidebarProps) 
             }}
           >
             Sign Up
-          </Button>
+          </Button> */}
         </Stack>
       )}
     </Box>
