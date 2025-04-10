@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { PokemonCard } from "@/app/lib/api/types";
 import CardDetails from "./CardDetails";
-import FoilContainer from "./FoilContainer";
+// import FoilContainer from "./FoilContainer";
 import Image from "next/image";
 
 interface CardGridProps {
@@ -68,20 +68,19 @@ export default function CardGrid({ cards, isSidebarOpen = false }: CardGridProps
     return rarityColors[rarity] || "bg-gray-700";
   };
   
-  const gridColsClass = isMobile
-    ? "grid-cols-2" 
-    : isSidebarOpen
-      ? "grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5" // With sidebar visible
-      : "grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6"; // Without sidebar
+  const gridColsClass = isSidebarOpen
+    ? "grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4" 
+    : "grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4"; // Without sidebar
   
   return (
     <>
-      <div className={`grid ${gridColsClass} gap-2 sm:gap-4 w-full`}>
+      <div className={`grid ${gridColsClass} gap-2 sm:gap-4 w-full ml-6`}>
         {cards.map((card) => (
           <div 
             key={card.id}
             className="relative rounded-lg bg-[#252525] overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
             onClick={() => handleCardClick(card)}
+            style={{ width: '220px', height: '370px' }}
           >
             <div className="aspect-[63/88] relative">
               {!loadedImages[card.id] && (
@@ -92,33 +91,33 @@ export default function CardGrid({ cards, isSidebarOpen = false }: CardGridProps
               <Image
                 src={card.images.small}
                 alt={card.name}
-                width={245}  
-                height={342}
+                width={180} // Adjust image width
+                height={260} // Adjust image height
                 className={`w-full h-full object-contain transform transition-transform ${loadedImages[card.id] ? 'opacity-100' : 'opacity-0'}`}
                 loading="lazy"
                 onLoad={() => handleImageLoad(card.id)}
               />
             </div>
             
-            <div className="p-2">
+            <div className="p-1"> {/* Adjust padding */}
               <div className="flex justify-between items-start">
                 <h3 className="text-white font-medium text-xs sm:text-sm truncate w-4/5">{card.name}</h3>
                 <span className="text-xs text-gray-400">#{card.number}</span>
               </div>
               
-              <div className="mt-1 flex flex-wrap items-center justify-between">
-                {/* Price indicator - now on the left */}
+              <div className="mt-3 flex flex-wrap items-center justify-between">
+                {/* Price indicator */}
                 {card.cardmarket?.prices?.trendPrice && (
                   <span 
-                    className="text-xs px-1.5 py-0.5 bg-[#8A3F3F] text-white rounded-full"
+                    className="text-xs px-1 py-0.5 bg-[#8A3F3F] text-white rounded-full"
                     title={`Trend price: ${card.cardmarket.prices.trendPrice.toFixed(2)}`}
                   >
                     ${card.cardmarket.prices.trendPrice.toFixed(2)}
                   </span>
                 )}
                 
-                {/* Card Foil indicator*/}
-                {card.tcgplayer?.prices && (() => {
+                {/* Card Foil indicator */}
+                {/* {card.tcgplayer?.prices && (() => {
                   const foilTypes = [];
                   if (card.tcgplayer.prices.normal) foilTypes.push("normal");
                   if (card.tcgplayer.prices.holofoil) foilTypes.push("holo");
@@ -130,9 +129,7 @@ export default function CardGrid({ cards, isSidebarOpen = false }: CardGridProps
                       cardId={card.id}
                     />
                   ) : null;
-
-                  return null; // Ensure a valid ReactNode or null is returned
-                })()}
+                })()} */}
               </div>
             </div>
           </div>

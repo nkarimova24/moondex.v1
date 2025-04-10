@@ -2,11 +2,18 @@ import React, { useState } from 'react';
 
 interface CardFoilProps {
   foilType: string;
-  onIncrement?: () => void;
-  onDecrement?: () => void;
+  position: 'first' | 'middle' | 'last' | 'single';
+  isNeighborHovered: boolean;
+  onIncrement: () => void;
+  onDecrement: () => void;
 }
 
-function CardFoil({ foilType, onIncrement, onDecrement }: CardFoilProps) {
+function CardFoil({ 
+  foilType, 
+
+  onIncrement, 
+  onDecrement 
+}: CardFoilProps) {
   const [isHovered, setIsHovered] = useState(false);
   
   const normalizedType = foilType.toLowerCase();
@@ -28,44 +35,43 @@ function CardFoil({ foilType, onIncrement, onDecrement }: CardFoilProps) {
     hoverBg = 'hover:bg-blue-600/10';
     tooltipText = 'Holo';
   }
-  
+
   return (
     <div 
-      className="flex items-center"
+      className="relative inline-flex items-center justify-center"
+      style={{ width: '40px', height: '28px' }} 
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Minus button */}
-      {isHovered && (
-        <button 
-          className="flex-shrink-0 h-4 w-4 flex items-center justify-center rounded-full bg-gray-800 opacity-90 hover:bg-gray-700 mr-1"
-          onClick={(e) => {
-            e.stopPropagation();
-            if (onDecrement) onDecrement();
-          }}
-        >
-          <span className="text-white text-xs leading-none">-</span>
-        </button>
-      )}
+      {/* Minus button - positioned outside the foil box */}
+      <button 
+        className="absolute left-[-8px] w-4 h-4 flex items-center justify-center rounded-full bg-gray-800 shadow-md hover:bg-gray-700 z-20 transition-opacity"
+        style={{ opacity: isHovered ? 0.9 : 0.6 }}
+        onClick={(e) => {
+          e.stopPropagation();
+          onDecrement();
+        }}
+      >
+        <span className="text-white text-xs font-bold">-</span>
+      </button>
       
-      {/* Foil box */}
+      {/* Foil indicator box - in the middle */}
       <div 
-        className={`w-5 h-5 border-2 rounded-md ${borderColor} ${hoverBg} transition-colors duration-200`}
-        title={` ${tooltipText}`}
+        className={`w-6 h-6 border-2 rounded-md ${borderColor} ${hoverBg} bg-transparent transition-colors duration-200 mx-auto`}
+        title={`Foil type: ${tooltipText}`}
       />
       
-      {/* Plus button */}
-      {isHovered && (
-        <button 
-          className="flex-shrink-0 h-4 w-4 flex items-center justify-center rounded-full bg-gray-800 opacity-90 hover:bg-gray-700 ml-1"
-          onClick={(e) => {
-            e.stopPropagation();
-            if (onIncrement) onIncrement();
-          }}
-        >
-          <span className="text-white text-xs leading-none">+</span>
-        </button>
-      )}
+      {/* Plus button - positioned outside the foil box */}
+      <button 
+        className="absolute right-[-8px] w-4 h-4 flex items-center justify-center rounded-full bg-gray-800 shadow-md hover:bg-gray-700 z-20 transition-opacity"
+        style={{ opacity: isHovered ? 0.9 : 0.6 }}
+        onClick={(e) => {
+          e.stopPropagation();
+          onIncrement();
+        }}
+      >
+        <span className="text-white text-xs font-bold">+</span>
+      </button>
     </div>
   );
 }
@@ -77,29 +83,42 @@ interface FoilContainerProps {
 }
 
 export default function FoilContainer({ foilTypes, cardId, className = '' }: FoilContainerProps) {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  if (!foilTypes || foilTypes.length === 0) return null;
   
-  if (foilTypes.length === 0) return null;
+  const getPosition = (index: number): 'first' | 'middle' | 'last' | 'single' => {
+    if (foilTypes.length === 1) return 'single';
+    if (index === 0) return 'first';
+    if (index === foilTypes.length - 1) return 'last';
+    return 'middle';
+  };
+  
+  // increment/decrement
+  const handleIncrement = (type: string) => {
+    console.log(`Increment ${type} for card ${cardId}`);
+   
+  };
+  
+  const handleDecrement = (type: string) => {
+    console.log(`Decrement ${type} for card ${cardId}`);
+   
+  };
   
   return (
-    <div className={`flex ${className}`} style={{ gap: '6px' }}>
+    <div 
+      className={`flex ${className}`} 
+      style={{ gap: '20px', zIndex: 0 }}
+      onClick={(e) => e.stopPropagation()}
+    >
       {foilTypes.map((foilType, index) => (
         <div 
           key={`${cardId}-${foilType}`}
-          style={{
-            transition: 'transform 0.15s ease-out',
-            transform: hoveredIndex !== null && hoveredIndex !== index
-              ? `translateX(${hoveredIndex < index ? '5px' : '-5px'})`
-              : 'translateX(0)'
-          }}
-          onMouseEnter={() => setHoveredIndex(index)}
-          onMouseLeave={() => setHoveredIndex(null)}
-          onClick={(e) => e.stopPropagation()}
         >
           <CardFoil 
             foilType={foilType}
-            onIncrement={() => console.log(`Increment ${foilType}`)}
-            onDecrement={() => console.log(`Decrement ${foilType}`)}
+            position={getPosition(index)}
+            isNeighborHovered={false} 
+            onIncrement={() => handleIncrement(foilType)}
+            onDecrement={() => handleDecrement(foilType)}
           />
         </div>
       ))}

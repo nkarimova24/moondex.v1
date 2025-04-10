@@ -63,6 +63,7 @@ export default function SetHeader({ setInfo }: SetHeaderProps) {
         borderBottom: "1px solid #333",
         marginTop: "-25px",
         borderTop: "none",
+
       }}
     >
       <div className="flex flex-col md:flex-row items-center gap-4">
