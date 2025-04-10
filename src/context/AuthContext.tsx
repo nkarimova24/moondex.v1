@@ -6,6 +6,17 @@ import Cookies from 'js-cookie';
 import * as api from '@/app/lib/api/';
 import { User, LoginCredentials, RegisterData, AuthResult } from '@/app/lib/api/types';
 
+// Define a more specific error type
+interface ApiError extends Error {
+  response?: {
+    data?: {
+      error?: string | Record<string, string>;
+      status?: string;
+    };
+    status?: number;
+  };
+}
+
 interface AuthContextType {
   user: User | null;
   loading: boolean;
@@ -74,8 +85,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       }
       
       return result;
-    } catch (error: any) {
-      console.error('Registration error in context:', error);
+    } catch (error: unknown) {
+      const apiError = error as ApiError;
+      console.error('Registration error in context:', apiError);
       return { 
         success: false, 
         message: 'Registration failed due to an unexpected error',
@@ -98,8 +110,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       }
       
       return result;
-    } catch (error: any) {
-      console.error('Login error in context:', error);
+    } catch (error: unknown) {
+      const apiError = error as ApiError;
+      console.error('Login error in context:', apiError);
       return { 
         success: false, 
         message: 'Login failed due to an unexpected error',

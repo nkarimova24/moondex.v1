@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
-import Link from "next/link";
+// import Link from "next/link";
 import { Button, TextField, Box, Typography, Container, Alert } from "@mui/material";
 
 export default function SignIn() {
@@ -113,12 +113,12 @@ export default function SignIn() {
             {loading ? "Signing in..." : "Sign In"}
           </Button>
           <Box textAlign="center">
-            <Typography variant="body2" color="text.secondary">
+            {/* <Typography variant="body2" color="text.secondary">
               Don't have an account?{" "}
               <Link href="/signup" style={{ color: "#90caf9" }}>
                 Sign Up
               </Link>
-            </Typography>
+            </Typography> */}
           </Box>
         </Box>
       </Box>

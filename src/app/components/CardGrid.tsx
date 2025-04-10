@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { PokemonCard } from "@/app/lib/api";
+import { PokemonCard } from "@/app/lib/api/types";
 import CardDetails from "./CardDetails";
-import FoilContainer from "./FoilContainer";
+// import FoilContainer from "./FoilContainer";
 import Image from "next/image";
 
 interface CardGridProps {
@@ -119,7 +119,6 @@ export default function CardGrid({ cards, isSidebarOpen = false }: CardGridProps
                 
                 {/* Card Foil indicator*/}
                 {card.tcgplayer?.prices && (() => {
-
                   // const foilTypes = [];
                   // if (card.tcgplayer.prices.normal) foilTypes.push("normal");
                   // if (card.tcgplayer.prices.holofoil) foilTypes.push("holo");
@@ -131,6 +130,8 @@ export default function CardGrid({ cards, isSidebarOpen = false }: CardGridProps
                   //     cardId={card.id}
                   //   />
                   // ) : null;
+
+                  return null; // Ensure a valid ReactNode or null is returned
                 })()}
               </div>
             </div>

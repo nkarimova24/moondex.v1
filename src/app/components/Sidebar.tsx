@@ -16,14 +16,13 @@ import {
   IconButton,
   Button,
   Stack,
-  useMediaQuery
 } from "@mui/material";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
-import LoginIcon from "@mui/icons-material/Login";
-import PersonAddIcon from "@mui/icons-material/PersonAdd";
+// import LoginIcon from "@mui/icons-material/Login";
+// import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { fetchPokemonSets } from "@/app/lib/api/pokemon";
 import { PokemonSet } from "@/app/lib/api/types";

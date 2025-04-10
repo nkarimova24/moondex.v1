@@ -1,103 +1,219 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { fetchPokemonSets } from "@/app/lib/api/pokemon";
+import { PokemonSet } from "@/app/lib/api/types";
+import { useRouter } from "next/navigation";
+import { Search } from "lucide-react";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [recentSets, setRecentSets] = useState<PokemonSet[]>([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  useEffect(() => {
+    const loadRecentSets = async () => {
+      try {
+        const setsData = await fetchPokemonSets();
+        // Flatten the grouped sets and take the 5 most recent ones
+        const allSets = Object.values(setsData).flat();
+        const recent = allSets.slice(0, 5);
+        setRecentSets(recent);
+      } catch (error) {
+        console.error("Error loading recent sets:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadRecentSets();
+  }, []);
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchTerm.trim()) {
+      router.push(`/pokedex?globalSearch=${encodeURIComponent(searchTerm.trim())}`);
+    }
+  };
+
+  return (
+    <div className="flex flex-col min-h-screen">
+      {/* Hero Section */}
+      <section 
+        className="relative py-16 sm:py-24 px-4 sm:px-6 lg:px-8 text-center"
+        style={{
+          background: "linear-gradient(to bottom, #8A3F3F, #612B2B)",
+          borderRadius: "0 0 20px 20px",
+          boxShadow: "0 4px 20px rgba(0, 0, 0, 0.25)",
+        }}
+      >
+        <div className="absolute inset-0 opacity-10">
+          <div className="w-full h-full" style={{ 
+            backgroundImage: `url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png')`,
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "right -50px center",
+            backgroundSize: "300px 300px"
+          }}></div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+        
+        <div className="relative max-w-3xl mx-auto">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
+            Welcome to Moondex
+          </h1>
+          <p className="text-lg sm:text-xl text-white/80 mb-8">
+            Your ultimate Pokémon TCG collection tracker and card database
+          </p>
+          
+          <form onSubmit={handleSearch} className="max-w-lg mx-auto">
+            <div className="relative">
+              <input
+                type="text"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                placeholder="Search for any Pokémon card..."
+                className="w-full py-3 px-5 pr-12 rounded-full bg-white/10 border border-white/30 text-white placeholder-white/60 shadow-lg focus:outline-none focus:ring-2 focus:ring-white/50"
+                style={{ backdropFilter: "blur(5px)" }}
+              />
+              <button
+                type="submit"
+                className="absolute right-2 top-1/2 transform -translate-y-1/2 text-white p-2 rounded-full hover:bg-white/10 transition-colors"
+              >
+                <Search size={20} />
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-2xl sm:text-3xl font-bold text-white text-center mb-12">
+            Explore the World of Pokémon TCG
+          </h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Feature 1 */}
+            <div className="bg-[#252525] rounded-lg p-6 shadow-lg transition-transform hover:transform hover:scale-105">
+              <div className="w-12 h-12 bg-[#8A3F3F] rounded-full mb-4 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <path d="m21 21-4.3-4.3"></path>
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold text-white mb-2">Search Cards</h3>
+              <p className="text-gray-400">
+                Find any Pokémon card by name, type, or set. Our comprehensive database makes it easy to discover cards.
+              </p>
+            </div>
+            
+            {/* Feature 2 */}
+            <div className="bg-[#252525] rounded-lg p-6 shadow-lg transition-transform hover:transform hover:scale-105">
+              <div className="w-12 h-12 bg-[#8A3F3F] rounded-full mb-4 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
+                  <path d="M3 6h18"></path>
+                  <path d="M3 12h18"></path>
+                  <path d="M3 18h18"></path>
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold text-white mb-2">Browse Sets</h3>
+              <p className="text-gray-400">
+                Explore complete Pokémon card sets from every generation, organized by series and release date.
+              </p>
+            </div>
+            
+            {/* Feature 3 */}
+            <div className="bg-[#252525] rounded-lg p-6 shadow-lg transition-transform hover:transform hover:scale-105">
+              <div className="w-12 h-12 bg-[#8A3F3F] rounded-full mb-4 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
+                  <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold text-white mb-2">Track Collection</h3>
+              <p className="text-gray-400">
+                Coming soon: Track your Pokémon card collection, manage your wishlist, and keep track of card values.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Latest Sets Section */}
+      <section className="py-12 px-4 sm:px-6 lg:px-8 bg-[#1E1E1E] rounded-lg mx-4 my-8">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex justify-between items-center mb-8">
+            <h2 className="text-2xl font-bold text-white">Latest Sets</h2>
+            <Link 
+              href="/sets" 
+              className="text-[#8A3F3F] hover:text-[#612B2B] transition-colors"
+            >
+              View all sets →
+            </Link>
+          </div>
+          
+          {loading ? (
+            <div className="flex justify-center py-12">
+              <div className="w-12 h-12 border-4 border-[#8A3F3F] border-t-transparent rounded-full animate-spin"></div>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-5">
+              {recentSets.map((set) => (
+                <Link
+                  key={set.id}
+                  href={`/pokedex?setId=${set.id}`}
+                  className="block bg-[#252525] rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:transform hover:scale-105"
+                >
+                  <div className="h-32 bg-gradient-to-r from-[#3A3A3A] to-[#2A2A2A] flex items-center justify-center p-4">
+                    {set.images?.logo ? (
+                      <img 
+                        src={set.images.logo} 
+                        alt={set.name} 
+                        className="max-h-full max-w-full object-contain"
+                      />
+                    ) : (
+                      <div className="text-gray-500 text-center">No image</div>
+                    )}
+                  </div>
+                  <div className="p-4">
+                    <h3 className="text-white font-medium text-lg truncate">{set.name}</h3>
+                    <p className="text-gray-400 text-sm">{set.releaseDate}</p>
+                    <div className="mt-2 text-xs font-medium px-2 py-1 bg-[#8A3F3F]/20 text-[#8A3F3F] rounded-full inline-block">
+                      {set.total} cards
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* Call to Action */}
+      <section className="py-16 px-4 text-center">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Ready to start your collection?</h2>
+          <p className="text-gray-400 mb-8">
+            Moondex makes it easy to find, organize, and track your Pokémon card collection.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link 
+              href="#" 
+              className="px-6 py-3 bg-[#8A3F3F] text-white font-medium rounded-lg hover:bg-[#612B2B] transition-colors"
+            >
+              Sign In
+            </Link>
+            <Link 
+              href="#" 
+              className="px-6 py-3 bg-transparent border border-[#8A3F3F] text-[#8A3F3F] font-medium rounded-lg hover:bg-[#8A3F3F]/10 transition-colors"
+            >
+              Create Account
+            </Link>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

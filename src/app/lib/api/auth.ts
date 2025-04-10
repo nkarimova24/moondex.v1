@@ -1,18 +1,41 @@
 // Authentication API functions
 import Cookies from 'js-cookie';
 import { authApiClient } from './client';
-import { LoginCredentials, RegisterData, AuthResult } from './types';
+import { LoginCredentials, RegisterData, AuthResult, User } from './types';
+
+interface ApiResponse<T> {
+  status: string;
+  data: T;
+}
+
+interface UserResponseData {
+  name: string;
+  email: string;
+  id: number;
+  token?: string;
+}
+
+interface ApiError extends Error {
+  response?: {
+    data?: {
+      error?: string | Record<string, string>;
+      status?: string;
+    };
+    status?: number;
+  };
+}
 
 /**
  * Log in a user
  */
 export const login = async (credentials: LoginCredentials): Promise<AuthResult> => {
   try {
-    const { data } = await authApiClient.post('/login', credentials);
+    const response = await authApiClient.post<ApiResponse<UserResponseData>>('/login', credentials);
+    const data = response.data;
     
     if (data.status === 'success' && data.data.token) {
       Cookies.set('auth_token', data.data.token, { expires: 7 });
-      return { 
+      return {
         success: true,
         user: {
           name: data.data.name,
@@ -23,12 +46,25 @@ export const login = async (credentials: LoginCredentials): Promise<AuthResult> 
       };
     }
     return { success: false, message: 'Login failed' };
-  } catch (error: any) {
-    console.error('Login error:', error.response?.data);
-    return { 
-      success: false, 
-      message: error.response?.data?.error || 'Login failed',
-      errors: error.response?.data?.error || {}
+  } catch (error: unknown) {
+    const apiError = error as ApiError;
+    console.error('Login error:', apiError.response?.data);
+    
+    let errorMessage = 'Login failed';
+    let errorDetails: Record<string, string> | undefined = undefined;
+    
+    if (apiError.response?.data?.error) {
+      if (typeof apiError.response.data.error === 'string') {
+        errorMessage = apiError.response.data.error;
+      } else {
+        errorDetails = apiError.response.data.error;
+      }
+    }
+    
+    return {
+      success: false,
+      message: errorMessage,
+      errors: errorDetails
     };
   }
 };
@@ -38,7 +74,8 @@ export const login = async (credentials: LoginCredentials): Promise<AuthResult> 
  */
 export const register = async (userData: RegisterData): Promise<AuthResult> => {
   try {
-    const { data } = await authApiClient.post('/register', userData);
+    const response = await authApiClient.post<ApiResponse<UserResponseData>>('/register', userData);
+    const data = response.data;
     
     if (data.status === 'success') {
       if (!data.data.token) {
@@ -50,7 +87,7 @@ export const register = async (userData: RegisterData): Promise<AuthResult> => {
       }
       
       Cookies.set('auth_token', data.data.token, { expires: 7 });
-      return { 
+      return {
         success: true,
         user: {
           name: data.data.name,
@@ -62,12 +99,25 @@ export const register = async (userData: RegisterData): Promise<AuthResult> => {
     }
     
     return { success: false, message: 'Registration failed' };
-  } catch (error: any) {
-    console.error('Registration error:', error.response?.data);
-    return { 
-      success: false, 
-      message: error.response?.data?.error || 'Registration failed',
-      errors: error.response?.data?.error || {}
+  } catch (error: unknown) {
+    const apiError = error as ApiError;
+    console.error('Registration error:', apiError.response?.data);
+    
+    let errorMessage = 'Registration failed';
+    let errorDetails: Record<string, string> | undefined = undefined;
+    
+    if (apiError.response?.data?.error) {
+      if (typeof apiError.response.data.error === 'string') {
+        errorMessage = apiError.response.data.error;
+      } else {
+        errorDetails = apiError.response.data.error;
+      }
+    }
+    
+    return {
+      success: false,
+      message: errorMessage,
+      errors: errorDetails
     };
   }
 };
@@ -98,20 +148,28 @@ export const getCurrentUser = async (): Promise<AuthResult> => {
     }
     
     console.log('Fetching current user with token');
-    const { data } = await authApiClient.get('/user');
+    const response = await authApiClient.get<ApiResponse<UserResponseData>>('/user');
+    const data = response.data;
     
     if (data.status === 'success' && data.data) {
-      return { 
-        success: true, 
-        user: data.data 
+      const userData: User = {
+        name: data.data.name,
+        email: data.data.email,
+        id: data.data.id
+      };
+      
+      return {
+        success: true,
+        user: userData
       };
     }
     
     return { success: false };
-  } catch (error: any) {
-    console.error('Get current user error:', error.response || error);
+  } catch (error: unknown) {
+    const apiError = error as ApiError;
+    console.error('Get current user error:', apiError.response || error);
     
-    if (error.response && error.response.status === 401) {
+    if (apiError.response && apiError.response.status === 401) {
       console.log('Removing invalid auth token');
       Cookies.remove('auth_token');
     }
