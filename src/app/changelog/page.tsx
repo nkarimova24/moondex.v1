@@ -30,7 +30,6 @@ export default function ChangelogPage() {
             "changelog.entry.2.added.0"
           ]
         },
-        
       ]
     },
     {
@@ -56,7 +55,8 @@ export default function ChangelogPage() {
             "changelog.entry.0.upcoming.1",
             "changelog.entry.0.upcoming.2",
             "changelog.entry.0.upcoming.3",
-            "changelog.entry.0.upcoming.4"
+            "changelog.entry.0.upcoming.4",
+            "changelog.entry.0.upcoming.5",
           ]
         }
       ]
@@ -264,12 +264,12 @@ export default function ChangelogPage() {
           <div
             key={entryIndex}
             className={`mb-8 sm:mb-12 relative ${
-              entryIndex === 0 ? "pt-0" : "pt-2"
+              entryIndex === 0 ? "pt-2" : "pt-2" // Adjust padding for the first entry
             }`}
           >
             {/* Timeline dot */}
             <div
-              className="absolute left-[-33px] sm:left-[-31px] top-3 w-4 h-4 sm:w-6 sm:h-6 rounded-full bg-[#8A3F3F] border-2 sm:border-4 border-[#1A1A1A] z-10"
+              className="absolute left-[-32px] sm:left-[-31px] top-3 w-4 h-4 sm:w-6 sm:h-6 rounded-full bg-[#8A3F3F] border-2 sm:border-4 border-[#1A1A1A] z-10"
               style={{ boxShadow: "0 0 0 3px rgba(138, 63, 63, 0.2)" }}
             ></div>
 
@@ -291,21 +291,23 @@ export default function ChangelogPage() {
               {entry.changes.map((changeGroup, groupIndex) => (
                 <div key={groupIndex}>
                   <h3
-                    className={`inline-block px-2 sm:px-3 py-0.5 sm:py-1 rounded-md text-xs sm:text-sm font-medium mb-2 sm:mb-3 border ${getTypeColor(
+                    className={`inline-block px-3 sm:px-4 py-1 sm:py-1.5 rounded-md text-xs sm:text-sm font-medium mb-2 sm:mb-3 border ${getTypeColor(
                       changeGroup.type
                     )}`}
+                    style={{
+                      display: "flex",
+                      marginLeft: "-1px" 
+                    }}
                   >
                     {getTypeLabel(changeGroup.type)}
                   </h3>
-                  <ul className="space-y-2">
+                  <ul className="space-y-3">
                     {changeGroup.itemKeys.map((itemKey, itemIndex) => (
                       <li
                         key={itemIndex}
-                        className="flex items-start gap-3"
+                        className="flex items-center gap-3" // Use items-center for vertical alignment
                       >
-                        <div className="pt-1">
-                          {getTypeIcon(changeGroup.type)}
-                        </div>
+                        <div className="flex items-center justify-center">{getTypeIcon(changeGroup.type)}</div>
                         <div className="text-gray-300 text-xs sm:text-sm flex-1">
                           {t(itemKey)}
                         </div>

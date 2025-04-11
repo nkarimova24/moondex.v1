@@ -72,7 +72,8 @@ const translations: Record<Language, Record<string, string>> = {
     "changelog.entry.0.upcoming.2": "Personal collection tracking",
     "changelog.entry.0.upcoming.3": "Wishlist functionality",
     "changelog.entry.0.upcoming.4": "Statistics and progress tracking for collectors",
-    
+    "changelog.entry.0.upcoming.5": "Japanese cards and sets",
+
     "changelog.entry.1.title": "Beta Version",
     "changelog.entry.1.added.0": "First implementation of the Pokémon TCG API",
     "changelog.entry.1.added.1": "Basic layout and navigation",
@@ -176,7 +177,7 @@ const translations: Record<Language, Record<string, string>> = {
     "home.cta.createAccount": "Account Aanmaken",
     
     // Changelog
-    "changelog.title": "Wijzigingslogboek",
+    "changelog.title": "Logboek",
     "changelog.description": "Hier vind je een overzicht van alle updates en geplande functies voor Moondex.",
     "changelog.legend": "Legenda",
     "changelog.added": "Toegevoegd",
@@ -204,6 +205,7 @@ const translations: Record<Language, Record<string, string>> = {
     "changelog.entry.0.upcoming.2": "Persoonlijke collecties maken en bijhouden",
     "changelog.entry.0.upcoming.3": "Wishlist functionaliteit",
     "changelog.entry.0.upcoming.4": "Statistieken en voortgangstracking voor verzamelaars",
+    "changelog.entry.0.upcoming.5": "Japanse kaarten en sets",
     
     "changelog.entry.1.title": "Beta versie",
     "changelog.entry.1.added.0": "Eerste implementatie van de Pokémon TCG API",
