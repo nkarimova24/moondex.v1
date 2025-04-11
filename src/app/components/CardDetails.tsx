@@ -5,11 +5,25 @@ import { PokemonCard } from "@/app/lib/api";
 import { X, ChevronLeft, ChevronRight, Heart } from "lucide-react";
 import Image from "next/image";
 
+// Update the type definition to include attacks
+interface Attack {
+  name: string;
+  cost?: string[];
+  convertedEnergyCost?: number;
+  damage?: string;
+  text?: string;
+}
+
+// Update PokemonCard interface to ensure attacks are recognized
+interface ExtendedPokemonCard extends PokemonCard {
+  attacks?: Attack[];
+}
+
 interface CardDetailsProps {
-  card: PokemonCard;
-  allCards: PokemonCard[];
+  card: ExtendedPokemonCard;
+  allCards: ExtendedPokemonCard[];
   onClose: () => void;
-  onNavigate: (card: PokemonCard) => void;
+  onNavigate: (card: ExtendedPokemonCard) => void;
 }
 
 export default function CardDetails({ card, allCards, onClose, onNavigate }: CardDetailsProps) {
@@ -305,6 +319,64 @@ export default function CardDetails({ card, allCards, onClose, onNavigate }: Car
                       </span>
                     </div>
                     <p className="text-gray-300 text-xs sm:text-sm">{ability.text}</p>
+                  </div>
+                ))}
+              </div>
+            )}
+            
+            {/* Attacks */}
+            {card.attacks && card.attacks.length > 0 && (
+              <div className="mb-3 sm:mb-5">
+                <h3 className="text-base sm:text-lg font-semibold mb-2 sm:mb-3" style={{ color: "#8A3F3F" }}>Attacks</h3>
+                {card.attacks.map((attack, index) => (
+                  <div 
+                    key={index} 
+                    className="mb-2 sm:mb-3 p-3 sm:p-4 rounded-lg" 
+                    style={{ 
+                      background: "linear-gradient(to right, rgba(40,40,40,0.8), rgba(30,30,30,0.8))",
+                      borderLeft: `4px solid ${primaryTypeColor}` 
+                    }}
+                  >
+                    <div className="flex justify-between items-center mb-1 sm:mb-2">
+                      <div className="flex items-center gap-2">
+                        {/* Energy cost */}
+                        {attack.cost && attack.cost.length > 0 && (
+                          <div className="flex gap-1">
+                            {attack.cost.map((energy, i) => (
+                              <div 
+                                key={i} 
+                                className="w-5 h-5 rounded-full flex items-center justify-center"
+                                style={{ 
+                                  backgroundColor: getTypeColor(energy),
+                                  boxShadow: "0 1px 2px rgba(0,0,0,0.3)"
+                                }}
+                                title={energy}
+                              >
+                                <span className="text-xs font-bold text-white">{energy[0]}</span>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                        
+                        <span className="font-medium text-white text-base sm:text-lg">{attack.name}</span>
+                      </div>
+                      
+                      {attack.damage && (
+                        <span 
+                          className="text-sm px-2 py-1 rounded-md font-bold" 
+                          style={{ 
+                            backgroundColor: "rgba(138, 63, 63, 0.3)", 
+                            color: "white" 
+                          }}
+                        >
+                          {attack.damage}
+                        </span>
+                      )}
+                    </div>
+                    
+                    {attack.text && (
+                      <p className="text-gray-300 text-xs sm:text-sm mt-1">{attack.text}</p>
+                    )}
                   </div>
                 ))}
               </div>
