@@ -61,7 +61,8 @@ export default function CardGrid({ cards }: CardGridProps) {
         {cards.map((card) => (
           <div 
             key={card.id}
-            className="relative rounded-lg bg-[#252525] overflow-hidden hover:shadow-lg transition-shadow cursor-pointer max-w-[220px] mx-auto"
+            //bg-[#252525]
+            className="relative rounded-lg overflow-hidden hover:shadow-lg transition-shadow cursor-pointer max-w-[220px] mx-auto"
             onClick={() => handleCardClick(card)}
           >
             <div className="aspect-[63/88] relative">
@@ -87,7 +88,7 @@ export default function CardGrid({ cards }: CardGridProps) {
                 <span className="text-xs text-gray-400">#{card.number}</span>
               </div>
               
-              <div className="mt-1 flex flex-wrap items-center justify-between">
+              <div className="mt-2 flex flex-wrap items-center justify-between">
                 {/* Price indicator */}
                 {card.cardmarket?.prices?.trendPrice && (
                   <span 
