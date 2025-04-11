@@ -7,7 +7,6 @@ import {
   fetchCardsBySet, 
   fetchSetDetails, 
   searchCardsByType,
-
 } from "@/app/lib/api/pokemon";
 import { PokemonCard, PokemonSet } from "@/app/lib/api/types";
 import { sortCards } from "@/app/lib/sortUtils";
@@ -17,8 +16,10 @@ import SetSearchbar from "@/app/components/SetSearchbar";
 import HeaderToggleButton from "@/app/components/HeaderToggleButton";
 import ToTopButton from "@/app/components/ToTopButton"; 
 import CardFilters from "@/app/components/CardFilters";
+import { useLanguage } from "@/context/LanguageContext";
 
 function PokeDexContent() {
+  const { t } = useLanguage();
   const searchParams = useSearchParams();
   const [headerVisible, setHeaderVisible] = useState(true);
   
@@ -201,14 +202,14 @@ function PokeDexContent() {
       <div className="text-center py-12">
         <p className="text-lg text-gray-300">
           {isPokemonSearch 
-            ? `No cards found for "${pokemonSearchTerm}".`
+            ? `${t("search.noResults")} "${pokemonSearchTerm}".`
             : isGlobalSearch 
-              ? `No cards found for "${globalSearchTerm}".`
+              ? `${t("search.noResults")} "${globalSearchTerm}".`
               : selectedType !== "All Types"
-                ? `No ${selectedType} type cards found${searchTerm ? ` matching "${searchTerm}"` : ""} in this set.`
+                ? `${t("search.noResults")} ${selectedType} ${t("search.typeCards")}${searchTerm ? ` ${t("search.for")} "${searchTerm}"` : ""}.`
                 : searchTerm 
-                  ? `No cards found for "${searchTerm}" in this set.` 
-                  : "No cards found in this set."}
+                  ? `${t("search.noResults")} ${t("search.for")} "${searchTerm}".` 
+                  : t("search.noResults")}
         </p>
         {(isPokemonSearch || isGlobalSearch || searchTerm || selectedType !== "All Types") && (
           <button 
@@ -224,10 +225,10 @@ function PokeDexContent() {
             className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors"
           >
             {isPokemonSearch || isGlobalSearch 
-              ? "Back" 
+              ? t("app.backToHome") 
               : selectedType !== "All Types" 
                 ? "Show All Types" 
-                : "Delete searchterm"}
+                : t("search.clear")}
           </button>
         )}
       </div>
@@ -238,7 +239,7 @@ function PokeDexContent() {
     if (loading && !loadingMore) {
       return (
         <div className="flex justify-center items-center h-64">
-          <p className="text-lg text-gray-300">Cards are loading</p>
+          <p className="text-lg text-gray-300">{t("misc.cardsAreLoading")}</p>
         </div>
       );
     }
@@ -246,7 +247,7 @@ function PokeDexContent() {
     if (isSearching) {
       return (
         <div className="flex justify-center items-center h-64">
-          <p className="text-lg text-gray-300">Searching for cards</p>
+          <p className="text-lg text-gray-300">{t("misc.searchingForCards")}</p>
         </div>
       );
     }
@@ -257,7 +258,7 @@ function PokeDexContent() {
   if (!setId && !isGlobalSearch && !isPokemonSearch) {
     return (
       <div className="flex justify-center items-center h-64">
-        <p className="text-lg text-gray-300 px-4 text-center">No set selected, select a set to search for a specific card.</p>
+        <p className="text-lg text-gray-300 px-4 text-center">{t("misc.noSetSelected")}</p>
       </div>
     );
   }
@@ -281,11 +282,11 @@ function PokeDexContent() {
 
         {isPokemonSearch ? (
           <h1 className="text-xl sm:text-2xl font-bold mb-2 sm:mb-4 text-white px-2">
-            Searchresults for &quot;{pokemonSearchTerm}&quot;
+            {t("search.resultsFor")} &quot;{pokemonSearchTerm}&quot;
           </h1>
         ) : isGlobalSearch ? (
           <h1 className="text-xl sm:text-2xl font-bold mb-2 sm:mb-4 text-white px-2">
-            Searchresults for &quot;{globalSearchTerm}&quot;
+            {t("search.resultsFor")} &quot;{globalSearchTerm}&quot;
           </h1>
         ) : null}
         
@@ -296,7 +297,7 @@ function PokeDexContent() {
                 <SetSearchbar 
                   onSearch={handleSearch} 
                   value={searchTerm}
-                  placeholder="Search for a card in this set..." 
+                  placeholder={t("search.set.placeholder")}
                   isLoading={isSearching || loading}
                 />
               </div>
@@ -324,14 +325,14 @@ function PokeDexContent() {
           ) : (
             <div className="px-2">
               <p className="mb-2 sm:mb-4 text-sm sm:text-base text-gray-400">
-                {displayedCards.length} {displayedCards.length === 1 ? "card" : "cards"} found
-                {selectedType !== "All Types" && ` (${selectedType} type)`}
+                {displayedCards.length} {displayedCards.length === 1 ? t("set.cards").slice(0, -1) : t("set.cards")} {t("search.found")}
+                {selectedType !== "All Types" && ` (${selectedType} ${t("filter.type").toLowerCase()})`}
                 {isPokemonSearch 
-                  ? ` for "${pokemonSearchTerm}"`
+                  ? ` ${t("search.for")} "${pokemonSearchTerm}"`
                   : isGlobalSearch 
-                    ? ` for "${globalSearchTerm}"` 
-                    : searchTerm && ` for "${searchTerm}"`}
-                {totalResults > displayedCards.length && selectedType === "All Types" && ` (${displayedCards.length} loaded)`}
+                    ? ` ${t("search.for")} "${globalSearchTerm}"` 
+                    : searchTerm && ` ${t("search.for")} "${searchTerm}"`}
+                {totalResults > displayedCards.length && selectedType === "All Types" && ` (${displayedCards.length} ${t("search.loaded")})`}
               </p>
               
               <CardGrid cards={displayedCards} />
@@ -344,8 +345,8 @@ function PokeDexContent() {
                   disabled={loadingMore}
                 >
                   {loadingMore 
-                    ? "Loading more cards..." 
-                    : `(${displayedCards.length} of ${totalResults})`}
+                    ? t("search.loadingMore")
+                    : `(${displayedCards.length} ${t("search.of")} ${totalResults})`}
                 </button>
               )}
               
@@ -353,8 +354,8 @@ function PokeDexContent() {
                (selectedType !== "All Types" && displayedCards.length > 0) ? (
                 <div className="text-center text-gray-500 mt-4 text-sm sm:text-base">
                   {selectedType !== "All Types" 
-                    ? `Showing all ${selectedType} type cards` 
-                    : "All cards are loaded"}
+                    ? `${t("search.showingAll")} ${selectedType} ${t("search.typeCards")}` 
+                    : t("search.allCardsLoaded")}
                 </div>
               ) : null}
             </div>

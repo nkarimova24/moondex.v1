@@ -3,6 +3,7 @@
 import { useState, useEffect, Suspense } from 'react';
 import { Search, X, Loader2 } from 'lucide-react';
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
+import { useLanguage } from '@/context/LanguageContext';
 
 interface GlobalSearchbarProps {
   isLoading?: boolean;
@@ -17,6 +18,7 @@ export default function GlobalSearchbar({ isLoading = false }: GlobalSearchbarPr
 }
 
 function InnerGlobalSearchbar({ isLoading }: GlobalSearchbarProps) {
+  const { t } = useLanguage();
   const [searchTerm, setSearchTerm] = useState('');
   const [isFocused, setIsFocused] = useState(false);
   const router = useRouter();
@@ -81,9 +83,9 @@ function InnerGlobalSearchbar({ isLoading }: GlobalSearchbarProps) {
                 onChange={(e) => setSearchTerm(e.target.value)}
                 onFocus={() => setIsFocused(true)}
                 onBlur={() => setIsFocused(false)}
-                placeholder="Search for any Pokémon card..."
+                placeholder={t("search.global.placeholder")}
                 className="py-2 px-3 flex-grow outline-none text-white bg-transparent placeholder-gray-500 text-sm"
-                aria-label="Search all cards"
+                aria-label={t("search.global.placeholder")}
                 disabled={isLoading}
                 style={{ caretColor: "#8A3F3F" }}
               />
@@ -93,7 +95,7 @@ function InnerGlobalSearchbar({ isLoading }: GlobalSearchbarProps) {
                   onClick={handleClear}
                   type="button"
                   className="p-2 text-gray-400 hover:text-white transition-colors"
-                  aria-label="Clear search"
+                  aria-label={t("search.clear")}
                   disabled={isLoading}
                   style={{ 
                     backgroundColor: isLoading ? "transparent" : "rgba(0, 0, 0, 0.1)"
@@ -107,7 +109,7 @@ function InnerGlobalSearchbar({ isLoading }: GlobalSearchbarProps) {
                 type="submit"
                 className="py-2 px-4 transition-colors"
                 disabled={isLoading || !searchTerm.trim()}
-                aria-label="Search"
+                aria-label={t("search.button")}
                 style={{ 
                   backgroundColor: "#8A3F3F",
                   color: "white",
@@ -115,7 +117,7 @@ function InnerGlobalSearchbar({ isLoading }: GlobalSearchbarProps) {
                   cursor: (isLoading || !searchTerm.trim()) ? "not-allowed" : "pointer",
                 }}
               >
-                Search
+                {t("search.button")}
               </button>
             </div>
             

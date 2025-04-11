@@ -1,6 +1,7 @@
 "use client";
 
 import { ChevronDown, ChevronUp } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface HeaderToggleButtonProps {
   isVisible: boolean;
@@ -13,6 +14,8 @@ export default function HeaderToggleButton({
   onClick, 
   setName 
 }: HeaderToggleButtonProps) {
+  const { t } = useLanguage();
+
   return (
     <div className="w-full">
       <button
@@ -31,12 +34,14 @@ export default function HeaderToggleButton({
       >
         {isVisible ? (
           <div className="flex items-center text-gray-400 hover:text-white transition-colors">
-            <span className="text-xs mr-1">Hide</span>
+            <span className="text-xs mr-1">{t("set.hideDetails")}</span>
             <ChevronUp size={14} />
           </div>
         ) : (
           <div className="flex items-center" style={{ color: "#8A3F3F" }}>
-            <span className="text-xs mr-1">Show {setName ? `${setName} details` : ''}</span>
+            <span className="text-xs mr-1">
+              {setName ? `${t("set.showDetails")} ${setName}` : t("set.showDetails")}
+            </span>
             <ChevronDown size={14} />
           </div>
         )}

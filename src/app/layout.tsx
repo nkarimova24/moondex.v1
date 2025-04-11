@@ -6,6 +6,7 @@ import Sidebar from "@/app/components/Sidebar";
 import ThemeRegistry from "@/app/components/ThemeRegistry";
 import GlobalSearchbar from "@/app/components/GlobalSearchbar";
 import { AuthProvider } from "@/context/AuthContext";
+import { LanguageProvider } from "@/context/LanguageContext";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -50,23 +51,25 @@ export default function RootLayout({
       >
         <ThemeRegistry>
           <AuthProvider>
-            <Sidebar
-              isOpen={sidebarOpen}
-              onToggle={handleToggleSidebar}
-            />
-            
-            <div 
-              style={{ 
-                marginLeft: isMobile ? 0 : (sidebarOpen ? "240px" : "0px"),
-                transition: "margin 0.3s ease-in-out"
-              }}
-            >
-              <GlobalSearchbar />
+            <LanguageProvider>
+              <Sidebar
+                isOpen={sidebarOpen}
+                onToggle={handleToggleSidebar}
+              />
+              
+              <div 
+                style={{ 
+                  marginLeft: isMobile ? 0 : (sidebarOpen ? "240px" : "0px"),
+                  transition: "margin 0.3s ease-in-out"
+                }}
+              >
+                <GlobalSearchbar />
 
-              <main style={{ padding: "20px" }}>
-                {children}
-              </main>
-            </div>
+                <main style={{ padding: "20px" }}>
+                  {children}
+                </main>
+              </div>
+            </LanguageProvider>
           </AuthProvider>
         </ThemeRegistry>
       </body>

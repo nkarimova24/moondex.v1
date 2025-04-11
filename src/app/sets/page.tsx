@@ -8,8 +8,10 @@ import { PokemonSet } from "@/app/lib/api/types";
 import { formatDate } from "@/app/lib/utils";
 import { Search, ChevronDown, ChevronUp } from "lucide-react";
 import ToTopButton from "@/app/components/ToTopButton";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function SetsPage() {
+  const { t } = useLanguage();
   const [groupedSets, setGroupedSets] = useState<{ [key: string]: PokemonSet[] }>({});
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
@@ -103,9 +105,9 @@ export default function SetsPage() {
     <div className="container mx-auto px-4 py-8">
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-white mb-2">Pokémon TCG Sets</h1>
+        <h1 className="text-3xl font-bold text-white mb-2">{t("sets.title")}</h1>
         <p className="text-gray-400">
-          Browse all Pokémon Trading Card Game sets organized by series
+          {t("sets.description")}
         </p>
       </div>
 
@@ -116,7 +118,7 @@ export default function SetsPage() {
             type="text"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            placeholder="Search sets or series..."
+            placeholder={t("sets.search")}
             className="w-full py-2 px-4 pr-10 rounded-md bg-[#252525] border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#8A3F3F] focus:border-transparent"
           />
           <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500">
@@ -130,14 +132,14 @@ export default function SetsPage() {
             className="px-3 py-1.5 bg-[#2A2A2A] hover:bg-[#3A3A3A] text-white text-sm rounded-md flex items-center gap-1 transition-colors"
           >
             <ChevronDown size={16} />
-            <span>Expand All</span>
+            <span>{t("sets.expandAll")}</span>
           </button>
           <button
             onClick={collapseAll}
             className="px-3 py-1.5 bg-[#2A2A2A] hover:bg-[#3A3A3A] text-white text-sm rounded-md flex items-center gap-1 transition-colors"
           >
             <ChevronUp size={16} />
-            <span>Collapse All</span>
+            <span>{t("sets.collapseAll")}</span>
           </button>
         </div>
       </div>
@@ -146,11 +148,11 @@ export default function SetsPage() {
       <div className="mb-6 text-sm text-gray-400">
         {searchTerm ? (
           <p>
-            Showing {getVisibleSetsCount()} sets out of {getTotalSetsCount()} total
+            {t("sets.showing")} {getVisibleSetsCount()} {t("sets.setsOutOf")} {getTotalSetsCount()} {t("sets.total")}
           </p>
         ) : (
           <p>
-            {getTotalSetsCount()} sets across {Object.keys(groupedSets).length} series
+            {getTotalSetsCount()} {t("sets.totalSets")} {Object.keys(groupedSets).length} {t("sets.series")}
           </p>
         )}
       </div>
@@ -163,12 +165,12 @@ export default function SetsPage() {
         <div className="space-y-6">
           {filteredSeries.length === 0 ? (
             <div className="text-center py-16">
-              <p className="text-lg text-gray-300 mb-4">No matching sets found</p>
+              <p className="text-lg text-gray-300 mb-4">{t("sets.noMatchingSets")}</p>
               <button
                 onClick={() => setSearchTerm("")}
                 className="px-4 py-2 bg-[#8A3F3F] text-white rounded-md hover:bg-[#612B2B] transition-colors"
               >
-                Clear Search
+                {t("sets.clearSearch")}
               </button>
             </div>
           ) : (
@@ -218,7 +220,7 @@ export default function SetsPage() {
                                   className="max-h-full max-w-full object-contain"
                                 />
                               ) : (
-                                <div className="text-gray-500 text-center text-xs">No image</div>
+                                <div className="text-gray-500 text-center text-xs">{t("misc.noImage")}</div>
                               )}
                               {set.images?.symbol && (
                                 <div className="absolute right-2 bottom-2 w-8 h-8 rounded-full bg-[#1A1A1A] p-1 flex items-center justify-center">

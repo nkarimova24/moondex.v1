@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Search, X, Loader2 } from 'lucide-react';
+import { useLanguage } from '@/context/LanguageContext';
 
 interface SetSearchbarProps {
   onSearch: (searchTerm: string) => void;
@@ -13,9 +14,10 @@ interface SetSearchbarProps {
 export default function SetSearchbar({ 
   onSearch, 
   value, 
-  placeholder = "Search for cards in this set...", 
+  placeholder, 
   isLoading = false 
 }: SetSearchbarProps) {
+  const { t } = useLanguage();
   const [localSearchTerm, setLocalSearchTerm] = useState(value);
   const [isFocused, setIsFocused] = useState(false);
   
@@ -41,6 +43,8 @@ export default function SetSearchbar({
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLocalSearchTerm(e.target.value);
   };
+  
+  const searchPlaceholder = placeholder || t("search.set.placeholder");
   
   return (
     <div className="w-full max-w-md">
@@ -70,9 +74,9 @@ export default function SetSearchbar({
           onChange={handleChange}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
-          placeholder={placeholder}
+          placeholder={searchPlaceholder}
           className="py-2.5 px-3 flex-grow outline-none text-white bg-transparent placeholder-gray-500 text-sm"
-          aria-label="Search cards"
+          aria-label={t("search.set.placeholder")}
           disabled={isLoading}
           style={{ caretColor: "#8A3F3F" }}
         />
@@ -81,7 +85,7 @@ export default function SetSearchbar({
           <button 
             onClick={handleClear}
             className="p-2 text-gray-400 hover:text-white transition-colors"
-            aria-label="Clear search"
+            aria-label={t("search.clear")}
             disabled={isLoading}
             style={{ 
               backgroundColor: isLoading ? "transparent" : "rgba(0, 0, 0, 0.1)"
@@ -94,7 +98,7 @@ export default function SetSearchbar({
         <button 
           onClick={() => onSearch(localSearchTerm)}
           className="py-2.5 px-4 transition-colors"
-          aria-label="Search"
+          aria-label={t("search.button")}
           disabled={isLoading}
           style={{ 
             backgroundColor: "#8A3F3F",
@@ -103,7 +107,7 @@ export default function SetSearchbar({
             cursor: isLoading ? "not-allowed" : "pointer",
           }}
         >
-          Search
+          {t("search.button")}
         </button>
       </div>
     </div>

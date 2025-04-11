@@ -21,12 +21,13 @@ import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
-// import LoginIcon from "@mui/icons-material/Login";
-// import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import LogoutIcon from "@mui/icons-material/Logout";
+import HistoryIcon from "@mui/icons-material/History";
 import { fetchPokemonSets } from "@/app/lib/api/pokemon";
 import { PokemonSet } from "@/app/lib/api/types";
 import { useAuth } from "@/context/AuthContext";
+import { useLanguage } from "@/context/LanguageContext";
+import LanguageToggle from "./LanguageToggle";
 
 interface SidebarProps {
   isOpen?: boolean;
@@ -34,6 +35,7 @@ interface SidebarProps {
 }
 
 export default function Sidebar({ isOpen: propIsOpen, onToggle }: SidebarProps) {
+  const { t } = useLanguage();
   const [sets, setSets] = useState<{ [key: string]: PokemonSet[] }>({});
   const [loading, setLoading] = useState(true);
   const [expandedMain, setExpandedMain] = useState(false);
@@ -273,7 +275,7 @@ export default function Sidebar({ isOpen: propIsOpen, onToggle }: SidebarProps) 
               }
             }}
           >
-            MOONDEX
+            {t("app.name")}
           </Typography>
         </Box>
         
@@ -333,7 +335,7 @@ export default function Sidebar({ isOpen: propIsOpen, onToggle }: SidebarProps) 
               onClick={isMobile ? handleDrawerToggle : undefined}
             >
               <ListItemText 
-                primary="Home" 
+                primary={t("nav.home")}
                 primaryTypographyProps={{ 
                   fontWeight: 500,
                   fontSize: "15px",
@@ -365,7 +367,7 @@ export default function Sidebar({ isOpen: propIsOpen, onToggle }: SidebarProps) 
               onClick={isMobile ? handleDrawerToggle : undefined}
             >
               <ListItemText 
-                primary="All Sets" 
+                primary={t("nav.allSets")}
                 primaryTypographyProps={{ 
                   fontWeight: 500,
                   fontSize: "15px",
@@ -379,6 +381,8 @@ export default function Sidebar({ isOpen: propIsOpen, onToggle }: SidebarProps) 
               />
             </ListItemButton>
           </ListItem>
+
+        
 
           <Divider sx={{ my: 1, opacity: 0.1 }} />
 
@@ -394,7 +398,7 @@ export default function Sidebar({ isOpen: propIsOpen, onToggle }: SidebarProps) 
               }}
             >
               <ListItemText 
-                primary="Browse by Series" 
+                primary={t("nav.browseBySeries")} 
                 primaryTypographyProps={{ 
                   fontWeight: 600,
                   fontSize: "15px",
@@ -562,6 +566,54 @@ export default function Sidebar({ isOpen: propIsOpen, onToggle }: SidebarProps) 
         </List>
       </Box>
       
+        {/* Changelog Link - Added Here */}
+        <ListItem disablePadding>
+            <ListItemButton 
+              component={Link} 
+              href="/changelog"
+              sx={{ 
+                padding: "12px 20px",
+                transition: 'all 0.2s ease',
+                "&:hover": {
+                  backgroundColor: "rgba(138, 63, 63, 0.15)",
+                  paddingLeft: '24px',
+                  borderLeft: '4px solid #8A3F3F',
+                },
+                borderLeft: '4px solid transparent',
+              }}
+              onClick={isMobile ? handleDrawerToggle : undefined}
+            >
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                <HistoryIcon fontSize="small" sx={{ color: 'rgba(138, 63, 63, 0.9)' }} />
+                <ListItemText 
+                  primary={t("nav.changelog")}
+                  primaryTypographyProps={{ 
+                    fontWeight: 500,
+                    fontSize: "15px",
+                    color: 'rgba(255,255,255,0.9)',
+                    sx: {
+                      '&:hover': {
+                        color: 'rgba(255,255,255,0.95)',
+                      }
+                    }
+                  }} 
+                />
+              </Box>
+            </ListItemButton>
+          </ListItem>
+          
+          {/* Language toggle */}
+          <ListItem disablePadding>
+            <ListItemButton
+              sx={{ 
+                padding: "12px 20px",
+                transition: 'all 0.2s ease',
+              }}
+            >
+              <LanguageToggle className="w-full" />
+            </ListItemButton>
+          </ListItem>
+          
       {/* Authentication Buttons */}
       {authButtons}
       
@@ -579,7 +631,7 @@ export default function Sidebar({ isOpen: propIsOpen, onToggle }: SidebarProps) 
           fontSize: "11px",
           letterSpacing: '0.5px',
         }}>
-          © 2025 MOONDEX
+          © 2025 {t("app.name")}
         </Typography>
       </Box>
     </>

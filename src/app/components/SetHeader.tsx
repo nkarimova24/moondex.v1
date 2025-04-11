@@ -6,12 +6,14 @@ import { PokemonSet} from "@/app/lib/api/types";
 import { formatDate } from "@/app/lib/utils";
 import { CircularProgress } from "@mui/material";
 import Image from "next/image";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface SetHeaderProps {
   setInfo: PokemonSet;
 }
 
 export default function SetHeader({ setInfo }: SetHeaderProps) {
+  const { t } = useLanguage();
   const [totalValue, setTotalValue] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -63,7 +65,6 @@ export default function SetHeader({ setInfo }: SetHeaderProps) {
         borderBottom: "1px solid #333",
         marginTop: "-25px",
         borderTop: "none",
-
       }}
     >
       <div className="flex flex-col md:flex-row items-center gap-4">
@@ -91,14 +92,14 @@ export default function SetHeader({ setInfo }: SetHeaderProps) {
           <div className="flex flex-wrap items-center gap-x-2 text-sm text-gray-400">
             <span>{setInfo.series}</span>
             <span>•</span>
-            <span>Released {formatDate(setInfo.releaseDate)}</span>
+            <span>{`${t("misc.updatedAt")} ${formatDate(setInfo.releaseDate)}`}</span>
           </div>
         </div>
 
         {/* Stats */}
         <div className="flex gap-4 mt-2 md:mt-0">
           <div className="text-center px-3">
-            <span className="block text-sm text-gray-400">Cards</span>
+            <span className="block text-sm text-gray-400">{t("set.cards")}</span>
             <span className="text-xl font-bold text-white">{setInfo.total}</span>
           </div>
 
@@ -106,7 +107,7 @@ export default function SetHeader({ setInfo }: SetHeaderProps) {
             className="text-center px-3"
             style={{ borderLeft: "1px solid #333" }}
           >
-            <span className="block text-sm text-gray-400">Value</span>
+            <span className="block text-sm text-gray-400">{t("set.value")}</span>
             {loading ? (
               <div className="flex justify-center py-1">
                 <CircularProgress
@@ -120,7 +121,7 @@ export default function SetHeader({ setInfo }: SetHeaderProps) {
                 ${totalValue.toFixed(2)}
               </span>
             ) : (
-              <span className="text-xl font-bold text-gray-500">N/A</span>
+              <span className="text-xl font-bold text-gray-500">{t("misc.na")}</span>
             )}
           </div>
         </div>
