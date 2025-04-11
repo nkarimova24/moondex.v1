@@ -8,12 +8,14 @@ import Image from "next/image";
 
 interface CardGridProps {
   cards: PokemonCard[];
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   isSidebarOpen?: boolean; 
 }
 
-export default function CardGrid({ cards, isSidebarOpen = false }: CardGridProps) {
+export default function CardGrid({ cards }: CardGridProps) {
   const [selectedCard, setSelectedCard] = useState<PokemonCard | null>(null);
   const [loadedImages, setLoadedImages] = useState<Record<string, boolean>>({});
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isMobile, setIsMobile] = useState(false);
   
   useEffect(() => {
