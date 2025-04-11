@@ -7,8 +7,10 @@ import { fetchPokemonSets } from "@/app/lib/api/pokemon";
 import { PokemonSet } from "@/app/lib/api/types";
 import { useRouter } from "next/navigation";
 import { Search } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Home() {
+  const { t } = useLanguage();
   const [recentSets, setRecentSets] = useState<PokemonSet[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(true);
@@ -60,10 +62,10 @@ export default function Home() {
         
         <div className="relative max-w-3xl mx-auto">
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
-            Welcome to Moondex
+            {t("app.name")}
           </h1>
           <p className="text-lg sm:text-xl text-white/80 mb-8">
-            Your ultimate Pokémon TCG collection tracker and card database
+            {t("app.tagline")}
           </p>
           
           <form onSubmit={handleSearch} className="max-w-lg mx-auto">
@@ -72,7 +74,7 @@ export default function Home() {
                 type="text"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                placeholder="Search for any Pokémon card..."
+                placeholder={t("search.global.placeholder")}
                 className="w-full py-3 px-5 pr-12 rounded-full bg-white/10 border border-white/30 text-white placeholder-white/60 shadow-lg focus:outline-none focus:ring-2 focus:ring-white/50"
                 style={{ backdropFilter: "blur(5px)" }}
               />
@@ -84,6 +86,8 @@ export default function Home() {
               </button>
             </div>
           </form>
+          
+       
         </div>
       </section>
 
@@ -91,7 +95,7 @@ export default function Home() {
       <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-2xl sm:text-3xl font-bold text-white text-center mb-12">
-            Explore the World of Moondex
+            {t("home.explore")}
           </h2>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -103,9 +107,9 @@ export default function Home() {
                   <path d="m21 21-4.3-4.3"></path>
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-white mb-2">Search Cards</h3>
+              <h3 className="text-xl font-semibold text-white mb-2">{t("home.feature1.title")}</h3>
               <p className="text-gray-400">
-                Find any Pokémon card by name, type, or set. Our comprehensive database makes it easy to discover cards.
+                {t("home.feature1.description")}
               </p>
             </div>
             
@@ -118,9 +122,9 @@ export default function Home() {
                   <path d="M3 18h18"></path>
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-white mb-2">Browse Sets</h3>
+              <h3 className="text-xl font-semibold text-white mb-2">{t("home.feature2.title")}</h3>
               <p className="text-gray-400">
-                Explore complete Pokémon card sets from every generation, organized by series and release date.
+                {t("home.feature2.description")}
               </p>
             </div>
             
@@ -131,9 +135,9 @@ export default function Home() {
                   <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-white mb-2">Track Collection</h3>
+              <h3 className="text-xl font-semibold text-white mb-2">{t("home.feature3.title")}</h3>
               <p className="text-gray-400">
-                Coming soon: Track your Pokémon card collection, manage your wishlist, and keep track of card values.
+                {t("home.feature3.description")}
               </p>
             </div>
           </div>
@@ -144,12 +148,12 @@ export default function Home() {
       <section className="py-12 px-4 sm:px-6 lg:px-8 bg-[#1E1E1E] rounded-lg mx-4 my-8">
         <div className="max-w-6xl mx-auto">
           <div className="flex justify-between items-center mb-8">
-            <h2 className="text-2xl font-bold text-white">Latest Sets</h2>
+            <h2 className="text-2xl font-bold text-white">{t("home.latestSets")}</h2>
             <Link 
               href="/sets" 
               className="text-[#8A3F3F] hover:text-[#612B2B] transition-colors"
             >
-              View all sets →
+              {t("home.viewAllSets")} →
             </Link>
           </div>
           
@@ -175,14 +179,14 @@ export default function Home() {
                         className="max-h-full max-w-full object-contain"
                       />
                     ) : (
-                      <div className="text-gray-500 text-center">No image</div>
+                      <div className="text-gray-500 text-center">{t("misc.noImage")}</div>
                     )}
                   </div>
                   <div className="p-4">
                     <h3 className="text-white font-medium text-lg truncate">{set.name}</h3>
                     <p className="text-gray-400 text-sm">{set.releaseDate}</p>
                     <div className="mt-2 text-xs font-medium px-2 py-1 bg-[#8A3F3F]/20 text-[#8A3F3F] rounded-full inline-block">
-                      {set.total} cards
+                      {set.total} {t("set.cards")}
                     </div>
                   </div>
                 </Link>
@@ -195,22 +199,22 @@ export default function Home() {
       {/* Call to Action */}
       <section className="py-16 px-4 text-center">
         <div className="max-w-3xl mx-auto">
-          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">Ready to start your collection?</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">{t("home.cta.title")}</h2>
           <p className="text-gray-400 mb-8">
-            Moondex makes it easy to find, organize, and track your Pokémon card collection.
+            {t("home.cta.description")}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link 
-              href="#" //to add in the future
+              href="#" 
               className="px-6 py-3 bg-[#8A3F3F] text-white font-medium rounded-lg hover:bg-[#612B2B] transition-colors"
             >
-              Sign In
+              {t("home.cta.signIn")}
             </Link>
             <Link 
-              href="#" //to add in the future
+              href="#" 
               className="px-6 py-3 bg-transparent border border-[#8A3F3F] text-[#8A3F3F] font-medium rounded-lg hover:bg-[#8A3F3F]/10 transition-colors"
             >
-              Create Account
+              {t("home.cta.createAccount")}
             </Link>
           </div>
         </div>

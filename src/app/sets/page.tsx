@@ -25,7 +25,6 @@ export default function SetsPage() {
         const sets = await fetchPokemonSets();
         setGroupedSets(sets);
         
-        // Initialize with all series expanded
         const seriesNames = Object.keys(sets);
         setExpandedSeries(seriesNames);
         setFilteredSeries(seriesNames);
@@ -47,10 +46,8 @@ export default function SetsPage() {
 
     const lowerSearchTerm = searchTerm.toLowerCase().trim();
     const filtered = Object.keys(groupedSets).filter(series => {
-      // Check if series name matches
       if (series.toLowerCase().includes(lowerSearchTerm)) return true;
       
-      // Check if any set in the series matches
       return groupedSets[series].some(set => 
         set.name.toLowerCase().includes(lowerSearchTerm)
       );
@@ -58,7 +55,6 @@ export default function SetsPage() {
     
     setFilteredSeries(filtered);
     
-    // Auto-expand any series that matches the search
     setExpandedSeries(prev => {
       const newExpanded = [...prev];
       filtered.forEach(series => {
@@ -86,7 +82,6 @@ export default function SetsPage() {
     setExpandedSeries([]);
   };
 
-  // Function to count total sets
   const getTotalSetsCount = () => {
     return Object.values(groupedSets).reduce(
       (total, sets) => total + sets.length, 
@@ -94,7 +89,6 @@ export default function SetsPage() {
     );
   };
 
-  // Function to get visible sets count based on search/filter
   const getVisibleSetsCount = () => {
     return filteredSeries.reduce((total, series) => {
       return total + groupedSets[series].length;
@@ -176,7 +170,7 @@ export default function SetsPage() {
           ) : (
             filteredSeries.map((series) => (
               <div key={series} className="rounded-lg overflow-hidden bg-[#1E1E1E] shadow-lg">
-                {/* Series Header */}
+                {/* Series Header  */}
                 <button
                   onClick={() => toggleSeries(series)}
                   className="w-full px-6 py-4 flex justify-between items-center transition-colors hover:bg-[#2A2A2A]"
@@ -185,9 +179,11 @@ export default function SetsPage() {
                     borderLeft: "4px solid #8A3F3F"
                   }}
                 >
-                  <div>
+                  <div className="flex flex-col">
                     <h2 className="text-xl font-bold text-white">{series}</h2>
-                    <p className="text-gray-400 text-sm">{groupedSets[series].length} sets</p>
+                    <div className="flex items-center">
+                      <span className="text-gray-400 text-sm">{groupedSets[series].length} sets</span>
+                    </div>
                   </div>
                   {expandedSeries.includes(series) ? (
                     <ChevronUp className="text-[#8A3F3F]" size={24} />

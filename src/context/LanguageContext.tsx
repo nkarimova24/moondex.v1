@@ -28,6 +28,21 @@ const translations: Record<Language, Record<string, string>> = {
     "nav.changelog": "Changelog",
     "nav.browseBySeries": "Browse by Series",
     
+    // Home page
+    "home.explore": "Explore the World of Moondex",
+    "home.feature1.title": "Search Cards",
+    "home.feature1.description": "Find any Pokémon card by name, type, or set. Our comprehensive database makes it easy to discover cards.",
+    "home.feature2.title": "Browse Sets",
+    "home.feature2.description": "Explore complete Pokémon card sets from every generation, organized by series and release date.",
+    "home.feature3.title": "Track Collection",
+    "home.feature3.description": "Coming soon: Track your Pokémon card collection, manage your wishlist, and keep track of card values.",
+    "home.latestSets": "Latest Sets",
+    "home.viewAllSets": "View all sets",
+    "home.cta.title": "Ready to start your collection?",
+    "home.cta.description": "Moondex makes it easy to find, organize, and track your Pokémon card collection.",
+    "home.cta.signIn": "Sign In",
+    "home.cta.createAccount": "Create Account",
+    
     // Changelog
     "changelog.title": "Changelog",
     "changelog.description": "Find all updates and planned features for Moondex here.",
@@ -42,13 +57,15 @@ const translations: Record<Language, Record<string, string>> = {
     "changelog.sendFeedback": "Send Feedback",
     
     // Changelog data
+    "changelog.entry.2.title": "Update",
+    "changelog.entry.2.added.0": "Language switcher for English and Dutch",
+    
     "changelog.entry.0.title": "First Release",
     "changelog.entry.0.added.0": "Search for Pokémon cards by name and number",
     "changelog.entry.0.added.1": "View all sets and their cards",
     "changelog.entry.0.added.2": "Detailed card information such as market prices, types, and rarities",
     "changelog.entry.0.added.3": "Sort and filter cards per set",
     "changelog.entry.0.added.4": "Mobile and desktop-friendly interface",
-    "changelog.entry.0.added.5": "Language switcher for English and Dutch",
     
     "changelog.entry.0.upcoming.0": "Card prices and patterns for Prismatic Evolution set (coming soon)",
     "changelog.entry.0.upcoming.1": "Registration and login system for users",
@@ -143,8 +160,23 @@ const translations: Record<Language, Record<string, string>> = {
     "nav.changelog": "Wijzigingen",
     "nav.browseBySeries": "Bladeren per Serie",
     
+    // Home page
+    "home.explore": "Ontdek de Wereld van Moondex",
+    "home.feature1.title": "Zoek Kaarten",
+    "home.feature1.description": "Vind elke Pokémon kaart op naam, type of set. Onze uitgebreide database maakt het gemakkelijk om kaarten te ontdekken.",
+    "home.feature2.title": "Blader door Sets",
+    "home.feature2.description": "Verken complete Pokémon kaartsets van elke generatie, georganiseerd per serie en releasedatum.",
+    "home.feature3.title": "Beheer Collectie",
+    "home.feature3.description": "Binnenkort beschikbaar: Houd je Pokémon kaartencollectie bij, beheer je wishlist en houd kaartwaarden in de gaten.",
+    "home.latestSets": "Nieuwste Sets",
+    "home.viewAllSets": "Bekijk alle sets",
+    "home.cta.title": "Klaar om je collectie te starten?",
+    "home.cta.description": "Moondex maakt het eenvoudig om je Pokémon kaarten te vinden, te organiseren en bij te houden.",
+    "home.cta.signIn": "Inloggen",
+    "home.cta.createAccount": "Account Aanmaken",
+    
     // Changelog
-    "changelog.title": "Logboek",
+    "changelog.title": "Wijzigingslogboek",
     "changelog.description": "Hier vind je een overzicht van alle updates en geplande functies voor Moondex.",
     "changelog.legend": "Legenda",
     "changelog.added": "Toegevoegd",
@@ -157,15 +189,15 @@ const translations: Record<Language, Record<string, string>> = {
     "changelog.sendFeedback": "Stuur Feedback",
     
     // Changelog data
+    "changelog.entry.2.title": "Update",
+    "changelog.entry.2.added.0": "Taalschakelaar voor Engels en Nederlands",
+    
     "changelog.entry.0.title": "Eerste release",
     "changelog.entry.0.added.0": "Zoeken naar Pokémon kaarten op naam en nummer",
     "changelog.entry.0.added.1": "Bekijken van alle sets en hun kaarten",
     "changelog.entry.0.added.2": "Uitgebreide kaartdetails zoals marktprijzen, typen en rarities",
     "changelog.entry.0.added.3": "Sorteren en filteren van kaarten per set",
     "changelog.entry.0.added.4": "Mobiele en desktop-vriendelijke interface",
-
-    "changelog.entry.2.title": "Update",
-    "changelog.entry.2.added.0": "Wissel van taal tussen Engels en Nederlands",
     
     "changelog.entry.0.upcoming.0": "Kaartprijzen en patterns voor Prismatic Evolution set (binnenkort beschikbaar)",
     "changelog.entry.0.upcoming.1": "Registratie- en inlogsysteem voor gebruikers",
