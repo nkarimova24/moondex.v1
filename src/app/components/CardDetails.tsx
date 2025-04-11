@@ -74,13 +74,6 @@ export default function CardDetails({ card, allCards, onClose, onNavigate }: Car
     return `$${price.toFixed(2)}`;
   };
 
-  // const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
-  //   if (e.target === e.currentTarget) {
-  //     onClose();
-  //   }
-  // };
-
-
   const getTypeColor = (type?: string) => {
     if (!type) return "#8A3F3F";
     
@@ -142,7 +135,7 @@ export default function CardDetails({ card, allCards, onClose, onNavigate }: Car
       style={{ left: isMobile ? 0 : '240px' }}
     >
       <div 
-        className="relative w-full max-w-4xl rounded-lg shadow-2xl overflow-hidden"
+        className="relative w-full max-w-5xl rounded-lg shadow-2xl overflow-hidden"
         style={{ 
           background: "linear-gradient(to bottom, #2D2D2D, #1A1A1A)",
           maxHeight: "90vh" 
@@ -189,14 +182,18 @@ export default function CardDetails({ card, allCards, onClose, onNavigate }: Car
               background: `radial-gradient(circle, ${primaryTypeColor}30 0%, #1A1A1A 100%)`,
             }}
           >
-            <div className="relative">
+            <div className="relative flex items-center justify-center">
               <Image
                 src={card.images.large || card.images.small}
                 alt={card.name}
-                width={400}
-                height={560}
-                className="max-h-[30vh] sm:max-h-[40vh] md:max-h-[55vh] object-contain drop-shadow-xl transform transition-transform duration-300 hover:scale-105"
+                width={500}
+                height={700}
+                className="max-h-[30vh] sm:max-h-[45vh] md:max-h-[65vh] object-contain drop-shadow-xl transform transition-transform duration-300 hover:scale-105"
                 priority
+                style={{ 
+                  width: 'auto', 
+                  maxWidth: isMobile ? '100%' : '500px' 
+                }}
               />
             </div>
           </div>
