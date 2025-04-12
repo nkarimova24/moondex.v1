@@ -1,580 +1,415 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useCollection } from "@/context/CollectionContext";
 import { useAuth } from "@/context/AuthContext";
-import Link from "next/link";
-import { 
-  Box, 
-  Typography, 
-  Button, 
-  Card, 
-  CardContent, 
-  Grid, 
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  TextField,
-  CircularProgress,
-  IconButton,
-  Tooltip,
-  Divider,
-  Alert
-} from "@mui/material";
-import AddIcon from '@mui/icons-material/Add';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
-import CollectionIcon from '@mui/icons-material/Collections';
 import { useRouter } from "next/navigation";
+import Image from "next/image";
+import Link from "next/link";
+import { Filter, Trash2, Check, X } from "lucide-react";
+import { getCardPrice } from "@/app/lib/sortUtils";
+import { PokemonCard } from "@/app/lib/api/types";
 
-export default function CollectionsPage() {
-  const { collections, loading, error, createCollection, updateCollection, deleteCollection } = useCollection();
+export default function CollectionPage() {
+  const { collections, loading, createCollection, removeCardFromCollection } = useCollection();
   const { isAuthenticated, user } = useAuth();
   const router = useRouter();
   
-  // Dialog states
-  const [openNewDialog, setOpenNewDialog] = useState(false);
-  const [openEditDialog, setOpenEditDialog] = useState(false);
-  const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
-  const [selectedCollection, setSelectedCollection] = useState<number | null>(null);
+  const [defaultCollection, setDefaultCollection] = useState<any>(null);
+  const [pokemonCards, setPokemonCards] = useState<{[key: string]: PokemonCard}>({});
+  const [showFilterMenu, setShowFilterMenu] = useState(false);
+  const [filter, setFilter] = useState<string | null>(null); // 'normal', 'holo', 'reverse_holo'
+  const [loadingCards, setLoadingCards] = useState(true);
+  const [createNewCollectionModal, setCreateNewCollectionModal] = useState(false);
+  const [newCollectionName, setNewCollectionName] = useState("");
+  const [isCreating, setIsCreating] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   
-  // Form states
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
-  const [formError, setFormError] = useState('');
-  const [formLoading, setFormLoading] = useState(false);
-
-  // Get selected collection details
-  const getSelectedCollection = () => {
-    if (selectedCollection === null) return null;
-    return collections.find(c => c.id === selectedCollection) || null;
-  };
-
-  // Open edit dialog with pre-filled data
-  const handleOpenEditDialog = (id: number) => {
-    const collection = collections.find(c => c.id === id);
-    if (collection) {
-      setSelectedCollection(id);
-      setName(collection.name);
-      setDescription(collection.description || '');
-      setOpenEditDialog(true);
-    }
-  };
-
-  // Open delete dialog
-  const handleOpenDeleteDialog = (id: number) => {
-    setSelectedCollection(id);
-    setOpenDeleteDialog(true);
-  };
-
-  // Reset form after dialog close
-  const resetForm = () => {
-    setName('');
-    setDescription('');
-    setFormError('');
-    setSelectedCollection(null);
-  };
-
-  // Handle collection creation
-  const handleCreateCollection = async () => {
-    if (!name.trim()) {
-      setFormError('Collection name is required');
+  // Get or create the default collection
+  useEffect(() => {
+    if (!isAuthenticated) {
+      router.push("/signin");
       return;
     }
-
-    setFormLoading(true);
-    setFormError('');
-
-    try {
-      const result = await createCollection(name, description);
-      
-      if (result) {
-        resetForm();
-        setOpenNewDialog(false);
-      } else {
-        setFormError('Failed to create collection');
+    
+    const createDefaultCollection = async () => {
+      try {
+        setIsCreating(true);
+        // Create a default collection automatically without user input
+        const result = await createCollection("My Collection");
+        if (result) {
+          setDefaultCollection(result);
+        } else {
+          setError("Failed to create default collection");
+        }
+      } catch (err) {
+        console.error("Error creating default collection:", err);
+        setError("Failed to create default collection");
+      } finally {
+        setIsCreating(false);
       }
-    } catch (err) {
-      console.error('Error creating collection:', err);
-      setFormError('An unexpected error occurred');
-    } finally {
-      setFormLoading(false);
+    };
+    
+    if (collections.length > 0) {
+      // Use the first collection as the default
+      setDefaultCollection(collections[0]);
+    } else if (!loading) {
+      // Automatically create a default collection
+      createDefaultCollection();
     }
-  };
-
-  // Handle collection update
-  const handleUpdateCollection = async () => {
-    if (!name.trim() || selectedCollection === null) {
-      setFormError('Collection name is required');
-      return;
-    }
-
-    setFormLoading(true);
-    setFormError('');
-
-    try {
-      const result = await updateCollection(selectedCollection, name, description);
-      
-      if (result) {
-        resetForm();
-        setOpenEditDialog(false);
-      } else {
-        setFormError('Failed to update collection');
-      }
-    } catch (err) {
-      console.error('Error updating collection:', err);
-      setFormError('An unexpected error occurred');
-    } finally {
-      setFormLoading(false);
-    }
-  };
-
-  // Handle collection deletion
-  const handleDeleteCollection = async () => {
-    if (selectedCollection === null) return;
-
-    setFormLoading(true);
-
-    try {
-      const result = await deleteCollection(selectedCollection);
-      
-      if (result) {
-        setOpenDeleteDialog(false);
-        setSelectedCollection(null);
-      } else {
-        setFormError('Failed to delete collection');
-      }
-    } catch (err) {
-      console.error('Error deleting collection:', err);
-      setFormError('An unexpected error occurred');
-    } finally {
-      setFormLoading(false);
-    }
-  };
-
-  // View collection details
-  const handleViewCollection = (id: number) => {
-    router.push(`/collections/${id}`);
-  };
+  }, [isAuthenticated, collections, loading, router, createCollection]);
   
-  // Render UI
-  return (
-    <div className="container mx-auto px-4">
-      {/* Header */}
-      <Box sx={{ mb: 4, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <Typography variant="h4" component="h1" color="white" fontWeight="bold">
-          My Collections
-        </Typography>
+  // Fetch card details once we have a collection
+  useEffect(() => {
+    if (!defaultCollection) return;
+    
+    setLoadingCards(true);
+    
+    const fetchCardDetails = async () => {
+      try {
+        const cardIds = defaultCollection.cards.map((card: any) => card.card_id);
+        const uniqueCardIds = [...new Set(cardIds)];
         
-        {isAuthenticated && (
-          <Button 
-            variant="contained" 
-            startIcon={<AddIcon />}
-            onClick={() => setOpenNewDialog(true)}
-            sx={{ 
-              backgroundColor: "#8A3F3F",
-              "&:hover": { backgroundColor: "#6E2F2F" }
-            }}
-          >
-            New Collection
-          </Button>
-        )}
-      </Box>
+        if (uniqueCardIds.length === 0) {
+          setLoadingCards(false);
+          return;
+        }
+        
+        const cardDetails: {[key: string]: PokemonCard} = {};
+        
+        // In a real app, this would be better implemented as a batch API request
+        // or loading from your database directly
+        for (const cardId of uniqueCardIds) {
+          try {
+            const response = await fetch(`https://api.pokemontcg.io/v2/cards/${cardId}`);
+            if (!response.ok) {
+              console.warn(`Failed to fetch card ${cardId}:`, response.status);
+              continue;
+            }
+            const data = await response.json();
+            cardDetails[cardId] = data.data;
+          } catch (cardError) {
+            console.error(`Failed to fetch card ${cardId}:`, cardError);
+            // Continue with other cards even if one fails
+          }
+        }
+        
+        setPokemonCards(cardDetails);
+      } catch (err) {
+        console.error('Error fetching card details:', err);
+        setError('Failed to load card details');
+      } finally {
+        setLoadingCards(false);
+      }
+    };
+    
+    fetchCardDetails();
+  }, [defaultCollection]);
+  
+  const handleCreateCollection = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!newCollectionName.trim()) {
+      setError("Please enter a collection name");
+      return;
+    }
+    
+    setIsCreating(true);
+    setError(null);
+    
+    try {
+      const result = await createCollection(newCollectionName);
       
-      {/* Error message */}
+      if (result) {
+        setDefaultCollection(result);
+        setCreateNewCollectionModal(false);
+      } else {
+        setError("Failed to create collection");
+      }
+    } catch (err) {
+      console.error("Error creating collection:", err);
+      setError("An unexpected error occurred");
+    } finally {
+      setIsCreating(false);
+    }
+  };
+  
+  // Filter cards based on current filter
+  const filteredCards = !defaultCollection ? [] : filter 
+    ? defaultCollection.cards.filter((card: any) => {
+        if (filter === 'normal') return !card.is_foil && !card.is_reverse_holo;
+        if (filter === 'holo') return card.is_foil;
+        if (filter === 'reverse_holo') return card.is_reverse_holo;
+        return true;
+      })
+    : defaultCollection.cards;
+  
+  const toggleFilterMenu = () => {
+    setShowFilterMenu(!showFilterMenu);
+  };
+  
+  const handleFilterSelect = (filterType: string | null) => {
+    setFilter(filterType);
+    setShowFilterMenu(false);
+  };
+  
+  const getFoilLabel = (card: any) => {
+    if (card.is_reverse_holo) return 'Reverse Holo';
+    if (card.is_foil) return 'Holo';
+    return 'Normal';
+  };
+  
+  const getFoilColor = (card: any) => {
+    if (card.is_reverse_holo) return 'text-red-600 border-red-600';
+    if (card.is_foil) return 'text-blue-600 border-blue-600';
+    return 'text-green-600 border-green-600';
+  };
+  
+  const handleRemoveCard = async (cardId: number) => {
+    if (!defaultCollection) return;
+    
+    if (window.confirm('Are you sure you want to remove this card from your collection?')) {
+      try {
+        await removeCardFromCollection(defaultCollection.id, cardId);
+      } catch (err) {
+        console.error('Error removing card:', err);
+        setError('Failed to remove card from collection');
+      }
+    }
+  };
+  
+  if (loading) {
+    return (
+      <div className="container mx-auto px-4 py-8">
+        <div className="flex justify-center items-center h-64">
+          <div className="w-12 h-12 border-4 border-[#8A3F3F] border-t-transparent rounded-full animate-spin"></div>
+        </div>
+      </div>
+    );
+  }
+  
+  return (
+    <div className="container mx-auto px-4 py-8">
+      {/* Header */}
+      <div className="mb-8">
+        <h1 className="text-3xl font-bold text-white mb-2">My Collection</h1>
+        <p className="text-gray-400">
+          {isAuthenticated ? 
+            `Track and organize your Pokémon card collection.` : 
+            `Sign in to track your Pokémon card collection.`}
+        </p>
+      </div>
+      
       {error && (
-        <Alert severity="error" sx={{ mb: 4 }}>
+        <div className="mb-6 p-4 bg-red-900/20 border border-red-800 text-red-400 rounded-lg">
           {error}
-        </Alert>
+        </div>
       )}
       
-      {/* Loading state */}
-      {loading ? (
-        <Box sx={{ display: 'flex', justifyContent: 'center', my: 8 }}>
-          <CircularProgress sx={{ color: "#8A3F3F" }} />
-        </Box>
-      ) : (
-        <>
-          {/* Not authenticated message */}
-          {!isAuthenticated ? (
-            <Card sx={{ bgcolor: '#252525', color: 'white', p: 2, mb: 4 }}>
-              <CardContent>
-                <Typography variant="h6" gutterBottom>
-                  Sign in to track your collection
-                </Typography>
-                <Typography variant="body2" sx={{ mb: 2 }}>
-                  Create an account to keep track of your Pokémon card collection, organize your cards, and more!
-                </Typography>
-                <Box sx={{ mt: 2 }}>
-                  <Button 
-                    component={Link} 
-                    href="/signin" 
-                    variant="contained"
-                    sx={{ 
-                      mr: 2, 
-                      backgroundColor: "#8A3F3F",
-                      "&:hover": { backgroundColor: "#6E2F2F" }
-                    }}
-                  >
-                    Sign In
-                  </Button>
-                  <Button 
-                    component={Link} 
-                    href="/signup" 
-                    variant="outlined"
-                    sx={{ 
-                      borderColor: "#8A3F3F", 
-                      color: "#8A3F3F",
-                      "&:hover": { 
-                        borderColor: "#6E2F2F", 
-                        backgroundColor: "rgba(138, 63, 63, 0.1)" 
-                      }
-                    }}
-                  >
-                    Sign Up
-                  </Button>
-                </Box>
-              </CardContent>
-            </Card>
-          ) : collections.length === 0 ? (
-            // Empty state
-            <Card sx={{ bgcolor: '#252525', color: 'white', p: 2, mb: 4 }}>
-              <CardContent sx={{ textAlign: 'center', py: 4 }}>
-                <CollectionIcon sx={{ fontSize: 60, color: '#8A3F3F', mb: 2, opacity: 0.7 }} />
-                <Typography variant="h6" gutterBottom>
-                  You don't have any collections yet
-                </Typography>
-                <Typography variant="body2" sx={{ mb: 3, maxWidth: '600px', mx: 'auto' }}>
-                  Collections help you organize your Pokémon cards. Create your first collection to start tracking your cards!
-                </Typography>
-                <Button 
-                  variant="contained" 
-                  startIcon={<AddIcon />}
-                  onClick={() => setOpenNewDialog(true)}
-                  sx={{ 
-                    backgroundColor: "#8A3F3F",
-                    "&:hover": { backgroundColor: "#6E2F2F" }
-                  }}
+      {!isAuthenticated ? (
+        <div className="bg-[#252525] rounded-lg p-8 text-center mb-8">
+          <h2 className="text-xl font-semibold text-white mb-4">Sign in to view your collection</h2>
+          <Link
+            href="/signin"
+            className="inline-block px-5 py-2.5 bg-[#8A3F3F] text-white rounded-md hover:bg-[#6E2F2F] transition-colors"
+          >
+            Sign In
+          </Link>
+        </div>
+      ) : isCreating ? (
+        <div className="bg-[#252525] rounded-lg p-8 text-center mb-8">
+          <div className="flex flex-col items-center justify-center py-12">
+            <div className="w-12 h-12 border-4 border-[#8A3F3F] border-t-transparent rounded-full animate-spin mb-4"></div>
+            <p className="text-white">Setting up your collection...</p>
+          </div>
+        </div>
+      ) : defaultCollection ? (
+        <div className="mb-8">
+          {/* Collection Info */}
+          <div className="bg-[#252525] rounded-lg p-6 mb-6">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+              <div>
+                <h2 className="text-2xl font-semibold text-white">My Collection</h2>
+                <p className="text-gray-400 text-sm mt-1">
+                  {defaultCollection.cards.length} {defaultCollection.cards.length === 1 ? 'card' : 'cards'} in collection
+                </p>
+              </div>
+              
+              <div className="relative">
+                <button
+                  className={`flex items-center gap-1 px-3 py-1.5 rounded text-sm transition-colors ${
+                    filter 
+                      ? "bg-[#8A3F3F]/30 text-white border border-[#8A3F3F]/50" 
+                      : "bg-transparent text-gray-300 border border-gray-700 hover:border-gray-500"
+                  }`}
+                  onClick={toggleFilterMenu}
                 >
-                  Create Your First Collection
-                </Button>
-              </CardContent>
-            </Card>
-          ) : (
-            // Collections grid
-            <Grid container spacing={3}>
-              {collections.map(collection => (
-                <Grid item xs={12} sm={6} md={4} key={collection.id}>
-                  <Card 
-                    sx={{ 
-                      bgcolor: '#252525', 
-                      color: 'white',
-                      height: '100%',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      transition: 'transform 0.2s, box-shadow 0.2s',
-                      '&:hover': {
-                        transform: 'translateY(-4px)',
-                        boxShadow: '0 6px 12px rgba(0,0,0,0.2)'
-                      }
-                    }}
+                  <Filter size={16} />
+                  <span>Filter {filter && '(1)'}</span>
+                </button>
+                
+                {showFilterMenu && (
+                  <div className="absolute right-0 mt-1 w-48 rounded-md shadow-lg bg-[#2A2A2A] z-50 overflow-hidden">
+                    <div className="py-1">
+                      <button 
+                        className={`w-full text-left px-4 py-2 text-sm ${filter === null ? 'bg-[#8A3F3F]/20 text-white' : 'text-gray-300 hover:bg-gray-800'}`}
+                        onClick={() => handleFilterSelect(null)}
+                      >
+                        All Cards
+                      </button>
+                      <button 
+                        className={`w-full text-left px-4 py-2 text-sm ${filter === 'normal' ? 'bg-[#8A3F3F]/20 text-white' : 'text-gray-300 hover:bg-gray-800'}`}
+                        onClick={() => handleFilterSelect('normal')}
+                      >
+                        Normal
+                      </button>
+                      <button 
+                        className={`w-full text-left px-4 py-2 text-sm ${filter === 'holo' ? 'bg-[#8A3F3F]/20 text-white' : 'text-gray-300 hover:bg-gray-800'}`}
+                        onClick={() => handleFilterSelect('holo')}
+                      >
+                        Holo
+                      </button>
+                      <button 
+                        className={`w-full text-left px-4 py-2 text-sm ${filter === 'reverse_holo' ? 'bg-[#8A3F3F]/20 text-white' : 'text-gray-300 hover:bg-gray-800'}`}
+                        onClick={() => handleFilterSelect('reverse_holo')}
+                      >
+                        Reverse Holo
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+            
+            {/* Card Grid */}
+            {loadingCards ? (
+              <div className="flex justify-center items-center py-12">
+                <div className="w-10 h-10 border-4 border-[#8A3F3F] border-t-transparent rounded-full animate-spin"></div>
+              </div>
+            ) : filteredCards.length === 0 ? (
+              <div className="text-center py-12">
+                <p className="text-xl text-white mb-4">
+                  {filter ? 'No cards match the selected filter' : 'Your collection is empty'}
+                </p>
+                {filter ? (
+                  <button 
+                    className="px-4 py-2 bg-[#8A3F3F] text-white rounded-md hover:bg-[#6E2F2F] transition-colors"
+                    onClick={() => setFilter(null)}
                   >
-                    <CardContent sx={{ flexGrow: 1 }}>
-                      <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-                        <Typography variant="h6" component="h2" sx={{ fontWeight: 'bold' }}>
-                          {collection.name}
-                        </Typography>
-                        <Box>
-                          <Tooltip title="Edit">
-                            <IconButton 
-                              size="small" 
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                handleOpenEditDialog(collection.id);
-                              }}
-                              sx={{ color: 'white' }}
-                            >
-                              <EditIcon fontSize="small" />
-                            </IconButton>
-                          </Tooltip>
-                          <Tooltip title="Delete">
-                            <IconButton 
-                              size="small" 
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                handleOpenDeleteDialog(collection.id);
-                              }}
-                              sx={{ color: 'white' }}
-                            >
-                              <DeleteIcon fontSize="small" />
-                            </IconButton>
-                          </Tooltip>
-                        </Box>
-                      </Box>
-                      
-                      <Typography variant="body2" color="text.secondary" sx={{ color: '#aaa', mb: 2 }}>
-                        {collection.description || 'No description'}
-                      </Typography>
-                      
-                      <Divider sx={{ my: 1, bgcolor: 'rgba(255,255,255,0.1)' }} />
-                      
-                      <Box sx={{ mt: 2, display: 'flex', justifyContent: 'space-between' }}>
-                        <Typography variant="body2" color="text.secondary" sx={{ color: '#aaa' }}>
-                          {collection.cards.length} {collection.cards.length === 1 ? 'card' : 'cards'}
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary" sx={{ color: '#aaa' }}>
-                          Created {new Date(collection.created_at).toLocaleDateString()}
-                        </Typography>
-                      </Box>
-                    </CardContent>
-                    <Button 
-                      fullWidth
-                      onClick={() => handleViewCollection(collection.id)}
-                      sx={{ 
-                        mt: 'auto',
-                        color: 'white',
-                        backgroundColor: "rgba(138, 63, 63, 0.6)",
-                        borderRadius: 0,
-                        py: 1.5,
-                        '&:hover': {
-                          backgroundColor: "rgba(138, 63, 63, 0.8)",
-                        }
-                      }}
+                    Clear Filter
+                  </button>
+                ) : (
+                  <p className="text-gray-400">
+                    Browse cards and click the + button to add them to your collection
+                  </p>
+                )}
+              </div>
+            ) : (
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                {filteredCards.map((collectionCard: any) => {
+                  const pokemonCard = pokemonCards[collectionCard.card_id];
+                  
+                  return (
+                    <div 
+                      key={collectionCard.id}
+                      className="bg-[#1E1E1E] rounded-lg overflow-hidden transition-transform hover:translate-y-[-4px] hover:shadow-lg"
                     >
-                      View Collection
-                    </Button>
-                  </Card>
-                </Grid>
-              ))}
-            </Grid>
-          )}
-        </>
+                      <div className="relative">
+                        {pokemonCard ? (
+                          <Image
+                            src={pokemonCard.images.small}
+                            alt={pokemonCard.name}
+                            width={180}
+                            height={250}
+                            className="w-full h-auto"
+                          />
+                        ) : (
+                          <div className="h-48 flex items-center justify-center bg-[#1E1E1E]">
+                            <p className="text-gray-500">Loading card...</p>
+                          </div>
+                        )}
+                        
+                        <div className="absolute top-2 right-2 bg-black/60 rounded-full px-2 py-0.5">
+                          <span className="text-xs text-white">
+                            x{collectionCard.quantity}
+                          </span>
+                        </div>
+                        
+                        <div className="absolute bottom-2 right-2 flex gap-1">
+                          <button
+                            className="w-7 h-7 rounded-full bg-black/60 flex items-center justify-center text-white hover:bg-red-700/80 transition-colors"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleRemoveCard(collectionCard.id);
+                            }}
+                            title="Remove from collection"
+                          >
+                            <Trash2 size={14} />
+                          </button>
+                        </div>
+                      </div>
+                      
+                      <div className="p-2">
+                        <div className="flex justify-between items-start mb-1">
+                          <p className="text-white text-sm font-medium truncate w-2/3">
+                            {pokemonCard?.name || 'Loading...'}
+                          </p>
+                          
+                          {pokemonCard?.number && (
+                            <span className="text-xs text-gray-400">
+                              #{pokemonCard.number}
+                            </span>
+                          )}
+                        </div>
+                        
+                        <div className="flex justify-between items-center">
+                          <span 
+                            className={`text-[10px] px-1.5 py-0.5 border rounded-sm ${getFoilColor(collectionCard)}`}
+                          >
+                            {getFoilLabel(collectionCard)}
+                          </span>
+                          
+                          {pokemonCard && (
+                            <span className="text-xs text-[#7FC99F]">
+                              ${getCardPrice(pokemonCard).toFixed(2)}
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+          
+          {/* Collection Tips */}
+          <div className="bg-[#2A2A2A] p-6 rounded-lg">
+            <h3 className="text-xl font-semibold text-white mb-4">Collection Tips</h3>
+            <ul className="text-gray-300 space-y-2">
+              <li className="flex items-start gap-2">
+                <Check size={18} className="text-green-500 flex-shrink-0 mt-0.5" />
+                <span>Click the <strong>+</strong> button on any card to add it to your collection</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <Check size={18} className="text-green-500 flex-shrink-0 mt-0.5" />
+                <span>Use the filter to view cards by foil type (Normal, Holo, Reverse Holo)</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <Check size={18} className="text-green-500 flex-shrink-0 mt-0.5" />
+                <span>Click the trash icon to remove cards from your collection</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      ) : (
+        <div className="bg-[#252525] rounded-lg p-8 text-center mb-8">
+          <div className="flex flex-col items-center justify-center py-12">
+            <div className="w-12 h-12 border-4 border-[#8A3F3F] border-t-transparent rounded-full animate-spin mb-4"></div>
+            <p className="text-white">Setting up your collection...</p>
+          </div>
+        </div>
       )}
-      
-      {/* Dialog for creating a new collection */}
-      <Dialog 
-        open={openNewDialog} 
-        onClose={() => {
-          setOpenNewDialog(false);
-          resetForm();
-        }}
-        PaperProps={{
-          style: {
-            backgroundColor: '#2A2A2A',
-            color: 'white',
-            maxWidth: '500px',
-            width: '100%'
-          }
-        }}
-      >
-        <DialogTitle>Create New Collection</DialogTitle>
-        <DialogContent>
-          {formError && (
-            <Alert severity="error" sx={{ mb: 2 }}>
-              {formError}
-            </Alert>
-          )}
-          <TextField
-            autoFocus
-            margin="dense"
-            label="Collection Name"
-            fullWidth
-            variant="outlined"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            InputLabelProps={{ style: { color: '#aaa' } }}
-            InputProps={{ style: { color: 'white' } }}
-            sx={{ 
-              mb: 2,
-              '& .MuiOutlinedInput-root': {
-                '& fieldset': { borderColor: 'rgba(255, 255, 255, 0.3)' },
-                '&:hover fieldset': { borderColor: 'rgba(255, 255, 255, 0.5)' },
-                '&.Mui-focused fieldset': { borderColor: '#8A3F3F' }
-              }
-            }}
-          />
-          <TextField
-            margin="dense"
-            label="Description (Optional)"
-            fullWidth
-            multiline
-            rows={4}
-            variant="outlined"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            InputLabelProps={{ style: { color: '#aaa' } }}
-            InputProps={{ style: { color: 'white' } }}
-            sx={{ 
-              '& .MuiOutlinedInput-root': {
-                '& fieldset': { borderColor: 'rgba(255, 255, 255, 0.3)' },
-                '&:hover fieldset': { borderColor: 'rgba(255, 255, 255, 0.5)' },
-                '&.Mui-focused fieldset': { borderColor: '#8A3F3F' }
-              }
-            }}
-          />
-        </DialogContent>
-        <DialogActions sx={{ px: 3, pb: 2 }}>
-          <Button 
-            onClick={() => {
-              setOpenNewDialog(false);
-              resetForm();
-            }}
-            sx={{ color: '#aaa' }}
-          >
-            Cancel
-          </Button>
-          <Button 
-            onClick={handleCreateCollection}
-            variant="contained"
-            disabled={formLoading}
-            sx={{ 
-              backgroundColor: "#8A3F3F",
-              "&:hover": { backgroundColor: "#6E2F2F" }
-            }}
-          >
-            {formLoading ? <CircularProgress size={24} color="inherit" /> : 'Create'}
-          </Button>
-        </DialogActions>
-      </Dialog>
-      
-      {/* Dialog for editing a collection */}
-      <Dialog 
-        open={openEditDialog} 
-        onClose={() => {
-          setOpenEditDialog(false);
-          resetForm();
-        }}
-        PaperProps={{
-          style: {
-            backgroundColor: '#2A2A2A',
-            color: 'white',
-            maxWidth: '500px',
-            width: '100%'
-          }
-        }}
-      >
-        <DialogTitle>Edit Collection</DialogTitle>
-        <DialogContent>
-          {formError && (
-            <Alert severity="error" sx={{ mb: 2 }}>
-              {formError}
-            </Alert>
-          )}
-          <TextField
-            autoFocus
-            margin="dense"
-            label="Collection Name"
-            fullWidth
-            variant="outlined"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            InputLabelProps={{ style: { color: '#aaa' } }}
-            InputProps={{ style: { color: 'white' } }}
-            sx={{ 
-              mb: 2,
-              '& .MuiOutlinedInput-root': {
-                '& fieldset': { borderColor: 'rgba(255, 255, 255, 0.3)' },
-                '&:hover fieldset': { borderColor: 'rgba(255, 255, 255, 0.5)' },
-                '&.Mui-focused fieldset': { borderColor: '#8A3F3F' }
-              }
-            }}
-          />
-          <TextField
-            margin="dense"
-            label="Description (Optional)"
-            fullWidth
-            multiline
-            rows={4}
-            variant="outlined"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            InputLabelProps={{ style: { color: '#aaa' } }}
-            InputProps={{ style: { color: 'white' } }}
-            sx={{ 
-              '& .MuiOutlinedInput-root': {
-                '& fieldset': { borderColor: 'rgba(255, 255, 255, 0.3)' },
-                '&:hover fieldset': { borderColor: 'rgba(255, 255, 255, 0.5)' },
-                '&.Mui-focused fieldset': { borderColor: '#8A3F3F' }
-              }
-            }}
-          />
-        </DialogContent>
-        <DialogActions sx={{ px: 3, pb: 2 }}>
-          <Button 
-            onClick={() => {
-              setOpenEditDialog(false);
-              resetForm();
-            }}
-            sx={{ color: '#aaa' }}
-          >
-            Cancel
-          </Button>
-          <Button 
-            onClick={handleUpdateCollection}
-            variant="contained"
-            disabled={formLoading}
-            sx={{ 
-              backgroundColor: "#8A3F3F",
-              "&:hover": { backgroundColor: "#6E2F2F" }
-            }}
-          >
-            {formLoading ? <CircularProgress size={24} color="inherit" /> : 'Save Changes'}
-          </Button>
-        </DialogActions>
-      </Dialog>
-      
-      {/* Dialog for deleting a collection */}
-      <Dialog 
-        open={openDeleteDialog} 
-        onClose={() => {
-          setOpenDeleteDialog(false);
-          setSelectedCollection(null);
-        }}
-        PaperProps={{
-          style: {
-            backgroundColor: '#2A2A2A',
-            color: 'white',
-            maxWidth: '500px',
-            width: '100%'
-          }
-        }}
-      >
-        <DialogTitle>Delete Collection</DialogTitle>
-        <DialogContent>
-          <Typography variant="body1">
-            Are you sure you want to delete{' '}
-            <strong>{getSelectedCollection()?.name}</strong>?
-            This action cannot be undone.
-          </Typography>
-          {formError && (
-            <Alert severity="error" sx={{ mt: 2 }}>
-              {formError}
-            </Alert>
-          )}
-        </DialogContent>
-        <DialogActions sx={{ px: 3, pb: 2 }}>
-          <Button 
-            onClick={() => {
-              setOpenDeleteDialog(false);
-              setSelectedCollection(null);
-            }}
-            sx={{ color: '#aaa' }}
-          >
-            Cancel
-          </Button>
-          <Button 
-            onClick={handleDeleteCollection}
-            variant="contained"
-            disabled={formLoading}
-            sx={{ 
-              backgroundColor: "rgb(211, 47, 47)",
-              "&:hover": { backgroundColor: "rgb(178, 34, 34)" }
-            }}
-          >
-            {formLoading ? <CircularProgress size={24} color="inherit" /> : 'Delete'}
-          </Button>
-        </DialogActions>
-      </Dialog>
     </div>
   );
+}

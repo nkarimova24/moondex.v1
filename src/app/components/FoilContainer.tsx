@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useCollection } from "@/context/CollectionContext";
+import { useAuth } from "@/context/AuthContext";
 
 interface CardFoilProps {
   foilType: string;
@@ -10,7 +12,6 @@ interface CardFoilProps {
 
 function CardFoil({ 
   foilType, 
-
   onIncrement, 
   onDecrement 
 }: CardFoilProps) {
@@ -80,9 +81,22 @@ interface FoilContainerProps {
   foilTypes: string[];
   cardId: string;
   className?: string;
+  card?: any; // Add the card prop to pass card data
 }
 
-export default function FoilContainer({ foilTypes, cardId, className = '' }: FoilContainerProps) {
+export default function FoilContainer({ 
+  foilTypes, 
+  cardId, 
+  className = '',
+  card
+}: FoilContainerProps) {
+  const { isAuthenticated } = useAuth();
+  const { collections, addCardToCollection } = useCollection();
+  
+  const [loading, setLoading] = useState<{[key: string]: boolean}>({});
+  const [successMessages, setSuccessMessages] = useState<{[key: string]: boolean}>({});
+  const [errorMessage, setErrorMessage] = useState('');
+  
   if (!foilTypes || foilTypes.length === 0) return null;
   
   const getPosition = (index: number): 'first' | 'middle' | 'last' | 'single' => {
@@ -92,15 +106,63 @@ export default function FoilContainer({ foilTypes, cardId, className = '' }: Foi
     return 'middle';
   };
   
-  // increment/decrement
-  const handleIncrement = (type: string) => {
-    console.log(`Increment ${type} for card ${cardId}`);
-   
+  // Simplified add to collection - just add to the first collection
+  const handleAddToCollection = async (foilType: string) => {
+    if (!isAuthenticated) {
+      // Redirect to login page if not authenticated
+      window.location.href = '/signin';
+      return;
+    }
+    
+    // Reset states
+    setErrorMessage('');
+    setSuccessMessages(prev => ({ ...prev, [foilType]: false }));
+    setLoading(prev => ({ ...prev, [foilType]: true }));
+    
+    try {
+      // Find the user's collection
+      if (collections.length === 0) {
+        setErrorMessage("You don't have any collections yet. Please create one first.");
+        setLoading(prev => ({ ...prev, [foilType]: false }));
+        return;
+      }
+      
+      // Just use the first collection
+      const collectionId = collections[0].id;
+      
+      const isFoil = foilType.includes('holo') && !foilType.includes('reverse');
+      const isReverseHolo = foilType.includes('reverse');
+      
+      const cardData = {
+        card_id: cardId,
+        quantity: 1,
+        is_foil: isFoil,
+        is_reverse_holo: isReverseHolo
+      };
+      
+      const result = await addCardToCollection(collectionId, cardData);
+      
+      if (result) {
+        // Show success message and auto-hide after 2 seconds
+        setSuccessMessages(prev => ({ ...prev, [foilType]: true }));
+        setTimeout(() => {
+          setSuccessMessages(prev => ({ ...prev, [foilType]: false }));
+        }, 2000);
+      } else {
+        setErrorMessage('Failed to add card to collection.');
+      }
+    } catch (err) {
+      console.error('Error adding card to collection:', err);
+      setErrorMessage('An unexpected error occurred.');
+    } finally {
+      setLoading(prev => ({ ...prev, [foilType]: false }));
+    }
   };
   
+  // Decrement not fully implemented yet
   const handleDecrement = (type: string) => {
     console.log(`Decrement ${type} for card ${cardId}`);
-   
+    // Future enhancement: Implement remove from collection feature
   };
   
   return (
@@ -112,16 +174,33 @@ export default function FoilContainer({ foilTypes, cardId, className = '' }: Foi
       {foilTypes.map((foilType, index) => (
         <div 
           key={`${cardId}-${foilType}`}
+          className="relative"
         >
           <CardFoil 
             foilType={foilType}
             position={getPosition(index)}
             isNeighborHovered={false} 
-            onIncrement={() => handleIncrement(foilType)}
+            onIncrement={() => handleAddToCollection(foilType)}
             onDecrement={() => handleDecrement(foilType)}
           />
+          
+          {loading[foilType] && (
+            <div className="absolute top-[-8px] right-[-8px] w-3 h-3 rounded-full border-2 border-white border-t-transparent animate-spin"></div>
+          )}
+          
+          {successMessages[foilType] && (
+            <div className="absolute top-[-20px] right-[-20px] bg-green-600 text-white text-xs rounded-md px-1 py-0.5 animate-fadeIn">
+              Added!
+            </div>
+          )}
         </div>
       ))}
+      
+      {errorMessage && (
+        <div className="absolute top-[-30px] left-0 right-0 bg-red-600/80 text-white text-xs rounded-md px-2 py-1 text-center">
+          {errorMessage}
+        </div>
+      )}
     </div>
   );
 }

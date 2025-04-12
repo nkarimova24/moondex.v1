@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { PokemonCard } from "@/app/lib/api/types";
 import CardDetails from "./CardDetails";
-// import FoilContainer from "./FoilContainer";
+import FoilContainer from "./FoilContainer";
 import Image from "next/image";
 
 interface CardGridProps {
@@ -61,7 +61,6 @@ export default function CardGrid({ cards }: CardGridProps) {
         {cards.map((card) => (
           <div 
             key={card.id}
-            //bg-[#252525]
             className="relative rounded-lg overflow-hidden hover:shadow-lg transition-shadow cursor-pointer max-w-[220px] mx-auto"
             onClick={() => handleCardClick(card)}
           >
@@ -100,7 +99,7 @@ export default function CardGrid({ cards }: CardGridProps) {
                 )}
                 
                 {/* Card Foil indicator */}
-                {/* {card.tcgplayer?.prices && (() => {
+                {card.tcgplayer?.prices && (() => {
                   const foilTypes = [];
                   if (card.tcgplayer.prices.normal) foilTypes.push("normal");
                   if (card.tcgplayer.prices.holofoil) foilTypes.push("holo");
@@ -110,9 +109,10 @@ export default function CardGrid({ cards }: CardGridProps) {
                     <FoilContainer 
                       foilTypes={foilTypes} 
                       cardId={card.id}
+                      card={card}
                     />
                   ) : null;
-                })()} */}
+                })()}
               </div>
             </div>
           </div>
