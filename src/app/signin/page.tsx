@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
-// import Link from "next/link";
+import Link from "next/link";
 import { Button, TextField, Box, Typography, Container, Alert } from "@mui/material";
 
 export default function SignIn() {
@@ -31,21 +31,30 @@ export default function SignIn() {
     setLoading(true);
 
     try {
+      console.log("Submitting login form with email:", credentials.email);
       const result = await login(credentials);
+      console.log("Login result:", result);
 
       if (result.success) {
         router.push("/"); 
       } else {
         if (result.errors) {
           setErrors(result.errors);
+          console.log("Login validation errors:", result.errors);
         }
         if (result.message) {
           setGeneralError(result.message);
+          console.log("Login error message:", result.message);
+        }
+        
+        // If no specific errors were provided but the login failed
+        if (!result.errors && !result.message) {
+          setGeneralError("Login failed. Please check your credentials and try again.");
         }
       }
     } catch (error) {
+      console.error("Login error in component:", error);
       setGeneralError("An unexpected error occurred. Please try again.");
-      console.error("Login error:", error);
     } finally {
       setLoading(false);
     }
@@ -113,12 +122,12 @@ export default function SignIn() {
             {loading ? "Signing in..." : "Sign In"}
           </Button>
           <Box textAlign="center">
-            {/* <Typography variant="body2" color="text.secondary">
+            <Typography variant="body2" color="text.secondary">
               Don't have an account?{" "}
               <Link href="/signup" style={{ color: "#90caf9" }}>
                 Sign Up
               </Link>
-            </Typography> */}
+            </Typography>
           </Box>
         </Box>
       </Box>

@@ -584,7 +584,6 @@ export default function Sidebar({ isOpen: propIsOpen, onToggle }: SidebarProps) 
       },
       borderLeft: '4px solid transparent',
     }}
-    onClick={isMobile ? handleToggleSidebar : undefined}
   >
     <ListItemText 
       primary="My Collection" 
@@ -652,43 +651,47 @@ export default function Sidebar({ isOpen: propIsOpen, onToggle }: SidebarProps) 
           
       {/* Authentication Buttons */}
       {authButtons}
-      <Stack spacing={1.5}>
-           <Button
-            fullWidth
-            variant="contained"
-            component={Link}
-            href="/signin"
-            startIcon={<LoginIcon />}
-            onClick={isMobile ? handleDrawerToggle : undefined}
-            sx={{ 
-              backgroundColor: '#8A3F3F',
-              '&:hover': {
-                backgroundColor: '#612B2B',
-              }
-            }}
-          >
-            Sign In
-          </Button> 
-          <Button
-            fullWidth
-            variant="outlined"
-            component={Link}
-            href="/signup"
-            startIcon={<PersonAddIcon />}
-            onClick={isMobile ? handleDrawerToggle : undefined}
-            sx={{ 
-              borderColor: 'rgba(138, 63, 63, 0.5)',
-              color: 'rgba(138, 63, 63, 0.9)',
-              '&:hover': {
-                borderColor: '#8A3F3F',
-                backgroundColor: 'rgba(138, 63, 63, 0.1)'
-              }
-            }}
-          >
-            Sign Up
-          </Button> 
+    {/*  login/signup buttons */}
+      {!isAuthenticated && (
+        <Box sx={{ padding: "0 16px 16px 16px" }}>
+          <Stack spacing={1.5}>
+            <Button
+              fullWidth
+              variant="contained"
+              component={Link}
+              href="/signin"
+              startIcon={<LoginIcon />}
+              onClick={isMobile ? handleDrawerToggle : undefined}
+              sx={{ 
+                backgroundColor: '#8A3F3F',
+                '&:hover': {
+                  backgroundColor: '#612B2B',
+                }
+              }}
+            >
+              Sign In
+            </Button> 
+            <Button
+              fullWidth
+              variant="outlined"
+              component={Link}
+              href="/signup"
+              startIcon={<PersonAddIcon />}
+              onClick={isMobile ? handleDrawerToggle : undefined}
+              sx={{ 
+                borderColor: 'rgba(138, 63, 63, 0.5)',
+                color: 'rgba(138, 63, 63, 0.9)',
+                '&:hover': {
+                  borderColor: '#8A3F3F',
+                  backgroundColor: 'rgba(138, 63, 63, 0.1)'
+                }
+              }}
+            >
+              Sign Up
+            </Button> 
           </Stack>
-
+        </Box>
+      )}
       {/* Footer */}
       <Box 
         sx={{ 

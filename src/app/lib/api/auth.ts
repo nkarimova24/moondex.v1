@@ -28,8 +28,13 @@ interface ApiError extends Error {
 /**
  * Log in a user
  */
+/**
+ * Log in a user
+ */
 export const login = async (credentials: LoginCredentials): Promise<AuthResult> => {
   try {
+    console.log("Attempting login with:", { email: credentials.email });
+    
     const response = await authApiClient.post<ApiResponse<UserResponseData>>('/login', credentials);
     const data = response.data;
     
@@ -45,10 +50,16 @@ export const login = async (credentials: LoginCredentials): Promise<AuthResult> 
         token: data.data.token
       };
     }
-    return { success: false, message: 'Login failed' };
+    
+    console.warn("Login response without success status or token:", data);
+    return { success: false, message: 'Login failed - invalid response format' };
   } catch (error: unknown) {
     const apiError = error as ApiError;
-    console.error('Login error:', apiError.response?.data);
+    console.error('Login error details:', {
+      response: apiError.response,
+      message: apiError.message,
+      stack: apiError.stack
+    });
     
     let errorMessage = 'Login failed';
     let errorDetails: Record<string, string> | undefined = undefined;

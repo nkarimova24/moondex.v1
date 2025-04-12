@@ -15,20 +15,15 @@ export const authApiClient = axios.create({
   },
 });
 
-authApiClient.interceptors.request.use(
-  (config) => {
-    const token = Cookies.get('auth_token');
-    if (token) {
-      console.log('Using auth token:', token.substring(0, 10) + '...');
-      
-      config.headers = config.headers || {};
-      config.headers.Authorization = `Bearer ${token}`;
-    } else {
-      console.log('No auth token found');
-    }
-    return config;
+authApiClient.interceptors.response.use(
+  (response) => {
+    console.log('API Response:', response.status, response.statusText);
+    return response;
   },
-  (error) => Promise.reject(error)
+  (error) => {
+    console.error('API Error Response:', error.response?.status, error.response?.data);
+    return Promise.reject(error);
+  }
 );
 
 export const fetchWithAuth = async (url: string) => {
