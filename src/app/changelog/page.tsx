@@ -264,7 +264,7 @@ export default function ChangelogPage() {
           <div
             key={entryIndex}
             className={`mb-8 sm:mb-12 relative ${
-              entryIndex === 0 ? "pt-2" : "pt-2" // Adjust padding for the first entry
+              entryIndex === 0 ? "pt-2" : "pt-2" 
             }`}
           >
             {/* Timeline dot */}

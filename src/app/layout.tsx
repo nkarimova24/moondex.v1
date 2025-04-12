@@ -7,6 +7,7 @@ import ThemeRegistry from "@/app/components/ThemeRegistry";
 import GlobalSearchbar from "@/app/components/GlobalSearchbar";
 import { AuthProvider } from "@/context/AuthContext";
 import { LanguageProvider } from "@/context/LanguageContext";
+import { CollectionProvider } from "@/context/CollectionContext";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -52,6 +53,7 @@ export default function RootLayout({
         <ThemeRegistry>
           <AuthProvider>
             <LanguageProvider>
+              <CollectionProvider>
               <Sidebar
                 isOpen={sidebarOpen}
                 onToggle={handleToggleSidebar}
@@ -69,6 +71,7 @@ export default function RootLayout({
                   {children}
                 </main>
               </div>
+              </CollectionProvider>
             </LanguageProvider>
           </AuthProvider>
         </ThemeRegistry>
