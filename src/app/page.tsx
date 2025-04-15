@@ -8,9 +8,11 @@ import { PokemonSet } from "@/app/lib/api/types";
 import { useRouter } from "next/navigation";
 import { Search } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
+import { useAuth } from "@/context/AuthContext";
 
 export default function Home() {
   const { t } = useLanguage();
+  const { isAuthenticated } = useAuth();
   const [recentSets, setRecentSets] = useState<PokemonSet[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(true);
@@ -197,28 +199,30 @@ export default function Home() {
       </section>
 
       {/* Call to Action */}
-      <section className="py-16 px-4 text-center">
-        <div className="max-w-3xl mx-auto">
-          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">{t("home.cta.title")}</h2>
-          <p className="text-gray-400 mb-8">
-            {t("home.cta.description")}
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link 
-              href="#" 
-              className="px-6 py-3 bg-[#8A3F3F] text-white font-medium rounded-lg hover:bg-[#612B2B] transition-colors"
-            >
-              {t("home.cta.signIn")}
-            </Link>
-            <Link 
-              href="#" 
-              className="px-6 py-3 bg-transparent border border-[#8A3F3F] text-[#8A3F3F] font-medium rounded-lg hover:bg-[#8A3F3F]/10 transition-colors"
-            >
-              {t("home.cta.createAccount")}
-            </Link>
+      {!isAuthenticated && (
+        <section className="py-16 px-4 text-center">
+          <div className="max-w-3xl mx-auto">
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">{t("home.cta.title")}</h2>
+            <p className="text-gray-400 mb-8">
+              {t("home.cta.description")}
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link 
+                href="/signin" 
+                className="px-6 py-3 bg-[#8A3F3F] text-white font-medium rounded-lg hover:bg-[#612B2B] transition-colors"
+              >
+                {t("home.cta.signIn")}
+              </Link>
+              <Link 
+                href="/signup" 
+                className="px-6 py-3 bg-transparent border border-[#8A3F3F] text-[#8A3F3F] font-medium rounded-lg hover:bg-[#8A3F3F]/10 transition-colors"
+              >
+                {t("home.cta.createAccount")}
+              </Link>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
     </div>
   );
 }
