@@ -51,6 +51,7 @@ function CardFoil({
         className="absolute left-[-8px] w-4 h-4 flex items-center justify-center rounded-full bg-gray-800 shadow-md hover:bg-gray-700 z-20 transition-opacity"
         style={{ opacity: isHovered ? 0.9 : 0.6 }}
         onClick={(e) => {
+          e.preventDefault();
           e.stopPropagation();
           onDecrement();
         }}
@@ -77,6 +78,7 @@ function CardFoil({
         className="absolute right-[-8px] w-4 h-4 flex items-center justify-center rounded-full bg-gray-800 shadow-md hover:bg-gray-700 z-20 transition-opacity"
         style={{ opacity: isHovered ? 0.9 : 0.6 }}
         onClick={(e) => {
+          e.preventDefault();
           e.stopPropagation();
           onIncrement();
         }}

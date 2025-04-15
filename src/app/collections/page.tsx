@@ -164,6 +164,27 @@ export default function CollectionPage() {
     }
   };
   
+  const handleAddToCollection = async (card: CollectionPokemonCard, e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault(); // Prevent page refresh
+    try {
+      await addCardToCollection(card.collection?.collection_id || 0, {
+        card_id: card.id,
+        quantity: 1,
+      });
+    } catch (err) {
+      console.error("Error adding card to collection:", err);
+    }
+  };
+  
+  const handleRemoveFromCollection = async (card: CollectionPokemonCard, e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault(); // Prevent page refresh
+    try {
+      await removeCardFromCollection(card.collection?.collection_id || 0, card.collection?.id || 0);
+    } catch (err) {
+      console.error("Error removing card from collection:", err);
+    }
+  };
+  
   // Apply filters to cards if needed
   const filteredCards = filter 
     ? pokemonCards.filter(card => {
