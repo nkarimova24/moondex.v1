@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useCollection } from "@/context/CollectionContext";
 import { useAuth } from "@/context/AuthContext";
+import toast from 'react-hot-toast';
 
 interface CardFoilProps {
   foilType: string;
@@ -70,7 +71,7 @@ function CardFoil({
         title={`Foil type: ${tooltipText}${quantity > 0 ? ` (${quantity} in collection)` : ''}`}
       >
         {quantity > 0 ? (
-          <span className="text-xs font-bold text-white">
+          <span className="text-xs text-white">
             {quantity}
           </span>
         ) : (
@@ -155,28 +156,23 @@ export default function FoilContainer({
     return 'middle';
   };
   
-  // Simplified add to collection - just add to the first collection
   const handleAddToCollection = async (foilType: string) => {
     if (!isAuthenticated) {
-      // Redirect to login page if not authenticated
       window.location.href = '/signin';
       return;
     }
     
-    // Reset states
     setErrorMessage('');
     setSuccessMessages(prev => ({ ...prev, [foilType]: false }));
     setLoading(prev => ({ ...prev, [foilType]: true }));
     
     try {
-      // Find the user's collection
       if (collections.length === 0) {
         setErrorMessage("You don't have any collections yet. Please create one first.");
         setLoading(prev => ({ ...prev, [foilType]: false }));
         return;
       }
       
-      // Just use the first collection
       const collectionId = collections[0].id;
       
       const isFoil = foilType.includes('holo') && !foilType.includes('reverse');
@@ -192,7 +188,6 @@ export default function FoilContainer({
       const result = await addCardToCollection(collectionId, cardData);
       
       if (result) {
-        // Update local quantity state immediately for better UX
         setCardQuantities(prev => {
           const newQuantities = { ...prev };
           const key = isReverseHolo ? "reverse holo" : (isFoil ? "holo" : "normal");
@@ -200,23 +195,18 @@ export default function FoilContainer({
           return newQuantities;
         });
         
-        // Show success message and auto-hide after 2 seconds
-        setSuccessMessages(prev => ({ ...prev, [foilType]: true }));
-        setTimeout(() => {
-          setSuccessMessages(prev => ({ ...prev, [foilType]: false }));
-        }, 2000);
+        toast.success(`Added ${foilType} card to collection!`);
       } else {
-        setErrorMessage('Failed to add card to collection.');
+        toast.error('Failed to add card to collection.');
       }
     } catch (err) {
       console.error('Error adding card to collection:', err);
-      setErrorMessage('An unexpected error occurred.');
+      toast.error('An unexpected error occurred.');
     } finally {
       setLoading(prev => ({ ...prev, [foilType]: false }));
     }
   };
   
-  // Decrement card quantity in collection
   const handleDecrement = async (type: string) => {
     if (!isAuthenticated) {
       window.location.href = '/signin';
@@ -224,29 +214,25 @@ export default function FoilContainer({
     }
     
     if (collections.length === 0) {
-      setErrorMessage("You don't have any collections yet.");
+      toast.error("You don't have any collections yet.");
       return;
     }
     
-    // Determine foil type
     const isFoil = type.includes('holo') && !type.includes('reverse');
     const isReverseHolo = type.includes('reverse');
     const foilTypeKey = isReverseHolo ? "reverse holo" : (isFoil ? "holo" : "normal");
     
-    // Check if there are any cards to remove
     if (!cardQuantities[foilTypeKey] || cardQuantities[foilTypeKey] <= 0) {
-      setErrorMessage(`No ${type} cards in your collection to remove.`);
+      toast.error(`No ${type} cards in your collection to remove.`);
       return;
     }
     
     setLoading(prev => ({ ...prev, [type]: true }));
     
     try {
-      // Find the card in the collection with matching properties
       let cardToUpdate = null;
       let collectionId = null;
       
-      // Search through all collections for this card
       for (const collection of collections) {
         const matchingCard = collection.cards.find(card => 
           card.card_id === cardId && 
@@ -262,23 +248,21 @@ export default function FoilContainer({
       }
       
       if (!cardToUpdate || !collectionId) {
-        setErrorMessage(`Couldn't find this card in your collection.`);
+        toast.error(`Couldn't find this card in your collection.`);
         return;
       }
       
-      // If quantity is 1, remove the card entirely
       if (cardToUpdate.quantity === 1) {
         const success = await removeCardFromCollection(collectionId, cardToUpdate.id);
         
         if (success) {
-          // Update the local state
           setCardQuantities(prev => ({
             ...prev,
             [foilTypeKey]: 0
           }));
+          toast.success(`Removed ${type} card from collection.`);
         }
       } else {
-        // Otherwise, decrease quantity by 1
         const updatedCard = await updateCardInCollection(
           collectionId, 
           cardToUpdate.id, 
@@ -286,16 +270,16 @@ export default function FoilContainer({
         );
         
         if (updatedCard) {
-          // Update the local state for immediate UI feedback
           setCardQuantities(prev => ({
             ...prev,
             [foilTypeKey]: Math.max(0, prev[foilTypeKey] - 1)
           }));
+          toast.success(`Removed one ${type} card from collection.`);
         }
       }
     } catch (err) {
       console.error('Error removing card from collection:', err);
-      setErrorMessage('Failed to remove card.');
+      toast.error('Failed to remove card.');
     } finally {
       setLoading(prev => ({ ...prev, [type]: false }));
     }
