@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import { PokemonCard } from "@/app/lib/api";
 import { X, ChevronLeft, ChevronRight, Heart } from "lucide-react";
 import Image from "next/image";
+import FoilContainer from "./FoilContainer";
 
 interface Attack {
   name: string;
@@ -395,6 +396,25 @@ export default function CardDetails({ card, allCards, onClose, onNavigate }: Car
                 ))}
               </div>
             )}
+            
+            {/* Card variants / foil types */}
+            {card.tcgplayer?.prices && (() => {
+              const foilTypes = [];
+              if (card.tcgplayer.prices.normal) foilTypes.push("normal");
+              if (card.tcgplayer.prices.holofoil) foilTypes.push("holo");
+              if (card.tcgplayer.prices.reverseHolofoil) foilTypes.push("reverse holo");
+              
+              return foilTypes.length > 0 ? (
+                <div className="mb-3 sm:mb-5">
+                  <FoilContainer 
+                    foilTypes={foilTypes} 
+                    cardId={card.id}
+                    card={card}
+                    listStyle={true}
+                  />
+                </div>
+              ) : null;
+            })()}
             
             {/* Card market prices */}
             {card.cardmarket?.prices && (

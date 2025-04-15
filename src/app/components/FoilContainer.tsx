@@ -100,13 +100,15 @@ interface FoilContainerProps {
   cardId: string;
   className?: string;
   card?: any;
+  listStyle?: boolean;
 }
 
 export default function FoilContainer({ 
   foilTypes, 
   cardId, 
   className = '',
-  card
+  card,
+  listStyle = false
 }: FoilContainerProps) {
   const { isAuthenticated } = useAuth();
   const { 
@@ -163,20 +165,35 @@ export default function FoilContainer({
     }
     
     setErrorMessage('');
-    setSuccessMessages(prev => ({ ...prev, [foilType]: false }));
     setLoading(prev => ({ ...prev, [foilType]: true }));
+    
+    // Determine the foil type key
+    const isFoil = foilType.includes('holo') && !foilType.includes('reverse');
+    const isReverseHolo = foilType.includes('reverse');
+    const foilTypeKey = isReverseHolo ? "reverse holo" : (isFoil ? "holo" : "normal");
+    
+    // Optimistic UI update - immediately update the UI
+    setCardQuantities(prev => {
+      const newQuantities = { ...prev };
+      newQuantities[foilTypeKey] = (newQuantities[foilTypeKey] || 0) + 1;
+      return newQuantities;
+    });
+    
+    const cardName = card?.name || "Card";
+    const toastId = toast.success(`Added ${cardName} (${foilType}) to collection!`);
     
     try {
       if (collections.length === 0) {
-        setErrorMessage("You don't have any collections yet. Please create one first.");
-        setLoading(prev => ({ ...prev, [foilType]: false }));
+        setCardQuantities(prev => {
+          const newQuantities = { ...prev };
+          newQuantities[foilTypeKey] = Math.max(0, (newQuantities[foilTypeKey] || 0) - 1);
+          return newQuantities;
+        });
+        toast.error("You don't have any collections yet. Please create one first.");
         return;
       }
       
       const collectionId = collections[0].id;
-      
-      const isFoil = foilType.includes('holo') && !foilType.includes('reverse');
-      const isReverseHolo = foilType.includes('reverse');
       
       const cardData = {
         card_id: cardId,
@@ -187,20 +204,23 @@ export default function FoilContainer({
       
       const result = await addCardToCollection(collectionId, cardData);
       
-      if (result) {
+      if (!result) {
         setCardQuantities(prev => {
           const newQuantities = { ...prev };
-          const key = isReverseHolo ? "reverse holo" : (isFoil ? "holo" : "normal");
-          newQuantities[key] = (newQuantities[key] || 0) + 1;
+          newQuantities[foilTypeKey] = Math.max(0, (newQuantities[foilTypeKey] || 0) - 1);
           return newQuantities;
         });
-        
-        toast.success(`Added ${foilType} card to collection!`);
-      } else {
         toast.error('Failed to add card to collection.');
       }
     } catch (err) {
       console.error('Error adding card to collection:', err);
+      
+      setCardQuantities(prev => {
+        const newQuantities = { ...prev };
+        newQuantities[foilTypeKey] = Math.max(0, (newQuantities[foilTypeKey] || 0) - 1);
+        return newQuantities;
+      });
+      
       toast.error('An unexpected error occurred.');
     } finally {
       setLoading(prev => ({ ...prev, [foilType]: false }));
@@ -210,11 +230,6 @@ export default function FoilContainer({
   const handleDecrement = async (type: string) => {
     if (!isAuthenticated) {
       window.location.href = '/signin';
-      return;
-    }
-    
-    if (collections.length === 0) {
-      toast.error("You don't have any collections yet.");
       return;
     }
     
@@ -229,7 +244,26 @@ export default function FoilContainer({
     
     setLoading(prev => ({ ...prev, [type]: true }));
     
+    const previousQuantity = cardQuantities[foilTypeKey];
+    
+    setCardQuantities(prev => ({
+      ...prev,
+      [foilTypeKey]: Math.max(0, prev[foilTypeKey] - 1)
+    }));
+    
+    const cardName = card?.name || "Card";
+    const toastId = toast.success(`Removed ${cardName} (${type}) from collection.`);
+    
     try {
+      if (collections.length === 0) {
+        setCardQuantities(prev => ({
+          ...prev,
+          [foilTypeKey]: previousQuantity
+        }));
+        toast.error("You don't have any collections yet.");
+        return;
+      }
+      
       let cardToUpdate = null;
       let collectionId = null;
       
@@ -248,42 +282,122 @@ export default function FoilContainer({
       }
       
       if (!cardToUpdate || !collectionId) {
+        setCardQuantities(prev => ({
+          ...prev,
+          [foilTypeKey]: previousQuantity
+        }));
         toast.error(`Couldn't find this card in your collection.`);
         return;
       }
       
+      let success = false;
+      
       if (cardToUpdate.quantity === 1) {
-        const success = await removeCardFromCollection(collectionId, cardToUpdate.id);
-        
-        if (success) {
-          setCardQuantities(prev => ({
-            ...prev,
-            [foilTypeKey]: 0
-          }));
-          toast.success(`Removed ${type} card from collection.`);
-        }
+        success = await removeCardFromCollection(collectionId, cardToUpdate.id);
       } else {
         const updatedCard = await updateCardInCollection(
           collectionId, 
           cardToUpdate.id, 
           { quantity: cardToUpdate.quantity - 1 }
         );
-        
-        if (updatedCard) {
-          setCardQuantities(prev => ({
-            ...prev,
-            [foilTypeKey]: Math.max(0, prev[foilTypeKey] - 1)
-          }));
-          toast.success(`Removed one ${type} card from collection.`);
-        }
+        success = !!updatedCard;
+      }
+      
+      if (!success) {
+        setCardQuantities(prev => ({
+          ...prev,
+          [foilTypeKey]: previousQuantity
+        }));
+        toast.error('Failed to remove card.');
       }
     } catch (err) {
       console.error('Error removing card from collection:', err);
+      
+      setCardQuantities(prev => ({
+        ...prev,
+        [foilTypeKey]: previousQuantity
+      }));
+      
       toast.error('Failed to remove card.');
     } finally {
       setLoading(prev => ({ ...prev, [type]: false }));
     }
   };
+  
+  if (listStyle) {
+    return (
+      <div className={`${className}`}>
+        <h3 className="text-base sm:text-lg font-semibold mb-2 sm:mb-3" style={{ color: "#8A3F3F" }}>Card Variants</h3>
+        <div className="rounded-lg p-3 sm:p-4" style={{ backgroundColor: "rgba(40,40,40,0.6)" }}>
+          {foilTypes.map((foilType, index) => {
+            const foilTypeKey = foilType.toLowerCase().includes('reverse') 
+              ? "reverse holo" 
+              : (foilType.toLowerCase().includes('holo') ? "holo" : "normal");
+            
+            const displayName = foilType === "normal" ? "Normal" : 
+                               (foilType === "holo" ? "Holo Foil" : 
+                               (foilType === "reverse holo" ? "Reverse Holo" : foilType));
+            
+            let typeColor = "#4e4e4e";
+            if (foilType.toLowerCase().includes('reverse')) {
+              typeColor = "#D32F2F";
+            } else if (foilType.toLowerCase().includes('holo')) {
+              typeColor = "#1976D2";
+            } else {
+              typeColor = "#388E3C";
+            }
+            
+            return (
+              <div 
+                key={`${cardId}-${foilType}`}
+                className="flex justify-between items-center py-2 border-b border-gray-700 last:border-b-0"
+              >
+                <div className="flex items-center">
+                  <div 
+                    className="w-3 h-3 rounded-full mr-2" 
+                    style={{ backgroundColor: typeColor }}
+                  ></div>
+                  <span className="text-white text-sm">{displayName}</span>
+                </div>
+                
+                <div className="flex items-center">
+                  {card?.tcgplayer?.prices?.[foilTypeKey === "normal" ? "normal" : (foilTypeKey === "holo" ? "holofoil" : "reverseHolofoil")] && (
+                    <span className="text-xs px-2 py-0.5 rounded-sm mr-4" style={{ backgroundColor: "rgba(138, 63, 63, 0.2)", color: "#7FC99F" }}>
+                      ${card.tcgplayer.prices[foilTypeKey === "normal" ? "normal" : (foilTypeKey === "holo" ? "holofoil" : "reverseHolofoil")].market?.toFixed(2) || "—"}
+                    </span>
+                  )}
+                  
+                  <div className="flex items-center">
+                    <button 
+                      className="w-6 h-6 flex items-center justify-center rounded-full bg-gray-800 hover:bg-gray-700 mr-1 transition-colors"
+                      onClick={() => handleDecrement(foilType)}
+                      disabled={!cardQuantities[foilTypeKey] || cardQuantities[foilTypeKey] <= 0}
+                      style={{ opacity: (!cardQuantities[foilTypeKey] || cardQuantities[foilTypeKey] <= 0) ? 0.5 : 1 }}
+                    >
+                      <span className="text-white text-sm font-bold">-</span>
+                    </button>
+                    
+                    <span className="w-8 text-center text-white">{cardQuantities[foilTypeKey] || 0}</span>
+                    
+                    <button 
+                      className="w-6 h-6 flex items-center justify-center rounded-full bg-gray-800 hover:bg-gray-700 ml-1 transition-colors"
+                      onClick={() => handleAddToCollection(foilType)}
+                    >
+                      <span className="text-white text-sm font-bold">+</span>
+                    </button>
+                    
+                    {loading[foilType] && (
+                      <div className="ml-2 w-3 h-3 rounded-full border-2 border-white border-t-transparent animate-spin"></div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    );
+  }
   
   return (
     <div 
