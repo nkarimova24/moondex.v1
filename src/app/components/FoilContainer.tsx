@@ -22,20 +22,24 @@ function CardFoil({
   const normalizedType = foilType.toLowerCase();
   
   let borderColor = '';
+  let bgColor = '';
   let hoverBg = '';
   let tooltipText = '';
   
   if (normalizedType.includes('normal')) {
     borderColor = 'border-green-600';
-    hoverBg = 'hover:bg-green-600/10';
+    bgColor = 'bg-green-600/20';
+    hoverBg = 'hover:bg-green-600/30';
     tooltipText = 'Normal';
   } else if (normalizedType.includes('holo') && normalizedType.includes('reverse')) {
     borderColor = 'border-red-600';
-    hoverBg = 'hover:bg-red-600/10';
+    bgColor = 'bg-red-600/20';
+    hoverBg = 'hover:bg-red-600/30';
     tooltipText = 'Reverse Holo';
   } else if (normalizedType.includes('holo')) {
     borderColor = 'border-blue-600';
-    hoverBg = 'hover:bg-blue-600/10';
+    bgColor = 'bg-blue-600/20';
+    hoverBg = 'hover:bg-blue-600/30';
     tooltipText = 'Holo';
   }
 
@@ -60,16 +64,17 @@ function CardFoil({
         <span className="text-white text-xs font-bold">-</span>
       </button>
       
-      {/* Foil indicator box */}
+      {/* Foil indicator box with quantity inside */}
       <div 
-        className={`w-6 h-6 border-2 rounded-md ${borderColor} ${hoverBg} bg-transparent transition-colors duration-200 mx-auto relative`}
+        className={`w-6 h-6 border rounded-md ${borderColor} ${bgColor} ${hoverBg} transition-colors duration-200 mx-auto relative flex items-center justify-center`}
         title={`Foil type: ${tooltipText}${quantity > 0 ? ` (${quantity} in collection)` : ''}`}
       >
-        {/* Show quantity badge if quantity > 0 */}
-        {quantity > 0 && (
-          <div className="absolute -top-2 -right-2 bg-[#8A3F3F] text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
+        {quantity > 0 ? (
+          <span className="text-xs font-bold text-white">
             {quantity}
-          </div>
+          </span>
+        ) : (
+          <span className="text-xs text-gray-400">0</span>
         )}
       </div>
       
