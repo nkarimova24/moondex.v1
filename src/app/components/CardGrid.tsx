@@ -116,12 +116,16 @@ export default function CardGrid({ cards }: CardGridProps) {
               
               <div className="mt-2 flex flex-wrap items-center justify-between">
                 {/* Price indicator */}
-                {card.cardmarket?.prices?.trendPrice && (
+                {card.cardmarket?.prices && (
                   <span 
                     className="text-xs px-1.5 py-0.5 bg-[#8A3F3F] text-white rounded-full"
-                    title={`Trend price: ${card.cardmarket.prices.trendPrice.toFixed(2)}`}
+                    title={card.cardmarket.prices.averageSellPrice 
+                      ? `Average sell price: ${card.cardmarket.prices.averageSellPrice.toFixed(2)}` 
+                      : `Trend price: ${card.cardmarket.prices.trendPrice?.toFixed(2)}`}
                   >
-                    ${card.cardmarket.prices.trendPrice.toFixed(2)}
+                    ${card.cardmarket.prices.averageSellPrice 
+                      ? card.cardmarket.prices.averageSellPrice.toFixed(2) 
+                      : card.cardmarket.prices.trendPrice?.toFixed(2) || "N/A"}
                   </span>
                 )}
                 
