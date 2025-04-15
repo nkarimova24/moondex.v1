@@ -5,7 +5,6 @@ import { PokemonCard } from "@/app/lib/api";
 import { X, ChevronLeft, ChevronRight, Heart } from "lucide-react";
 import Image from "next/image";
 
-// Update the type definition to include attacks
 interface Attack {
   name: string;
   cost?: string[];
@@ -14,7 +13,6 @@ interface Attack {
   text?: string;
 }
 
-// Update PokemonCard interface to ensure attacks are recognized
 interface ExtendedPokemonCard extends PokemonCard {
   attacks?: Attack[];
 }

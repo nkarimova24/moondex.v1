@@ -1,4 +1,3 @@
-// API client setup for both Pokemon TCG API and Laravel backend
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
@@ -14,6 +13,18 @@ export const authApiClient = axios.create({
     'Content-Type': 'application/json',
   },
 });
+
+authApiClient.interceptors.request.use(
+  (config) => {
+    const token = Cookies.get('auth_token');
+    if (token) {
+      config.headers = config.headers || {};
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
 
 authApiClient.interceptors.response.use(
   (response) => {

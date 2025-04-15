@@ -82,28 +82,32 @@ export const CollectionProvider = ({ children }: { children: ReactNode }) => {
   };
 
   // Create a new collection
-  const createCollection = async (name: string, description?: string): Promise<Collection | null> => {
-    setError(null);
+const createCollection = async (name: string, description?: string): Promise<Collection | null> => {
+  setError(null);
+  console.log("Creating collection with name:", name);
+  
+  try {
+    const response = await authApiClient.post<{ status: string; data: Collection }>('/collections', {
+      name,
+      description
+    });
     
-    try {
-      const response = await authApiClient.post<{ status: string; data: Collection }>('/collections', {
-        name,
-        description
-      });
-      
-      if (response.data.status === 'success') {
-        const newCollection = response.data.data;
-        setCollections([...collections, newCollection]);
-        return newCollection;
-      }
-      
-      return null;
-    } catch (err: any) {
-      console.error('Error creating collection:', err);
-      setError('Failed to create collection. Please try again.');
-      return null;
+    console.log("Collection creation response:", response.data);
+    
+    if (response.data.status === 'success') {
+      const newCollection = response.data.data;
+      setCollections([...collections, newCollection]);
+      return newCollection;
     }
-  };
+    
+    console.error("Collection creation failed with response:", response.data);
+    return null;
+  } catch (err: any) {
+    console.error("Error creating collection:", err.response?.data || err.message);
+    setError('Failed to create collection. Please try again.');
+    return null;
+  }
+};
 
   // Update a collection
   const updateCollection = async (id: number, name: string, description?: string): Promise<Collection | null> => {
