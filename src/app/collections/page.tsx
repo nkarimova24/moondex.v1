@@ -42,6 +42,7 @@ interface CollectionPokemonCard extends PokemonCard {
   };
   attacks?: Attack[];
   abilities?: Ability[];
+  notes?: string;
 }
 
 export default function CollectionPage() {

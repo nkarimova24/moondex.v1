@@ -4,7 +4,6 @@ import { createContext, useState, useEffect, useContext, ReactNode } from 'react
 import { useAuth } from '@/context/AuthContext';
 import { authApiClient } from '@/app/lib/api/client';
 
-// Define types for our collection data
 export interface CollectionCard {
   id: number;
   collection_id: number;
@@ -41,6 +40,7 @@ interface CollectionContextType {
   addCardToCollection: (collectionId: number, cardData: Partial<CollectionCard>) => Promise<CollectionCard | null>;
   updateCardInCollection: (collectionId: number, cardId: number, cardData: Partial<CollectionCard>) => Promise<CollectionCard | null>;
   removeCardFromCollection: (collectionId: number, cardId: number) => Promise<boolean>;
+  refreshCardData: (collectionId: number, cardId: number) => Promise<CollectionCard | null>;
 }
 
 const CollectionContext = createContext<CollectionContextType | undefined>(undefined);
@@ -51,7 +51,6 @@ export const CollectionProvider = ({ children }: { children: ReactNode }) => {
   const [error, setError] = useState<string | null>(null);
   const { isAuthenticated } = useAuth();
 
-  // Fetch collections when authenticated
   useEffect(() => {
     if (isAuthenticated) {
       fetchCollections();
@@ -140,7 +139,7 @@ const createCollection = async (name: string, description?: string): Promise<Col
     setError(null);
     
     try {
-      const response = await authApiClient.delete<{ status: string }>('/collections/${id}');
+      const response = await authApiClient.delete<{ status: string }>(`/collections/${id}`);
       
       if (response.data.status === 'success') {
         setCollections(collections.filter(collection => collection.id !== id));
@@ -167,7 +166,6 @@ const createCollection = async (name: string, description?: string): Promise<Col
         
         setCollections(prevCollections => prevCollections.map(collection => {
           if (collection.id === collectionId) {
-            // If the card already exists with the same id, replace it
             const cardIndex = collection.cards.findIndex(card => card.id === newCard.id);
             
             if (cardIndex >= 0) {
@@ -176,7 +174,6 @@ const createCollection = async (name: string, description?: string): Promise<Col
               return { ...collection, cards: updatedCards };
             }
             
-            // Otherwise add it as a new card
             return { ...collection, cards: [...collection.cards, newCard] };
           }
           return collection;
@@ -198,10 +195,16 @@ const createCollection = async (name: string, description?: string): Promise<Col
     setError(null);
     
     try {
+      console.log(`Updating card ${cardId} in collection ${collectionId} with data:`, cardData);
+      
       const response = await authApiClient.put<{ status: string; data: CollectionCard }>(`/collections/${collectionId}/cards/${cardId}`, cardData);
+      
+      console.log(`Update response for card ${cardId}:`, response.data);
       
       if (response.data.status === 'success') {
         const updatedCard = response.data.data;
+        
+        console.log(`Received updated card with notes:`, updatedCard.notes);
         
         setCollections(prevCollections => prevCollections.map(collection => {
           if (collection.id === collectionId) {
@@ -216,9 +219,11 @@ const createCollection = async (name: string, description?: string): Promise<Col
         return updatedCard;
       }
       
+      console.warn(`Update request for card ${cardId} returned non-success status:`, response.data);
       return null;
     } catch (err: any) {
       console.error('Error updating card in collection:', err);
+      console.error('Error details:', err.response?.data || err.message);
       setError('Failed to update card. Please try again.');
       return null;
     }
@@ -251,6 +256,53 @@ const createCollection = async (name: string, description?: string): Promise<Col
     }
   };
 
+  // Refresh card data from a collection
+  const refreshCardData = async (collectionId: number, cardId: number): Promise<CollectionCard | null> => {
+    setError(null);
+    
+    try {
+      console.log(`Refreshing card data for card ${cardId} in collection ${collectionId}`);
+      
+      const response = await authApiClient.get<{ status: string; data: Collection }>(`/collections/${collectionId}`);
+      
+      console.log(`Collection refresh response status: ${response.data.status}`);
+      
+      if (response.data.status === 'success') {
+        const collection = response.data.data;
+        const refreshedCard = collection.cards.find(card => card.id === cardId);
+        
+        if (refreshedCard) {
+          console.log(`Found card in collection:`, refreshedCard);
+          console.log(`Notes from refreshed card:`, refreshedCard.notes);
+          
+          setCollections(prevCollections => prevCollections.map(collection => {
+            if (collection.id === collectionId) {
+              const updatedCards = collection.cards.map(card => 
+                card.id === cardId ? refreshedCard : card
+              );
+              return { ...collection, cards: updatedCards };
+            }
+            return collection;
+          }));
+          
+          return refreshedCard;
+        } else {
+          console.warn(`Card ${cardId} not found in collection ${collectionId}`);
+          return null;
+        }
+      } else {
+        console.warn(`Refresh request returned non-success status:`, response.data);
+      }
+      
+      return null;
+    } catch (err: any) {
+      console.error('Error refreshing card data:', err);
+      console.error('Error details:', err.response?.data || err.message);
+      setError('Failed to refresh card data.');
+      return null;
+    }
+  };
+
   const value = {
     collections,
     loading,
@@ -261,7 +313,8 @@ const createCollection = async (name: string, description?: string): Promise<Col
     deleteCollection,
     addCardToCollection,
     updateCardInCollection,
-    removeCardFromCollection
+    removeCardFromCollection,
+    refreshCardData
   };
 
   return (

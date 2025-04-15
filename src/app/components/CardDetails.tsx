@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import { useCollection } from "@/context/CollectionContext";
 import { PokemonCard } from "@/app/lib/api";
 import { X, ChevronLeft, ChevronRight, Heart, FileText, Info, Edit2, Trash2, Plus } from "lucide-react";
 import Image from "next/image";
@@ -27,6 +28,7 @@ interface CollectionPokemonCard extends PokemonCard {
     is_reverse_holo: boolean;
     collection_id: number;
     variants: Record<string, number>;
+    notes?: string;
   };
   attacks?: Attack[];
   abilities?: {
@@ -34,6 +36,7 @@ interface CollectionPokemonCard extends PokemonCard {
     text: string;
     type: string;
   }[];
+  notes?: string;
 }
 
 interface CardDetailsProps {
@@ -52,6 +55,7 @@ interface CardNote {
 
 export default function CardDetails({ card, allCards, onClose, onNavigate }: CardDetailsProps) {
   const [isFavorite, setIsFavorite] = useState(false);
+  const { updateCardInCollection, refreshCardData, fetchCollections, collections } = useCollection();
   const [isMobile, setIsMobile] = useState(false);
   const [activeTab, setActiveTab] = useState<'details' | 'notes'>('details');
   const [notes, setNotes] = useState<CardNote[]>([]);
@@ -61,7 +65,89 @@ export default function CardDetails({ card, allCards, onClose, onNavigate }: Car
   const currentIndex = allCards.findIndex(c => c.id === card.id);
   const hasPrevious = currentIndex > 0;
   const hasNext = currentIndex < allCards.length - 1;
-
+  
+  const [currentCard, setCurrentCard] = useState<CollectionPokemonCard>(card);
+  
+  useEffect(() => {
+    const handleCardAddedToCollection = async (event: any) => {
+      const { cardId, collectionCardId, collectionId, isFoil, isReverseHolo } = event.detail;
+      
+      if (cardId === currentCard.id) {
+        console.log('Card was added to collection, updating card details:', event.detail);
+        
+        try {
+          const refreshedCard = await refreshCardData(collectionId, collectionCardId);
+          
+          if (refreshedCard) {
+            setCurrentCard(prevCard => ({
+              ...prevCard,
+              collection: {
+                id: collectionCardId,
+                collection_id: collectionId,
+                is_foil: isFoil,
+                is_reverse_holo: isReverseHolo,
+                quantity: 1,
+                variants: {
+                  normal: !isFoil && !isReverseHolo ? 1 : 0,
+                  holo: isFoil ? 1 : 0,
+                  reverse_holo: isReverseHolo ? 1 : 0
+                }
+              }
+            }));
+            
+            console.log('Updated card with collection info:', refreshedCard);
+          } else {
+            console.log('Could not refresh card data, but updating UI with collection info');
+            setCurrentCard(prevCard => ({
+              ...prevCard,
+              collection: {
+                id: collectionCardId,
+                collection_id: collectionId,
+                is_foil: isFoil,
+                is_reverse_holo: isReverseHolo,
+                quantity: 1,
+                variants: {
+                  normal: !isFoil && !isReverseHolo ? 1 : 0,
+                  holo: isFoil ? 1 : 0,
+                  reverse_holo: isReverseHolo ? 1 : 0
+                }
+              }
+            }));
+          }
+        } catch (error) {
+          console.error('Failed to fetch updated card data:', error);
+          
+          console.log('Error fetching card data, but updating UI with collection info');
+          setCurrentCard(prevCard => ({
+            ...prevCard,
+            collection: {
+              id: collectionCardId,
+              collection_id: collectionId,
+              is_foil: isFoil,
+              is_reverse_holo: isReverseHolo,
+              quantity: 1,
+              variants: {
+                normal: !isFoil && !isReverseHolo ? 1 : 0,
+                holo: isFoil ? 1 : 0,
+                reverse_holo: isReverseHolo ? 1 : 0
+              }
+            }
+          }));
+        }
+      }
+    };
+    
+    document.addEventListener('cardAddedToCollection', handleCardAddedToCollection);
+    
+    return () => {
+      document.removeEventListener('cardAddedToCollection', handleCardAddedToCollection);
+    };
+  }, [currentCard.id, refreshCardData]);
+  
+  useEffect(() => {
+    setCurrentCard(card);
+  }, [card]);
+  
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
@@ -75,40 +161,170 @@ export default function CardDetails({ card, allCards, onClose, onNavigate }: Car
   }, []);
 
   useEffect(() => {
-    const savedNotesString = localStorage.getItem(`card_notes_${card.id}`);
+    if (currentCard.collection?.notes) {
+      try {
+        const savedNotes = JSON.parse(currentCard.collection.notes);
+        if (Array.isArray(savedNotes) && savedNotes.length > 0) {
+          setNotes(savedNotes);
+          console.log("Loaded notes from database:", savedNotes);
+          return;
+        }
+      } catch (error) {
+        console.error("Failed to parse notes from database:", error);
+      }
+    }
+    
+    // Fallback to localStorage
+    const savedNotesString = localStorage.getItem(`card_notes_${currentCard.id}`);
     if (savedNotesString) {
       try {
         const savedNotes = JSON.parse(savedNotesString);
         setNotes(Array.isArray(savedNotes) ? savedNotes : []);
+        console.log("Loaded notes from localStorage:", savedNotes);
       } catch (error) {
-        console.error("Failed to parse saved notes:", error);
+        console.error("Failed to parse saved notes from localStorage:", error);
         setNotes([]);
       }
     } else {
+      console.log("No notes found for card", currentCard.id);
       setNotes([]);
     }
+    
     setNewNoteText('');
     setEditingNoteId(null);
-  }, [card.id]);
-
-  const saveNotes = useCallback((updatedNotes: CardNote[]) => {
-    localStorage.setItem(`card_notes_${card.id}`, JSON.stringify(updatedNotes));
+  }, [currentCard.id, currentCard.collection]);
+  
+  const saveNotes = useCallback(async (updatedNotes: CardNote[]) => {
+    try {
+      localStorage.setItem(`card_notes_${currentCard.id}`, JSON.stringify(updatedNotes));
+      console.log(`Saved notes for card ${currentCard.id} to localStorage`, updatedNotes);
+    } catch (error) {
+      console.error("Error saving notes to localStorage:", error);
+    }
+    
     setNotes(updatedNotes);
-  }, [card.id]);
+    
+    if (currentCard.collection?.id) {
+      const maxRetries = 2;
+      let retryCount = 0;
+      let saved = false;
+      
+      while (retryCount <= maxRetries && !saved) {
+        try {
+          const notesJson = JSON.stringify(updatedNotes);
+          console.log(`Attempt ${retryCount + 1}/${maxRetries + 1}: Saving notes to collection ${currentCard.collection.collection_id}, card ${currentCard.collection.id}`);
+          console.log('Notes payload:', notesJson);
+          
+          const cardData = { notes: notesJson };
+          console.log('Card data being sent:', cardData);
+          
+          const result = await updateCardInCollection(
+            currentCard.collection.collection_id,
+            currentCard.collection.id,
+            cardData
+          );
+          
+          if (!result) {
+            retryCount++;
+            if (retryCount <= maxRetries) {
+              console.warn(`Retry ${retryCount}/${maxRetries}: Failed to save notes to database`);
+              await new Promise(resolve => setTimeout(resolve, 500 * retryCount));
+            } else {
+              console.error("Maximum retries reached. Failed to save notes to database");
+              toast.error("Could not save to database. Your notes are saved locally.");
+            }
+          } else {
+            console.log("Notes saved to database successfully:", result);
+            
+            if (result.notes) {
+              try {
+                const parsedNotes = JSON.parse(result.notes);
+                console.log("Parsed saved notes from result:", parsedNotes);
+              } catch (e) {
+                console.error("Could not parse saved notes from result:", e);
+              }
+            } else {
+              console.warn("No notes in result after saving");
+            }
+            
+            toast.success("Notes saved!");
+            saved = true;
+            
+          }
+        } catch (error) {
+          retryCount++;
+          console.error(`Attempt ${retryCount}/${maxRetries + 1} failed:`, error);
+          
+          if (retryCount > maxRetries) {
+            toast.error("Error saving notes. Your notes are saved locally.");
+          } else {
+            await new Promise(resolve => setTimeout(resolve, 500 * retryCount));
+          }
+        }
+      }
+    } else {
+      console.log("Card not in collection, saving notes to localStorage only");
+      
+      console.log("Checking if the card exists in any collection...");
+      
+      try {
+        await fetchCollections();
+        console.log("Collections refreshed, checking for card");
+        
+        for (const collection of collections) {
+          if (!collection.cards) continue;
+          
+          const cardInCollection = collection.cards.find(
+            card => card.card_id === currentCard.id
+          );
+          
+          if (cardInCollection) {
+            console.log(`Found card in collection ${collection.id}, attempting to save notes now`);
+            
+            setCurrentCard(prevCard => ({
+              ...prevCard,
+              collection: {
+                id: cardInCollection.id,
+                collection_id: collection.id,
+                is_foil: cardInCollection.is_foil,
+                is_reverse_holo: cardInCollection.is_reverse_holo,
+                quantity: cardInCollection.quantity,
+                variants: {
+                  normal: !cardInCollection.is_foil && !cardInCollection.is_reverse_holo ? cardInCollection.quantity : 0,
+                  holo: cardInCollection.is_foil ? cardInCollection.quantity : 0,
+                  reverse_holo: cardInCollection.is_reverse_holo ? cardInCollection.quantity : 0,
+                }
+              }
+            }));
+            
+            setTimeout(() => {
+              saveNotes(updatedNotes);
+            }, 300);
+            
+            return;
+          }
+        }
+      } catch (err) {
+        console.error("Failed to refresh collections:", err);
+      }
+      
+      toast.success("Notes saved to local storage!");
+    }
+  }, [currentCard.id, currentCard.collection, updateCardInCollection, fetchCollections, collections]);
 
   const addNote = () => {
     if (!newNoteText.trim()) {
-      toast.error('Please enter a note');
+      toast.error('Note cannot be empty');
       return;
     }
-
+    
     const newNote: CardNote = {
       id: Date.now().toString(),
       text: newNoteText.trim(),
       createdAt: Date.now(),
       updatedAt: Date.now()
     };
-
+    
     const updatedNotes = [...notes, newNote];
     saveNotes(updatedNotes);
     setNewNoteText('');
@@ -251,6 +467,50 @@ export default function CardDetails({ card, allCards, onClose, onNavigate }: Car
     return { backgroundColor: colorValue, boxShadow: "0 1px 3px rgba(0,0,0,0.2)" };
   };
 
+  useEffect(() => {
+    const loadLatestCardData = async () => {
+      if (currentCard.collection?.id) {
+        try {
+          console.log(`Attempting to refresh card ${currentCard.collection.id} in collection ${currentCard.collection.collection_id}`);
+          const refreshedCard = await refreshCardData(currentCard.collection.collection_id, currentCard.collection.id);
+          
+          console.log('Refresh result:', refreshedCard);
+          
+          if (refreshedCard && refreshedCard.notes) {
+            console.log('Successfully refreshed card data with notes:', refreshedCard.notes);
+            
+            try {
+              const parsedNotes = JSON.parse(refreshedCard.notes);
+              console.log('Parsed notes from refreshed card:', parsedNotes);
+              
+              if (Array.isArray(parsedNotes) && parsedNotes.length > 0) {
+                setNotes(parsedNotes);
+                console.log("Updated notes from refreshed data");
+              } else {
+                console.warn("Refreshed notes are not an array or empty:", parsedNotes);
+              }
+            } catch (parseError) {
+              console.error("Error parsing notes from refreshed card:", parseError, refreshedCard.notes);
+            }
+          } else {
+            console.log('Card refresh returned no data or no notes, using existing data');
+            if (refreshedCard) {
+              console.log('Refreshed card data:', refreshedCard);
+            }
+          }
+        } catch (error) {
+          console.error('Failed to refresh card data, will use current data instead:', error);
+        }
+      } else {
+        console.log('Card not in collection, cannot refresh data');
+      }
+    };
+    
+    loadLatestCardData().catch(error => {
+      console.error('Unexpected error during card refresh:', error);
+    });
+  }, [currentCard.id, currentCard.collection, refreshCardData, setNotes]);
+
   return (
     <div 
       className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/75"
@@ -271,13 +531,13 @@ export default function CardDetails({ card, allCards, onClose, onNavigate }: Car
             borderBottom: "1px solid rgba(255,255,255,0.1)" 
           }}>
           <div className="flex items-center">
-            <span className="text-white font-bold text-sm sm:text-base">#{card.number}</span>
-            {card.set && (
-              <span className="text-white/70 ml-2 text-xs sm:text-sm hidden sm:inline">{card.set.name}</span>
+            <span className="text-white font-bold text-sm sm:text-base">#{currentCard.number}</span>
+            {currentCard.set && (
+              <span className="text-white/70 ml-2 text-xs sm:text-sm hidden sm:inline">{currentCard.set.name}</span>
             )}
           </div>
           
-          <div className="text-base sm:text-xl text-white font-bold truncate max-w-[150px] sm:max-w-none">{card.name}</div>
+          <div className="text-base sm:text-xl text-white font-bold truncate max-w-[150px] sm:max-w-none">{currentCard.name}</div>
           
           <div className="flex gap-1 sm:gap-3">
             <button
@@ -325,8 +585,8 @@ export default function CardDetails({ card, allCards, onClose, onNavigate }: Car
             >
               <div className="relative flex items-center justify-center">
                 <Image
-                  src={card.images.large || card.images.small}
-                  alt={card.name}
+                  src={currentCard.images.large || currentCard.images.small}
+                  alt={currentCard.name}
                   width={500}
                   height={700}
                   className="max-h-[30vh] sm:max-h-[45vh] md:max-h-[65vh] object-contain drop-shadow-xl transform transition-transform duration-300 hover:scale-105"
@@ -350,37 +610,37 @@ export default function CardDetails({ card, allCards, onClose, onNavigate }: Car
                   }}
                 >
                   <span className="text-white font-medium">
-                    {card.supertype} {card.subtypes?.join(", ")}
+                    {currentCard.supertype} {currentCard.subtypes?.join(", ")}
                   </span>
                 </div>
                 
                 {/* Fixed rarity display */}
-                {card.rarity && (
+                {currentCard.rarity && (
                   <div 
                     className="py-1 px-2 sm:px-3 rounded-md text-xs sm:text-sm"
-                    style={getRarityStyle(card.rarity)}
+                    style={getRarityStyle(currentCard.rarity)}
                   >
                     <span className="text-white font-medium">
-                      {card.rarity}
+                      {currentCard.rarity}
                     </span>
                   </div>
                 )}
               </div>
               
               {/* HP & Types */}
-              {card.supertype === "Pokémon" && (
+              {currentCard.supertype === "Pokémon" && (
                 <div className="mb-3 sm:mb-5 p-3 sm:p-4 rounded-lg" style={{ backgroundColor: "rgba(40,40,40,0.6)" }}>
-                  {card.hp && (
+                  {currentCard.hp && (
                     <div className="flex justify-between items-center mb-2">
                       <span className="text-gray-300 text-sm sm:text-base">HP</span>
-                      <span className="text-lg sm:text-xl font-bold" style={{ color: "#8A3F3F" }}>{card.hp}</span>
+                      <span className="text-lg sm:text-xl font-bold" style={{ color: "#8A3F3F" }}>{currentCard.hp}</span>
                     </div>
                   )}
-                  {card.types && card.types.length > 0 && (
+                  {currentCard.types && currentCard.types.length > 0 && (
                     <div className="flex items-center justify-between">
                       <span className="text-gray-300 text-sm sm:text-base">Types</span>
                       <div className="flex gap-1 sm:gap-2">
-                        {card.types.map(type => (
+                        {currentCard.types.map(type => (
                           <span 
                             key={type} 
                             className="px-1.5 sm:px-2 py-0.5 sm:py-1 rounded text-white font-medium text-xs sm:text-sm"
@@ -396,7 +656,7 @@ export default function CardDetails({ card, allCards, onClose, onNavigate }: Car
               )}
               
               {/* Evolution line */}
-              {(card.evolvesFrom || (card.evolvesTo && card.evolvesTo.length > 0)) && (
+              {(currentCard.evolvesFrom || (currentCard.evolvesTo && currentCard.evolvesTo.length > 0)) && (
                 <div 
                   className="mb-3 sm:mb-5 p-3 sm:p-4 rounded-lg" 
                   style={{ 
@@ -405,26 +665,26 @@ export default function CardDetails({ card, allCards, onClose, onNavigate }: Car
                   }}
                 >
                   <h3 className="text-base sm:text-lg font-semibold mb-2" style={{ color: "#8A3F3F" }}>Evolution Chain</h3>
-                  {card.evolvesFrom && (
+                  {currentCard.evolvesFrom && (
                     <div className="flex gap-2 items-center mb-1">
                       <span className="text-gray-400 text-xs sm:text-sm">Evolves From:</span>
-                      <span className="text-white font-medium text-xs sm:text-sm">{card.evolvesFrom}</span>
+                      <span className="text-white font-medium text-xs sm:text-sm">{currentCard.evolvesFrom}</span>
                     </div>
                   )}
-                  {card.evolvesTo && card.evolvesTo.length > 0 && (
+                  {currentCard.evolvesTo && currentCard.evolvesTo.length > 0 && (
                     <div className="flex gap-2 items-center">
                       <span className="text-gray-400 text-xs sm:text-sm">Evolves To:</span>
-                      <span className="text-white font-medium text-xs sm:text-sm">{card.evolvesTo.join(", ")}</span>
+                      <span className="text-white font-medium text-xs sm:text-sm">{currentCard.evolvesTo.join(", ")}</span>
                     </div>
                   )}
                 </div>
               )}
               
               {/* Abilities */}
-              {card.abilities && card.abilities.length > 0 && (
+              {currentCard.abilities && currentCard.abilities.length > 0 && (
                 <div className="mb-3 sm:mb-5">
                   <h3 className="text-base sm:text-lg font-semibold mb-2 sm:mb-3" style={{ color: "#8A3F3F" }}>Abilities</h3>
-                  {card.abilities.map((ability, index) => (
+                  {currentCard.abilities.map((ability, index) => (
                     <div 
                       key={index} 
                       className="mb-2 sm:mb-3 p-3 sm:p-4 rounded-lg" 
@@ -452,10 +712,10 @@ export default function CardDetails({ card, allCards, onClose, onNavigate }: Car
               )}
               
               {/* Attacks */}
-              {card.attacks && card.attacks.length > 0 && (
+              {currentCard.attacks && currentCard.attacks.length > 0 && (
                 <div className="mb-3 sm:mb-5">
                   <h3 className="text-base sm:text-lg font-semibold mb-2 sm:mb-3" style={{ color: "#8A3F3F" }}>Attacks</h3>
-                  {card.attacks.map((attack, index) => (
+                  {currentCard.attacks.map((attack, index) => (
                     <div 
                       key={index} 
                       className="mb-2 sm:mb-3 p-3 sm:p-4 rounded-lg" 
@@ -510,42 +770,40 @@ export default function CardDetails({ card, allCards, onClose, onNavigate }: Car
               )}
               
               {/* Card variants / foil types */}
-              {card.tcgplayer?.prices ? (
+              {currentCard.tcgplayer?.prices ? (
                 (() => {
                   const foilTypes = [];
-                  if (card.tcgplayer.prices.normal) foilTypes.push("normal");
-                  if (card.tcgplayer.prices.holofoil) foilTypes.push("holo");
-                  if (card.tcgplayer.prices.reverseHolofoil) foilTypes.push("reverse holo");
+                  if (currentCard.tcgplayer.prices.normal) foilTypes.push("normal");
+                  if (currentCard.tcgplayer.prices.holofoil) foilTypes.push("holo");
+                  if (currentCard.tcgplayer.prices.reverseHolofoil) foilTypes.push("reverse holo");
                   
                   return foilTypes.length > 0 ? (
                     <div className="mb-3 sm:mb-5">
                       <FoilContainer 
                         foilTypes={foilTypes} 
-                        cardId={card.id}
-                        card={card}
+                        cardId={currentCard.id}
+                        card={currentCard}
                         listStyle={true}
                       />
                     </div>
                   ) : (
-                    // If card has tcgplayer but no foil types detected, add a generic "normal" option
                     <div className="mb-3 sm:mb-5">
                       <FoilContainer 
                         foilTypes={["normal"]} 
-                        cardId={card.id}
-                        card={card}
+                        cardId={currentCard.id}
+                        card={currentCard}
                         listStyle={true}
                       />
                     </div>
                   );
                 })()
               ) : (
-                // No price data, add a dark gray container
-                !card.collection ? (
+                !currentCard.collection ? (
                   <div className="mb-3 sm:mb-5">
                     <FoilContainer 
                       foilTypes={["darkgray"]} 
-                      cardId={card.id}
-                      card={card}
+                      cardId={currentCard.id}
+                      card={currentCard}
                       listStyle={true}
                     />
                   </div>
@@ -553,51 +811,51 @@ export default function CardDetails({ card, allCards, onClose, onNavigate }: Car
               )}
               
               {/* Card market prices */}
-              {card.cardmarket?.prices && (
+              {currentCard.cardmarket?.prices && (
                 <div className="mb-3 sm:mb-4">
                   <h3 className="text-base sm:text-lg font-semibold mb-2 sm:mb-3" style={{ color: "#8A3F3F" }}>Market Prices</h3>
                   <div className="grid grid-cols-2 gap-2 sm:gap-4 p-3 sm:p-4 rounded-lg text-xs sm:text-sm" style={{ backgroundColor: "rgba(40,40,40,0.6)" }}>
-                    {card.cardmarket.prices.trendPrice !== undefined && (
+                    {currentCard.cardmarket.prices.trendPrice !== undefined && (
                       <>
                         <div className="text-gray-300">Trend Price:</div>
                         <div className="text-right font-medium" style={{ color: "#7FC99F" }}>
-                          {formatPrice(card.cardmarket.prices.trendPrice)}
+                          {formatPrice(currentCard.cardmarket.prices.trendPrice)}
                         </div>
                       </>
                     )}
                     
-                    {card.cardmarket.prices.averageSellPrice !== undefined && (
+                    {currentCard.cardmarket.prices.averageSellPrice !== undefined && (
                       <>
                         <div className="text-gray-300">Average Sell Price:</div>
                         <div className="text-right font-medium" style={{ color: "#7FC99F" }}>
-                          {formatPrice(card.cardmarket.prices.averageSellPrice)}
+                          {formatPrice(currentCard.cardmarket.prices.averageSellPrice)}
                         </div>
                       </>
                     )}
                     
-                    {card.cardmarket.prices.lowPrice !== undefined && (
+                    {currentCard.cardmarket.prices.lowPrice !== undefined && (
                       <>
                         <div className="text-gray-300">Low Price:</div>
                         <div className="text-right font-medium" style={{ color: "#7FC99F" }}>
-                          {formatPrice(card.cardmarket.prices.lowPrice)}
+                          {formatPrice(currentCard.cardmarket.prices.lowPrice)}
                         </div>
                       </>
                     )}
                     
-                    {card.cardmarket.prices.reverseHoloTrend !== undefined && 
-                     card.cardmarket.prices.reverseHoloTrend > 0 && (
+                    {currentCard.cardmarket.prices.reverseHoloTrend !== undefined && 
+                     currentCard.cardmarket.prices.reverseHoloTrend > 0 && (
                       <>
                         <div className="text-gray-300">Reverse Holo Trend:</div>
                         <div className="text-right font-medium" style={{ color: "#7FC99F" }}>
-                          {formatPrice(card.cardmarket.prices.reverseHoloTrend)}
+                          {formatPrice(currentCard.cardmarket.prices.reverseHoloTrend)}
                         </div>
                       </>
                     )}
                   </div>
                   
-                  {card.cardmarket.updatedAt && (
+                  {currentCard.cardmarket.updatedAt && (
                     <div className="text-xs text-gray-500 mt-1 sm:mt-2 text-right">
-                      Prices updated: {new Date(card.cardmarket.updatedAt).toLocaleDateString()}
+                      Prices updated: {new Date(currentCard.cardmarket.updatedAt).toLocaleDateString()}
                     </div>
                   )}
                 </div>
@@ -616,8 +874,8 @@ export default function CardDetails({ card, allCards, onClose, onNavigate }: Car
             >
               <div className="relative flex items-center justify-center">
                 <Image
-                  src={card.images.large || card.images.small}
-                  alt={card.name}
+                  src={currentCard.images.large || currentCard.images.small}
+                  alt={currentCard.name}
                   width={500}
                   height={700}
                   className="max-h-[30vh] sm:max-h-[45vh] md:max-h-[65vh] object-contain drop-shadow-xl transition-transform duration-300 hover:scale-105 opacity-70"

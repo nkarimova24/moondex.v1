@@ -16,6 +16,7 @@ interface CollectionPokemonCard extends PokemonCard {
     collection_id: number;
     variants: Record<string, number>;
   };
+  notes?: string;
 }
 
 interface CardGridProps {
@@ -144,7 +145,6 @@ export default function CardGrid({ cards }: CardGridProps) {
                         card={card}
                       />
                     ) : (
-                      // If card has tcgplayer but no foil types detected, add a generic "normal" option
                       <FoilContainer 
                         foilTypes={["normal"]} 
                         cardId={card.id}
@@ -153,7 +153,6 @@ export default function CardGrid({ cards }: CardGridProps) {
                     );
                   })()
                 ) : (
-                  // No price data available, add a dark gray FoilContainer
                   card.collection ? null : (
                     <FoilContainer 
                       foilTypes={["darkgray"]} 
@@ -163,7 +162,6 @@ export default function CardGrid({ cards }: CardGridProps) {
                   )
                 )}
                 
-                {/* If it's a collection card, display its foil type */}
                 {card.collection && !card.tcgplayer?.prices && (
                   <div className="text-xs px-1.5 py-0.5 border rounded-sm">
                     {card.collection.is_reverse_holo 

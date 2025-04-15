@@ -180,14 +180,12 @@ export default function FoilContainer({
     setErrorMessage('');
     setLoading(prev => ({ ...prev, [foilType]: true }));
     
-    // Determine the foil type key
     const normalizedType = foilType.toLowerCase();
     let foilTypeKey = "normal";
     let isFoil = false;
     let isReverseHolo = false;
     
     if (normalizedType === 'darkgray') {
-      // For cards with no price data, we'll add them as normal by default
       foilTypeKey = "normal";
     } else {
       isFoil = normalizedType.includes('holo') && !normalizedType.includes('reverse');
@@ -195,7 +193,6 @@ export default function FoilContainer({
       foilTypeKey = isReverseHolo ? "reverse holo" : (isFoil ? "holo" : "normal");
     }
     
-    // Optimistic UI update - immediately update the UI
     setCardQuantities(prev => {
       const newQuantities = { ...prev };
       newQuantities[foilTypeKey] = (newQuantities[foilTypeKey] || 0) + 1;
@@ -211,7 +208,6 @@ export default function FoilContainer({
       let isNewCollection = false;
       
       if (collections.length === 0) {
-        // Create a default collection if no collections exist
         const newCollection = await createCollection("My Collection", "Your default collection");
         
         if (!newCollection) {
@@ -249,8 +245,22 @@ export default function FoilContainer({
       } else if (isNewCollection) {
         toast.success('Created "My Collection" and added your first card!');
       }
-    } catch (err) {
-      console.error('Error adding card to collection:', err);
+      
+      if (result) {
+        const cardUpdatedEvent = new CustomEvent('cardAddedToCollection', { 
+          detail: { 
+            cardId,
+            collectionCardId: result.id,
+            collectionId: result.collection_id,
+            isFoil,
+            isReverseHolo
+          } 
+        });
+        document.dispatchEvent(cardUpdatedEvent);
+        console.log('Dispatched cardAddedToCollection event for card:', cardId);
+      }
+    } catch (error) {
+      console.error('Error adding card to collection:', error);
       
       setCardQuantities(prev => {
         const newQuantities = { ...prev };
@@ -258,7 +268,7 @@ export default function FoilContainer({
         return newQuantities;
       });
       
-      toast.error('An unexpected error occurred.');
+      toast.error('Error adding card to collection. Please try again.');
     } finally {
       setLoading(prev => ({ ...prev, [foilType]: false }));
     }
@@ -276,7 +286,6 @@ export default function FoilContainer({
     let isReverseHolo = false;
     
     if (normalizedType === 'darkgray') {
-      // For cards with no price data, we treat them as normal
       foilTypeKey = "normal";
     } else {
       isFoil = normalizedType.includes('holo') && !normalizedType.includes('reverse');

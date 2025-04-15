@@ -21,6 +21,7 @@ authApiClient.interceptors.request.use(
       config.headers = config.headers || {};
       config.headers.Authorization = `Bearer ${token}`;
     }
+    console.log(`API Request: ${config.method?.toUpperCase()} ${config.url}`, config.data);
     return config;
   },
   (error) => Promise.reject(error)
@@ -28,11 +29,20 @@ authApiClient.interceptors.request.use(
 
 authApiClient.interceptors.response.use(
   (response) => {
-    console.log('API Response:', response.status, response.statusText);
+    console.log('API Response:', response.status, response.statusText, response.config.url);
     return response;
   },
   (error) => {
-    console.error('API Error Response:', error.response?.status, error.response?.data);
+    console.error('API Error Response:', error.response?.status, error.response?.data, error.config?.url);
+    console.error('Error details:', {
+      url: error.config?.url,
+      method: error.config?.method,
+      data: error.config?.data,
+      headers: error.config?.headers,
+      status: error.response?.status,
+      statusText: error.response?.statusText,
+      responseData: error.response?.data
+    });
     return Promise.reject(error);
   }
 );
