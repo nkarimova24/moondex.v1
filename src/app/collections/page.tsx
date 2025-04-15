@@ -248,74 +248,29 @@ export default function CollectionPage() {
                         className={`w-full text-left px-4 py-2 text-sm ${filter === 'normal' ? 'bg-[#8A3F3F]/20 text-white' : 'text-gray-300 hover:bg-gray-800'}`}
                         onClick={() => handleFilterSelect('normal')}
                       >
-                        Normal
+                        Normal Cards
                       </button>
                       <button 
                         className={`w-full text-left px-4 py-2 text-sm ${filter === 'holo' ? 'bg-[#8A3F3F]/20 text-white' : 'text-gray-300 hover:bg-gray-800'}`}
                         onClick={() => handleFilterSelect('holo')}
                       >
-                        Holo
+                        Holo Cards
                       </button>
                       <button 
                         className={`w-full text-left px-4 py-2 text-sm ${filter === 'reverse_holo' ? 'bg-[#8A3F3F]/20 text-white' : 'text-gray-300 hover:bg-gray-800'}`}
                         onClick={() => handleFilterSelect('reverse_holo')}
                       >
-                        Reverse Holo
+                        Reverse Holo Cards
                       </button>
                     </div>
                   </div>
                 )}
               </div>
             </div>
-            
-            {/* Card Grid */}
-            {pokemonCards.length === 0 ? (
-              <div className="text-center py-12">
-                <p className="text-xl text-white mb-4">
-                  {filter ? 'No cards match the selected filter' : 'Your collection is empty'}
-                </p>
-                {filter ? (
-                  <button 
-                    className="px-4 py-2 bg-[#8A3F3F] text-white rounded-md hover:bg-[#6E2F2F] transition-colors"
-                    onClick={() => setFilter(null)}
-                  >
-                    Clear Filter
-                  </button>
-                ) : (
-                  <p className="text-gray-400">
-                    Browse cards and click the + button to add them to your collection
-                  </p>
-                )}
-              </div>
-            ) : (
-              <CardGrid cards={filteredCards} />
-            )}
           </div>
-          
-          {/* Collection Tips */}
-          {/* <div className="bg-[#2A2A2A] p-6 rounded-lg">
-            <h3 className="text-xl font-semibold text-white mb-4">Collection Tips</h3>
-            <ul className="text-gray-300 space-y-2">
-              <li className="flex items-start gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                </svg>
-                <span>Click the <strong>+</strong> button on any card to add it to your collection</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                </svg>
-                <span>Use the filter to view cards by foil type (Normal, Holo, Reverse Holo)</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                </svg>
-                <span>Click the trash icon to remove cards from your collection</span>
-              </li>
-            </ul>
-          </div> */}
+
+          {/* Card Grid */}
+          <CardGrid cards={filteredCards} />
         </div>
       ) : (
         <div className="bg-[#252525] rounded-lg p-8 text-center mb-8">
@@ -342,36 +297,28 @@ export default function CollectionPage() {
                   />
                 </div>
                 
-                <div className="flex gap-3 justify-center">
+                <div className="flex justify-end gap-3">
                   <button
                     type="button"
                     onClick={() => setCreateNewCollectionModal(false)}
-                    className="px-4 py-2 border border-gray-600 text-gray-300 rounded-md hover:bg-gray-800 transition-colors"
-                    disabled={isCreating}
+                    className="px-4 py-2 text-sm text-gray-300 hover:text-white transition-colors"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
-                    className="px-5 py-2 bg-[#8A3F3F] text-white rounded-md hover:bg-[#6E2F2F] transition-colors flex items-center gap-2"
                     disabled={isCreating}
+                    className="px-4 py-2 bg-[#8A3F3F] text-white rounded-md hover:bg-[#6E2F2F] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    {isCreating ? (
-                      <>
-                        <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                        <span>Creating...</span>
-                      </>
-                    ) : (
-                      'Create Collection'
-                    )}
+                    {isCreating ? 'Creating...' : 'Create Collection'}
                   </button>
                 </div>
               </form>
             </div>
           ) : (
-            <button 
-              className="px-5 py-2.5 bg-[#8A3F3F] text-white rounded-md hover:bg-[#6E2F2F] transition-colors"
+            <button
               onClick={() => setCreateNewCollectionModal(true)}
+              className="px-5 py-2.5 bg-[#8A3F3F] text-white rounded-md hover:bg-[#6E2F2F] transition-colors"
             >
               Create Collection
             </button>
