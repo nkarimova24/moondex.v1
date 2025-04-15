@@ -126,20 +126,38 @@ export default function CardGrid({ cards }: CardGridProps) {
                 )}
                 
                 {/* Card Foil indicator */}
-                {card.tcgplayer?.prices && (() => {
-                  const foilTypes = [];
-                  if (card.tcgplayer.prices.normal) foilTypes.push("normal");
-                  if (card.tcgplayer.prices.holofoil) foilTypes.push("holo");
-                  if (card.tcgplayer.prices.reverseHolofoil) foilTypes.push("reverse holo");
-                  
-                  return foilTypes.length > 0 ? (
+                {card.tcgplayer?.prices ? (
+                  (() => {
+                    const foilTypes = [];
+                    if (card.tcgplayer.prices.normal) foilTypes.push("normal");
+                    if (card.tcgplayer.prices.holofoil) foilTypes.push("holo");
+                    if (card.tcgplayer.prices.reverseHolofoil) foilTypes.push("reverse holo");
+                    
+                    return foilTypes.length > 0 ? (
+                      <FoilContainer 
+                        foilTypes={foilTypes} 
+                        cardId={card.id}
+                        card={card}
+                      />
+                    ) : (
+                      // If card has tcgplayer but no foil types detected, add a generic "normal" option
+                      <FoilContainer 
+                        foilTypes={["normal"]} 
+                        cardId={card.id}
+                        card={card}
+                      />
+                    );
+                  })()
+                ) : (
+                  // No price data available, add a dark gray FoilContainer
+                  card.collection ? null : (
                     <FoilContainer 
-                      foilTypes={foilTypes} 
+                      foilTypes={["darkgray"]} 
                       cardId={card.id}
                       card={card}
                     />
-                  ) : null;
-                })()}
+                  )
+                )}
                 
                 {/* If it's a collection card, display its foil type */}
                 {card.collection && !card.tcgplayer?.prices && (
@@ -162,7 +180,7 @@ export default function CardGrid({ cards }: CardGridProps) {
           card={selectedCard} 
           allCards={cards}
           onClose={handleCloseDetails}
-          // onNavigate={handleNavigate}
+          onNavigate={handleNavigate}
         />
       )}
     </>

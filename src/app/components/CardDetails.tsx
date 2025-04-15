@@ -399,23 +399,47 @@ export default function CardDetails({ card, allCards, onClose, onNavigate }: Car
             )}
             
             {/* Card variants / foil types */}
-            {card.tcgplayer?.prices && (() => {
-              const foilTypes = [];
-              if (card.tcgplayer.prices.normal) foilTypes.push("normal");
-              if (card.tcgplayer.prices.holofoil) foilTypes.push("holo");
-              if (card.tcgplayer.prices.reverseHolofoil) foilTypes.push("reverse holo");
-              
-              return foilTypes.length > 0 ? (
+            {card.tcgplayer?.prices ? (
+              (() => {
+                const foilTypes = [];
+                if (card.tcgplayer.prices.normal) foilTypes.push("normal");
+                if (card.tcgplayer.prices.holofoil) foilTypes.push("holo");
+                if (card.tcgplayer.prices.reverseHolofoil) foilTypes.push("reverse holo");
+                
+                return foilTypes.length > 0 ? (
+                  <div className="mb-3 sm:mb-5">
+                    <FoilContainer 
+                      foilTypes={foilTypes} 
+                      cardId={card.id}
+                      card={card}
+                      listStyle={true}
+                    />
+                  </div>
+                ) : (
+                  // If card has tcgplayer but no foil types detected, add a generic "normal" option
+                  <div className="mb-3 sm:mb-5">
+                    <FoilContainer 
+                      foilTypes={["normal"]} 
+                      cardId={card.id}
+                      card={card}
+                      listStyle={true}
+                    />
+                  </div>
+                );
+              })()
+            ) : (
+              // No price data, add a dark gray container
+              !card.collection ? (
                 <div className="mb-3 sm:mb-5">
                   <FoilContainer 
-                    foilTypes={foilTypes} 
+                    foilTypes={["darkgray"]} 
                     cardId={card.id}
                     card={card}
                     listStyle={true}
                   />
                 </div>
-              ) : null;
-            })()}
+              ) : null
+            )}
             
             {/* Card market prices */}
             {card.cardmarket?.prices && (

@@ -27,7 +27,13 @@ function CardFoil({
   let hoverBg = '';
   let tooltipText = '';
   
-  if (normalizedType.includes('normal')) {
+  if (normalizedType === 'darkgray') {
+    // Dark gray style for cards with no price data
+    borderColor = 'border-gray-600';
+    bgColor = 'bg-gray-700/50';
+    hoverBg = 'hover:bg-gray-600/50';
+    tooltipText = 'Add to Collection';
+  } else if (normalizedType.includes('normal')) {
     borderColor = 'border-green-600';
     bgColor = 'bg-green-600/20';
     hoverBg = 'hover:bg-green-600/30';
@@ -42,6 +48,12 @@ function CardFoil({
     bgColor = 'bg-blue-600/20';
     hoverBg = 'hover:bg-blue-600/30';
     tooltipText = 'Holo';
+  } else {
+    // Default fallback style
+    borderColor = 'border-gray-600';
+    bgColor = 'bg-gray-600/20';
+    hoverBg = 'hover:bg-gray-600/30';
+    tooltipText = 'Unknown';
   }
 
   return (
@@ -169,9 +181,19 @@ export default function FoilContainer({
     setLoading(prev => ({ ...prev, [foilType]: true }));
     
     // Determine the foil type key
-    const isFoil = foilType.includes('holo') && !foilType.includes('reverse');
-    const isReverseHolo = foilType.includes('reverse');
-    const foilTypeKey = isReverseHolo ? "reverse holo" : (isFoil ? "holo" : "normal");
+    const normalizedType = foilType.toLowerCase();
+    let foilTypeKey = "normal";
+    let isFoil = false;
+    let isReverseHolo = false;
+    
+    if (normalizedType === 'darkgray') {
+      // For cards with no price data, we'll add them as normal by default
+      foilTypeKey = "normal";
+    } else {
+      isFoil = normalizedType.includes('holo') && !normalizedType.includes('reverse');
+      isReverseHolo = normalizedType.includes('reverse');
+      foilTypeKey = isReverseHolo ? "reverse holo" : (isFoil ? "holo" : "normal");
+    }
     
     // Optimistic UI update - immediately update the UI
     setCardQuantities(prev => {
@@ -181,7 +203,8 @@ export default function FoilContainer({
     });
     
     const cardName = card?.name || "Card";
-    const toastId = toast.success(`Added ${cardName} (${foilType}) to collection!`);
+    const displayFoilType = normalizedType === 'darkgray' ? 'Normal' : foilType;
+    const toastId = toast.success(`Added ${cardName} (${displayFoilType}) to collection!`);
     
     try {
       let collectionId: number;
@@ -247,12 +270,22 @@ export default function FoilContainer({
       return;
     }
     
-    const isFoil = type.includes('holo') && !type.includes('reverse');
-    const isReverseHolo = type.includes('reverse');
-    const foilTypeKey = isReverseHolo ? "reverse holo" : (isFoil ? "holo" : "normal");
+    const normalizedType = type.toLowerCase();
+    let foilTypeKey = "normal";
+    let isFoil = false;
+    let isReverseHolo = false;
+    
+    if (normalizedType === 'darkgray') {
+      // For cards with no price data, we treat them as normal
+      foilTypeKey = "normal";
+    } else {
+      isFoil = normalizedType.includes('holo') && !normalizedType.includes('reverse');
+      isReverseHolo = normalizedType.includes('reverse');
+      foilTypeKey = isReverseHolo ? "reverse holo" : (isFoil ? "holo" : "normal");
+    }
     
     if (!cardQuantities[foilTypeKey] || cardQuantities[foilTypeKey] <= 0) {
-      toast.error(`No ${type} cards in your collection to remove.`);
+      toast.error(`No ${normalizedType === 'darkgray' ? 'normal' : type} cards in your collection to remove.`);
       return;
     }
     
@@ -266,7 +299,8 @@ export default function FoilContainer({
     }));
     
     const cardName = card?.name || "Card";
-    const toastId = toast.success(`Removed ${cardName} (${type}) from collection.`);
+    const displayFoilType = normalizedType === 'darkgray' ? 'Normal' : type;
+    const toastId = toast.success(`Removed ${cardName} (${displayFoilType}) from collection.`);
     
     try {
       if (collections.length === 0) {
@@ -344,18 +378,29 @@ export default function FoilContainer({
         <h3 className="text-base sm:text-lg font-semibold mb-2 sm:mb-3" style={{ color: "#8A3F3F" }}>Card Variants</h3>
         <div className="rounded-lg p-3 sm:p-4" style={{ backgroundColor: "rgba(40,40,40,0.6)" }}>
           {foilTypes.map((foilType, index) => {
-            const foilTypeKey = foilType.toLowerCase().includes('reverse') 
-              ? "reverse holo" 
-              : (foilType.toLowerCase().includes('holo') ? "holo" : "normal");
+            const normalizedType = foilType.toLowerCase();
+            let foilTypeKey = "normal";
             
-            const displayName = foilType === "normal" ? "Normal" : 
-                               (foilType === "holo" ? "Holo Foil" : 
-                               (foilType === "reverse holo" ? "Reverse Holo" : foilType));
+            if (normalizedType === 'darkgray') {
+              foilTypeKey = "normal";
+            } else {
+              foilTypeKey = normalizedType.includes('reverse') 
+                ? "reverse holo" 
+                : (normalizedType.includes('holo') ? "holo" : "normal");
+            }
+            
+            const displayName = normalizedType === "darkgray" 
+              ? "Variant NaN - Add to Collection" 
+              : (foilType === "normal" ? "Normal" 
+                : (foilType === "holo" ? "Holo Foil" 
+                : (foilType === "reverse holo" ? "Reverse Holo" : foilType)));
             
             let typeColor = "#4e4e4e";
-            if (foilType.toLowerCase().includes('reverse')) {
+            if (normalizedType === "darkgray") {
+              typeColor = "#707070";
+            } else if (normalizedType.includes('reverse')) {
               typeColor = "#D32F2F";
-            } else if (foilType.toLowerCase().includes('holo')) {
+            } else if (normalizedType.includes('holo')) {
               typeColor = "#1976D2";
             } else {
               typeColor = "#388E3C";
