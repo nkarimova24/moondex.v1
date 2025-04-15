@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { PokemonCard } from "@/app/lib/api/types";
 import CardDetails from "./CardDetails";
 import FoilContainer from "./FoilContainer";
@@ -42,26 +42,26 @@ export default function CardGrid({ cards }: CardGridProps) {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
   
-  const handleCardClick = (card: CollectionPokemonCard) => {
+  const handleCardClick = useCallback((card: CollectionPokemonCard) => {
     setSelectedCard(card);
-  };
+  }, []);
   
-  const handleCloseDetails = () => {
+  const handleCloseDetails = useCallback(() => {
     setSelectedCard(null);
-  };
+  }, []);
   
-  const handleNavigate = (card: CollectionPokemonCard) => {
+  const handleNavigate = useCallback((card: CollectionPokemonCard) => {
     setSelectedCard(card);
-  };
+  }, []);
   
-  const handleImageLoad = (cardId: string) => {
+  const handleImageLoad = useCallback((cardId: string) => {
     setLoadedImages(prev => ({
       ...prev,
       [cardId]: true
     }));
-  };
+  }, []);
   
-  const handleRemoveFromCollection = async (card: CollectionPokemonCard, e: React.MouseEvent) => {
+  const handleRemoveFromCollection = useCallback(async (card: CollectionPokemonCard, e: React.MouseEvent) => {
     e.stopPropagation();
     if (!card.collection) return;
     
@@ -75,7 +75,7 @@ export default function CardGrid({ cards }: CardGridProps) {
         console.error('Error removing card from collection:', err);
       }
     }
-  };
+  }, [removeCardFromCollection]);
   
   if (cards.length === 0) {
     return null;

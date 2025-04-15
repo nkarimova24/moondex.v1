@@ -132,7 +132,7 @@ export default function CollectionPage() {
     };
     
     fetchCardDetails();
-  }, [defaultCollection]);
+  }, [defaultCollection?.id]);
 
   // Handle creating a new collection
   const handleCreateCollection = async (e?: React.FormEvent) => {

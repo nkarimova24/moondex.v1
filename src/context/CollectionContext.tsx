@@ -165,7 +165,7 @@ const createCollection = async (name: string, description?: string): Promise<Col
       if (response.data.status === 'success') {
         const newCard = response.data.data;
         
-        setCollections(collections.map(collection => {
+        setCollections(prevCollections => prevCollections.map(collection => {
           if (collection.id === collectionId) {
             // If the card already exists with the same id, replace it
             const cardIndex = collection.cards.findIndex(card => card.id === newCard.id);
@@ -203,7 +203,7 @@ const createCollection = async (name: string, description?: string): Promise<Col
       if (response.data.status === 'success') {
         const updatedCard = response.data.data;
         
-        setCollections(collections.map(collection => {
+        setCollections(prevCollections => prevCollections.map(collection => {
           if (collection.id === collectionId) {
             const updatedCards = collection.cards.map(card => 
               card.id === cardId ? updatedCard : card
@@ -232,7 +232,7 @@ const createCollection = async (name: string, description?: string): Promise<Col
       const response = await authApiClient.delete<{ status: string }>(`/collections/${collectionId}/cards/${cardId}`);
       
       if (response.data.status === 'success') {
-        setCollections(collections.map(collection => {
+        setCollections(prevCollections => prevCollections.map(collection => {
           if (collection.id === collectionId) {
             const updatedCards = collection.cards.filter(card => card.id !== cardId);
             return { ...collection, cards: updatedCards };
