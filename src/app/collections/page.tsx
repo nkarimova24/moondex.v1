@@ -14,11 +14,7 @@ interface CollectionMetadata {
   is_foil: boolean;
   is_reverse_holo: boolean;
   collection_id: number;
-  variants?: {
-    normal?: number;
-    holo?: number;
-    reverse_holo?: number;
-  };
+  variants: Record<string, number>;
 }
 
 interface Attack {
@@ -42,11 +38,7 @@ interface CollectionPokemonCard extends PokemonCard {
     is_foil: boolean;
     is_reverse_holo: boolean;
     collection_id: number;
-    variants?: {
-      normal?: number;
-      holo?: number;
-      reverse_holo?: number;
-    };
+    variants: Record<string, number>;
   };
   attacks?: Attack[];
   abilities?: Ability[];
@@ -109,7 +101,7 @@ export default function CollectionPage() {
               (card: any) => card.card_id === currentCardId
             );
             
-            const variants = {
+            const variants: Record<string, number> = {
               normal: 0,
               holo: 0,
               reverse_holo: 0

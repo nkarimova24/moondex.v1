@@ -43,6 +43,7 @@ export default function SignUp() {
         name: userData.name,
         email: userData.email,
         password: userData.password,
+        password_confirmation: userData.confirmPassword,
       });
 
       if (result.success) {
