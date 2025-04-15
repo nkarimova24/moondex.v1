@@ -195,6 +195,23 @@ export default function Sidebar({ isOpen: propIsOpen, onToggle }: SidebarProps) 
           </Box>
           <Button
             fullWidth
+            variant="contained"
+            component={Link}
+            href="/profile"
+            sx={{ 
+              mb: 2,
+              backgroundColor: '#8A3F3F',
+              '&:hover': {
+                backgroundColor: '#612B2B',
+              },
+              textTransform: 'none',
+              fontWeight: 500,
+            }}
+          >
+            Go to Profile
+          </Button>
+          <Button
+            fullWidth
             variant="outlined"
             startIcon={<LogoutIcon />}
             onClick={handleLogout}
@@ -569,38 +586,6 @@ export default function Sidebar({ isOpen: propIsOpen, onToggle }: SidebarProps) 
         </List>
       </Box>
 
-      {/* Collection Link */}
-<ListItem disablePadding>
-  <ListItemButton 
-    component={Link} 
-    href="/collections"
-    sx={{ 
-      padding: "12px 20px",
-      transition: 'all 0.2s ease',
-      "&:hover": {
-        backgroundColor: "rgba(138, 63, 63, 0.15)",
-        paddingLeft: '24px',
-        borderLeft: '4px solid #8A3F3F',
-      },
-      borderLeft: '4px solid transparent',
-    }}
-  >
-    <ListItemText 
-      primary="My Collection" 
-      primaryTypographyProps={{ 
-        fontWeight: 500,
-        fontSize: "15px",
-        color: 'rgba(255,255,255,0.9)',
-        sx: {
-          '&:hover': {
-            color: 'rgba(255,255,255,0.95)',
-          }
-        }
-      }} 
-    />
-  </ListItemButton>
-</ListItem>
-      
         {/* Changelog Link - Added Here */}
         <ListItem disablePadding>
             <ListItemButton 

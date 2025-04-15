@@ -173,3 +173,37 @@ export interface PokemonSet {
     user?: User;
     token?: string;
   }
+
+  // Notes API interfaces
+  export interface CardNote {
+    id: number;
+    user_id: number;
+    card_id: string;
+    collection_id?: number | null;
+    deck_id?: number | null;
+    content: string;
+    created_at: string;
+    updated_at: string;
+  }
+
+  export interface CreateNoteRequest {
+    card_id: string;
+    collection_id?: number | null;
+    deck_id?: number | null;
+    content: string;
+  }
+
+  export interface UpdateNoteRequest {
+    content: string;
+  }
+
+  export interface NoteResponse {
+    id: number;
+    user_id: number;
+    card_id: string;
+    collection_id?: number | null;
+    deck_id?: number | null;
+    content: string;
+    created_at: string;
+    updated_at: string;
+  }

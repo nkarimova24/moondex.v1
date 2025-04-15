@@ -8,6 +8,8 @@ import GlobalSearchbar from "@/app/components/GlobalSearchbar";
 import { AuthProvider } from "@/context/AuthContext";
 import { LanguageProvider } from "@/context/LanguageContext";
 import { CollectionProvider } from "@/context/CollectionContext";
+import { NotesProvider } from '@/context/NotesContext';
+
 import "./globals.css";
 import Toast from "./components/Toast";
 
@@ -55,6 +57,7 @@ export default function RootLayout({
           <AuthProvider>
             <LanguageProvider>
               <CollectionProvider>
+              <NotesProvider>
               <Sidebar
                 isOpen={sidebarOpen}
                 onToggle={handleToggleSidebar}
@@ -72,6 +75,7 @@ export default function RootLayout({
                   {children}
                 </main>
               </div>
+              </NotesProvider>
               </CollectionProvider>
             </LanguageProvider>
           </AuthProvider>

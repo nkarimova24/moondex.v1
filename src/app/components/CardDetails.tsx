@@ -7,6 +7,9 @@ import { X, ChevronLeft, ChevronRight, Heart, FileText, Info, Edit2, Trash2, Plu
 import Image from "next/image";
 import FoilContainer from "./FoilContainer";
 import toast from "react-hot-toast";
+import { authApiClient } from '../lib/api/client';
+import { createCardNote, getCardNotes, updateNote as updateNoteApi, deleteNote as deleteNoteApi } from '../lib/api/notes';
+import { useAuth } from "@/context/AuthContext";
 
 interface Attack {
   name: string;
@@ -44,6 +47,8 @@ interface CardDetailsProps {
   allCards: CollectionPokemonCard[];
   onClose: () => void;
   onNavigate: (card: CollectionPokemonCard) => void;
+  baseRoute?: string;
+  collectionMode?: boolean;
 }
 
 interface CardNote {
@@ -51,9 +56,10 @@ interface CardNote {
   text: string;
   createdAt: number;
   updatedAt: number;
+  server_id?: number;
 }
 
-export default function CardDetails({ card, allCards, onClose, onNavigate }: CardDetailsProps) {
+export default function CardDetails({ card, allCards, onClose, onNavigate, baseRoute, collectionMode }: CardDetailsProps) {
   const [isFavorite, setIsFavorite] = useState(false);
   const { updateCardInCollection, refreshCardData, fetchCollections, collections } = useCollection();
   const [isMobile, setIsMobile] = useState(false);
@@ -67,6 +73,10 @@ export default function CardDetails({ card, allCards, onClose, onNavigate }: Car
   const hasNext = currentIndex < allCards.length - 1;
   
   const [currentCard, setCurrentCard] = useState<CollectionPokemonCard>(card);
+  
+  const [noteServerIds, setNoteServerIds] = useState<Record<string, number>>({});
+  
+  const { isAuthenticated } = useAuth();
   
   useEffect(() => {
     const handleCardAddedToCollection = async (event: any) => {
@@ -161,95 +171,76 @@ export default function CardDetails({ card, allCards, onClose, onNavigate }: Car
   }, []);
 
   useEffect(() => {
-    if (currentCard.collection?.notes) {
+    const loadNotes = async () => {
+      const localStorageKey = `card_notes_${card.id}`;
+      const storedNotes = localStorage.getItem(localStorageKey);
+      
+      if (storedNotes) {
+        try {
+          const parsedNotes: CardNote[] = JSON.parse(storedNotes);
+          setNotes(parsedNotes);
+        } catch (e) {
+          console.error('Error parsing stored notes:', e);
+        }
+      }
+      
       try {
-        const savedNotes = JSON.parse(currentCard.collection.notes);
-        if (Array.isArray(savedNotes) && savedNotes.length > 0) {
-          setNotes(savedNotes);
-          console.log("Loaded notes from database:", savedNotes);
-          return;
+        if (isAuthenticated) {
+          const backendNotes = await getCardNotes(card.id);
+          if (backendNotes && Array.isArray(backendNotes) && backendNotes.length > 0) {
+            const convertedNotes: CardNote[] = backendNotes.map((note: any) => ({
+              id: `server_${note.id}`,
+              text: note.content,
+              createdAt: new Date(note.created_at).getTime(),
+              updatedAt: new Date(note.updated_at).getTime(),
+              server_id: note.id
+            }));
+            
+            const serverIdMap: Record<string, number> = {};
+            convertedNotes.forEach(note => {
+              if (note.server_id) {
+                serverIdMap[note.id] = note.server_id;
+              }
+            });
+            setNoteServerIds(serverIdMap);
+            
+            setNotes(convertedNotes);
+            
+            localStorage.setItem(localStorageKey, JSON.stringify(convertedNotes));
+          }
         }
       } catch (error) {
-        console.error("Failed to parse notes from database:", error);
+        console.error('Failed to load notes from server:', error);
       }
-    }
+    };
     
-    // Fallback to localStorage
-    const savedNotesString = localStorage.getItem(`card_notes_${currentCard.id}`);
-    if (savedNotesString) {
-      try {
-        const savedNotes = JSON.parse(savedNotesString);
-        setNotes(Array.isArray(savedNotes) ? savedNotes : []);
-        console.log("Loaded notes from localStorage:", savedNotes);
-      } catch (error) {
-        console.error("Failed to parse saved notes from localStorage:", error);
-        setNotes([]);
-      }
-    } else {
-      console.log("No notes found for card", currentCard.id);
-      setNotes([]);
-    }
-    
-    setNewNoteText('');
-    setEditingNoteId(null);
-  }, [currentCard.id, currentCard.collection]);
+    loadNotes();
+  }, [card.id, isAuthenticated]);
   
   const saveNotes = useCallback(async (updatedNotes: CardNote[]) => {
-    try {
-      localStorage.setItem(`card_notes_${currentCard.id}`, JSON.stringify(updatedNotes));
-      console.log(`Saved notes for card ${currentCard.id} to localStorage`, updatedNotes);
-    } catch (error) {
-      console.error("Error saving notes to localStorage:", error);
-    }
-    
+    const localStorageKey = `card_notes_${currentCard.id}`;
+    localStorage.setItem(localStorageKey, JSON.stringify(updatedNotes));
     setNotes(updatedNotes);
     
     if (currentCard.collection?.id) {
-      const maxRetries = 2;
-      let retryCount = 0;
       let saved = false;
+      let retryCount = 0;
+      const maxRetries = 3;
       
-      while (retryCount <= maxRetries && !saved) {
+      while (!saved && retryCount <= maxRetries) {
         try {
-          const notesJson = JSON.stringify(updatedNotes);
-          console.log(`Attempt ${retryCount + 1}/${maxRetries + 1}: Saving notes to collection ${currentCard.collection.collection_id}, card ${currentCard.collection.id}`);
-          console.log('Notes payload:', notesJson);
-          
-          const cardData = { notes: notesJson };
-          console.log('Card data being sent:', cardData);
-          
+          const serializedNotes = JSON.stringify(updatedNotes);
           const result = await updateCardInCollection(
             currentCard.collection.collection_id,
             currentCard.collection.id,
-            cardData
+            {
+              notes: serializedNotes
+            }
           );
           
-          if (!result) {
-            retryCount++;
-            if (retryCount <= maxRetries) {
-              console.warn(`Retry ${retryCount}/${maxRetries}: Failed to save notes to database`);
-              await new Promise(resolve => setTimeout(resolve, 500 * retryCount));
-            } else {
-              console.error("Maximum retries reached. Failed to save notes to database");
-              toast.error("Could not save to database. Your notes are saved locally.");
-            }
-          } else {
-            console.log("Notes saved to database successfully:", result);
-            
-            if (result.notes) {
-              try {
-                const parsedNotes = JSON.parse(result.notes);
-                console.log("Parsed saved notes from result:", parsedNotes);
-              } catch (e) {
-                console.error("Could not parse saved notes from result:", e);
-              }
-            } else {
-              console.warn("No notes in result after saving");
-            }
-            
+          if (result !== null) {
             toast.success("Notes saved!");
             saved = true;
-            
           }
         } catch (error) {
           retryCount++;
@@ -263,54 +254,32 @@ export default function CardDetails({ card, allCards, onClose, onNavigate }: Car
         }
       }
     } else {
-      console.log("Card not in collection, saving notes to localStorage only");
+      console.log("Card not in collection, saving notes to backend API");
       
-      console.log("Checking if the card exists in any collection...");
-      
-      try {
-        await fetchCollections();
-        console.log("Collections refreshed, checking for card");
-        
-        for (const collection of collections) {
-          if (!collection.cards) continue;
-          
-          const cardInCollection = collection.cards.find(
-            card => card.card_id === currentCard.id
-          );
-          
-          if (cardInCollection) {
-            console.log(`Found card in collection ${collection.id}, attempting to save notes now`);
-            
-            setCurrentCard(prevCard => ({
-              ...prevCard,
-              collection: {
-                id: cardInCollection.id,
-                collection_id: collection.id,
-                is_foil: cardInCollection.is_foil,
-                is_reverse_holo: cardInCollection.is_reverse_holo,
-                quantity: cardInCollection.quantity,
-                variants: {
-                  normal: !cardInCollection.is_foil && !cardInCollection.is_reverse_holo ? cardInCollection.quantity : 0,
-                  holo: cardInCollection.is_foil ? cardInCollection.quantity : 0,
-                  reverse_holo: cardInCollection.is_reverse_holo ? cardInCollection.quantity : 0,
-                }
+      if (isAuthenticated) {
+        for (const note of updatedNotes) {
+          if (!noteServerIds[note.id]) {
+            try {
+              const noteData = {
+                card_id: currentCard.id,
+                content: note.text
+              };
+              
+              const result = await createCardNote(noteData);
+              if (result && typeof result === 'object' && 'id' in result) {
+                setNoteServerIds(prev => ({ ...prev, [note.id]: result.id as number }));
               }
-            }));
-            
-            setTimeout(() => {
-              saveNotes(updatedNotes);
-            }, 300);
-            
-            return;
+            } catch (error) {
+              console.error('Failed to save note to server:', error);
+            }
           }
         }
-      } catch (err) {
-        console.error("Failed to refresh collections:", err);
+        toast.success("Notes saved!");
+      } else {
+        toast.success("Notes saved to local storage!");
       }
-      
-      toast.success("Notes saved to local storage!");
     }
-  }, [currentCard.id, currentCard.collection, updateCardInCollection, fetchCollections, collections]);
+  }, [currentCard.id, currentCard.collection, updateCardInCollection, noteServerIds, isAuthenticated]);
 
   const addNote = () => {
     if (!newNoteText.trim()) {
@@ -353,6 +322,13 @@ export default function CardDetails({ card, allCards, onClose, onNavigate }: Car
         : note
     );
     
+    const noteToUpdate = notes.find(note => note.id === editingNoteId);
+    if (noteToUpdate && noteServerIds[noteToUpdate.id]) {
+      const serverId = noteServerIds[noteToUpdate.id];
+      updateNoteApi(serverId, { content: editingNoteText.trim() })
+        .catch((error: Error) => console.error('Failed to update note on server:', error));
+    }
+    
     saveNotes(updatedNotes);
     setEditingNoteId(null);
     toast.success('Note updated successfully!');
@@ -360,6 +336,16 @@ export default function CardDetails({ card, allCards, onClose, onNavigate }: Car
 
   const deleteNote = (noteId: string) => {
     if (window.confirm('Are you sure you want to delete this note?')) {
+      if (noteServerIds[noteId]) {
+        const serverId = noteServerIds[noteId];
+        deleteNoteApi(serverId)
+          .catch((error: Error) => console.error('Failed to delete note on server:', error));
+        
+        const updatedServerIds = { ...noteServerIds };
+        delete updatedServerIds[noteId];
+        setNoteServerIds(updatedServerIds);
+      }
+      
       const updatedNotes = notes.filter(note => note.id !== noteId);
       saveNotes(updatedNotes);
       toast.success('Note deleted successfully!');
@@ -466,50 +452,6 @@ export default function CardDetails({ card, allCards, onClose, onNavigate }: Car
     
     return { backgroundColor: colorValue, boxShadow: "0 1px 3px rgba(0,0,0,0.2)" };
   };
-
-  useEffect(() => {
-    const loadLatestCardData = async () => {
-      if (currentCard.collection?.id) {
-        try {
-          console.log(`Attempting to refresh card ${currentCard.collection.id} in collection ${currentCard.collection.collection_id}`);
-          const refreshedCard = await refreshCardData(currentCard.collection.collection_id, currentCard.collection.id);
-          
-          console.log('Refresh result:', refreshedCard);
-          
-          if (refreshedCard && refreshedCard.notes) {
-            console.log('Successfully refreshed card data with notes:', refreshedCard.notes);
-            
-            try {
-              const parsedNotes = JSON.parse(refreshedCard.notes);
-              console.log('Parsed notes from refreshed card:', parsedNotes);
-              
-              if (Array.isArray(parsedNotes) && parsedNotes.length > 0) {
-                setNotes(parsedNotes);
-                console.log("Updated notes from refreshed data");
-              } else {
-                console.warn("Refreshed notes are not an array or empty:", parsedNotes);
-              }
-            } catch (parseError) {
-              console.error("Error parsing notes from refreshed card:", parseError, refreshedCard.notes);
-            }
-          } else {
-            console.log('Card refresh returned no data or no notes, using existing data');
-            if (refreshedCard) {
-              console.log('Refreshed card data:', refreshedCard);
-            }
-          }
-        } catch (error) {
-          console.error('Failed to refresh card data, will use current data instead:', error);
-        }
-      } else {
-        console.log('Card not in collection, cannot refresh data');
-      }
-    };
-    
-    loadLatestCardData().catch(error => {
-      console.error('Unexpected error during card refresh:', error);
-    });
-  }, [currentCard.id, currentCard.collection, refreshCardData, setNotes]);
 
   return (
     <div 

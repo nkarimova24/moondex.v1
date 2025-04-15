@@ -21,10 +21,12 @@ interface CollectionPokemonCard extends PokemonCard {
 
 interface CardGridProps {
   cards: CollectionPokemonCard[];
-  isSidebarOpen?: boolean; 
+  isSidebarOpen?: boolean;
+  baseRoute?: string;
+  collectionMode?: boolean;
 }
 
-export default function CardGrid({ cards }: CardGridProps) {
+export default function CardGrid({ cards, baseRoute, collectionMode }: CardGridProps) {
   const [selectedCard, setSelectedCard] = useState<CollectionPokemonCard | null>(null);
   const [loadedImages, setLoadedImages] = useState<Record<string, boolean>>({});
   const [isMobile, setIsMobile] = useState(false);
@@ -183,6 +185,8 @@ export default function CardGrid({ cards }: CardGridProps) {
           allCards={cards}
           onClose={handleCloseDetails}
           onNavigate={handleNavigate}
+          baseRoute={baseRoute}
+          collectionMode={collectionMode}
         />
       )}
     </>
