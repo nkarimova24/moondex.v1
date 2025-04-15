@@ -5,18 +5,30 @@ import { PokemonCard } from "@/app/lib/api/types";
 import CardDetails from "./CardDetails";
 import FoilContainer from "./FoilContainer";
 import Image from "next/image";
+import { Trash2 } from "lucide-react";
+import { useCollection } from "@/context/CollectionContext";
+
+// Extended type for cards with collection information
+interface CollectionPokemonCard extends PokemonCard {
+  collection?: {
+    id: number;
+    quantity: number;
+    is_foil: boolean;
+    is_reverse_holo: boolean;
+    collection_id: number;
+  };
+}
 
 interface CardGridProps {
-  cards: PokemonCard[];
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  cards: CollectionPokemonCard[];
   isSidebarOpen?: boolean; 
 }
 
 export default function CardGrid({ cards }: CardGridProps) {
-  const [selectedCard, setSelectedCard] = useState<PokemonCard | null>(null);
+  const [selectedCard, setSelectedCard] = useState<CollectionPokemonCard | null>(null);
   const [loadedImages, setLoadedImages] = useState<Record<string, boolean>>({});
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isMobile, setIsMobile] = useState(false);
+  const { removeCardFromCollection } = useCollection();
   
   useEffect(() => {
     const checkMobile = () => {
@@ -30,7 +42,7 @@ export default function CardGrid({ cards }: CardGridProps) {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
   
-  const handleCardClick = (card: PokemonCard) => {
+  const handleCardClick = (card: CollectionPokemonCard) => {
     setSelectedCard(card);
   };
   
@@ -38,7 +50,7 @@ export default function CardGrid({ cards }: CardGridProps) {
     setSelectedCard(null);
   };
   
-  const handleNavigate = (card: PokemonCard) => {
+  const handleNavigate = (card: CollectionPokemonCard) => {
     setSelectedCard(card);
   };
   
@@ -47,6 +59,22 @@ export default function CardGrid({ cards }: CardGridProps) {
       ...prev,
       [cardId]: true
     }));
+  };
+  
+  const handleRemoveFromCollection = async (card: CollectionPokemonCard, e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (!card.collection) return;
+    
+    if (window.confirm('Are you sure you want to remove this card from your collection?')) {
+      try {
+        await removeCardFromCollection(
+          card.collection.collection_id, 
+          card.collection.id
+        );
+      } catch (err) {
+        console.error('Error removing card from collection:', err);
+      }
+    }
   };
   
   if (cards.length === 0) {
@@ -60,7 +88,7 @@ export default function CardGrid({ cards }: CardGridProps) {
       <div className={`grid ${gridColsClass} gap-x-3 sm:gap-x-4 gap-y-8 sm:gap-y-10 w-full`}>
         {cards.map((card) => (
           <div 
-            key={card.id}
+            key={card.id + (card.collection?.id || '')}
             className="relative rounded-lg overflow-hidden hover:shadow-lg transition-shadow cursor-pointer max-w-[220px] mx-auto"
             onClick={() => handleCardClick(card)}
           >
@@ -79,6 +107,28 @@ export default function CardGrid({ cards }: CardGridProps) {
                 loading="lazy"
                 onLoad={() => handleImageLoad(card.id)}
               />
+              
+              {/* Show quantity badge if card is in collection */}
+              {card.collection && (
+                <div className="absolute top-2 right-2 bg-black/60 rounded-full px-2 py-0.5">
+                  <span className="text-xs text-white">
+                    x{card.collection.quantity}
+                  </span>
+                </div>
+              )}
+              
+              {/* Show remove button if card is in collection */}
+              {card.collection && (
+                <div className="absolute bottom-2 right-2">
+                  <button
+                    className="w-7 h-7 rounded-full bg-black/60 flex items-center justify-center text-white hover:bg-red-700/80 transition-colors"
+                    onClick={(e) => handleRemoveFromCollection(card, e)}
+                    title="Remove from collection"
+                  >
+                    <Trash2 size={14} />
+                  </button>
+                </div>
+              )}
             </div>
             
             <div className="p-1.5">
@@ -113,6 +163,17 @@ export default function CardGrid({ cards }: CardGridProps) {
                     />
                   ) : null;
                 })()}
+                
+                {/* If it's a collection card, display its foil type */}
+                {card.collection && !card.tcgplayer?.prices && (
+                  <div className="text-xs px-1.5 py-0.5 border rounded-sm">
+                    {card.collection.is_reverse_holo 
+                      ? 'Reverse Holo' 
+                      : card.collection.is_foil 
+                        ? 'Holo' 
+                        : 'Normal'}
+                  </div>
+                )}
               </div>
             </div>
           </div>

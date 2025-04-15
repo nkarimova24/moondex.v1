@@ -17,11 +17,27 @@ interface ExtendedPokemonCard extends PokemonCard {
   attacks?: Attack[];
 }
 
+interface CollectionPokemonCard extends PokemonCard {
+  collection?: {
+    id: number;
+    quantity: number;
+    is_foil: boolean;
+    is_reverse_holo: boolean;
+    collection_id: number;
+  };
+  attacks?: Attack[];
+  abilities?: {
+    name: string;
+    text: string;
+    type: string;
+  }[];
+}
+
 interface CardDetailsProps {
-  card: ExtendedPokemonCard;
-  allCards: ExtendedPokemonCard[];
+  card: CollectionPokemonCard;
+  allCards: CollectionPokemonCard[];
   onClose: () => void;
-  onNavigate: (card: ExtendedPokemonCard) => void;
+  onNavigate: (card: CollectionPokemonCard) => void;
 }
 
 export default function CardDetails({ card, allCards, onClose, onNavigate }: CardDetailsProps) {
