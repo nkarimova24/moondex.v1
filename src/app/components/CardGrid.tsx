@@ -162,7 +162,7 @@ export default function CardGrid({ cards }: CardGridProps) {
           card={selectedCard} 
           allCards={cards}
           onClose={handleCloseDetails}
-          onNavigate={handleNavigate}
+          // onNavigate={handleNavigate}
         />
       )}
     </>

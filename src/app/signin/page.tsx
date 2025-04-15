@@ -31,29 +31,23 @@ export default function SignIn() {
     setLoading(true);
 
     try {
-      console.log("Submitting login form with email:", credentials.email);
       const result = await login(credentials);
-      console.log("Login result:", result);
 
       if (result.success) {
         router.push("/"); 
       } else {
         if (result.errors) {
           setErrors(result.errors);
-          console.log("Login validation errors:", result.errors);
         }
         if (result.message) {
           setGeneralError(result.message);
-          console.log("Login error message:", result.message);
         }
         
-        // If no specific errors were provided but the login failed
         if (!result.errors && !result.message) {
           setGeneralError("Login failed. Please check your credentials and try again.");
         }
       }
     } catch (error) {
-      console.error("Login error in component:", error);
       setGeneralError("An unexpected error occurred. Please try again.");
     } finally {
       setLoading(false);
@@ -61,76 +55,170 @@ export default function SignIn() {
   };
 
   return (
-    <Container component="main" maxWidth="xs">
-      <Box
-        sx={{
-          marginTop: 8,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          bgcolor: "background.paper",
-          p: 4,
-          borderRadius: 2,
-        }}
-      >
-        <Typography component="h1" variant="h5" color="text.primary">
-          Sign in to your Pokemon TCG account
-        </Typography>
-        
-        {generalError && (
-          <Alert severity="error" sx={{ width: "100%", mt: 2 }}>
-            {generalError}
-          </Alert>
-        )}
-
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1, width: "100%" }}>
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            autoFocus
-            value={credentials.email}
-            onChange={handleChange}
-            error={!!errors.email}
-            helperText={errors.email}
-          />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-            value={credentials.password}
-            onChange={handleChange}
-            error={!!errors.password}
-            helperText={errors.password}
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            disabled={loading}
-            sx={{ mt: 3, mb: 2 }}
+    <div className="min-h-screen flex items-center justify-center ">
+      <Container component="main" maxWidth="xs">
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            bgcolor: "rgba(30, 30, 30, 0.8)",
+            p: 4,
+            borderRadius: 2,
+            boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+            backdropFilter: "blur(10px)",
+          }}
+        >
+          <Typography 
+            component="h1" 
+            variant="h5" 
+            sx={{ 
+              color: "#8A3F3F",
+              fontWeight: "bold",
+              mb: 2,
+              textAlign: "center"
+            }}
           >
-            {loading ? "Signing in..." : "Sign In"}
-          </Button>
-          <Box textAlign="center">
-            <Typography variant="body2" color="text.secondary">
-              Don't have an account?{" "}
-              <Link href="/signup" style={{ color: "#90caf9" }}>
-                Sign Up
-              </Link>
-            </Typography>
+            Sign in to MoonDex
+          </Typography>
+          
+          {generalError && (
+            <Alert 
+              severity="error" 
+              sx={{ 
+                width: "100%", 
+                mt: 2,
+                bgcolor: "rgba(211, 47, 47, 0.1)",
+                color: "#ff8a80",
+                border: "1px solid rgba(211, 47, 47, 0.3)"
+              }}
+            >
+              {generalError}
+            </Alert>
+          )}
+
+          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1, width: "100%" }}>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="email"
+              autoComplete="email"
+              autoFocus
+              value={credentials.email}
+              onChange={handleChange}
+              error={!!errors.email}
+              helperText={errors.email}
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  color: '#fff',
+                  '& fieldset': {
+                    borderColor: 'rgba(255, 255, 255, 0.1)',
+                  },
+                  '&:hover fieldset': {
+                    borderColor: 'rgba(255, 255, 255, 0.2)',
+                  },
+                  '&.Mui-focused fieldset': {
+                    borderColor: '#8A3F3F',
+                  },
+                },
+                '& .MuiInputLabel-root': {
+                  color: 'rgba(255, 255, 255, 0.7)',
+                },
+                '& .MuiInputLabel-root.Mui-focused': {
+                  color: '#8A3F3F',
+                },
+                '& .MuiFormHelperText-root': {
+                  color: '#ff8a80',
+                },
+              }}
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+              value={credentials.password}
+              onChange={handleChange}
+              error={!!errors.password}
+              helperText={errors.password}
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  color: '#fff',
+                  '& fieldset': {
+                    borderColor: 'rgba(255, 255, 255, 0.1)',
+                  },
+                  '&:hover fieldset': {
+                    borderColor: 'rgba(255, 255, 255, 0.2)',
+                  },
+                  '&.Mui-focused fieldset': {
+                    borderColor: '#8A3F3F',
+                  },
+                },
+                '& .MuiInputLabel-root': {
+                  color: 'rgba(255, 255, 255, 0.7)',
+                },
+                '& .MuiInputLabel-root.Mui-focused': {
+                  color: '#8A3F3F',
+                },
+                '& .MuiFormHelperText-root': {
+                  color: '#ff8a80',
+                },
+              }}
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              disabled={loading}
+              sx={{ 
+                mt: 3, 
+                mb: 2,
+                bgcolor: '#8A3F3F',
+                '&:hover': {
+                  bgcolor: '#6A2F2F',
+                },
+                '&:disabled': {
+                  bgcolor: 'rgba(138, 63, 63, 0.5)',
+                },
+                py: 1.5,
+                fontSize: '1rem',
+                fontWeight: 'bold',
+                textTransform: 'none',
+              }}
+            >
+              {loading ? "Signing in..." : "Sign In"}
+            </Button>
+            <Box textAlign="center">
+              <Typography 
+                variant="body2" 
+                sx={{ 
+                  color: 'rgba(255, 255, 255, 0.7)',
+                  '& a': {
+                    color: '#8A3F3F',
+                    textDecoration: 'none',
+                    fontWeight: 'bold',
+                    '&:hover': {
+                      textDecoration: 'underline',
+                    },
+                  },
+                }}
+              >
+                Don't have an account?{" "}
+                <Link href="/signup">
+                  Sign Up
+                </Link>
+              </Typography>
+            </Box>
           </Box>
         </Box>
-      </Box>
-    </Container>
+      </Container>
+    </div>
   );
 }

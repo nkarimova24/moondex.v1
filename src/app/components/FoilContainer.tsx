@@ -115,7 +115,8 @@ export default function FoilContainer({
     collections, 
     addCardToCollection, 
     updateCardInCollection, 
-    removeCardFromCollection 
+    removeCardFromCollection,
+    createCollection
   } = useCollection();
   
   const [loading, setLoading] = useState<{[key: string]: boolean}>({});
@@ -183,17 +184,28 @@ export default function FoilContainer({
     const toastId = toast.success(`Added ${cardName} (${foilType}) to collection!`);
     
     try {
-      if (collections.length === 0) {
-        setCardQuantities(prev => {
-          const newQuantities = { ...prev };
-          newQuantities[foilTypeKey] = Math.max(0, (newQuantities[foilTypeKey] || 0) - 1);
-          return newQuantities;
-        });
-        toast.error("You don't have any collections yet. Please create one first.");
-        return;
-      }
+      let collectionId: number;
+      let isNewCollection = false;
       
-      const collectionId = collections[0].id;
+      if (collections.length === 0) {
+        // Create a default collection if no collections exist
+        const newCollection = await createCollection("My Collection", "Your default collection");
+        
+        if (!newCollection) {
+          setCardQuantities(prev => {
+            const newQuantities = { ...prev };
+            newQuantities[foilTypeKey] = Math.max(0, (newQuantities[foilTypeKey] || 0) - 1);
+            return newQuantities;
+          });
+          toast.error("Failed to create a collection. Please try again.");
+          return;
+        }
+        
+        collectionId = newCollection.id;
+        isNewCollection = true;
+      } else {
+        collectionId = collections[0].id;
+      }
       
       const cardData = {
         card_id: cardId,
@@ -211,6 +223,8 @@ export default function FoilContainer({
           return newQuantities;
         });
         toast.error('Failed to add card to collection.');
+      } else if (isNewCollection) {
+        toast.success('Created "My Collection" and added your first card!');
       }
     } catch (err) {
       console.error('Error adding card to collection:', err);

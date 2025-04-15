@@ -25,6 +25,7 @@ interface CollectionPokemonCard extends PokemonCard {
     is_foil: boolean;
     is_reverse_holo: boolean;
     collection_id: number;
+    variants: Record<string, number>;
   };
   attacks?: Attack[];
   abilities?: {
