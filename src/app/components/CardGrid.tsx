@@ -8,7 +8,6 @@ import Image from "next/image";
 import { Trash2 } from "lucide-react";
 import { useCollection } from "@/context/CollectionContext";
 
-// Extended type for cards with collection information
 interface CollectionPokemonCard extends PokemonCard {
   collection?: {
     id: number;
@@ -107,28 +106,6 @@ export default function CardGrid({ cards }: CardGridProps) {
                 loading="lazy"
                 onLoad={() => handleImageLoad(card.id)}
               />
-              
-              {/* Show quantity badge if card is in collection */}
-              {card.collection && (
-                <div className="absolute top-2 right-2 bg-black/60 rounded-full px-2 py-0.5">
-                  <span className="text-xs text-white">
-                    x{card.collection.quantity}
-                  </span>
-                </div>
-              )}
-              
-              {/* Show remove button if card is in collection */}
-              {card.collection && (
-                <div className="absolute bottom-2 right-2">
-                  <button
-                    className="w-7 h-7 rounded-full bg-black/60 flex items-center justify-center text-white hover:bg-red-700/80 transition-colors"
-                    onClick={(e) => handleRemoveFromCollection(card, e)}
-                    title="Remove from collection"
-                  >
-                    <Trash2 size={14} />
-                  </button>
-                </div>
-              )}
             </div>
             
             <div className="p-1.5">

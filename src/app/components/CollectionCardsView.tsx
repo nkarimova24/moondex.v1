@@ -191,7 +191,7 @@ export default function CollectionPage() {
     <div className="container mx-auto px-4 py-8">
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-white mb-2">My Collection</h1>
+        {/* <h1 className="text-3xl font-bold text-white mb-2">My Collection</h1> */}
         <p className="text-gray-400">
           {isAuthenticated ? 
             `Track and organize your Pokémon card collection.` : 

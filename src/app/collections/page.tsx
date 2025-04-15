@@ -8,7 +8,6 @@ import CardGrid from "@/app/components/CardGrid";
 import { Filter } from "lucide-react";
 import { PokemonCard } from "@/app/lib/api/types";
 
-// Create a shared interface for both components to use
 interface CollectionMetadata {
   id: number;
   quantity: number;
@@ -31,7 +30,6 @@ interface Ability {
   type: string;
 }
 
-// Extended type for cards with collection information
 interface CollectionPokemonCard extends PokemonCard {
   collection?: CollectionMetadata;
   attacks?: Attack[];
@@ -53,7 +51,6 @@ export default function CollectionPage() {
   const [isCreating, setIsCreating] = useState(false);
   const [error, setError] = useState<string | null>(null);
   
-  // Get the default collection
   useEffect(() => {
     if (!isAuthenticated) {
       router.push("/signin");
@@ -61,12 +58,10 @@ export default function CollectionPage() {
     }
     
     if (collections.length > 0) {
-      // Use the first collection as the default
       setDefaultCollection(collections[0]);
     }
   }, [isAuthenticated, collections, router]);
   
-  // Fetch card details once we have a collection
   useEffect(() => {
     if (!defaultCollection) return;
     
@@ -85,7 +80,6 @@ export default function CollectionPage() {
         
         const cardsWithQuantities: CollectionPokemonCard[] = [];
         
-        // Fetch each card's details and add collection information
         for (const cardId of uniqueCardIds) {
           try {
             const response = await fetch(`https://api.pokemontcg.io/v2/cards/${cardId}`);
@@ -95,17 +89,13 @@ export default function CollectionPage() {
             }
             const data = await response.json();
             
-            // Find all instances of this card in the collection
             const collectionCards = defaultCollection.cards.filter(
               (card: any) => card.card_id === cardId
             );
             
-            // For each variant (normal, holo, reverse holo), create a card instance
             collectionCards.forEach((collectionCard: any) => {
-              // Clone the card data
               const enrichedCard: CollectionPokemonCard = {
                 ...data.data,
-                // Add collection metadata
                 collection: {
                   id: collectionCard.id,
                   quantity: collectionCard.quantity,
@@ -134,7 +124,6 @@ export default function CollectionPage() {
     fetchCardDetails();
   }, [defaultCollection?.id]);
 
-  // Handle creating a new collection
   const handleCreateCollection = async (e?: React.FormEvent) => {
     if (e) e.preventDefault();
     
@@ -164,28 +153,6 @@ export default function CollectionPage() {
     }
   };
   
-  const handleAddToCollection = async (card: CollectionPokemonCard, e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault(); // Prevent page refresh
-    try {
-      await addCardToCollection(card.collection?.collection_id || 0, {
-        card_id: card.id,
-        quantity: 1,
-      });
-    } catch (err) {
-      console.error("Error adding card to collection:", err);
-    }
-  };
-  
-  const handleRemoveFromCollection = async (card: CollectionPokemonCard, e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault(); // Prevent page refresh
-    try {
-      await removeCardFromCollection(card.collection?.collection_id || 0, card.collection?.id || 0);
-    } catch (err) {
-      console.error("Error removing card from collection:", err);
-    }
-  };
-  
-  // Apply filters to cards if needed
   const filteredCards = filter 
     ? pokemonCards.filter(card => {
         if (!card.collection) return false;
@@ -219,7 +186,7 @@ export default function CollectionPage() {
     <div className="container mx-auto px-4 py-8">
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-white mb-2">My Collection</h1>
+        {/* <h1 className="text-3xl font-bold text-white mb-2">My Collection</h1> */}
         <p className="text-gray-400">
           {isAuthenticated ? 
             `Track and organize your Pokémon card collection.` : 
@@ -326,7 +293,7 @@ export default function CollectionPage() {
           </div>
           
           {/* Collection Tips */}
-          <div className="bg-[#2A2A2A] p-6 rounded-lg">
+          {/* <div className="bg-[#2A2A2A] p-6 rounded-lg">
             <h3 className="text-xl font-semibold text-white mb-4">Collection Tips</h3>
             <ul className="text-gray-300 space-y-2">
               <li className="flex items-start gap-2">
@@ -348,7 +315,7 @@ export default function CollectionPage() {
                 <span>Click the trash icon to remove cards from your collection</span>
               </li>
             </ul>
-          </div>
+          </div> */}
         </div>
       ) : (
         <div className="bg-[#252525] rounded-lg p-8 text-center mb-8">
