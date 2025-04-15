@@ -5,7 +5,6 @@ import { PokemonCard } from "@/app/lib/api/types";
 import CardDetails from "./CardDetails";
 import FoilContainer from "./FoilContainer";
 import Image from "next/image";
-import { Trash2 } from "lucide-react";
 import { useCollection } from "@/context/CollectionContext";
 
 interface CollectionPokemonCard extends PokemonCard {
@@ -15,6 +14,7 @@ interface CollectionPokemonCard extends PokemonCard {
     is_foil: boolean;
     is_reverse_holo: boolean;
     collection_id: number;
+    variants: Record<string, number>;
   };
 }
 

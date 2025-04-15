@@ -14,6 +14,11 @@ interface CollectionMetadata {
   is_foil: boolean;
   is_reverse_holo: boolean;
   collection_id: number;
+  variants?: {
+    normal?: number;
+    holo?: number;
+    reverse_holo?: number;
+  };
 }
 
 interface Attack {
@@ -31,7 +36,18 @@ interface Ability {
 }
 
 interface CollectionPokemonCard extends PokemonCard {
-  collection?: CollectionMetadata;
+  collection?: {
+    id: number;
+    quantity: number;
+    is_foil: boolean;
+    is_reverse_holo: boolean;
+    collection_id: number;
+    variants?: {
+      normal?: number;
+      holo?: number;
+      reverse_holo?: number;
+    };
+  };
   attacks?: Attack[];
   abilities?: Ability[];
 }
@@ -80,35 +96,50 @@ export default function CollectionPage() {
         
         const cardsWithQuantities: CollectionPokemonCard[] = [];
         
-        for (const cardId of uniqueCardIds) {
+        for (const currentCardId of uniqueCardIds) {
           try {
-            const response = await fetch(`https://api.pokemontcg.io/v2/cards/${cardId}`);
+            const response = await fetch(`https://api.pokemontcg.io/v2/cards/${currentCardId}`);
             if (!response.ok) {
-              console.warn(`Failed to fetch card ${cardId}:`, response.status);
+              console.warn(`Failed to fetch card ${currentCardId}:`, response.status);
               continue;
             }
             const data = await response.json();
             
             const collectionCards = defaultCollection.cards.filter(
-              (card: any) => card.card_id === cardId
+              (card: any) => card.card_id === currentCardId
             );
             
+            const variants = {
+              normal: 0,
+              holo: 0,
+              reverse_holo: 0
+            };
+            
             collectionCards.forEach((collectionCard: any) => {
-              const enrichedCard: CollectionPokemonCard = {
-                ...data.data,
-                collection: {
-                  id: collectionCard.id,
-                  quantity: collectionCard.quantity,
-                  is_foil: collectionCard.is_foil,
-                  is_reverse_holo: collectionCard.is_reverse_holo,
-                  collection_id: defaultCollection.id
-                }
-              };
-              
-              cardsWithQuantities.push(enrichedCard);
+              if (collectionCard.is_reverse_holo) {
+                variants.reverse_holo += collectionCard.quantity;
+              } else if (collectionCard.is_foil) {
+                variants.holo += collectionCard.quantity;
+              } else {
+                variants.normal += collectionCard.quantity;
+              }
             });
+            
+            const enrichedCard: CollectionPokemonCard = {
+              ...data.data,
+              collection: {
+                id: collectionCards[0].id,
+                quantity: Object.values(variants).reduce((a, b) => a + b, 0),
+                is_foil: variants.holo > 0,
+                is_reverse_holo: variants.reverse_holo > 0,
+                collection_id: defaultCollection.id,
+                variants: variants
+              }
+            };
+            
+            cardsWithQuantities.push(enrichedCard);
           } catch (cardError) {
-            console.error(`Failed to fetch card ${cardId}:`, cardError);
+            console.error(`Failed to fetch card ${currentCardId}:`, cardError);
           }
         }
         
@@ -185,14 +216,14 @@ export default function CollectionPage() {
   return (
     <div className="container mx-auto px-4 py-8">
       {/* Header */}
-      <div className="mb-8">
+      {/* <div className="mb-8"> */}
         {/* <h1 className="text-3xl font-bold text-white mb-2">My Collection</h1> */}
-        <p className="text-gray-400">
+        {/* <p className="text-gray-400">
           {isAuthenticated ? 
             `Track and organize your Pokémon card collection.` : 
             `Sign in to track your Pokémon card collection.`}
-        </p>
-      </div>
+        </p> */}
+      {/* </div> */}
       
       {error && (
         <div className="mb-6 p-4 bg-red-900/20 border border-red-800 text-red-400 rounded-lg">
