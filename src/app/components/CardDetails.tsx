@@ -239,7 +239,7 @@ export default function CardDetails({ card, allCards, onClose, onNavigate, baseR
           );
           
           if (result !== null) {
-            toast.success("Notes saved!");
+            toast.success("Note saved!");
             saved = true;
           }
         } catch (error) {
@@ -274,7 +274,7 @@ export default function CardDetails({ card, allCards, onClose, onNavigate, baseR
             }
           }
         }
-        toast.success("Notes saved!");
+        toast.success("Note added!");
       } else {
         toast.success("Notes saved to local storage!");
       }
@@ -297,7 +297,7 @@ export default function CardDetails({ card, allCards, onClose, onNavigate, baseR
     const updatedNotes = [...notes, newNote];
     saveNotes(updatedNotes);
     setNewNoteText('');
-    toast.success('Note added successfully!');
+    // toast.success('Note added successfully!');
   };
 
   const startEditingNote = (note: CardNote) => {

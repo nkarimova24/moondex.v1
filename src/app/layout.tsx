@@ -26,13 +26,14 @@ const geistMono = Geist_Mono({
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const checkMobile = () => {
       const mobile = window.innerWidth < 768; 
       setIsMobile(mobile);
+      setSidebarOpen(!mobile); // Set sidebarOpen based on mobile state
     };
 
     checkMobile();
@@ -43,7 +44,6 @@ export default function RootLayout({
   }, []);
 
   const handleToggleSidebar = () => {
-    console.log("Toggle sidebar called, current state:", sidebarOpen);
     setSidebarOpen(prevState => !prevState);
   };
 
