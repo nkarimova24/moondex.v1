@@ -188,28 +188,24 @@ export default function Sidebar({ isOpen: propIsOpen, onToggle }: SidebarProps) 
               <Typography variant="body2" sx={{ color: "rgba(255,255,255,0.9)", fontWeight: 500 }}>
                 {user?.name}
               </Typography>
-              <Typography variant="caption" sx={{ color: "rgba(255,255,255,0.6)" }}>
-                {user?.email}
+              <Typography 
+                component={Link}
+                href="/profile"
+                variant="caption" 
+                sx={{ 
+                  color: "rgba(255,255,255,0.6)",
+                  textDecoration: "none",
+                  "&:hover": {
+                    color: "rgba(255,255,255,0.9)",
+                    textDecoration: "underline"
+                  }
+                }}
+                onClick={isMobile ? handleDrawerToggle : undefined}
+              >
+                Go to profile
               </Typography>
             </Box>
           </Box>
-          <Button
-            fullWidth
-            variant="contained"
-            component={Link}
-            href="/profile"
-            sx={{ 
-              mb: 2,
-              backgroundColor: '#8A3F3F',
-              '&:hover': {
-                backgroundColor: '#612B2B',
-              },
-              textTransform: 'none',
-              fontWeight: 500,
-            }}
-          >
-            Go to Profile
-          </Button>
         </Box>
       ) : (
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
