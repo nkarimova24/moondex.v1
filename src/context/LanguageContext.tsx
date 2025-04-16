@@ -27,6 +27,9 @@ const translations: Record<Language, Record<string, string>> = {
     "nav.allSets": "All Sets",
     "nav.changelog": "Changelog",
     "nav.browseBySeries": "Browse by Series",
+    "nav.collections": "Collections",
+    "nav.decks": "Decks",
+    "nav.profile": "Profile",
     
     // Home page
     "home.explore": "Explore the World of Moondex",
@@ -56,10 +59,24 @@ const translations: Record<Language, Record<string, string>> = {
     "changelog.inDevelopment": "Moondex is continuously being developed. Are you missing a feature or do you have suggestions? Let us know!",
     "changelog.sendFeedback": "Send Feedback",
     
-    // Changelog data
+    // Nieuwste changelog entry (v0.8.0)
+    "changelog.entry.3.title": "Update",
+    "changelog.entry.3.added.0": "User registration and login system",
+    "changelog.entry.3.added.1": "Personal collection tracking functionality",
+    "changelog.entry.3.added.2": "Card notes feature for adding personal notes to cards",
+    "changelog.entry.3.added.3": "Profile page with account settings",
+    // "changelog.entry.3.added.4": "Profile page with account settings",
+    "changelog.entry.3.fixed.0": "Fixed issue with card pricing not displaying correctly",
+    // "changelog.entry.3.fixed.1": "Fixed mobile navigation issues on smaller screens",
+    "changelog.entry.3.upcoming.0": "Collection statistics and analytics",
+    "changelog.entry.3.upcoming.1": "Create and manage decks and lists",
+    "changelog.entry.3.upcoming.2": "Add friends and visit their profile",
+    
+    // Changelog data voor v0.7.1
     "changelog.entry.2.title": "Update",
     "changelog.entry.2.added.0": "Language switcher for English and Dutch",
     
+    // Changelog data voor v0.7.0
     "changelog.entry.0.title": "First Release",
     "changelog.entry.0.added.0": "Search for Pokémon cards by name and number",
     "changelog.entry.0.added.1": "View all sets and their cards",
@@ -67,13 +84,14 @@ const translations: Record<Language, Record<string, string>> = {
     "changelog.entry.0.added.3": "Sort and filter cards per set",
     "changelog.entry.0.added.4": "Mobile and desktop-friendly interface",
     
-    "changelog.entry.0.upcoming.0": "Card prices and patterns for Prismatic Evolution set (coming soon)",
+    "changelog.entry.0.upcoming.0": "Card prices and patterns for Prismatic Evolution set",
     "changelog.entry.0.upcoming.1": "Registration and login system for users",
     "changelog.entry.0.upcoming.2": "Personal collection tracking",
     "changelog.entry.0.upcoming.3": "Wishlist functionality",
     "changelog.entry.0.upcoming.4": "Statistics and progress tracking for collectors",
     "changelog.entry.0.upcoming.5": "Japanese cards and sets",
 
+    // Changelog data voor v0.5.0
     "changelog.entry.1.title": "Beta Version",
     "changelog.entry.1.added.0": "First implementation of the Pokémon TCG API",
     "changelog.entry.1.added.1": "Basic layout and navigation",
@@ -134,6 +152,64 @@ const translations: Record<Language, Record<string, string>> = {
     "button.next": "Next",
     "button.loadMore": "Load More",
     "button.close": "Close",
+    "button.add": "Add",
+    "button.save": "Save",
+    "button.cancel": "Cancel",
+    "button.delete": "Delete",
+    "button.edit": "Edit",
+    
+    // Collection features
+    "collection.title": "My Collection",
+    "collection.description": "Track and organize your Pokémon card collection",
+    "collection.empty": "You don't have any cards in your collection yet",
+    "collection.create": "Create Collection",
+    "collection.addFirst": "Add your first card",
+    "collection.cardAdded": "Card added to collection!",
+    "collection.cardRemoved": "Card removed from collection",
+    "collection.filter.all": "All Cards",
+    "collection.filter.normal": "Normal Cards",
+    "collection.filter.holo": "Holo Cards",
+    "collection.filter.reverseHolo": "Reverse Holo Cards",
+    "collection.variants": "Card Variants",
+    "collection.addToCollection": "Add to Collection",
+    
+    // Card Details
+    "card.details": "Card Details",
+    "card.notes": "Card Notes",
+    "card.addNote": "Add a new note",
+    "card.noteAdded": "Note added successfully!",
+    "card.noteUpdated": "Note updated successfully!",
+    "card.noteDeleted": "Note deleted successfully!",
+    "card.evolution": "Evolution Chain",
+    "card.evolvesFrom": "Evolves From",
+    "card.evolvesTo": "Evolves To",
+    "card.abilities": "Abilities",
+    "card.attacks": "Attacks",
+    "card.marketPrices": "Market Prices",
+    "card.pricesUpdated": "Prices updated",
+    "card.addToWishlist": "Add to Wishlist",
+    "card.yourNotes": "Your Notes",
+    "card.noNotes": "No notes yet. Add your first note above!",
+    
+    // Authentication
+    "auth.signIn": "Sign In",
+    "auth.signUp": "Sign Up",
+    "auth.email": "Email Address",
+    "auth.password": "Password",
+    "auth.confirmPassword": "Confirm Password",
+    "auth.username": "Username",
+    "auth.noAccount": "Don't have an account?",
+    "auth.hasAccount": "Already have an account?",
+    "auth.signOut": "Sign Out",
+    "auth.createAccount": "Create Account",
+    
+    // Profile
+    "profile.title": "Profile",
+    "profile.collections": "Collections",
+    "profile.settings": "Settings",
+    "profile.editProfile": "Edit Profile",
+    "profile.accountSecurity": "Account Security",
+    "profile.changePassword": "Change Password",
     
     // Misc
     "misc.updatedAt": "Updated at",
@@ -160,6 +236,9 @@ const translations: Record<Language, Record<string, string>> = {
     "nav.allSets": "Alle Sets",
     "nav.changelog": "Wijzigingen",
     "nav.browseBySeries": "Bladeren per Serie",
+    "nav.collections": "Collecties",
+    "nav.decks": "Decks",
+    "nav.profile": "Profiel",
     
     // Home page
     "home.explore": "Ontdek de Wereld van Moondex",
@@ -189,10 +268,22 @@ const translations: Record<Language, Record<string, string>> = {
     "changelog.inDevelopment": "Moondex is continu in ontwikkeling. Mis je een functie of heb je suggesties? Laat het ons weten!",
     "changelog.sendFeedback": "Stuur Feedback",
     
-    // Changelog data
+    // Nieuwste changelog entry (v0.8.0)
+    "changelog.entry.3.title": "Update",
+    "changelog.entry.3.added.0": "Gebruikersregistratie en inlogsysteem",
+    "changelog.entry.3.added.1": "Persoonlijke collectie bijhoud-functionaliteit",
+    "changelog.entry.3.added.2": "Kaartnotities functie voor het toevoegen van persoonlijke notities aan kaarten",
+    "changelog.entry.3.added.3": "Profielpagina met accountinstellingen",
+    // "changelog.entry.3.fixed.0": "Probleem opgelost met kaartprijzen die niet correct werden weergegeven",
+    // "changelog.entry.3.fixed.1": "Problemen met mobiele navigatie op kleinere schermen opgelost",
+    "changelog.entry.3.upcoming.0": "Collectie statistieken en analyses",
+    "changelog.entry.3.upcoming.1": "Decks en lists bouwen",
+    
+    // Changelog data voor v0.7.1
     "changelog.entry.2.title": "Update",
     "changelog.entry.2.added.0": "Taalschakelaar voor Engels en Nederlands",
     
+    // Changelog data voor v0.7.0
     "changelog.entry.0.title": "Eerste release",
     "changelog.entry.0.added.0": "Zoeken naar Pokémon kaarten op naam en nummer",
     "changelog.entry.0.added.1": "Bekijken van alle sets en hun kaarten",
@@ -207,6 +298,7 @@ const translations: Record<Language, Record<string, string>> = {
     "changelog.entry.0.upcoming.4": "Statistieken en voortgangstracking voor verzamelaars",
     "changelog.entry.0.upcoming.5": "Japanse kaarten en sets",
     
+    // Changelog data voor v0.5.0
     "changelog.entry.1.title": "Beta versie",
     "changelog.entry.1.added.0": "Eerste implementatie van de Pokémon TCG API",
     "changelog.entry.1.added.1": "Basis layout en navigatie",
@@ -267,6 +359,64 @@ const translations: Record<Language, Record<string, string>> = {
     "button.next": "Volgende",
     "button.loadMore": "Meer laden",
     "button.close": "Sluiten",
+    "button.add": "Toevoegen",
+    "button.save": "Opslaan",
+    "button.cancel": "Annuleren",
+    "button.delete": "Verwijderen",
+    "button.edit": "Bewerken",
+    
+    // Collection features
+    "collection.title": "Mijn Collectie",
+    "collection.description": "Beheer en organiseer je Pokémon kaartencollectie",
+    "collection.empty": "Je hebt nog geen kaarten in je collectie",
+    "collection.create": "Collectie Aanmaken",
+    "collection.addFirst": "Voeg je eerste kaart toe",
+    "collection.cardAdded": "Kaart toegevoegd aan collectie!",
+    "collection.cardRemoved": "Kaart verwijderd uit collectie",
+    "collection.filter.all": "Alle Kaarten",
+    "collection.filter.normal": "Normale Kaarten",
+    "collection.filter.holo": "Holo Kaarten",
+    "collection.filter.reverseHolo": "Reverse Holo Kaarten",
+    "collection.variants": "Kaartvarianten",
+    "collection.addToCollection": "Toevoegen aan Collectie",
+    
+    // Card Details
+    "card.details": "Kaartdetails",
+    "card.notes": "Kaartnotities",
+    "card.addNote": "Voeg een nieuwe notitie toe",
+    "card.noteAdded": "Notitie succesvol toegevoegd!",
+    "card.noteUpdated": "Notitie succesvol bijgewerkt!",
+    "card.noteDeleted": "Notitie succesvol verwijderd!",
+    "card.evolution": "Evolutieketen",
+    "card.evolvesFrom": "Evolueert van",
+    "card.evolvesTo": "Evolueert naar",
+    "card.abilities": "Vaardigheden",
+    "card.attacks": "Aanvallen",
+    "card.marketPrices": "Marktprijzen",
+    "card.pricesUpdated": "Prijzen bijgewerkt",
+    "card.addToWishlist": "Toevoegen aan Wishlist",
+    "card.yourNotes": "Jouw Notities",
+    "card.noNotes": "Nog geen notities. Voeg hierboven je eerste notitie toe!",
+    
+    // Authentication
+    "auth.signIn": "Inloggen",
+    "auth.signUp": "Registreren",
+    "auth.email": "E-mailadres",
+    "auth.password": "Wachtwoord",
+    "auth.confirmPassword": "Bevestig Wachtwoord",
+    "auth.username": "Gebruikersnaam",
+    "auth.noAccount": "Nog geen account?",
+    "auth.hasAccount": "Heb je al een account?",
+    "auth.signOut": "Uitloggen",
+    "auth.createAccount": "Account Aanmaken",
+    
+    // Profile
+    "profile.title": "Profiel",
+    "profile.collections": "Collecties",
+    "profile.settings": "Instellingen",
+    "profile.editProfile": "Profiel Bewerken",
+    "profile.accountSecurity": "Accountbeveiliging",
+    "profile.changePassword": "Wachtwoord Wijzigen",
     
     // Misc
     "misc.updatedAt": "Bijgewerkt op",

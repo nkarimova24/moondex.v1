@@ -2,6 +2,7 @@
 
 import { useLanguage } from "@/context/LanguageContext";
 import { Globe } from "lucide-react";
+import { useEffect, useState } from "react";
 
 interface LanguageToggleProps {
   compact?: boolean;
@@ -10,10 +11,19 @@ interface LanguageToggleProps {
 
 export default function LanguageToggle({ compact = false, className = "" }: LanguageToggleProps) {
   const { language, setLanguage, t } = useLanguage();
+  const [mounted, setMounted] = useState(false);
+
+  // Voorkom hydration mismatch
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const toggleLanguage = () => {
     setLanguage(language === "en" ? "nl" : "en");
   };
+
+  // Toon niets tijdens SSR
+  if (!mounted) return null;
 
   return (
     <button

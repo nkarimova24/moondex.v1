@@ -19,6 +19,32 @@ export default function ChangelogPage() {
   const { t } = useLanguage();
   
   const [changelogData] = useState<ChangelogEntry[]>([
+    // Nieuwste update bovenaan
+    {
+      date: "15 April 2025",
+      version: "0.8.0",
+      titleKey: "changelog.entry.3.title",
+      changes: [
+        {
+          type: "added",
+          itemKeys: [
+            "changelog.entry.3.added.0",
+            "changelog.entry.3.added.1",
+            "changelog.entry.3.added.2",
+            "changelog.entry.3.added.3",
+            // "changelog.entry.3.added.4"
+          ]
+        },
+        {
+          type: "upcoming",
+          itemKeys: [
+            "changelog.entry.3.upcoming.0",
+            "changelog.entry.3.upcoming.1",
+            "changelog.entry.3.upcoming.2"
+          ]
+        }
+      ]
+    },
     {
       date: "11 April 2025",
       version: "0.7.1",
