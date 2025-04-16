@@ -79,7 +79,7 @@ export default function SignIn() {
               textAlign: "center"
             }}
           >
-            Sign in to MoonDex
+            Sign in
           </Typography>
           
           {generalError && (

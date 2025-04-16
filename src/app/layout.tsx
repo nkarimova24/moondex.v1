@@ -74,6 +74,17 @@ export default function RootLayout({
                 <main style={{ padding: "20px" }}>
                   {children}
                 </main>
+                
+                {/* Footer with copyright */}
+                <footer style={{ 
+                  textAlign: 'center', 
+                  padding: '20px',
+                  color: 'rgba(255,255,255,0.25)',
+                  fontSize: '11px',
+                  letterSpacing: '0.5px',
+                }}>
+                  © 2025 Moondex
+                </footer>
               </div>
               </NotesProvider>
               </CollectionProvider>

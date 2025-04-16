@@ -210,25 +210,6 @@ export default function Sidebar({ isOpen: propIsOpen, onToggle }: SidebarProps) 
           >
             Go to Profile
           </Button>
-          <Button
-            fullWidth
-            variant="outlined"
-            startIcon={<LogoutIcon />}
-            onClick={handleLogout}
-            sx={{ 
-              borderColor: 'rgba(138, 63, 63, 0.5)',
-              color: 'rgba(255,255,255,0.9)',
-              background: 'rgba(138, 63, 63, 0.2)',
-              '&:hover': {
-                borderColor: '#8A3F3F',
-                backgroundColor: 'rgba(138, 63, 63, 0.3)'
-              },
-              textTransform: 'none',
-              fontWeight: 500,
-            }}
-          >
-            Logout
-          </Button>
         </Box>
       ) : (
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
@@ -586,54 +567,6 @@ export default function Sidebar({ isOpen: propIsOpen, onToggle }: SidebarProps) 
         </List>
       </Box>
 
-        {/* Changelog Link - Added Here */}
-        <ListItem disablePadding>
-            <ListItemButton 
-              component={Link} 
-              href="/changelog"
-              sx={{ 
-                padding: "12px 20px",
-                transition: 'all 0.2s ease',
-                "&:hover": {
-                  backgroundColor: "rgba(138, 63, 63, 0.15)",
-                  paddingLeft: '24px',
-                  borderLeft: '4px solid #8A3F3F',
-                },
-                borderLeft: '4px solid transparent',
-              }}
-              onClick={isMobile ? handleDrawerToggle : undefined}
-            >
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                <HistoryIcon fontSize="small" sx={{ color: 'rgba(138, 63, 63, 0.9)' }} />
-                <ListItemText 
-                  primary={t("nav.changelog")}
-                  primaryTypographyProps={{ 
-                    fontWeight: 500,
-                    fontSize: "15px",
-                    color: 'rgba(255,255,255,0.9)',
-                    sx: {
-                      '&:hover': {
-                        color: 'rgba(255,255,255,0.95)',
-                      }
-                    }
-                  }} 
-                />
-              </Box>
-            </ListItemButton>
-          </ListItem>
-          
-          {/* Language toggle */}
-          <ListItem disablePadding>
-            <ListItemButton
-              sx={{ 
-                padding: "12px 20px",
-                transition: 'all 0.2s ease',
-              }}
-            >
-              <LanguageToggle className="w-full" />
-            </ListItemButton>
-          </ListItem>
-          
       {/* Authentication Buttons */}
       {authButtons}
     {/*  login/signup buttons */}
@@ -677,22 +610,63 @@ export default function Sidebar({ isOpen: propIsOpen, onToggle }: SidebarProps) 
           </Stack>
         </Box>
       )}
-      {/* Footer */}
+      {/* Footer with compact language and changelog */}
       <Box 
         sx={{ 
           padding: "12px",
-          textAlign: "center",
           flexShrink: 0,
           background: 'linear-gradient(to bottom, rgba(25,25,25,1), rgba(20,20,20,1))',
         }}
       >
-        <Typography variant="caption" sx={{ 
-          color: "rgba(255,255,255,0.4)", 
-          fontSize: "11px",
-          letterSpacing: '0.5px',
+        {/* Compact utility links */}
+        <Box sx={{ 
+          display: 'flex', 
+          justifyContent: 'center', 
+          gap: 3, 
+          mb: 0,
+          pb: 0
         }}>
-          © 2025 {t("app.name")}
-        </Typography>
+          {/* Language Toggle */}
+          <Box 
+            sx={{ 
+              display: 'flex', 
+              alignItems: 'center',
+              cursor: 'pointer'
+            }}
+          >
+            <LanguageToggle compact={true} />
+          </Box>
+          
+          {/* Changelog Link */}
+          <IconButton
+            component={Link}
+            href="/changelog"
+            onClick={isMobile ? handleDrawerToggle : undefined}
+            size="small"
+            sx={{ 
+              color: 'rgba(255,255,255,0.6)',
+              '&:hover': { color: 'rgba(255,255,255,0.9)' }
+            }}
+            title={t("nav.changelog")}
+          >
+            <HistoryIcon fontSize="small" />
+          </IconButton>
+
+          {/* Logout Button */}
+          {isAuthenticated && (
+            <IconButton
+              onClick={handleLogout}
+              size="small"
+              sx={{ 
+                color: 'rgba(255,255,255,0.6)',
+                '&:hover': { color: 'rgba(255,255,255,0.9)' }
+              }}
+              title="Logout"
+            >
+              <LogoutIcon fontSize="small" />
+            </IconButton>
+          )}
+        </Box>
       </Box>
     </>
   );
