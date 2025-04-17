@@ -80,7 +80,7 @@ function a11yProps(index: number) {
 }
 
 export default function ProfilePage() {
-  const { user, isAuthenticated, loading: authLoading, updateProfile } = useAuth();
+  const { user: authUser, isAuthenticated, loading: authLoading, updateProfile } = useAuth();
   const { collections, loading: collectionsLoading } = useCollection();
   const { t } = useLanguage();
   const router = useRouter();
@@ -98,6 +98,9 @@ export default function ProfilePage() {
   const [updating, setUpdating] = useState(false);
   const [updateMessage, setUpdateMessage] = useState<{type: 'success' | 'error', message: string} | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  
+  // Add a local user state that we can update immediately
+  const [user, setUser] = useState<User | null>(null);
   
   useEffect(() => {
     if (!authLoading && !isAuthenticated) {
@@ -187,6 +190,14 @@ export default function ProfilePage() {
     fetchCardDetails();
   }, [selectedCollection?.id]);
 
+  // Update local user state whenever authUser changes
+  useEffect(() => {
+    if (authUser) {
+      setUser(authUser);
+    }
+  }, [authUser]);
+
+  // Also need to add logic to clear image preview if changing user
   useEffect(() => {
     if (user) {
       console.log('Profile page detected user change');
@@ -240,7 +251,12 @@ export default function ProfilePage() {
   };
 
   const handleUpdateProfile = async () => {
+    // Close the dialog immediately before anything else
+    setEditProfileDialogOpen(false);
+    
+    // Then continue with profile update
     setUpdating(true);
+    
     try {
       // Create update data with optional avatar
       const updateData: UpdateProfileData = {
@@ -259,20 +275,35 @@ export default function ProfilePage() {
         hasAvatar: !!updateData.avatar 
       });
       
+      // Immediately update local user state to reflect changes in UI
+      if (user) {
+        const immediatelyUpdatedUser = {
+          ...user,
+          name: profileName || user.name,
+          email: profileEmail !== user?.email ? profileEmail : user.email
+        };
+        setUser(immediatelyUpdatedUser);
+      }
+      
       const result = await updateProfile(updateData);
+      console.log('Profile update result:', result);
 
+      // Set success/error message after API call
       if (result.success) {
         // Clear the preview after successful update
         setProfileImage(null);
         setImagePreview(null);
         
-        // Show success message
         setUpdateMessage({
           type: 'success',
-          message: t("profile.updateSuccess") || 'Profile updated successfully'
+          message: result.message || t("profile.updateSuccess") || 'Profile updated successfully'
         });
-        handleEditProfileClose();
       } else {
+        // If API call failed, revert to original user data
+        if (authUser) {
+          setUser(authUser);
+        }
+        
         setUpdateMessage({
           type: 'error',
           message: result.message || t("profile.updateError") || 'Failed to update profile'
@@ -280,6 +311,12 @@ export default function ProfilePage() {
       }
     } catch (error) {
       console.error("Error updating profile:", error);
+      
+      // If there was an error, revert to original user data
+      if (authUser) {
+        setUser(authUser);
+      }
+      
       setUpdateMessage({
         type: 'error',
         message: t("profile.updateError") || 'Failed to update profile'
@@ -674,7 +711,7 @@ export default function ProfilePage() {
         >
           <Alert 
             onClose={handleCloseMessage} 
-            severity={updateMessage.type} 
+            severity={updateMessage.type === 'success' ? 'success' : 'error'} 
             sx={{ width: '100%' }}
           >
             {updateMessage.message}

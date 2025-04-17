@@ -385,9 +385,20 @@ const register = async (userData: RegisterData): Promise<AuthResult> => {
         
         if (result.success && result.user) {
           console.log('Email change successful:', result.user);
-          setUser(result.user);
+          // Create a completely new user object to ensure React detects the change
+          setUser({...result.user});
         } else if (result.success) {
-          // If we didn't get a user object back, refresh the user data
+          // If we didn't get a user object back but the operation was successful,
+          // create a new user object with the updated email to ensure UI updates
+          if (user) {
+            const updatedUser = {
+              ...user,
+              email: newEmail
+            };
+            console.log('Updating user with new email:', updatedUser);
+            setUser(updatedUser);
+          }
+          // Also refresh user data from the server
           await refreshUser();
         }
         
@@ -424,7 +435,7 @@ export const getUserAvatarUrl = (user: User | null): string | undefined => {
   if (!user) return undefined;
   
   // Get the base URL from either field
-  const avatarUrl = user.avatar || (user as any).profile_picture;
+  const avatarUrl = user.avatar || user.profile_picture;
   if (!avatarUrl) return undefined;
   
   // Add a cache-busting parameter to the URL to force browser to reload the image
