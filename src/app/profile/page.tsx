@@ -92,6 +92,7 @@ export default function ProfilePage() {
   // Profile editing state
   const [editProfileDialogOpen, setEditProfileDialogOpen] = useState(false);
   const [profileName, setProfileName] = useState('');
+  const [profileEmail, setProfileEmail] = useState('');
   const [profileImage, setProfileImage] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [updating, setUpdating] = useState(false);
@@ -192,6 +193,7 @@ export default function ProfilePage() {
       
       // Update the profile name when user data changes
       setProfileName(user.name || '');
+      setProfileEmail(user.email || '');
       
       // Clear image preview if changing user
       setImagePreview(null);
@@ -209,6 +211,7 @@ export default function ProfilePage() {
 
   const handleEditProfileOpen = () => {
     setProfileName(user?.name || '');
+    setProfileEmail(user?.email || '');
     setProfileImage(null);
     setImagePreview(null);
     setEditProfileDialogOpen(true);
@@ -241,7 +244,8 @@ export default function ProfilePage() {
     try {
       // Create update data with optional avatar
       const updateData: UpdateProfileData = {
-        name: profileName
+        name: profileName,
+        email: profileEmail !== user?.email ? profileEmail : undefined
       };
       
       // Only include avatar if a new one was selected
@@ -250,7 +254,8 @@ export default function ProfilePage() {
       }
       
       console.log('Updating profile with:', { 
-        name: updateData.name, 
+        name: updateData.name,
+        email: updateData.email, 
         hasAvatar: !!updateData.avatar 
       });
       
@@ -610,7 +615,6 @@ export default function ProfilePage() {
           </Box>
           
           <TextField
-            autoFocus
             margin="dense"
             label={t("auth.username")}
             type="text"
@@ -618,6 +622,18 @@ export default function ProfilePage() {
             variant="outlined"
             value={profileName}
             onChange={(e) => setProfileName(e.target.value)}
+            sx={{ mb: 2 }}
+          />
+          
+          <TextField
+            autoFocus
+            margin="dense"
+            label={t("auth.email")}
+            type="email"
+            fullWidth
+            variant="outlined"
+            value={profileEmail}
+            onChange={(e) => setProfileEmail(e.target.value)}
             sx={{ mb: 3 }}
           />
         </DialogContent>

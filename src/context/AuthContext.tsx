@@ -27,6 +27,7 @@ interface AuthContextType {
   refreshUser: () => Promise<void>; // New function to refresh user data
   updateProfile: (data: UpdateProfileData) => Promise<AuthResult>;
   uploadAvatar: (file: File) => Promise<AuthResult>;
+  changeEmail: (newEmail: string) => Promise<AuthResult>; // Added changeEmail function
 }
 
 interface AuthProviderProps {
@@ -369,7 +370,38 @@ const register = async (userData: RegisterData): Promise<AuthResult> => {
     logout,
     refreshUser,
     updateProfile,
-    uploadAvatar
+    uploadAvatar,
+    changeEmail: async (newEmail: string) => {
+      try {
+        setLoading(true);
+        if (!user) {
+          return { 
+            success: false, 
+            message: 'No authenticated user found' 
+          };
+        }
+        
+        const result = await api.changeEmail(newEmail, user.id);
+        
+        if (result.success && result.user) {
+          console.log('Email change successful:', result.user);
+          setUser(result.user);
+        } else if (result.success) {
+          // If we didn't get a user object back, refresh the user data
+          await refreshUser();
+        }
+        
+        return result;
+      } catch (error) {
+        console.error('Error changing email:', error);
+        return { 
+          success: false, 
+          message: 'Failed to change email' 
+        };
+      } finally {
+        setLoading(false);
+      }
+    }
   };
 
   return (

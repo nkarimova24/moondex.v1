@@ -212,5 +212,6 @@ export interface PokemonSet {
 
   export interface UpdateProfileData {
     name?: string;
+    email?: string;
     avatar?: File;
   }

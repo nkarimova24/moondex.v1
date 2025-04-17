@@ -228,16 +228,61 @@ export const updateProfile = async (data: UpdateProfileData, userId?: number): P
   try {
     console.log('Starting profile update with data:', { 
       name: data.name, 
+      email: data.email,
       hasAvatar: !!data.avatar,
       userId
     });
     
+    let emailResult: AuthResult | null = null;
+    let avatarResult: AuthResult | null = null;
+    
+    // If email is changing, use the dedicated email change endpoint
+    if (data.email) {
+      console.log('Email change detected, using dedicated endpoint');
+      try {
+        emailResult = await changeEmail(data.email, userId);
+        if (!emailResult.success) {
+          return emailResult; // Return early if email change failed
+        }
+        
+        // If only email is changing and no other fields, return the email result
+        if (!data.name && !data.avatar) {
+          return emailResult;
+        }
+        
+        // If email change is successful and we have user data, use it
+        if (emailResult.success && emailResult.user) {
+          console.log('Email change successful, updating other profile data');
+        }
+      } catch (emailError) {
+        console.error('Error changing email:', emailError);
+        return {
+          success: false,
+          message: 'Failed to update email address'
+        };
+      }
+    }
+    
     if (data.avatar) {
       console.log('Avatar detected, using separate upload flow');
       try {
-        const avatarResult = await uploadProfilePicture(data.avatar, userId);
+        avatarResult = await uploadProfilePicture(data.avatar, userId);
         
         if (avatarResult.success && !data.name) {
+          // If we already have email result with user data, merge it
+          if (emailResult && emailResult.success && emailResult.user && avatarResult.user) {
+            const mergedUser: User = {
+              ...avatarResult.user,
+              email: emailResult.user.email
+            };
+            
+            return {
+              success: true,
+              user: mergedUser,
+              message: 'Profile updated successfully'
+            };
+          }
+          
           return avatarResult;
         }
         
@@ -245,6 +290,20 @@ export const updateProfile = async (data: UpdateProfileData, userId?: number): P
           console.log('Avatar upload successful, updating remaining profile data');
           
           if (!data.name) {
+            // If we already have email result with user data, merge it
+            if (emailResult && emailResult.success && emailResult.user && avatarResult.user) {
+              const mergedUser: User = {
+                ...avatarResult.user,
+                email: emailResult.user.email
+              };
+              
+              return {
+                success: true,
+                user: mergedUser,
+                message: 'Profile updated successfully'
+              };
+            }
+            
             return avatarResult;
           }
         }
@@ -253,6 +312,30 @@ export const updateProfile = async (data: UpdateProfileData, userId?: number): P
       }
     }
     
+    // If we only needed to change the email and/or avatar and we're done, return
+    if ((!data.name && data.email && emailResult && emailResult.success) &&
+        (!data.avatar || (data.avatar && avatarResult && avatarResult.success))) {
+      
+      // If both operations succeeded with user data, merge the user data
+      if (emailResult && emailResult.user && avatarResult && avatarResult.user) {
+        const mergedUser: User = {
+          ...emailResult.user,
+          ...avatarResult.user,
+          avatar: avatarResult.user.avatar // Prefer avatar from avatar result
+        };
+        
+        return {
+          success: true,
+          user: mergedUser,
+          message: 'Profile updated successfully'
+        };
+      }
+      
+      // Return whichever result has user data, preferring email result
+      return emailResult && emailResult.user ? emailResult : avatarResult || emailResult;
+    }
+    
+    // If we're here, we need to update the name or continue with other updates
     const formData = new FormData();
     
     if (data.name) {
@@ -555,6 +638,164 @@ export const uploadProfilePicture = async (file: File, userId?: number): Promise
     console.error('Error status:', apiError.response?.status);
     
     let errorMessage = 'Avatar upload failed';
+    let errorDetails: Record<string, string> | undefined = undefined;
+    
+    if (apiError.response?.data?.error) {
+      if (typeof apiError.response.data.error === 'string') {
+        errorMessage = apiError.response.data.error;
+      } else {
+        errorDetails = apiError.response.data.error;
+      }
+    }
+    
+    return {
+      success: false,
+      message: errorMessage,
+      errors: errorDetails
+    };
+  }
+};
+
+/**
+ * Change user's username
+ */
+export const changeUsername = async (newUsername: string, userId?: number): Promise<AuthResult> => {
+  try {
+    console.log('Starting username change with:', { newUsername, userId });
+    
+    let endpoint = '/api/profile/username';
+    if (userId) {
+      endpoint = `/api/user/${userId}/username`;
+    }
+    
+    const response = await authApiClient.post<any>(endpoint, { username: newUsername });
+    
+    console.log('Username change response:', response.data);
+    
+    if (response.data && response.data.status === 'success') {
+      // Extract user data from response
+      let userData: User | undefined;
+      
+      if (response.data.data) {
+        userData = {
+          name: response.data.data.name,
+          email: response.data.data.email,
+          id: response.data.data.id,
+          avatar: response.data.data.avatar || response.data.data.profile_picture
+        };
+      } else if (response.data.user) {
+        userData = {
+          name: response.data.user.name, 
+          email: response.data.user.email,
+          id: response.data.user.id,
+          avatar: response.data.user.avatar || response.data.user.profile_picture
+        };
+      }
+      
+      if (userData) {
+        return {
+          success: true,
+          user: userData,
+          message: response.data.message || 'Username changed successfully'
+        };
+      }
+      
+      // If we don't have user data but the request was successful
+      return {
+        success: true,
+        message: response.data.message || 'Username changed successfully'
+      };
+    }
+    
+    return { 
+      success: false, 
+      message: response.data.message || 'Failed to change username' 
+    };
+  } catch (error: unknown) {
+    const apiError = error as ApiError;
+    console.error('Username change error:', apiError.response?.data);
+    
+    let errorMessage = 'Failed to change username';
+    let errorDetails: Record<string, string> | undefined = undefined;
+    
+    if (apiError.response?.data?.error) {
+      if (typeof apiError.response.data.error === 'string') {
+        errorMessage = apiError.response.data.error;
+      } else {
+        errorDetails = apiError.response.data.error;
+      }
+    }
+    
+    return {
+      success: false,
+      message: errorMessage,
+      errors: errorDetails
+    };
+  }
+};
+
+/**
+ * Change user's email address
+ */
+export const changeEmail = async (newEmail: string, userId?: number): Promise<AuthResult> => {
+  try {
+    console.log('Starting email change with:', { newEmail, userId });
+    
+    // Use the correct endpoint based on whether we have a userId
+    let endpoint = '/profile/email';
+    if (userId) {
+      // Reverting to the original endpoint without /update suffix
+      endpoint = `/user/${userId}/email`;
+    }
+    
+    const response = await authApiClient.post<any>(endpoint, { email: newEmail });
+    
+    console.log('Email change response:', response.data);
+    
+    if (response.data && response.data.status === 'success') {
+      // Extract user data from response
+      let userData: User | undefined;
+      
+      if (response.data.data) {
+        userData = {
+          name: response.data.data.name,
+          email: response.data.data.email,
+          id: response.data.data.id,
+          avatar: response.data.data.avatar || response.data.data.profile_picture
+        };
+      } else if (response.data.user) {
+        userData = {
+          name: response.data.user.name, 
+          email: response.data.user.email,
+          id: response.data.user.id,
+          avatar: response.data.user.avatar || response.data.user.profile_picture
+        };
+      }
+      
+      if (userData) {
+        return {
+          success: true,
+          user: userData,
+          message: response.data.message || 'Email changed successfully'
+        };
+      }
+      
+      // If we don't have user data but the request was successful
+      return {
+        success: true,
+        message: response.data.message || 'Email changed successfully'
+      };
+    }
+    
+    return { 
+      success: false, 
+      message: response.data.message || 'Failed to change email' 
+    };
+  } catch (error: unknown) {
+    const apiError = error as ApiError;
+    console.error('Email change error:', apiError.response?.data);
+    
+    let errorMessage = 'Failed to change email';
     let errorDetails: Record<string, string> | undefined = undefined;
     
     if (apiError.response?.data?.error) {
