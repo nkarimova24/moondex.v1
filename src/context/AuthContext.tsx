@@ -4,7 +4,7 @@ import { createContext, useState, useEffect, useContext, ReactNode } from 'react
 import { useRouter } from 'next/navigation';
 import Cookies from 'js-cookie';
 import * as api from '@/app/lib/api/';
-import { User, LoginCredentials, RegisterData, AuthResult } from '@/app/lib/api/types';
+import { User, LoginCredentials, RegisterData, AuthResult, UpdateProfileData } from '@/app/lib/api/types';
 
 // Define a more specific error type
 interface ApiError extends Error {
@@ -24,6 +24,7 @@ interface AuthContextType {
   register: (userData: RegisterData) => Promise<AuthResult>;
   login: (credentials: LoginCredentials) => Promise<AuthResult>;
   logout: () => Promise<void>;
+  updateProfile: (data: UpdateProfileData) => Promise<AuthResult>;
 }
 
 interface AuthProviderProps {
@@ -138,13 +139,45 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     }
   };
 
+  // Update user profile
+  const updateProfile = async (data: UpdateProfileData): Promise<AuthResult> => {
+    setLoading(true);
+    try {
+      if (!user || !user.id) {
+        return { 
+          success: false, 
+          message: 'No authenticated user found' 
+        };
+      }
+      
+      const result = await api.updateProfile(user.id, data);
+      
+      if (result.success && result.user) {
+        setUser(result.user);
+        return result;
+      }
+      
+      return result;
+    } catch (error: unknown) {
+      const apiError = error as ApiError;
+      console.error('Profile update error in context:', apiError);
+      return { 
+        success: false, 
+        message: 'Profile update failed due to an unexpected error',
+      };
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const contextValue: AuthContextType = {
     user, 
     loading, 
     isAuthenticated: !!user,
     register, 
     login, 
-    logout
+    logout,
+    updateProfile
   };
 
   return (

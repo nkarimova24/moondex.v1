@@ -1,7 +1,7 @@
 // Authentication API functions
 import Cookies from 'js-cookie';
 import { authApiClient } from './client';
-import { LoginCredentials, RegisterData, AuthResult, User } from './types';
+import { LoginCredentials, RegisterData, AuthResult, User, UpdateProfileData } from './types';
 
 interface ApiResponse<T> {
   status: string;
@@ -13,6 +13,7 @@ interface UserResponseData {
   email: string;
   id: number;
   token?: string;
+  avatar?: string;
 }
 
 interface ApiError extends Error {
@@ -186,5 +187,66 @@ export const getCurrentUser = async (): Promise<AuthResult> => {
     }
     
     return { success: false };
+  }
+};
+
+/**
+ * Update user profile
+ */
+export const updateProfile = async (userId: number, data: UpdateProfileData): Promise<AuthResult> => {
+  try {
+    const formData = new FormData();
+    
+    if (data.name) {
+      formData.append('name', data.name);
+    }
+    
+    if (data.avatar) {
+      formData.append('avatar', data.avatar);
+    }
+    
+    const response = await authApiClient.post<ApiResponse<UserResponseData>>(`/user/${userId}/profile`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    
+    const responseData = response.data;
+    
+    if (responseData.status === 'success' && responseData.data) {
+      const userData: User = {
+        name: responseData.data.name,
+        email: responseData.data.email,
+        id: responseData.data.id,
+        avatar: responseData.data.avatar
+      };
+      
+      return {
+        success: true,
+        user: userData
+      };
+    }
+    
+    return { success: false, message: 'Profile update failed' };
+  } catch (error: unknown) {
+    const apiError = error as ApiError;
+    console.error('Update profile error:', apiError.response?.data);
+    
+    let errorMessage = 'Profile update failed';
+    let errorDetails: Record<string, string> | undefined = undefined;
+    
+    if (apiError.response?.data?.error) {
+      if (typeof apiError.response.data.error === 'string') {
+        errorMessage = apiError.response.data.error;
+      } else {
+        errorDetails = apiError.response.data.error;
+      }
+    }
+    
+    return {
+      success: false,
+      message: errorMessage,
+      errors: errorDetails
+    };
   }
 };

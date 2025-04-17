@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, ChangeEvent } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { useCollection } from "@/context/CollectionContext";
 import { useLanguage } from "@/context/LanguageContext";
@@ -20,11 +20,21 @@ import {
   Grid,
   Card,
   CardContent,
-  CardActionArea
+  CardActionArea,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  TextField,
+  IconButton,
+  Snackbar,
+  Alert
 } from "@mui/material";
 import CollectionsIcon from "@mui/icons-material/Collections";
 import SettingsIcon from "@mui/icons-material/Settings";
 import AddIcon from "@mui/icons-material/Add";
+import EditIcon from "@mui/icons-material/Edit";
+import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 import CardGrid from "@/app/components/CardGrid";
 import { PokemonCard } from "@/app/lib/api/types";
 
@@ -69,7 +79,7 @@ function a11yProps(index: number) {
 }
 
 export default function ProfilePage() {
-  const { user, isAuthenticated, loading: authLoading } = useAuth();
+  const { user, isAuthenticated, loading: authLoading, updateProfile } = useAuth();
   const { collections, loading: collectionsLoading } = useCollection();
   const { t } = useLanguage();
   const router = useRouter();
@@ -77,6 +87,15 @@ export default function ProfilePage() {
   const [selectedCollection, setSelectedCollection] = useState<any>(null);
   const [pokemonCards, setPokemonCards] = useState<CollectionPokemonCard[]>([]);
   const [loadingCards, setLoadingCards] = useState(false);
+  
+  // Profile editing state
+  const [editProfileDialogOpen, setEditProfileDialogOpen] = useState(false);
+  const [profileName, setProfileName] = useState('');
+  const [profileImage, setProfileImage] = useState<File | null>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [updating, setUpdating] = useState(false);
+  const [updateMessage, setUpdateMessage] = useState<{type: 'success' | 'error', message: string} | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (!authLoading && !isAuthenticated) {
@@ -166,12 +185,82 @@ export default function ProfilePage() {
     fetchCardDetails();
   }, [selectedCollection?.id]);
 
+  useEffect(() => {
+    if (user) {
+      setProfileName(user.name || '');
+    }
+  }, [user]);
+
   const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
     setTabValue(newValue);
   };
 
   const handleCollectionSelect = (collection: any) => {
     setSelectedCollection(collection);
+  };
+
+  const handleEditProfileOpen = () => {
+    setProfileName(user?.name || '');
+    setProfileImage(null);
+    setImagePreview(null);
+    setEditProfileDialogOpen(true);
+  };
+
+  const handleEditProfileClose = () => {
+    setEditProfileDialogOpen(false);
+  };
+
+  const handleProfileImageClick = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      setProfileImage(file);
+      
+      // Create preview
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setImagePreview(e.target?.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleUpdateProfile = async () => {
+    setUpdating(true);
+    try {
+      const result = await updateProfile({
+        name: profileName,
+        avatar: profileImage || undefined
+      });
+
+      if (result.success) {
+        setUpdateMessage({
+          type: 'success',
+          message: t("profile.updateSuccess") || 'Profile updated successfully'
+        });
+        handleEditProfileClose();
+      } else {
+        setUpdateMessage({
+          type: 'error',
+          message: result.message || t("profile.updateError") || 'Failed to update profile'
+        });
+      }
+    } catch (error) {
+      console.error("Error updating profile:", error);
+      setUpdateMessage({
+        type: 'error',
+        message: t("profile.updateError") || 'Failed to update profile'
+      });
+    } finally {
+      setUpdating(false);
+    }
+  };
+
+  const handleCloseMessage = () => {
+    setUpdateMessage(null);
   };
 
   if (authLoading) {
@@ -187,6 +276,7 @@ export default function ProfilePage() {
       <Paper elevation={3} sx={{ mb: 4, p: 3, borderRadius: 2, background: 'linear-gradient(to right, rgba(138, 63, 63, 0.05), rgba(138, 63, 63, 0.15))' }}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 3 }}>
           <Avatar 
+            src={user?.avatar}
             sx={{ 
               width: 80, 
               height: 80,
@@ -401,6 +491,8 @@ export default function ProfilePage() {
             </Typography>
             <Button 
               variant="outlined"
+              onClick={handleEditProfileOpen}
+              startIcon={<EditIcon />}
               sx={{ 
                 mt: 2,
                 borderColor: '#8A3F3F',
@@ -435,6 +527,117 @@ export default function ProfilePage() {
           </Paper>
         </TabPanel>
       </Box>
+
+      {/* Edit Profile Dialog */}
+      <Dialog open={editProfileDialogOpen} onClose={handleEditProfileClose} maxWidth="sm" fullWidth>
+        <DialogTitle>{t("profile.editProfile")}</DialogTitle>
+        <DialogContent>
+          <Box sx={{ textAlign: 'center', mb: 3, mt: 1 }}>
+            <Box sx={{ position: 'relative', display: 'inline-block' }}>
+              <Avatar
+                src={imagePreview || user?.avatar}
+                onClick={handleProfileImageClick}
+                sx={{
+                  width: 120,
+                  height: 120,
+                  fontSize: '3rem',
+                  fontWeight: 'bold',
+                  cursor: 'pointer',
+                  background: 'linear-gradient(to bottom right, #8A3F3F, #612B2B)',
+                  border: '4px solid rgba(138, 63, 63, 0.2)',
+                  transition: 'all 0.2s ease',
+                  '&:hover': {
+                    opacity: 0.8,
+                  }
+                }}
+              >
+                {user?.name?.[0] || 'U'}
+              </Avatar>
+              <IconButton
+                size="small"
+                onClick={handleProfileImageClick}
+                sx={{
+                  position: 'absolute',
+                  bottom: 0,
+                  right: 0,
+                  background: '#8A3F3F',
+                  color: 'white',
+                  '&:hover': {
+                    background: '#612B2B',
+                  }
+                }}
+              >
+                <PhotoCameraIcon fontSize="small" />
+              </IconButton>
+            </Box>
+            <Typography variant="caption" display="block" sx={{ mt: 1, color: 'text.secondary' }}>
+              {t("profile.clickToUpload")}
+            </Typography>
+            <input
+              type="file"
+              ref={fileInputRef}
+              onChange={handleFileChange}
+              accept="image/*"
+              style={{ display: 'none' }}
+            />
+          </Box>
+          
+          <TextField
+            autoFocus
+            margin="dense"
+            label={t("auth.username")}
+            type="text"
+            fullWidth
+            variant="outlined"
+            value={profileName}
+            onChange={(e) => setProfileName(e.target.value)}
+            sx={{ mb: 3 }}
+          />
+        </DialogContent>
+        <DialogActions sx={{ px: 3, pb: 2 }}>
+          <Button 
+            onClick={handleEditProfileClose}
+            sx={{ color: 'text.secondary' }}
+          >
+            {t("button.cancel")}
+          </Button>
+          <Button 
+            onClick={handleUpdateProfile}
+            variant="contained"
+            disabled={updating}
+            sx={{
+              backgroundColor: '#8A3F3F',
+              '&:hover': {
+                backgroundColor: '#612B2B',
+              }
+            }}
+          >
+            {updating ? (
+              <CircularProgress size={24} color="inherit" />
+            ) : (
+              t("button.save")
+            )}
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* Success/Error Message */}
+      <Snackbar 
+        open={!!updateMessage} 
+        autoHideDuration={6000} 
+        onClose={handleCloseMessage}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+      >
+        {updateMessage && (
+          <Alert 
+            onClose={handleCloseMessage} 
+            severity={updateMessage.type} 
+            sx={{ width: '100%' }}
+          >
+            {updateMessage.message}
+          </Alert>
+        )}
+      </Snackbar>
     </Container>
   );
 } 

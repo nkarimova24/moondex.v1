@@ -217,6 +217,9 @@ const translations: Record<Language, Record<string, string>> = {
     "profile.comingSoon": "Coming soon...",
     "profile.lists": "Lists",
     "profile.decks": "Decks",
+    "profile.clickToUpload": "Click to upload profile picture",
+    "profile.updateSuccess": "Profile updated successfully",
+    "profile.updateError": "Failed to update profile",
     
     // Misc
     "misc.updatedAt": "Updated at",
@@ -437,6 +440,9 @@ const translations: Record<Language, Record<string, string>> = {
     "profile.comingSoon": "Binnenkort beschikbaar...",
     "profile.lists": "Lijsten",
     "profile.decks": "Decks",
+    "profile.clickToUpload": "Klik om profielfoto te uploaden",
+    "profile.updateSuccess": "Profiel succesvol bijgewerkt",
+    "profile.updateError": "Kan profiel niet bijwerken",
     
     // Misc
     "misc.updatedAt": "Bijgewerkt op",

@@ -150,6 +150,7 @@ export interface PokemonSet {
     id?: number;
     name: string;
     email: string;
+    avatar?: string;
     created_at?: string;
     updated_at?: string;
   }
@@ -206,4 +207,9 @@ export interface PokemonSet {
     content: string;
     created_at: string;
     updated_at: string;
+  }
+
+  export interface UpdateProfileData {
+    name?: string;
+    avatar?: File;
   }
