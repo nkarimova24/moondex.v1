@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, ChangeEvent } from "react";
-import { useAuth } from "@/context/AuthContext";
+import { useAuth, getUserAvatarUrl } from "@/context/AuthContext";
 import { useCollection } from "@/context/CollectionContext";
 import { useLanguage } from "@/context/LanguageContext";
 import { useRouter } from "next/navigation";
@@ -35,8 +35,9 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
+import RefreshIcon from "@mui/icons-material/Refresh";
 import CardGrid from "@/app/components/CardGrid";
-import { PokemonCard } from "@/app/lib/api/types";
+import { PokemonCard, User, UpdateProfileData } from "@/app/lib/api/types";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -96,7 +97,7 @@ export default function ProfilePage() {
   const [updating, setUpdating] = useState(false);
   const [updateMessage, setUpdateMessage] = useState<{type: 'success' | 'error', message: string} | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
-
+  
   useEffect(() => {
     if (!authLoading && !isAuthenticated) {
       router.push("/signin");
@@ -187,7 +188,14 @@ export default function ProfilePage() {
 
   useEffect(() => {
     if (user) {
+      console.log('Profile page detected user change');
+      
+      // Update the profile name when user data changes
       setProfileName(user.name || '');
+      
+      // Clear image preview if changing user
+      setImagePreview(null);
+      setProfileImage(null);
     }
   }, [user]);
 
@@ -231,12 +239,29 @@ export default function ProfilePage() {
   const handleUpdateProfile = async () => {
     setUpdating(true);
     try {
-      const result = await updateProfile({
-        name: profileName,
-        avatar: profileImage || undefined
+      // Create update data with optional avatar
+      const updateData: UpdateProfileData = {
+        name: profileName
+      };
+      
+      // Only include avatar if a new one was selected
+      if (profileImage) {
+        updateData.avatar = profileImage;
+      }
+      
+      console.log('Updating profile with:', { 
+        name: updateData.name, 
+        hasAvatar: !!updateData.avatar 
       });
+      
+      const result = await updateProfile(updateData);
 
       if (result.success) {
+        // Clear the preview after successful update
+        setProfileImage(null);
+        setImagePreview(null);
+        
+        // Show success message
         setUpdateMessage({
           type: 'success',
           message: t("profile.updateSuccess") || 'Profile updated successfully'
@@ -275,18 +300,20 @@ export default function ProfilePage() {
     <Container maxWidth="lg" sx={{ py: 4 }}>
       <Paper elevation={3} sx={{ mb: 4, p: 3, borderRadius: 2, background: 'linear-gradient(to right, rgba(138, 63, 63, 0.05), rgba(138, 63, 63, 0.15))' }}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 3 }}>
-          <Avatar 
-            src={user?.avatar}
-            sx={{ 
-              width: 80, 
-              height: 80,
-              background: 'linear-gradient(to bottom right, #8A3F3F, #612B2B)',
-              fontSize: '2rem',
-              fontWeight: 'bold',
-            }}
-          >
-            {user?.name?.[0] || 'U'}
-          </Avatar>
+          <Box sx={{ position: 'relative' }}>
+            <Avatar 
+              src={getUserAvatarUrl(user)}
+              sx={{ 
+                width: 80, 
+                height: 80,
+                background: 'linear-gradient(to bottom right, #8A3F3F, #612B2B)',
+                fontSize: '2rem',
+                fontWeight: 'bold',
+              }}
+            >
+              {user?.name?.[0]?.toUpperCase() || 'U'}
+            </Avatar>
+          </Box>
           <Box>
             <Typography variant="h4" fontWeight="bold" sx={{ mb: 0.5 }}>
               {user?.name || 'User'}
@@ -535,7 +562,7 @@ export default function ProfilePage() {
           <Box sx={{ textAlign: 'center', mb: 3, mt: 1 }}>
             <Box sx={{ position: 'relative', display: 'inline-block' }}>
               <Avatar
-                src={imagePreview || user?.avatar}
+                src={imagePreview || getUserAvatarUrl(user)}
                 onClick={handleProfileImageClick}
                 sx={{
                   width: 120,
@@ -551,7 +578,7 @@ export default function ProfilePage() {
                   }
                 }}
               >
-                {user?.name?.[0] || 'U'}
+                {user?.name?.[0]?.toUpperCase() || 'U'}
               </Avatar>
               <IconButton
                 size="small"
@@ -622,13 +649,13 @@ export default function ProfilePage() {
       </Dialog>
 
       {/* Success/Error Message */}
-      <Snackbar 
-        open={!!updateMessage} 
-        autoHideDuration={6000} 
-        onClose={handleCloseMessage}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-      >
-        {updateMessage && (
+      {updateMessage && (
+        <Snackbar 
+          open={true} 
+          autoHideDuration={6000} 
+          onClose={handleCloseMessage}
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+        >
           <Alert 
             onClose={handleCloseMessage} 
             severity={updateMessage.type} 
@@ -636,8 +663,8 @@ export default function ProfilePage() {
           >
             {updateMessage.message}
           </Alert>
-        )}
-      </Snackbar>
+        </Snackbar>
+      )}
     </Container>
   );
 } 

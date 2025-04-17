@@ -151,6 +151,7 @@ export interface PokemonSet {
     name: string;
     email: string;
     avatar?: string;
+    profile_picture?: string;
     created_at?: string;
     updated_at?: string;
   }

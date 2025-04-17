@@ -16,7 +16,8 @@ import {
   IconButton,
   Button,
   Stack,
-  Box
+  Box,
+  Avatar
 } from "@mui/material";
 import LoginIcon from "@mui/icons-material/Login";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
@@ -28,7 +29,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import HistoryIcon from "@mui/icons-material/History";
 import { fetchPokemonSets } from "@/app/lib/api/pokemon";
 import { PokemonSet } from "@/app/lib/api/types";
-import { useAuth } from "@/context/AuthContext";
+import { useAuth, getUserAvatarUrl } from "@/context/AuthContext";
 import { useLanguage } from "@/context/LanguageContext";
 import LanguageToggle from "./LanguageToggle";
 
@@ -168,22 +169,17 @@ export default function Sidebar({ isOpen: propIsOpen, onToggle }: SidebarProps) 
               background: 'linear-gradient(to right, rgba(138, 63, 63, 0.15), rgba(138, 63, 63, 0.05))',
             }}
           >
-            <Box 
+            <Avatar 
+              src={getUserAvatarUrl(user)}
               sx={{ 
                 width: 40, 
-                height: 40, 
-                borderRadius: '50%', 
+                height: 40,
                 background: 'linear-gradient(to bottom right, #8A3F3F, #612B2B)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
                 fontWeight: 'bold',
-                color: 'white',
-                textTransform: 'uppercase',
               }}
             >
-              {user?.name?.[0] || 'U'}
-            </Box>
+              {user?.name?.[0]?.toUpperCase() || 'U'}
+            </Avatar>
             <Box sx={{ flexGrow: 1 }}>
               <Typography variant="body2" sx={{ color: "rgba(255,255,255,0.9)", fontWeight: 500 }}>
                 {user?.name}
@@ -209,7 +205,6 @@ export default function Sidebar({ isOpen: propIsOpen, onToggle }: SidebarProps) 
         </Box>
       ) : (
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
-          {/* Sign in/up buttons soon*/}
         </Box>
       )}
     </Box>
