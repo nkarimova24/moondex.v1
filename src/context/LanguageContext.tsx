@@ -210,6 +210,13 @@ const translations: Record<Language, Record<string, string>> = {
     "profile.editProfile": "Edit Profile",
     "profile.accountSecurity": "Account Security",
     "profile.changePassword": "Change Password",
+    "profile.myCollections": "My Collections",
+    "profile.addCollection": "Add Collection",
+    "profile.collectionsEmpty": "You haven't created any collections yet",
+    "profile.createFirstCollection": "Create your first collection",
+    "profile.comingSoon": "Coming soon...",
+    "profile.lists": "Lists",
+    "profile.decks": "Decks",
     
     // Misc
     "misc.updatedAt": "Updated at",
@@ -223,6 +230,12 @@ const translations: Record<Language, Record<string, string>> = {
     // Language toggle
     "language.switch": "Switch to Dutch",
     "language.current": "English",
+    
+    // Sidebar
+    "sidebar.goToProfile": "Go to profile",
+    "sidebar.signIn": "Sign In",
+    "sidebar.signUp": "Sign Up",
+    "sidebar.logout": "Logout",
   },
   nl: {
     // Algemeen
@@ -417,6 +430,13 @@ const translations: Record<Language, Record<string, string>> = {
     "profile.editProfile": "Profiel Bewerken",
     "profile.accountSecurity": "Accountbeveiliging",
     "profile.changePassword": "Wachtwoord Wijzigen",
+    "profile.myCollections": "Mijn Collecties",
+    "profile.addCollection": "Collectie Toevoegen",
+    "profile.collectionsEmpty": "Je hebt nog geen collecties aangemaakt",
+    "profile.createFirstCollection": "Maak je eerste collectie aan",
+    "profile.comingSoon": "Binnenkort beschikbaar...",
+    "profile.lists": "Lijsten",
+    "profile.decks": "Decks",
     
     // Misc
     "misc.updatedAt": "Bijgewerkt op",
@@ -430,6 +450,12 @@ const translations: Record<Language, Record<string, string>> = {
     // Language toggle
     "language.switch": "Schakel naar Engels",
     "language.current": "Nederlands",
+    
+    // Sidebar
+    "sidebar.goToProfile": "Ga naar profiel",
+    "sidebar.signIn": "Inloggen",
+    "sidebar.signUp": "Registreren",
+    "sidebar.logout": "Uitloggen",
   }
 };
 

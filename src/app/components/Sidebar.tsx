@@ -202,7 +202,7 @@ export default function Sidebar({ isOpen: propIsOpen, onToggle }: SidebarProps) 
                 }}
                 onClick={isMobile ? handleDrawerToggle : undefined}
               >
-                Go to profile
+                {t("sidebar.goToProfile")}
               </Typography>
             </Box>
           </Box>
@@ -583,7 +583,7 @@ export default function Sidebar({ isOpen: propIsOpen, onToggle }: SidebarProps) 
                 }
               }}
             >
-              Sign In
+              {t("sidebar.signIn")}
             </Button> 
             <Button
               fullWidth
@@ -601,7 +601,7 @@ export default function Sidebar({ isOpen: propIsOpen, onToggle }: SidebarProps) 
                 }
               }}
             >
-              Sign Up
+              {t("sidebar.signUp")}
             </Button> 
           </Stack>
         </Box>
@@ -657,7 +657,7 @@ export default function Sidebar({ isOpen: propIsOpen, onToggle }: SidebarProps) 
                 color: 'rgba(255,255,255,0.6)',
                 '&:hover': { color: 'rgba(255,255,255,0.9)' }
               }}
-              title="Logout"
+              title={t("sidebar.logout")}
             >
               <LogoutIcon fontSize="small" />
             </IconButton>

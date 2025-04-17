@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { useCollection } from "@/context/CollectionContext";
+import { useLanguage } from "@/context/LanguageContext";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import {
@@ -70,6 +71,7 @@ function a11yProps(index: number) {
 export default function ProfilePage() {
   const { user, isAuthenticated, loading: authLoading } = useAuth();
   const { collections, loading: collectionsLoading } = useCollection();
+  const { t } = useLanguage();
   const router = useRouter();
   const [tabValue, setTabValue] = useState(0);
   const [selectedCollection, setSelectedCollection] = useState<any>(null);
@@ -211,7 +213,7 @@ export default function ProfilePage() {
           <Tabs value={tabValue} onChange={handleTabChange} aria-label="profile tabs">
             <Tab 
               icon={<CollectionsIcon />} 
-              label="Collections" 
+              label={t("profile.collections")} 
               {...a11yProps(0)} 
               sx={{ 
                 '&.Mui-selected': { color: '#8A3F3F' },
@@ -220,7 +222,7 @@ export default function ProfilePage() {
             />
             <Tab 
               icon={<SettingsIcon />} 
-              label="Settings" 
+              label={t("profile.settings")} 
               {...a11yProps(1)} 
               sx={{ 
                 '&.Mui-selected': { color: '#8A3F3F' },
@@ -237,7 +239,7 @@ export default function ProfilePage() {
             </Box>
           ) : collections.length === 0 ? (
             <Box sx={{ textAlign: 'center', my: 4 }}>
-              <Typography variant="h6" sx={{ mb: 2 }}>Your collected cards will be shown here</Typography>
+              <Typography variant="h6" sx={{ mb: 2 }}>{t("profile.collectionsEmpty")}</Typography>
               {/* <Button 
                 variant="contained" 
                 component={Link} 
@@ -248,13 +250,13 @@ export default function ProfilePage() {
                   '&:hover': { backgroundColor: '#612B2B' }
                 }}
               >
-                Start Collecting
+                {t("profile.createFirstCollection")}
               </Button> */}
             </Box>
           ) : (
             <>
               <Box sx={{ mb: 4 }}>
-                <Typography variant="h6" sx={{ mb: 2 }}>Your Moondex</Typography>
+                <Typography variant="h6" sx={{ mb: 2 }}>{t("profile.myCollections")}</Typography>
                 <Grid container spacing={2}>
                   {collections.map((collection) => (
                     <Grid item xs={12} sm={6} md={4} key={collection.id}>
@@ -267,15 +269,60 @@ export default function ProfilePage() {
                       >
                         <CardActionArea onClick={() => handleCollectionSelect(collection)}>
                           <CardContent>
-                            <Typography variant="h6" sx={{ mb: 1 }}>Collected Cards</Typography>
+                            <Typography variant="h6" sx={{ mb: 1 }}>{t("collection.title")}</Typography>
                             <Typography variant="body2" color="text.secondary">
-                              {collection.cards.length} cards
+                              {collection.cards.length} {t("set.cards").toLowerCase()}
                             </Typography>
                           </CardContent>
                         </CardActionArea>
                       </Card>
                     </Grid>
                   ))}
+                  
+                  {/* Coming soon - Lists */}
+                  <Grid item xs={12} sm={6} md={4}>
+                    <Card 
+                      elevation={1}
+                      sx={{ 
+                        height: '100%',
+                        opacity: 0.7,
+                        background: 'rgba(138, 63, 63, 0.02)',
+                        border: '1px dashed rgba(138, 63, 63, 0.2)',
+                      }}
+                    >
+                      <CardContent sx={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                        <Typography variant="h6" sx={{ mb: 1, color: 'text.secondary' }}>
+                          {t("profile.comingSoon")}
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary">
+                          {t("profile.lists")}
+                        </Typography>
+                      </CardContent>
+                    </Card>
+                  </Grid>
+                  
+                  {/* Coming soon - Decks */}
+                  <Grid item xs={12} sm={6} md={4}>
+                    <Card 
+                      elevation={1}
+                      sx={{ 
+                        height: '100%',
+                        opacity: 0.7,
+                        background: 'rgba(138, 63, 63, 0.02)',
+                        border: '1px dashed rgba(138, 63, 63, 0.2)',
+                      }}
+                    >
+                      <CardContent sx={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                        <Typography variant="h6" sx={{ mb: 1, color: 'text.secondary' }}>
+                          {t("profile.comingSoon")}
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary">
+                          {t("profile.decks")}
+                        </Typography>
+                      </CardContent>
+                    </Card>
+                  </Grid>
+                  
                   {/* <Grid item xs={12} sm={6} md={4}>
                     <Card 
                       elevation={1}
@@ -293,7 +340,7 @@ export default function ProfilePage() {
                         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center' }}>
                           <AddIcon sx={{ fontSize: 40, color: 'rgba(138, 63, 63, 0.5)', mb: 1 }} />
                           <Typography variant="body1" sx={{ color: 'rgba(138, 63, 63, 0.7)' }}>
-                            Add Collection
+                            {t("profile.addCollection")}
                           </Typography>
                         </Box>
                       </CardActionArea>
@@ -316,7 +363,7 @@ export default function ProfilePage() {
                   ) : pokemonCards.length === 0 ? (
                     <Box sx={{ textAlign: 'center', my: 4 }}>
                       <Typography variant="body1" sx={{ mb: 2 }}>
-                        Cards you have collected will be shown here!
+                        {t("collection.empty")}
                       </Typography>
                       <Button 
                         variant="contained" 
@@ -327,7 +374,7 @@ export default function ProfilePage() {
                           '&:hover': { backgroundColor: '#612B2B' }
                         }}
                       >
-                        Add Cards
+                        {t("collection.addFirst")}
                       </Button>
                     </Box>
                   ) : (
@@ -340,17 +387,17 @@ export default function ProfilePage() {
         </TabPanel>
         
         <TabPanel value={tabValue} index={1}>
-          <Typography variant="h6" sx={{ mb: 3 }}>Account Settings</Typography>
+          <Typography variant="h6" sx={{ mb: 3 }}>{t("profile.settings")}</Typography>
           
           <Paper sx={{ p: 3, mb: 3 }}>
             <Typography variant="subtitle1" fontWeight="bold" sx={{ mb: 2 }}>
-              Profile Information
+              {t("profile.editProfile")}
             </Typography>
             <Typography variant="body1" sx={{ mb: 1 }}>
-              Name: {user?.name || 'Not set'}
+              {t("auth.username")}: {user?.name || 'Not set'}
             </Typography>
             <Typography variant="body1" sx={{ mb: 1 }}>
-              Email: {user?.email || 'Not set'}
+              {t("auth.email")}: {user?.email || 'Not set'}
             </Typography>
             <Button 
               variant="outlined"
@@ -364,13 +411,13 @@ export default function ProfilePage() {
                 } 
               }}
             >
-              Edit Profile
+              {t("profile.editProfile")}
             </Button>
           </Paper>
           
           <Paper sx={{ p: 3 }}>
             <Typography variant="subtitle1" fontWeight="bold" sx={{ mb: 2 }}>
-              Account Security
+              {t("profile.accountSecurity")}
             </Typography>
             <Button 
               variant="outlined"
@@ -383,7 +430,7 @@ export default function ProfilePage() {
                 } 
               }}
             >
-              Change Password
+              {t("profile.changePassword")}
             </Button>
           </Paper>
         </TabPanel>
