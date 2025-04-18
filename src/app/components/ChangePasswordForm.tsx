@@ -36,19 +36,19 @@ const ChangePasswordForm = ({ onClose }: { onClose?: () => void }) => {
     } = {};
     
     if (!currentPassword) {
-      newErrors.currentPassword = t('auth.requiredField');
+      newErrors.currentPassword = t('profile.requiredField');
     }
     
     if (!newPassword) {
-      newErrors.newPassword = t('auth.requiredField');
+      newErrors.newPassword = t('profile.requiredField');
     } else if (newPassword.length < 8) {
-      newErrors.newPassword = t('auth.passwordLength');
+      newErrors.newPassword = t('profile.passwordLength');
     }
     
     if (!confirmPassword) {
-      newErrors.confirmPassword = t('auth.requiredField');
+      newErrors.confirmPassword = t('profile.requiredField');
     } else if (confirmPassword !== newPassword) {
-      newErrors.confirmPassword = t('auth.passwordMismatch');
+      newErrors.confirmPassword = t('profile.passwordMismatch');
     }
     
     setErrors(newErrors);

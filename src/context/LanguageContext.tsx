@@ -221,6 +221,14 @@ const translations: Record<Language, Record<string, string>> = {
     "profile.clickToUpload": "Click to upload profile picture",
     "profile.updateSuccess": "Profile updated successfully",
     "profile.updateError": "Failed to update profile",
+    "profile.currentPassword": "Current Password",
+    "profile.newPassword": "New Password",
+    "profile.confirmNewPassword": "Confirm New Password",
+    "profile.passwordChangeSuccess": "Password changed successfully",
+    "profile.passwordChangeError": "Failed to change password",
+    "profile.requiredField": "This field is required",
+    "profile.passwordLength": "Password must be at least 8 characters",
+    "profile.passwordMismatch": "Passwords do not match",
     
     // Misc
     "misc.updatedAt": "Updated at",
@@ -445,6 +453,14 @@ const translations: Record<Language, Record<string, string>> = {
     "profile.clickToUpload": "Klik om profielfoto te uploaden",
     "profile.updateSuccess": "Profiel succesvol bijgewerkt",
     "profile.updateError": "Kan profiel niet bijwerken",
+    "profile.currentPassword": "Huidig Wachtwoord",
+    "profile.newPassword": "Nieuw Wachtwoord",
+    "profile.confirmNewPassword": "Bevestig Nieuw Wachtwoord",
+    "profile.passwordChangeSuccess": "Wachtwoord succesvol gewijzigd",
+    "profile.passwordChangeError": "Wachtwoord wijzigen mislukt",
+    "profile.requiredField": "Dit veld is verplicht",
+    "profile.passwordLength": "Wachtwoord moet minimaal 8 tekens bevatten",
+    "profile.passwordMismatch": "Wachtwoorden komen niet overeen",
     
     // Misc
     "misc.updatedAt": "Bijgewerkt op",

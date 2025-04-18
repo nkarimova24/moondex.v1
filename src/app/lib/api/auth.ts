@@ -826,17 +826,20 @@ export const changePassword = async (currentPassword: string, newPassword: strin
   try {
     console.log('Starting password change request');
     
-    // Determine the endpoint based on whether we have a userId
-    let endpoint = '/profile/password';
-    if (userId) {
-      endpoint = `/user/${userId}/password`;
-    }
+    // Remove the /api prefix since the baseURL already includes it
+    const endpoint = userId 
+      ? `/user/${userId}/change-password` 
+      : '/change-password';
     
-    const response = await authApiClient.post<any>(endpoint, { 
+    // Use the parameter names expected by the backend
+    const passwordData = { 
       current_password: currentPassword,
-      password: newPassword,
-      password_confirmation: newPassword
-    });
+      new_password: newPassword,
+      confirm_password: newPassword  // Using the same value for confirmation
+    };
+    
+    console.log(`Making password change request to: ${endpoint}`);
+    const response = await authApiClient.post<any>(endpoint, passwordData);
     
     console.log('Password change response:', response.data);
     

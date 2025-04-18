@@ -47,6 +47,7 @@ import SetSearchbar from "@/app/components/SetSearchbar";
 import CardFilters from "@/app/components/CardFilters";
 import { Search } from "lucide-react";
 import { getCardPrice } from "@/app/lib/sortUtils";
+import ChangePasswordForm from "@/app/components/ChangePasswordForm";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -107,6 +108,7 @@ export default function ProfilePage() {
   
   // Profile editing state
   const [editProfileDialogOpen, setEditProfileDialogOpen] = useState(false);
+  const [changePasswordDialogOpen, setChangePasswordDialogOpen] = useState(false);
   const [profileEmail, setProfileEmail] = useState('');
   const [profileImage, setProfileImage] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
@@ -504,6 +506,16 @@ export default function ProfilePage() {
     setSelectedType(type);
   };
 
+  // Handle opening the change password dialog
+  const handleChangePasswordOpen = () => {
+    setChangePasswordDialogOpen(true);
+  };
+
+  // Handle closing the change password dialog
+  const handleChangePasswordClose = () => {
+    setChangePasswordDialogOpen(false);
+  };
+
   if (authLoading) {
     return (
       <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
@@ -872,6 +884,7 @@ export default function ProfilePage() {
             </Typography>
             <Button 
               variant="outlined"
+              onClick={handleChangePasswordOpen}
               sx={{ 
                 borderColor: '#8A3F3F',
                 color: '#8A3F3F',
@@ -978,6 +991,19 @@ export default function ProfilePage() {
           )}
         </Button>
       </DialogActions>
+      </Dialog>
+
+      {/* Change Password Dialog */}
+      <Dialog 
+        open={changePasswordDialogOpen} 
+        onClose={handleChangePasswordClose} 
+        maxWidth="sm" 
+        fullWidth
+      >
+        <DialogTitle>{t("profile.changePassword")}</DialogTitle>
+        <DialogContent>
+          <ChangePasswordForm onClose={handleChangePasswordClose} />
+        </DialogContent>
       </Dialog>
 
       {/* Success/Error Message */}
