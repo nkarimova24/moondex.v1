@@ -1,102 +1,81 @@
 "use client";
 
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { Box, Typography, Button, Paper, Container } from '@mui/material';
-import { useLanguage } from '@/context/LanguageContext';
+import { useEffect } from 'react';
+import { Box, Typography, Paper, Button, Alert } from '@mui/material';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import { toast } from 'react-hot-toast';
+import Link from 'next/link';
 
-export default function PasswordResetSuccessPage() {
-  const { t } = useLanguage();
-  const router = useRouter();
-  const [countdown, setCountdown] = useState(5);
-  
-  // Get the current origin for redirection
-  const [baseUrl, setBaseUrl] = useState('');
-  
+export default function PasswordResetConfirmationPage() {
   useEffect(() => {
-    // Set the base URL for redirects based on the current environment
-    if (typeof window !== 'undefined') {
-      // Get origin (e.g., http://localhost:3000 or https://moondex.nl)
-      setBaseUrl(window.location.origin);
-    }
+    // Show success toast
+    toast.success('Your password has been reset successfully');
   }, []);
 
-  useEffect(() => {
-    // Start countdown for redirection
-    const countdownInterval = setInterval(() => {
-      setCountdown((prev) => {
-        if (prev <= 1) {
-          clearInterval(countdownInterval);
-          router.push('/signin');
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
-    
-    return () => clearInterval(countdownInterval);
-  }, [router]);
-
   return (
-    <Container maxWidth="sm" sx={{ pt: 8, pb: 8 }}>
-      <Paper elevation={3} sx={{ 
-        p: 4, 
-        borderRadius: 2,
-        bgcolor: "rgba(30, 30, 30, 0.8)",
-        boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-        backdropFilter: "blur(10px)",
-      }}>
-        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <CheckCircleOutlineIcon color="success" sx={{ fontSize: 60, mb: 2 }} />
-          
-          <Typography 
-            variant="h4" 
-            component="h1" 
-            gutterBottom 
-            align="center"
-            sx={{ color: "#8A3F3F", fontWeight: "bold" }}
-          >
-            Password Reset Successful
-          </Typography>
-          
-          <Typography 
-            variant="body1" 
-            align="center" 
-            sx={{ mb: 4, color: 'rgba(255, 255, 255, 0.7)' }}
-          >
-            Your password has been successfully reset. 
-            You have been logged out from all devices for security reasons.
-          </Typography>
-          
-          <Typography 
-            variant="body2" 
-            align="center"
-            sx={{ color: 'rgba(255, 255, 255, 0.5)', mb: 3 }}
-          >
-            You will be redirected to the login page in {countdown} seconds...
-          </Typography>
-          
+    <Box 
+      sx={{ 
+        display: 'flex', 
+        flexDirection: 'column', 
+        alignItems: 'center', 
+        justifyContent: 'center',
+        minHeight: '50vh',
+        padding: 4
+      }}
+    >
+      <Paper 
+        elevation={3} 
+        sx={{ 
+          p: 4, 
+          maxWidth: 500, 
+          width: '100%',
+          textAlign: 'center'
+        }}
+      >
+        <CheckCircleOutlineIcon 
+          sx={{ 
+            fontSize: 64, 
+            color: 'success.main',
+            mb: 2
+          }} 
+        />
+        
+        <Typography variant="h4" gutterBottom>
+          Password Changed
+        </Typography>
+        
+        <Alert severity="success" sx={{ mb: 3, textAlign: 'left' }}>
+          Your password has been changed successfully.
+        </Alert>
+        
+        <Typography variant="body1" paragraph>
+          You can now log in to your account using your new password.
+        </Typography>
+        
+        <Typography variant="body2" paragraph color="text.secondary">
+          For security reasons, you have been logged out from all devices.
+        </Typography>
+        
+        <Box sx={{ mt: 4 }}>
           <Button 
+            component={Link}
+            href="/signin"
             variant="contained" 
-            color="primary" 
-            onClick={() => router.push('/signin')}
-            sx={{ 
-              mt: 2,
-              bgcolor: '#8A3F3F',
-              '&:hover': {
-                bgcolor: '#6A2F2F',
-              },
-              py: 1.5,
-              fontSize: '1rem',
-              fontWeight: 'bold',
-              textTransform: 'none',
-            }}
+            color="primary"
+            sx={{ mx: 1 }}
           >
-            Go to Login Now
+            Log In Now
+          </Button>
+          <Button 
+            component={Link}
+            href="/"
+            variant="outlined"
+            sx={{ mx: 1 }}
+          >
+            Return to Home
           </Button>
         </Box>
       </Paper>
-    </Container>
+    </Box>
   );
 } 

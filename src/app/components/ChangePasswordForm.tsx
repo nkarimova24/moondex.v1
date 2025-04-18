@@ -7,9 +7,13 @@ import {
   CircularProgress,
   Typography,
   Box,
-  Alert
+  Alert,
+  Paper,
+  Divider
 } from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
+import MailOutlineIcon from '@mui/icons-material/MailOutline';
+import { toast } from 'react-hot-toast';
 
 const ChangePasswordForm = ({ onClose }: { onClose?: () => void }) => {
   const { t } = useLanguage();
@@ -94,8 +98,11 @@ const ChangePasswordForm = ({ onClose }: { onClose?: () => void }) => {
         
         if (isConfirmationFlow) {
           setConfirmationSent(true);
+          // Show toast notification for confirmation email
+          toast.success('A confirmation email has been sent to your inbox');
         } else {
           setSuccess(true);
+          toast.success('Password changed successfully');
         }
         
         // Reset form after successful submission
@@ -117,6 +124,7 @@ const ChangePasswordForm = ({ onClose }: { onClose?: () => void }) => {
           result.message?.toLowerCase().includes('does not match');
         
         setError(result.message || t('profile.passwordChangeError'));
+        toast.error(result.message || t('profile.passwordChangeError'));
         
         // Reset only the current password field if that's the issue
         if (isCurrentPasswordError) {
@@ -137,6 +145,7 @@ const ChangePasswordForm = ({ onClose }: { onClose?: () => void }) => {
     } catch (err) {
       console.error('Error changing password:', err);
       setError(t('profile.passwordChangeError'));
+      toast.error(t('profile.passwordChangeError'));
       // Reset form on unexpected errors
       setCurrentPassword('');
       setNewPassword('');
@@ -145,6 +154,75 @@ const ChangePasswordForm = ({ onClose }: { onClose?: () => void }) => {
       setLoading(false);
     }
   };
+  
+  // If confirmation is sent, show a completely different UI
+  if (confirmationSent) {
+    return (
+      <Box sx={{ textAlign: 'center', py: 2 }}>
+        <MailOutlineIcon 
+          sx={{ 
+            fontSize: 64, 
+            color: 'primary.main', 
+            mb: 2 
+          }} 
+        />
+        
+        <Typography variant="h6" gutterBottom>
+          Check Your Email
+        </Typography>
+        
+        <Alert 
+          severity="info" 
+          icon={<InfoIcon />}
+          sx={{ 
+            mb: 3, 
+            backgroundColor: 'rgba(245, 193, 66, 0.1)',
+            border: '1px solid rgba(245, 193, 66, 0.3)',
+            '& .MuiAlert-icon': {
+              color: '#F5C142',
+            }
+          }}
+        >
+          <Typography variant="body2">
+            A confirmation email has been sent to <strong>{user?.email}</strong>
+          </Typography>
+        </Alert>
+        
+        <Typography variant="body1" paragraph>
+          Please check your email inbox and click on the confirmation link to complete your password change.
+        </Typography>
+        
+        <Typography variant="body2" sx={{ mt: 2, fontStyle: 'italic', color: 'text.secondary' }}>
+          Don't see the email? Check your spam folder.
+        </Typography>
+        
+        <Divider sx={{ my: 3 }} />
+        
+        <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2, mt: 2 }}>
+          {onClose && (
+            <Button 
+              onClick={onClose}
+              variant="outlined"
+            >
+              {t('button.close')}
+            </Button>
+          )}
+          
+          <Button 
+            variant="contained"
+            onClick={() => {
+              setConfirmationSent(false);
+              setCurrentPassword('');
+              setNewPassword('');
+              setConfirmPassword('');
+            }}
+          >
+            Try Again
+          </Button>
+        </Box>
+      </Box>
+    );
+  }
   
   return (
     <Box
@@ -169,120 +247,72 @@ const ChangePasswordForm = ({ onClose }: { onClose?: () => void }) => {
         </Alert>
       )}
       
-      {confirmationSent && (
-        <Alert 
-          severity="info" 
-          icon={<InfoIcon />}
-          sx={{ 
-            mb: 2,
-            backgroundColor: 'rgba(245, 193, 66, 0.1)',
-            border: '1px solid rgba(245, 193, 66, 0.3)',
-            '& .MuiAlert-icon': {
-              color: '#F5C142',
-            }
-          }}
-        >
-          <Typography variant="body2">
-            A confirmation email has been sent to {user?.email}. Please check your inbox and click on the confirmation link to complete your password change.
-          </Typography>
-        </Alert>
-      )}
+      <TextField
+        label={t('profile.currentPassword')}
+        type="password"
+        value={currentPassword}
+        onChange={(e) => setCurrentPassword(e.target.value)}
+        fullWidth
+        margin="normal"
+        variant="outlined"
+        error={!!errors.currentPassword}
+        helperText={errors.currentPassword}
+        disabled={loading || success}
+        sx={{ mt: 0 }}
+        inputRef={currentPasswordRef}
+      />
       
-      {!confirmationSent && (
-        <>
-          <TextField
-            label={t('profile.currentPassword')}
-            type="password"
-            value={currentPassword}
-            onChange={(e) => setCurrentPassword(e.target.value)}
-            fullWidth
-            margin="normal"
-            variant="outlined"
-            error={!!errors.currentPassword}
-            helperText={errors.currentPassword}
-            disabled={loading || success}
-            sx={{ mt: 0 }}
-            inputRef={currentPasswordRef}
-          />
-          
-          <TextField
-            label={t('profile.newPassword')}
-            type="password"
-            value={newPassword}
-            onChange={(e) => setNewPassword(e.target.value)}
-            fullWidth
-            margin="normal"
-            variant="outlined"
-            error={!!errors.newPassword}
-            helperText={errors.newPassword}
-            disabled={loading || success}
-            sx={{ mt: 0 }}
-            inputRef={newPasswordRef}
-          />
-          
-          <TextField
-            label={t('profile.confirmNewPassword')}
-            type="password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            fullWidth
-            margin="normal"
-            variant="outlined"
-            error={!!errors.confirmPassword}
-            helperText={errors.confirmPassword}
-            disabled={loading || success}
-            sx={{ mt: 0 }}
-            inputRef={confirmPasswordRef}
-          />
-          
-          <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 2 }}>
-            {onClose && (
-              <Button 
-                onClick={onClose}
-                sx={{ mr: 2, color: 'text.secondary' }}
-                disabled={loading}
-              >
-                {t('button.cancel')}
-              </Button>
-            )}
-            
-            <Button 
-              type="submit"
-              variant="contained"
-              disabled={loading || success}
-              sx={{
-                backgroundColor: '#8A3F3F',
-                '&:hover': {
-                  backgroundColor: '#612B2B',
-                }
-              }}
-            >
-              {loading ? (
-                <CircularProgress size={24} color="inherit" />
-              ) : (
-                t('button.save')
-              )}
-            </Button>
-          </Box>
-        </>
-      )}
+      <TextField
+        label={t('profile.newPassword')}
+        type="password"
+        value={newPassword}
+        onChange={(e) => setNewPassword(e.target.value)}
+        fullWidth
+        margin="normal"
+        variant="outlined"
+        error={!!errors.newPassword}
+        helperText={errors.newPassword}
+        disabled={loading || success}
+        sx={{ mt: 0 }}
+        inputRef={newPasswordRef}
+      />
       
-      {confirmationSent && (
-        <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 2 }}>
+      <TextField
+        label={t('profile.confirmNewPassword')}
+        type="password"
+        value={confirmPassword}
+        onChange={(e) => setConfirmPassword(e.target.value)}
+        fullWidth
+        margin="normal"
+        variant="outlined"
+        error={!!errors.confirmPassword}
+        helperText={errors.confirmPassword}
+        disabled={loading || success}
+        sx={{ mt: 0 }}
+        inputRef={confirmPasswordRef}
+      />
+      
+      <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 2 }}>
+        {onClose && (
           <Button 
             onClick={onClose}
-            variant="contained"
-            sx={{
-              backgroundColor: '#8A3F3F',
-              '&:hover': {
-                backgroundColor: '#612B2B',
-              }
-            }}
+            sx={{ mr: 2, color: 'text.secondary' }}
+            disabled={loading}
           >
-            {t('button.close')}
+            {t('button.cancel')}
           </Button>
-        </Box>
-      )}
+        )}
+        
+        <Button 
+          type="submit"
+          variant="contained"
+          color="primary"
+          disabled={loading || success}
+          startIcon={loading && <CircularProgress size={20} color="inherit" />}
+        >
+          {loading ? t('button.loading') : t('button.saveChanges')}
+        </Button>
+      </Box>
     </Box>
   );
 };

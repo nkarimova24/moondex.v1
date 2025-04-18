@@ -1,8 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import { Box, Typography, Paper, TextField, Button, CircularProgress } from '@mui/material';
+import { Box, Typography, Paper, TextField, Button, CircularProgress, Alert } from '@mui/material';
 import { toast } from 'react-hot-toast';
+import Link from 'next/link';
+import MailOutlineIcon from '@mui/icons-material/MailOutline';
 
 export default function PasswordResetPage() {
   const [email, setEmail] = useState('');
@@ -70,12 +72,45 @@ export default function PasswordResetPage() {
         
         {isSubmitted ? (
           <Box sx={{ textAlign: 'center', my: 3 }}>
+            <MailOutlineIcon sx={{ fontSize: 64, color: 'primary.main', mb: 2 }} />
+            
+            <Typography variant="h6" gutterBottom>
+              Check Your Email
+            </Typography>
+            
+            <Alert severity="success" sx={{ mb: 3 }}>
+              A confirmation link has been sent to your email address.
+            </Alert>
+            
             <Typography variant="body1" paragraph>
-              If an account exists with the email you provided, we've sent instructions to reset your password.
+              If an account exists with the email you provided, we've sent a confirmation link to reset your password.
             </Typography>
-            <Typography variant="body2" color="text.secondary">
-              Please check your email inbox and follow the instructions to reset your password.
+            
+            <Typography variant="body2" paragraph color="text.secondary">
+              Please check your email inbox and click on the link to complete the password reset process.
             </Typography>
+            
+            <Typography variant="body2" sx={{ mt: 3, fontStyle: 'italic' }} color="text.secondary">
+              Don't see the email? Check your spam folder or try again.
+            </Typography>
+            
+            <Box sx={{ mt: 4 }}>
+              <Button
+                component={Link}
+                href="/"
+                variant="outlined"
+                sx={{ mx: 1 }}
+              >
+                Back to Home
+              </Button>
+              <Button
+                onClick={() => setIsSubmitted(false)}
+                variant="text"
+                sx={{ mx: 1 }}
+              >
+                Try Again
+              </Button>
+            </Box>
           </Box>
         ) : (
           <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
