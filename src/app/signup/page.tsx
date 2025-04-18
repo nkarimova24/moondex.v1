@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import Link from "next/link";
-import { Button, TextField, Box, Typography, Container, Alert } from "@mui/material";
+import { Button, TextField, Box, Typography, Container, Alert, CircularProgress } from "@mui/material";
 
 export default function SignUp() {
   const [userData, setUserData] = useState({
@@ -16,8 +16,15 @@ export default function SignUp() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(false);
   const [generalError, setGeneralError] = useState("");
-  const { register } = useAuth();
+  const { register, isAuthenticated, loading: authLoading } = useAuth();
   const router = useRouter();
+
+  // Redirect already authenticated users to profile page
+  useEffect(() => {
+    if (!authLoading && isAuthenticated) {
+      router.push("/profile");
+    }
+  }, [isAuthenticated, authLoading, router]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserData({
@@ -47,7 +54,7 @@ export default function SignUp() {
       });
 
       if (result.success) {
-        router.push("/");
+        router.push("/profile"); // Redirect to profile instead of home
       } else {
         if (result.errors) {
           setErrors(result.errors);
@@ -66,6 +73,15 @@ export default function SignUp() {
       setLoading(false);
     }
   };
+
+  // Show loading while checking authentication
+  if (authLoading) {
+    return (
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+        <CircularProgress sx={{ color: '#8A3F3F' }} />
+      </Box>
+    );
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center">

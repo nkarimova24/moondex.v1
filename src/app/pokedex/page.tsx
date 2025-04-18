@@ -82,6 +82,11 @@ function PokeDexContent() {
       try {
         const fetchedSetInfo = await fetchSetDetails(setId);
         setSetInfo(fetchedSetInfo);
+        
+        // Update document title when set info is loaded
+        if (fetchedSetInfo && fetchedSetInfo.name) {
+          document.title = `${fetchedSetInfo.name} - MoonDex`;
+        }
       } catch (error) {
         console.error("Error loading set info:", error);
       }
@@ -170,6 +175,24 @@ function PokeDexContent() {
       setIsSearching(false);
     }
   }, [cards, sortOption, selectedType, loading, loadingMore]);
+  
+  useEffect(() => {
+    // Update title based on search/set info
+    if (setId && setInfo && setInfo.name) {
+      document.title = `${setInfo.name} - MoonDex`;
+    } else if (isPokemonSearch) {
+      document.title = `${pokemonSearchTerm} - MoonDex`;
+    } else if (isGlobalSearch) {
+      document.title = `${globalSearchTerm} - MoonDex`;
+    } else {
+      document.title = "MoonDex";
+    }
+    
+    return () => {
+      // Reset title when component unmounts
+      document.title = "MoonDex";
+    };
+  }, [setId, setInfo, isGlobalSearch, isPokemonSearch, pokemonSearchTerm, globalSearchTerm]);
   
   const handleSearch = useCallback((term: string) => {
     if (isGlobalSearch || isPokemonSearch) return; 
