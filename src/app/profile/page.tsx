@@ -30,7 +30,8 @@ import {
   TextField,
   IconButton,
   Snackbar,
-  Alert
+  Alert,
+  Tooltip
 } from "@mui/material";
 import CollectionsIcon from "@mui/icons-material/Collections";
 import SettingsIcon from "@mui/icons-material/Settings";
@@ -38,11 +39,14 @@ import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 import RefreshIcon from "@mui/icons-material/Refresh";
+import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
+import InfoIcon from "@mui/icons-material/Info";
 import CardGrid from "@/app/components/CardGrid";
 import { PokemonCard, User, UpdateProfileData } from "@/app/lib/api/types";
 import SetSearchbar from "@/app/components/SetSearchbar";
 import CardFilters from "@/app/components/CardFilters";
 import { Search } from "lucide-react";
+import { getCardPrice } from "@/app/lib/sortUtils";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -98,6 +102,8 @@ export default function ProfilePage() {
   const [isSearching, setIsSearching] = useState(false);
   const [sortOption, setSortOption] = useState("number-asc");
   const [selectedType, setSelectedType] = useState("All Types");
+  const [collectionValue, setCollectionValue] = useState<number | null>(null);
+  const [isCalculatingValue, setIsCalculatingValue] = useState(false);
   
   // Profile editing state
   const [editProfileDialogOpen, setEditProfileDialogOpen] = useState(false);
@@ -300,6 +306,61 @@ export default function ProfilePage() {
       setProfileImage(null);
     }
   }, [user]);
+
+  // Calculate collection value when pokemonCards change
+  useEffect(() => {
+    if (!pokemonCards.length) {
+      setCollectionValue(null);
+      return;
+    }
+    
+    setIsCalculatingValue(true);
+    
+    try {
+      let totalValue = 0;
+      let cardCount = 0;
+      
+      pokemonCards.forEach(card => {
+        // Get base price for the card
+        const basePrice = getCardPrice(card);
+        
+        // Calculate value based on card quantity and variant
+        if (card.collection && card.collection.variants) {
+          const { variants } = card.collection;
+          
+          // Normal cards
+          if (variants.normal > 0) {
+            const normalPrice = card.tcgplayer?.prices?.normal?.market || basePrice;
+            totalValue += normalPrice * variants.normal;
+            cardCount += variants.normal;
+          }
+          
+          // Holo cards (usually more valuable)
+          if (variants.holo > 0) {
+            const holoPrice = card.tcgplayer?.prices?.holofoil?.market || 
+                             (basePrice * 1.5); // Estimate if no specific price
+            totalValue += holoPrice * variants.holo;
+            cardCount += variants.holo;
+          }
+          
+          // Reverse holo cards
+          if (variants.reverse_holo > 0) {
+            const reverseHoloPrice = card.tcgplayer?.prices?.reverseHolofoil?.market || 
+                                    (basePrice * 1.25); // Estimate if no specific price
+            totalValue += reverseHoloPrice * variants.reverse_holo;
+            cardCount += variants.reverse_holo;
+          }
+        }
+      });
+      
+      setCollectionValue(totalValue);
+    } catch (error) {
+      console.error('Error calculating collection value:', error);
+      setCollectionValue(null);
+    } finally {
+      setIsCalculatingValue(false);
+    }
+  }, [pokemonCards]);
 
   const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
     setTabValue(newValue);
@@ -517,7 +578,7 @@ export default function ProfilePage() {
                       >
                         <CardActionArea onClick={() => handleCollectionSelect(collection)}>
                           <CardContent>
-                            <Typography variant="h6" sx={{ mb: 1 }}>{t("collection.title")}</Typography>
+                            <Typography variant="h6" sx={{ mb: 1 }}>{collection.name}</Typography>
                             <Typography variant="body2" color="text.secondary">
                               {collection.cards.length} {t("set.cards").toLowerCase()}
                             </Typography>
@@ -578,6 +639,43 @@ export default function ProfilePage() {
                   <Typography variant="h5" sx={{ mb: 2, display: 'flex', alignItems: 'center' }}>
                     <CollectionsIcon sx={{ mr: 1 }} /> {selectedCollection.name}
                   </Typography>
+                  
+                  {/* Collection Value */}
+                  <Box sx={{ 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    gap: 2, 
+                    mb: 2, 
+                    p: 2, 
+                    borderRadius: 1, 
+                    backgroundColor: 'rgba(138, 63, 63, 0.05)'
+                  }}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                      <MonetizationOnIcon sx={{ color: '#7FC99F' }} />
+                      <Typography variant="body1" fontWeight="medium">
+                        Collection Value:
+                      </Typography>
+                    </Box>
+                    
+                    {isCalculatingValue ? (
+                      <CircularProgress size={20} thickness={5} sx={{ color: '#8A3F3F' }} />
+                    ) : collectionValue !== null ? (
+                      <Typography variant="body1" fontWeight="bold" sx={{ color: '#7FC99F' }}>
+                        ${collectionValue.toFixed(2)}
+                      </Typography>
+                    ) : (
+                      <Typography variant="body1" color="text.secondary">
+                        No price data available
+                      </Typography>
+                    )}
+                    
+                    <Tooltip title="This value is calculated based on current market prices for each card in your collection, including variants like holofoil and reverse holofoil.">
+                      <IconButton size="small" sx={{ ml: 'auto' }}>
+                        <InfoIcon fontSize="small" />
+                      </IconButton>
+                    </Tooltip>
+                  </Box>
+                  
                   <Divider sx={{ mb: 3 }} />
                   
                   {loadingCards ? (
