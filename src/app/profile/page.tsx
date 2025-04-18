@@ -1,3 +1,5 @@
+// src/app/profile/page.tsx
+
 "use client";
 
 import { useState, useEffect, useRef, ChangeEvent } from "react";
@@ -80,7 +82,7 @@ function a11yProps(index: number) {
 }
 
 export default function ProfilePage() {
-  const { user: authUser, isAuthenticated, loading: authLoading, updateProfile } = useAuth();
+  const { user: authUser, isAuthenticated, loading: authLoading, updateProfile, refreshUser } = useAuth();
   const { collections, loading: collectionsLoading } = useCollection();
   const { t } = useLanguage();
   const router = useRouter();
@@ -91,7 +93,6 @@ export default function ProfilePage() {
   
   // Profile editing state
   const [editProfileDialogOpen, setEditProfileDialogOpen] = useState(false);
-  const [profileName, setProfileName] = useState('');
   const [profileEmail, setProfileEmail] = useState('');
   const [profileImage, setProfileImage] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
@@ -202,8 +203,7 @@ export default function ProfilePage() {
     if (user) {
       console.log('Profile page detected user change');
       
-      // Update the profile name when user data changes
-      setProfileName(user.name || '');
+      // Update the profile email when user data changes
       setProfileEmail(user.email || '');
       
       // Clear image preview if changing user
@@ -221,7 +221,6 @@ export default function ProfilePage() {
   };
 
   const handleEditProfileOpen = () => {
-    setProfileName(user?.name || '');
     setProfileEmail(user?.email || '');
     setProfileImage(null);
     setImagePreview(null);
@@ -251,20 +250,15 @@ export default function ProfilePage() {
   };
 
   const handleUpdateProfile = async () => {
-    // Close the dialog immediately before anything else
     setEditProfileDialogOpen(false);
     
-    // Then continue with profile update
     setUpdating(true);
     
     try {
-      // Create update data with optional avatar
       const updateData: UpdateProfileData = {
-        name: profileName,
         email: profileEmail !== user?.email ? profileEmail : undefined
       };
       
-      // Only include avatar if a new one was selected
       if (profileImage) {
         updateData.avatar = profileImage;
       }
@@ -279,7 +273,6 @@ export default function ProfilePage() {
       if (user) {
         const immediatelyUpdatedUser = {
           ...user,
-          name: profileName || user.name,
           email: profileEmail !== user?.email ? profileEmail : user.email
         };
         setUser(immediatelyUpdatedUser);
@@ -287,19 +280,16 @@ export default function ProfilePage() {
       
       const result = await updateProfile(updateData);
       console.log('Profile update result:', result);
-
-      // Set success/error message after API call
-      if (result.success) {
-        // Clear the preview after successful update
+  
+      if (result.success || (result.message && result.message.toLowerCase().includes('success'))) {
         setProfileImage(null);
         setImagePreview(null);
         
         setUpdateMessage({
           type: 'success',
-          message: result.message || t("profile.updateSuccess") || 'Profile updated successfully'
+          message: t("profile.updateSuccess") || 'Profile updated successfully'
         });
       } else {
-        // If API call failed, revert to original user data
         if (authUser) {
           setUser(authUser);
         }
@@ -312,7 +302,6 @@ export default function ProfilePage() {
     } catch (error) {
       console.error("Error updating profile:", error);
       
-      // If there was an error, revert to original user data
       if (authUser) {
         setUser(authUser);
       }
@@ -399,18 +388,6 @@ export default function ProfilePage() {
           ) : collections.length === 0 ? (
             <Box sx={{ textAlign: 'center', my: 4 }}>
               <Typography variant="h6" sx={{ mb: 2 }}>{t("profile.collectionsEmpty")}</Typography>
-              {/* <Button 
-                variant="contained" 
-                component={Link} 
-                href="/collections" 
-                startIcon={<AddIcon />}
-                sx={{ 
-                  backgroundColor: '#8A3F3F',
-                  '&:hover': { backgroundColor: '#612B2B' }
-                }}
-              >
-                {t("profile.createFirstCollection")}
-              </Button> */}
             </Box>
           ) : (
             <>
@@ -481,30 +458,6 @@ export default function ProfilePage() {
                       </CardContent>
                     </Card>
                   </Grid>
-                  
-                  {/* <Grid item xs={12} sm={6} md={4}>
-                    <Card 
-                      elevation={1}
-                      sx={{ 
-                        height: '100%',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        background: 'rgba(138, 63, 63, 0.05)',
-                        border: '1px dashed rgba(138, 63, 63, 0.3)',
-                        p: 3
-                      }}
-                    >
-                      <CardActionArea component={Link} href="/collections" sx={{ height: '100%', p: 2 }}>
-                        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center' }}>
-                          <AddIcon sx={{ fontSize: 40, color: 'rgba(138, 63, 63, 0.5)', mb: 1 }} />
-                          <Typography variant="body1" sx={{ color: 'rgba(138, 63, 63, 0.7)' }}>
-                            {t("profile.addCollection")}
-                          </Typography>
-                        </Box>
-                      </CardActionArea>
-                    </Card>
-                  </Grid> */}
                 </Grid>
               </Box>
 
@@ -652,17 +605,6 @@ export default function ProfilePage() {
           </Box>
           
           <TextField
-            margin="dense"
-            label={t("auth.username")}
-            type="text"
-            fullWidth
-            variant="outlined"
-            value={profileName}
-            onChange={(e) => setProfileName(e.target.value)}
-            sx={{ mb: 2 }}
-          />
-          
-          <TextField
             autoFocus
             margin="dense"
             label={t("auth.email")}
@@ -711,7 +653,7 @@ export default function ProfilePage() {
         >
           <Alert 
             onClose={handleCloseMessage} 
-            severity={updateMessage.type === 'success' ? 'success' : 'error'} 
+            severity={updateMessage.type} 
             sx={{ width: '100%' }}
           >
             {updateMessage.message}
@@ -720,4 +662,4 @@ export default function ProfilePage() {
       )}
     </Container>
   );
-} 
+}
