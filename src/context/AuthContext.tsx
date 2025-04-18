@@ -424,18 +424,64 @@ const register = async (userData: RegisterData): Promise<AuthResult> => {
       setLoading(true);
       
       try {
+        // Store current avatar URL before making the API call
+        const currentAvatarUrl = getUserAvatarUrl(user);
+        
         // Call the API function from auth.ts
-        const result = await api.changePassword(currentPassword, newPassword);
+        const result = await api.changePassword(currentPassword, newPassword, user.id);
         
         if (result.success) {
-          // If password change succeeds, update the local user data if provided in the response
+          // If password change succeeds and returns user data, merge it with existing user data
           if (result.user) {
-            setUser(result.user);
-            localStorage.setItem('user', JSON.stringify(result.user));
+            // Create a merged user object that preserves existing values if they're missing in the response
+            const mergedUser: User = {
+              ...user,                                        // Start with all existing user data
+              ...result.user,                                // Override with new data from response
+              // Ensure we keep these properties even if not returned in response
+              name: result.user.name || user.name,
+              email: result.user.email || user.email,
+              // Preserve avatar - crucial for maintaining profile picture
+              avatar: result.user.avatar || user.avatar,
+              profile_picture: (result.user as any).profile_picture || (user as any).profile_picture,
+              // Other fields to preserve
+              pending_email: result.user.pending_email || user.pending_email
+            };
+            
+            console.log('Preserving user data after password change:', {
+              before: {
+                id: user.id,
+                name: user.name,
+                email: user.email,
+                avatar: user.avatar,
+                profile_picture: (user as any).profile_picture
+              },
+              after: {
+                id: mergedUser.id,
+                name: mergedUser.name,
+                email: mergedUser.email,
+                avatar: mergedUser.avatar,
+                profile_picture: (mergedUser as any).profile_picture
+              }
+            });
+            
+            // Update with merged data to maintain all user information
+            setUser(mergedUser);
+            
+            // Optionally update local storage if you're using it
+            if (typeof window !== 'undefined') {
+              localStorage.setItem('user', JSON.stringify(mergedUser));
+            }
+          } else {
+            // If no user data returned but operation was successful,
+            // just preserve the current user state
+            console.log('No user data in password change response, preserving current state:', user);
           }
           
-          // Also refresh user data from the server to ensure all data is up to date
-          await refreshUser();
+          // Refresh user data from server, but don't await it
+          // This runs in background and will update state when complete
+          refreshUser().catch(err => {
+            console.error('Error refreshing user after password change:', err);
+          });
         }
         
         return result;
