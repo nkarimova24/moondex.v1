@@ -270,22 +270,6 @@ export default function Sidebar({ isOpen: propIsOpen, onToggle }: SidebarProps) 
             {t("app.name")}
           </Typography>
         </Box>
-        
-        {isMobile && (
-          <IconButton 
-            size="small" 
-            onClick={handleDrawerToggle}
-            sx={{ 
-              color: 'white',
-              background: 'rgba(0,0,0,0.2)',
-              '&:hover': {
-                background: 'rgba(0,0,0,0.3)',
-              }
-            }}
-          >
-            <CloseIcon />
-          </IconButton>
-        )}
       </Box>
 
       <Box 
