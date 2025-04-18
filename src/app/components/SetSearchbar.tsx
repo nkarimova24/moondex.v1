@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect } from 'react';
-import { Search, X, Loader2 } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Search, Loader2 } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
 
 interface SetSearchbarProps {
@@ -20,29 +20,49 @@ export default function SetSearchbar({
   const { t } = useLanguage();
   const [localSearchTerm, setLocalSearchTerm] = useState(value);
   const [isFocused, setIsFocused] = useState(false);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   
+  // Update local state when parent value changes, but ONLY if it's different
   useEffect(() => {
-    setLocalSearchTerm(value);
+    if (value !== localSearchTerm) {
+      setLocalSearchTerm(value);
+    }
   }, [value]);
   
-  useEffect(() => {
-    if (localSearchTerm === value) return;
-    
-    const timer = setTimeout(() => {
-      onSearch(localSearchTerm);
-    }, 500);
-    
-    return () => clearTimeout(timer);
-  }, [localSearchTerm, onSearch, value]);
-  
-  const handleClear = () => {
-    setLocalSearchTerm('');
-    onSearch('');
-  };
-  
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLocalSearchTerm(e.target.value);
+    const newValue = e.target.value;
+    setLocalSearchTerm(newValue);
+    
+    // Clear any existing timeout
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+    
+    // Set a new timeout
+    timeoutRef.current = setTimeout(() => {
+      onSearch(newValue);
+    }, 500);
   };
+  
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+      onSearch(localSearchTerm);
+    }
+  };
+  
+  // Clean up timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
   
   const searchPlaceholder = placeholder || t("search.set.placeholder");
   
@@ -69,9 +89,11 @@ export default function SetSearchbar({
         </div>
         
         <input
+          ref={inputRef}
           type="text"
           value={localSearchTerm}
           onChange={handleChange}
+          onKeyDown={handleKeyDown}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
           placeholder={searchPlaceholder}
@@ -80,20 +102,6 @@ export default function SetSearchbar({
           disabled={isLoading}
           style={{ caretColor: "#8A3F3F" }}
         />
-        
-        {localSearchTerm && (
-          <button 
-            onClick={handleClear}
-            className="p-2 text-gray-400 hover:text-white transition-colors"
-            aria-label={t("search.clear")}
-            disabled={isLoading}
-            style={{ 
-              backgroundColor: isLoading ? "transparent" : "rgba(0, 0, 0, 0.1)"
-            }}
-          >
-            <X size={18} />
-          </button>
-        )}
         
         <button 
           onClick={() => onSearch(localSearchTerm)}

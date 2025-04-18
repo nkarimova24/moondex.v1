@@ -40,6 +40,8 @@ import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import CardGrid from "@/app/components/CardGrid";
 import { PokemonCard, User, UpdateProfileData } from "@/app/lib/api/types";
+import SetSearchbar from "@/app/components/SetSearchbar";
+import { Search } from "lucide-react";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -89,7 +91,10 @@ export default function ProfilePage() {
   const [tabValue, setTabValue] = useState(0);
   const [selectedCollection, setSelectedCollection] = useState<any>(null);
   const [pokemonCards, setPokemonCards] = useState<CollectionPokemonCard[]>([]);
+  const [filteredCards, setFilteredCards] = useState<CollectionPokemonCard[]>([]);
   const [loadingCards, setLoadingCards] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [isSearching, setIsSearching] = useState(false);
   
   // Profile editing state
   const [editProfileDialogOpen, setEditProfileDialogOpen] = useState(false);
@@ -119,6 +124,7 @@ export default function ProfilePage() {
     if (!selectedCollection) return;
     
     setLoadingCards(true);
+    setSearchTerm(''); // Reset search when collection changes
     
     const fetchCardDetails = async () => {
       try {
@@ -190,6 +196,35 @@ export default function ProfilePage() {
     
     fetchCardDetails();
   }, [selectedCollection?.id]);
+
+  // Filter cards based on search term
+  useEffect(() => {
+    if (!pokemonCards.length) {
+      setFilteredCards([]);
+      return;
+    }
+    
+    if (!searchTerm.trim()) {
+      setFilteredCards(pokemonCards);
+      return;
+    }
+    
+    // Filter cards based on search term (case insensitive)
+    const searchTermLower = searchTerm.toLowerCase();
+    const filtered = pokemonCards.filter(card => {
+      return (
+        card.name.toLowerCase().includes(searchTermLower) ||
+        card.id.toLowerCase().includes(searchTermLower) ||
+        card.number.toLowerCase().includes(searchTermLower) ||
+        (card.types && card.types.some(type => type.toLowerCase().includes(searchTermLower))) ||
+        (card.subtypes && card.subtypes.some(subtype => subtype.toLowerCase().includes(searchTermLower))) ||
+        (card.rarity && card.rarity.toLowerCase().includes(searchTermLower))
+      );
+    });
+    
+    setFilteredCards(filtered);
+    setIsSearching(false);
+  }, [pokemonCards, searchTerm]);
 
   // Update local user state whenever authUser changes
   useEffect(() => {
@@ -317,6 +352,21 @@ export default function ProfilePage() {
 
   const handleCloseMessage = () => {
     setUpdateMessage(null);
+  };
+
+  const handleSearch = (term: string) => {
+    // Only set searching state if there's an actual term
+    if (term) {
+      setIsSearching(true);
+    }
+    
+    setSearchTerm(term);
+    
+    // Always reset the searching state after a short delay
+    // This ensures the UI updates properly and prevents the input from freezing
+    setTimeout(() => {
+      setIsSearching(false);
+    }, 300);
   };
 
   if (authLoading) {
@@ -490,7 +540,39 @@ export default function ProfilePage() {
                       </Button>
                     </Box>
                   ) : (
-                    <CardGrid cards={pokemonCards} baseRoute="/collections" collectionMode={true} />
+                    <>
+                      <Box sx={{ mb: 3 }}>
+                        <SetSearchbar 
+                          onSearch={handleSearch}
+                          value={searchTerm}
+                          placeholder={t("search.collection.placeholder") || "Search your collection..."}
+                          isLoading={isSearching}
+                        />
+                        {searchTerm && (
+                          <Box sx={{ mt: 2, display: 'flex', alignItems: 'center' }}>
+                            <Search size={16} style={{ color: '#8A3F3F', marginRight: '4px' }} />
+                            <Typography variant="body2" color="text.secondary">
+                              {filteredCards.length} {filteredCards.length === 1 ? 'card' : 'cards'} found for "{searchTerm}"
+                            </Typography>
+                            {searchTerm && (
+                              <Button 
+                                size="small" 
+                                sx={{ ml: 2, color: '#8A3F3F' }}
+                                onClick={() => {
+                                  // Clear the search term
+                                  setSearchTerm('');
+                                  // Immediately clear the searching state
+                                  setIsSearching(false);
+                                }}
+                              >
+                                Clear search
+                              </Button>
+                            )}
+                          </Box>
+                        )}
+                      </Box>
+                      <CardGrid cards={filteredCards} baseRoute="/collections" collectionMode={true} />
+                    </>
                   )}
                 </Box>
               )}

@@ -102,6 +102,7 @@ const translations: Record<Language, Record<string, string>> = {
     // Search
     "search.global.placeholder": "Search for any Pokémon card...",
     "search.set.placeholder": "Search for cards in this set...",
+    "search.collection.placeholder": "Search your collection...",
     "search.button": "Search",
     "search.clear": "Clear search",
     "search.loading": "Searching...",
@@ -325,6 +326,7 @@ const translations: Record<Language, Record<string, string>> = {
     // Search
     "search.global.placeholder": "Zoek naar een Pokémon kaart...",
     "search.set.placeholder": "Zoek naar kaarten in deze set...",
+    "search.collection.placeholder": "Zoek in je collectie...",
     "search.button": "Zoeken",
     "search.clear": "Wissen",
     "search.loading": "Zoeken...",
