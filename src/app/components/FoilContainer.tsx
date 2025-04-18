@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useCollection } from "@/context/CollectionContext";
 import { useAuth } from "@/context/AuthContext";
 import toast from 'react-hot-toast';
@@ -132,9 +132,13 @@ export default function FoilContainer({
   } = useCollection();
   
   const [loading, setLoading] = useState<{[key: string]: boolean}>({});
-  const [successMessages, setSuccessMessages] = useState<{[key: string]: boolean}>({});
   const [errorMessage, setErrorMessage] = useState('');
   const [cardQuantities, setCardQuantities] = useState<{[key: string]: number}>({});
+  
+  // Use a ref to track toasts within this component instance
+  const toastIdsRef = useRef(new Map());
+  // Track counter for each card type
+  const cardCountRef = useRef<{[key: string]: number}>({});
   
   useEffect(() => {
     if (collections.length === 0 || !cardId) return;
@@ -193,6 +197,12 @@ export default function FoilContainer({
       foilTypeKey = isReverseHolo ? "reverse holo" : (isFoil ? "holo" : "normal");
     }
     
+    // Update local card count ref
+    if (!cardCountRef.current[foilTypeKey]) {
+      cardCountRef.current[foilTypeKey] = 0;
+    }
+    cardCountRef.current[foilTypeKey]++;
+    
     setCardQuantities(prev => {
       const newQuantities = { ...prev };
       newQuantities[foilTypeKey] = (newQuantities[foilTypeKey] || 0) + 1;
@@ -201,7 +211,25 @@ export default function FoilContainer({
     
     const cardName = card?.name || "Card";
     const displayFoilType = normalizedType === 'darkgray' ? 'Normal' : foilType;
-    const toastId = toast.success(`Added ${cardName} (${displayFoilType}) to collection!`);
+    
+    // Create a unique key for this card type combination
+    const toastKey = `${cardId}-${foilTypeKey}-add`;
+    
+    // Display the count from our ref
+    const count = cardCountRef.current[foilTypeKey];
+    
+    // Clear previous toast if it exists
+    if (toastIdsRef.current.has(toastKey)) {
+      toast.dismiss(toastIdsRef.current.get(toastKey));
+    }
+    
+    // Create a new toast with the current count
+    const toastId = toast.success(`Added ${cardName} (${displayFoilType}) to collection! (x${count})`, {
+      duration: 3000, // Set a consistent duration
+    });
+    
+    // Save the new toast ID
+    toastIdsRef.current.set(toastKey, toastId);
     
     try {
       let collectionId: number;
@@ -216,6 +244,8 @@ export default function FoilContainer({
             newQuantities[foilTypeKey] = Math.max(0, (newQuantities[foilTypeKey] || 0) - 1);
             return newQuantities;
           });
+          // Decrease our count ref
+          cardCountRef.current[foilTypeKey]--;
           toast.error("Failed to create a collection. Please try again.");
           return;
         }
@@ -241,6 +271,8 @@ export default function FoilContainer({
           newQuantities[foilTypeKey] = Math.max(0, (newQuantities[foilTypeKey] || 0) - 1);
           return newQuantities;
         });
+        // Decrease our count ref
+        cardCountRef.current[foilTypeKey]--;
         toast.error('Failed to add card to collection.');
       } else if (isNewCollection) {
         toast.success('Created "My Collection" and added your first card!');
@@ -257,7 +289,6 @@ export default function FoilContainer({
           } 
         });
         document.dispatchEvent(cardUpdatedEvent);
-        console.log('Dispatched cardAddedToCollection event for card:', cardId);
       }
     } catch (error) {
       console.error('Error adding card to collection:', error);
@@ -268,6 +299,10 @@ export default function FoilContainer({
         return newQuantities;
       });
       
+      // Decrease our count ref
+      cardCountRef.current[foilTypeKey]--;
+      
+      // Create a new error toast
       toast.error('Error adding card to collection. Please try again.');
     } finally {
       setLoading(prev => ({ ...prev, [foilType]: false }));
@@ -307,9 +342,38 @@ export default function FoilContainer({
       [foilTypeKey]: Math.max(0, prev[foilTypeKey] - 1)
     }));
     
+    // Update our local count ref
+    if (cardCountRef.current[foilTypeKey]) {
+      cardCountRef.current[foilTypeKey] = Math.max(0, cardCountRef.current[foilTypeKey] - 1);
+    }
+    
     const cardName = card?.name || "Card";
     const displayFoilType = normalizedType === 'darkgray' ? 'Normal' : type;
-    const toastId = toast.success(`Removed ${cardName} (${displayFoilType}) from collection.`);
+    
+    // Create a unique key for this card type combination
+    const toastKey = `${cardId}-${foilTypeKey}-remove`;
+    
+    // Clear previous toast if it exists
+    if (toastIdsRef.current.has(toastKey)) {
+      toast.dismiss(toastIdsRef.current.get(toastKey));
+    }
+    
+    const remainingQuantity = Math.max(0, previousQuantity - 1);
+    
+    // Create a new toast with the current quantity info
+    let toastId;
+    if (remainingQuantity > 0) {
+      toastId = toast.success(`Removed ${cardName} (${displayFoilType}) from collection. (${remainingQuantity} remaining)`, {
+        duration: 3000,
+      });
+    } else {
+      toastId = toast.success(`Removed last ${cardName} (${displayFoilType}) from collection.`, {
+        duration: 3000,
+      });
+    }
+    
+    // Save the new toast ID
+    toastIdsRef.current.set(toastKey, toastId);
     
     try {
       if (collections.length === 0) {
@@ -317,6 +381,10 @@ export default function FoilContainer({
           ...prev,
           [foilTypeKey]: previousQuantity
         }));
+        // Reset our count ref to the previous value
+        if (cardCountRef.current[foilTypeKey] !== undefined) {
+          cardCountRef.current[foilTypeKey]++;
+        }
         toast.error("You don't have any collections yet.");
         return;
       }
@@ -494,12 +562,6 @@ export default function FoilContainer({
             
             {loading[foilType] && (
               <div className="absolute top-[-8px] right-[-8px] w-3 h-3 rounded-full border-2 border-white border-t-transparent animate-spin"></div>
-            )}
-            
-            {successMessages[foilType] && (
-              <div className="absolute top-[-20px] right-[-20px] bg-green-600 text-white text-xs rounded-md px-1 py-0.5 animate-fadeIn">
-                Added!
-              </div>
             )}
           </div>
         );
