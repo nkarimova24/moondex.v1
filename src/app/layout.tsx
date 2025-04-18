@@ -12,6 +12,8 @@ import { NotesProvider } from '@/context/NotesContext';
 
 import "./globals.css";
 import Toast from "./components/Toast";
+import { Container } from "@/app/components/Container";
+import Link from "next/link";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -75,16 +77,18 @@ export default function RootLayout({
                   {children}
                 </main>
                 
-                {/* Footer with copyright */}
-                <footer style={{ 
-                  textAlign: 'center', 
-                  padding: '20px',
-                  color: 'rgba(255,255,255,0.25)',
-                  fontSize: '11px',
-                  letterSpacing: '0.5px',
-                }}>
-                  © 2025 Moondex
-                </footer>
+                <Container maxWidth="lg">
+                  <div className="flex flex-col md:flex-row justify-between items-center py-3 text-gray-500 text-xs">
+                    <div className="flex space-x-4 mb-2 md:mb-0">
+                      <Link href="/about" className="hover:text-gray-800 dark:hover:text-gray-300 transition">About</Link>
+                      <Link href="/contact" className="hover:text-gray-800 dark:hover:text-gray-300 transition">Contact</Link>
+                      <Link href="/changelog" className="hover:text-gray-800 dark:hover:text-gray-300 transition">Changelog</Link>
+                    </div>
+                    <div className="text-center md:text-right">
+                      © 2025 MoonDex
+                    </div>
+                  </div>
+                </Container>
               </div>
               </NotesProvider>
               </CollectionProvider>

@@ -355,7 +355,7 @@ export default function ChangelogPage() {
         </p>
         <div className="flex flex-wrap gap-2 sm:gap-3">
           <button
-            onClick={() => window.open("mailto:info@moondex.nl", "_blank")}
+            onClick={() => window.open("mailto:info@MoonDex.nl", "_blank")}
             className="px-3 sm:px-4 py-1.5 sm:py-2 bg-[#8A3F3F] text-white rounded-md hover:bg-[#612B2B] transition-colors text-xs sm:text-sm"
           >
             {t("changelog.sendFeedback")}

@@ -419,11 +419,15 @@ export default function ProfilePage() {
         hasAvatar: !!updateData.avatar 
       });
       
+      // Check if email is being changed
+      const emailBeingChanged = profileEmail !== user?.email && profileEmail.trim() !== '';
+      
       // Immediately update local user state to reflect changes in UI
       if (user) {
         const immediatelyUpdatedUser = {
           ...user,
-          email: profileEmail !== user?.email ? profileEmail : user.email
+          // Only update the avatar preview immediately
+          // For email changes, we'll show a pending status instead of immediately changing the email
         };
         setUser(immediatelyUpdatedUser);
       }
@@ -435,10 +439,18 @@ export default function ProfilePage() {
         setProfileImage(null);
         setImagePreview(null);
         
-        setUpdateMessage({
-          type: 'success',
-          message: t("profile.updateSuccess") || 'Profile updated successfully'
-        });
+        // Show appropriate message based on whether email was changed
+        if (emailBeingChanged) {
+          setUpdateMessage({
+            type: 'success',
+            message: 'Your profile was updated. A confirmation email has been sent to ' + profileEmail + ' from info@MoonDex.nl'
+          });
+        } else {
+          setUpdateMessage({
+            type: 'success',
+            message: t("profile.updateSuccess") || 'Profile updated successfully'
+          });
+        }
       } else {
         if (authUser) {
           setUser(authUser);
@@ -525,6 +537,24 @@ export default function ProfilePage() {
             <Typography variant="body1" color="text.secondary">
               {user?.email || 'user@example.com'}
             </Typography>
+            {user?.pending_email && (
+              <Box sx={{ 
+                mt: 1, 
+                px: 1.5, 
+                py: 0.5, 
+                borderRadius: 1, 
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 0.5,
+                backgroundColor: 'rgba(245, 193, 66, 0.1)',
+                border: '1px solid rgba(245, 193, 66, 0.3)'
+              }}>
+                <InfoIcon sx={{ color: 'warning.main', fontSize: '0.9rem' }} />
+                <Typography variant="body2" sx={{ color: 'warning.main', fontStyle: 'italic', fontSize: '0.8rem' }}>
+                  Email change to {user.pending_email} pending confirmation
+                </Typography>
+              </Box>
+            )}
           </Box>
         </Box>
       </Paper>
@@ -552,7 +582,7 @@ export default function ProfilePage() {
             />
           </Tabs>
         </Box>
-        
+
         <TabPanel value={tabValue} index={0}>
           {collectionsLoading ? (
             <Box sx={{ display: 'flex', justifyContent: 'center', my: 4 }}>
@@ -627,7 +657,7 @@ export default function ProfilePage() {
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
                           {t("profile.decks")}
-                          </Typography>
+                        </Typography>
                       </CardContent>
                     </Card>
                   </Grid>
@@ -799,7 +829,7 @@ export default function ProfilePage() {
             </>
           )}
         </TabPanel>
-        
+
         <TabPanel value={tabValue} index={1}>
           <Typography variant="h6" sx={{ mb: 3 }}>{t("profile.settings")}</Typography>
           
@@ -812,6 +842,11 @@ export default function ProfilePage() {
             </Typography>
             <Typography variant="body1" sx={{ mb: 1 }}>
               {t("auth.email")}: {user?.email || 'Not set'}
+              {user?.pending_email && (
+                <Typography component="span" sx={{ ml: 1, fontSize: '0.85rem', color: 'warning.main', fontStyle: 'italic' }}>
+                  (Change to {user.pending_email} pending confirmation)
+                </Typography>
+              )}
             </Typography>
             <Button 
               variant="outlined"
@@ -854,114 +889,114 @@ export default function ProfilePage() {
 
       {/* Edit Profile Dialog */}
       <Dialog open={editProfileDialogOpen} onClose={handleEditProfileClose} maxWidth="sm" fullWidth>
-        <DialogTitle>{t("profile.editProfile")}</DialogTitle>
-        <DialogContent>
-          <Box sx={{ textAlign: 'center', mb: 3, mt: 1 }}>
-            <Box sx={{ position: 'relative', display: 'inline-block' }}>
-              <Avatar
-                src={imagePreview || getUserAvatarUrl(user)}
-                onClick={handleProfileImageClick}
-                sx={{
-                  width: 120,
-                  height: 120,
-                  fontSize: '3rem',
-                  fontWeight: 'bold',
-                  cursor: 'pointer',
-                  background: 'linear-gradient(to bottom right, #8A3F3F, #612B2B)',
-                  border: '4px solid rgba(138, 63, 63, 0.2)',
-                  transition: 'all 0.2s ease',
-                  '&:hover': {
-                    opacity: 0.8,
-                  }
-                }}
-              >
-                {user?.name?.[0]?.toUpperCase() || 'U'}
-              </Avatar>
-              <IconButton
-                size="small"
-                onClick={handleProfileImageClick}
-                sx={{
-                  position: 'absolute',
-                  bottom: 0,
-                  right: 0,
-                  background: '#8A3F3F',
-                  color: 'white',
-                  '&:hover': {
-                    background: '#612B2B',
-                  }
-                }}
-              >
-                <PhotoCameraIcon fontSize="small" />
-              </IconButton>
-            </Box>
-            <Typography variant="caption" display="block" sx={{ mt: 1, color: 'text.secondary' }}>
-              {t("profile.clickToUpload")}
-            </Typography>
-            <input
-              type="file"
-              ref={fileInputRef}
-              onChange={handleFileChange}
-              accept="image/*"
-              style={{ display: 'none' }}
-            />
+      <DialogTitle>{t("profile.editProfile")}</DialogTitle>
+      <DialogContent>
+        <Box sx={{ textAlign: 'center', mb: 3, mt: 1 }}>
+          <Box sx={{ position: 'relative', display: 'inline-block' }}>
+            <Avatar
+              src={imagePreview || getUserAvatarUrl(user)}
+              onClick={handleProfileImageClick}
+              sx={{
+                width: 120,
+                height: 120,
+                fontSize: '3rem',
+                fontWeight: 'bold',
+                cursor: 'pointer',
+                background: 'linear-gradient(to bottom right, #8A3F3F, #612B2B)',
+                border: '4px solid rgba(138, 63, 63, 0.2)',
+                transition: 'all 0.2s ease',
+                '&:hover': {
+                  opacity: 0.8,
+                }
+              }}
+            >
+              {user?.name?.[0]?.toUpperCase() || 'U'}
+            </Avatar>
+            <IconButton
+              size="small"
+              onClick={handleProfileImageClick}
+              sx={{
+                position: 'absolute',
+                bottom: 0,
+                right: 0,
+                background: '#8A3F3F',
+                color: 'white',
+                '&:hover': {
+                  background: '#612B2B',
+                }
+              }}
+            >
+              <PhotoCameraIcon fontSize="small" />
+            </IconButton>
           </Box>
-          
-          <TextField
-            autoFocus
-            margin="dense"
-            label={t("auth.email")}
-            type="email"
-            fullWidth
-            variant="outlined"
-            value={profileEmail}
-            onChange={(e) => setProfileEmail(e.target.value)}
-            sx={{ mb: 3 }}
+          <Typography variant="caption" display="block" sx={{ mt: 1, color: 'text.secondary' }}>
+            {t("profile.clickToUpload")}
+          </Typography>
+          <input
+            type="file"
+            ref={fileInputRef}
+            onChange={handleFileChange}
+            accept="image/*"
+            style={{ display: 'none' }}
           />
-        </DialogContent>
-        <DialogActions sx={{ px: 3, pb: 2 }}>
-          <Button 
-            onClick={handleEditProfileClose}
-            sx={{ color: 'text.secondary' }}
-          >
-            {t("button.cancel")}
-          </Button>
-          <Button 
-            onClick={handleUpdateProfile}
-            variant="contained"
-            disabled={updating}
-            sx={{
-              backgroundColor: '#8A3F3F',
-              '&:hover': {
-                backgroundColor: '#612B2B',
-              }
-            }}
-          >
-            {updating ? (
-              <CircularProgress size={24} color="inherit" />
-            ) : (
-              t("button.save")
-            )}
-          </Button>
-        </DialogActions>
+        </Box>
+        
+        <TextField
+          autoFocus
+          margin="dense"
+          label={t("auth.email")}
+          type="email"
+          fullWidth
+          variant="outlined"
+          value={profileEmail}
+          onChange={(e) => setProfileEmail(e.target.value)}
+          sx={{ mb: 3 }}
+        />
+      </DialogContent>
+      <DialogActions sx={{ px: 3, pb: 2 }}>
+        <Button 
+          onClick={handleEditProfileClose}
+          sx={{ color: 'text.secondary' }}
+        >
+          {t("button.cancel")}
+        </Button>
+        <Button 
+          onClick={handleUpdateProfile}
+          variant="contained"
+          disabled={updating}
+          sx={{
+            backgroundColor: '#8A3F3F',
+            '&:hover': {
+              backgroundColor: '#612B2B',
+            }
+          }}
+        >
+          {updating ? (
+            <CircularProgress size={24} color="inherit" />
+          ) : (
+            t("button.save")
+          )}
+        </Button>
+      </DialogActions>
       </Dialog>
 
       {/* Success/Error Message */}
       {updateMessage && (
-        <Snackbar 
-          open={true} 
-          autoHideDuration={6000} 
-          onClose={handleCloseMessage}
-          anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+      <Snackbar 
+        open={true} 
+        autoHideDuration={6000} 
+        onClose={handleCloseMessage}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+      >
+        <Alert 
+          onClose={handleCloseMessage} 
+          severity={updateMessage.type} 
+          sx={{ width: '100%' }}
         >
-          <Alert 
-            onClose={handleCloseMessage} 
-            severity={updateMessage.type} 
-            sx={{ width: '100%' }}
-          >
-            {updateMessage.message}
-          </Alert>
-        </Snackbar>
+          {updateMessage.message}
+        </Alert>
+      </Snackbar>
       )}
     </Container>
   );
-} 
+}

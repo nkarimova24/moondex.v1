@@ -239,8 +239,8 @@ export default function Sidebar({ isOpen: propIsOpen, onToggle }: SidebarProps) 
         />
         
         <Box sx={{ position: 'relative', zIndex: 2, display: 'flex', alignItems: 'center', gap: 1.5 }}>
-          {/* Here you could add a logo image */}
-          {/* <Image src="/logo.png" alt="Moondex" width={32} height={32} /> */}
+          {/* Uncomment when we have a logo */}
+          {/* <Image src="/logo.png" alt="MoonDex" width={32} height={32} /> */}
           <Typography 
             variant="h6" 
             component={Link}

@@ -17,7 +17,7 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 const translations: Record<Language, Record<string, string>> = {
   en: {
     // Algemeen
-    "app.name": "Moondex",
+    "app.name": "MoonDex",
     "app.tagline": "Your ultimate Pokémon TCG collection tracker and card database",
     "app.backToHome": "Back to home",
     "button.back": "Back",
@@ -32,7 +32,7 @@ const translations: Record<Language, Record<string, string>> = {
     "nav.profile": "Profile",
     
     // Home page
-    "home.explore": "Explore the World of Moondex",
+    "home.explore": "Explore the World of MoonDex",
     "home.feature1.title": "Search Cards",
     "home.feature1.description": "Find any Pokémon card by name, type, or set. Our comprehensive database makes it easy to discover cards.",
     "home.feature2.title": "Browse Sets",
@@ -42,13 +42,13 @@ const translations: Record<Language, Record<string, string>> = {
     "home.latestSets": "Latest Sets",
     "home.viewAllSets": "View all sets",
     "home.cta.title": "Ready to start your collection?",
-    "home.cta.description": "Moondex makes it easy to find, organize, and track your Pokémon card collection.",
+    "home.cta.description": "MoonDex makes it easy to find, organize, and track your Pokémon card collection.",
     "home.cta.signIn": "Sign In",
     "home.cta.createAccount": "Create Account",
     
     // Changelog
     "changelog.title": "Changelog",
-    "changelog.description": "Find all updates and planned features for Moondex here.",
+    "changelog.description": "Find all updates and planned features for MoonDex here.",
     "changelog.legend": "Legend",
     "changelog.added": "Added",
     "changelog.changed": "Changed",
@@ -56,7 +56,7 @@ const translations: Record<Language, Record<string, string>> = {
     "changelog.removed": "Removed",
     "changelog.upcoming": "Upcoming",
     "changelog.helpUs": "Help us improve",
-    "changelog.inDevelopment": "Moondex is continuously being developed. Are you missing a feature or do you have suggestions? Let us know!",
+    "changelog.inDevelopment": "MoonDex is continuously being developed. Are you missing a feature or do you have suggestions? Let us know!",
     "changelog.sendFeedback": "Send Feedback",
     
     // Nieuwste changelog entry (v0.8.0)
@@ -243,7 +243,7 @@ const translations: Record<Language, Record<string, string>> = {
   },
   nl: {
     // Algemeen
-    "app.name": "Moondex",
+    "app.name": "MoonDex",
     "app.tagline": "Jouw ultieme Pokémon TCG collectie tracker en kaarten database",
     "app.backToHome": "Terug naar home",
     "button.back": "Terug",
@@ -258,7 +258,7 @@ const translations: Record<Language, Record<string, string>> = {
     "nav.profile": "Profiel",
     
     // Home page
-    "home.explore": "Ontdek de Wereld van Moondex",
+    "home.explore": "Ontdek de Wereld van MoonDex",
     "home.feature1.title": "Zoek Kaarten",
     "home.feature1.description": "Vind elke Pokémon kaart op naam, type of set. Onze uitgebreide database maakt het gemakkelijk om kaarten te ontdekken.",
     "home.feature2.title": "Blader door Sets",
@@ -268,13 +268,13 @@ const translations: Record<Language, Record<string, string>> = {
     "home.latestSets": "Nieuwste Sets",
     "home.viewAllSets": "Bekijk alle sets",
     "home.cta.title": "Klaar om je collectie te starten?",
-    "home.cta.description": "Moondex maakt het eenvoudig om je Pokémon kaarten te vinden, te organiseren en bij te houden.",
+    "home.cta.description": "MoonDex maakt het eenvoudig om je Pokémon kaarten te vinden, te organiseren en bij te houden.",
     "home.cta.signIn": "Inloggen",
     "home.cta.createAccount": "Account Aanmaken",
     
     // Changelog
     "changelog.title": "Logboek",
-    "changelog.description": "Hier vind je een overzicht van alle updates en geplande functies voor Moondex.",
+    "changelog.description": "Hier vind je een overzicht van alle updates en geplande functies voor MoonDex.",
     "changelog.legend": "Legenda",
     "changelog.added": "Toegevoegd",
     "changelog.changed": "Aangepast",
@@ -282,7 +282,7 @@ const translations: Record<Language, Record<string, string>> = {
     "changelog.removed": "Verwijderd",
     "changelog.upcoming": "Binnenkort",
     "changelog.helpUs": "Help ons verbeteren",
-    "changelog.inDevelopment": "Moondex is continu in ontwikkeling. Mis je een functie of heb je suggesties? Laat het ons weten!",
+    "changelog.inDevelopment": "MoonDex is continu in ontwikkeling. Mis je een functie of heb je suggesties? Laat het ons weten!",
     "changelog.sendFeedback": "Stuur Feedback",
     
     // Nieuwste changelog entry (v0.8.0)

@@ -748,12 +748,100 @@ export const changeEmail = async (newEmail: string, userId?: number): Promise<Au
       endpoint = `/user/${userId}/email`;
     }
     
-    const response = await authApiClient.post<any>(endpoint, { email: newEmail });
+    const response = await authApiClient.post<any>(endpoint, { 
+      email: newEmail,
+      notification_from: 'info@MoonDex.nl'  // Add sender email address
+    });
     
     console.log('Email change response:', response.data);
     
     if (response.data && response.data.status === 'success') {
       // Extract user data from response
+      let userData: User | undefined;
+      
+      if (response.data.data) {
+        userData = {
+          name: response.data.data.name,
+          email: response.data.data.email,
+          id: response.data.data.id,
+          avatar: response.data.data.avatar || response.data.data.profile_picture,
+          pending_email: response.data.data.pending_email || newEmail
+        };
+      } else if (response.data.user) {
+        userData = {
+          name: response.data.user.name, 
+          email: response.data.user.email,
+          id: response.data.user.id,
+          avatar: response.data.user.avatar || response.data.user.profile_picture,
+          pending_email: response.data.user.pending_email || newEmail
+        };
+      }
+      
+      if (userData) {
+        return {
+          success: true,
+          user: userData,
+          message: response.data.message || 'Email change request sent. Please check your new email for confirmation.'
+        };
+      }
+      
+      // If we don't have user data but the request was successful
+      return {
+        success: true,
+        message: response.data.message || 'Email change request sent. Please check your new email for confirmation.'
+      };
+    }
+    
+    return { 
+      success: false, 
+      message: response.data.message || 'Failed to change email' 
+    };
+  } catch (error) {
+    const apiError = error as ApiError;
+    console.error('Email change error:', apiError.response?.data);
+    
+    let errorMessage = 'Failed to change email';
+    let errorDetails: Record<string, string> | undefined = undefined;
+    
+    if (apiError.response?.data?.error) {
+      if (typeof apiError.response.data.error === 'string') {
+        errorMessage = apiError.response.data.error;
+      } else {
+        errorDetails = apiError.response.data.error;
+      }
+    }
+    
+    return {
+      success: false,
+      message: errorMessage,
+      errors: errorDetails
+    };
+  }
+};
+
+/**
+ * Change user's password
+ */
+export const changePassword = async (currentPassword: string, newPassword: string, userId?: number): Promise<AuthResult> => {
+  try {
+    console.log('Starting password change request');
+    
+    // Determine the endpoint based on whether we have a userId
+    let endpoint = '/profile/password';
+    if (userId) {
+      endpoint = `/user/${userId}/password`;
+    }
+    
+    const response = await authApiClient.post<any>(endpoint, { 
+      current_password: currentPassword,
+      password: newPassword,
+      password_confirmation: newPassword
+    });
+    
+    console.log('Password change response:', response.data);
+    
+    if (response.data && (response.data.status === 'success' || response.data.message?.includes('success'))) {
+      // Extract user data from response if available
       let userData: User | undefined;
       
       if (response.data.data) {
@@ -776,26 +864,26 @@ export const changeEmail = async (newEmail: string, userId?: number): Promise<Au
         return {
           success: true,
           user: userData,
-          message: response.data.message || 'Email changed successfully'
+          message: response.data.message || 'Password changed successfully'
         };
       }
       
       // If we don't have user data but the request was successful
       return {
         success: true,
-        message: response.data.message || 'Email changed successfully'
+        message: response.data.message || 'Password changed successfully'
       };
     }
     
     return { 
       success: false, 
-      message: response.data.message || 'Failed to change email' 
+      message: response.data.message || 'Failed to change password' 
     };
-  } catch (error: unknown) {
+  } catch (error) {
     const apiError = error as ApiError;
-    console.error('Email change error:', apiError.response?.data);
+    console.error('Password change error:', apiError.response?.data);
     
-    let errorMessage = 'Failed to change email';
+    let errorMessage = 'Failed to change password';
     let errorDetails: Record<string, string> | undefined = undefined;
     
     if (apiError.response?.data?.error) {

@@ -28,6 +28,7 @@ interface AuthContextType {
   updateProfile: (data: UpdateProfileData) => Promise<AuthResult>;
   uploadAvatar: (file: File) => Promise<AuthResult>;
   changeEmail: (newEmail: string) => Promise<AuthResult>; // Added changeEmail function
+  changePassword: (currentPassword: string, newPassword: string) => Promise<AuthResult>; // Added changePassword function
 }
 
 interface AuthProviderProps {
@@ -218,6 +219,8 @@ const register = async (userData: RegisterData): Promise<AuthResult> => {
           // Keep existing values for empty strings in the result
           name: result.user.name || user.name,
           email: result.user.email || user.email,
+          // Preserve pending_email status if present
+          pending_email: result.user.pending_email || user.pending_email,
           // Ensure avatar is preserved
           avatar: avatarUrl
         };
@@ -226,26 +229,23 @@ const register = async (userData: RegisterData): Promise<AuthResult> => {
         
         // Create a new object to ensure React detects the change
         setUser({...updatedUser});
-        
-        // If we didn't get a complete user object back, refresh the user data
-        if (!result.user.email) {
-          console.log('Incomplete user data returned, refreshing user data');
-          await refreshUser();
-        }
-        
-        return {
-          success: true,
-          user: updatedUser
-        };
       }
       
       return result;
-    } catch (error: unknown) {
+    } catch (error) {
+      console.error('Profile update error:', error);
       const apiError = error as ApiError;
-      console.error('Profile update error in context:', apiError);
-      return { 
-        success: false, 
-        message: 'Profile update failed due to an unexpected error',
+      
+      let errorMessage = 'Failed to update profile';
+      if (apiError.response?.data?.error) {
+        if (typeof apiError.response.data.error === 'string') {
+          errorMessage = apiError.response.data.error;
+        }
+      }
+      
+      return {
+        success: false,
+        message: errorMessage
       };
     } finally {
       setLoading(false);
@@ -384,18 +384,18 @@ const register = async (userData: RegisterData): Promise<AuthResult> => {
         const result = await api.changeEmail(newEmail, user.id);
         
         if (result.success && result.user) {
-          console.log('Email change successful:', result.user);
+          console.log('Email change request submitted:', result.user);
           // Create a completely new user object to ensure React detects the change
           setUser({...result.user});
         } else if (result.success) {
           // If we didn't get a user object back but the operation was successful,
-          // create a new user object with the updated email to ensure UI updates
+          // create a new user object with the pending email to ensure UI updates
           if (user) {
             const updatedUser = {
               ...user,
-              email: newEmail
+              pending_email: newEmail
             };
-            console.log('Updating user with new email:', updatedUser);
+            console.log('Updating user with pending email:', updatedUser);
             setUser(updatedUser);
           }
           // Also refresh user data from the server
@@ -408,6 +408,42 @@ const register = async (userData: RegisterData): Promise<AuthResult> => {
         return { 
           success: false, 
           message: 'Failed to change email' 
+        };
+      } finally {
+        setLoading(false);
+      }
+    },
+    changePassword: async (currentPassword: string, newPassword: string): Promise<AuthResult> => {
+      if (!user) {
+        return { 
+          success: false, 
+          message: 'No authenticated user' 
+        };
+      }
+
+      setLoading(true);
+      
+      try {
+        // Call the API function from auth.ts
+        const result = await api.changePassword(currentPassword, newPassword);
+        
+        if (result.success) {
+          // If password change succeeds, update the local user data if provided in the response
+          if (result.user) {
+            setUser(result.user);
+            localStorage.setItem('user', JSON.stringify(result.user));
+          }
+          
+          // Also refresh user data from the server to ensure all data is up to date
+          await refreshUser();
+        }
+        
+        return result;
+      } catch (error) {
+        console.error('Error changing password:', error);
+        return { 
+          success: false, 
+          message: 'Failed to change password' 
         };
       } finally {
         setLoading(false);
