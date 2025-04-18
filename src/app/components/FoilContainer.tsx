@@ -59,14 +59,17 @@ function CardFoil({
   return (
     <div 
       className="relative inline-flex items-center justify-center"
-      style={{ width: '40px', height: '28px' }} 
+      style={{ width: '44px', height: '30px' }} 
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Minus button  */}
       <button 
-        className="absolute left-[-8px] w-4 h-4 flex items-center justify-center rounded-full bg-gray-800 shadow-md hover:bg-gray-700 z-20 transition-opacity"
-        style={{ opacity: isHovered ? 0.9 : 0.6 }}
+        className="absolute left-[-14px] w-5 h-5 flex items-center justify-center rounded-full hover:bg-gray-800/30 z-20 transition-all duration-200"
+        style={{ 
+          opacity: isHovered ? 1 : 0.7,
+          transform: isHovered ? 'scale(1.1)' : 'scale(1)'
+        }}
         onClick={(e) => {
           e.preventDefault();
           e.stopPropagation();
@@ -79,11 +82,15 @@ function CardFoil({
       
       {/* Foil indicator box with quantity inside */}
       <div 
-        className={`w-6 h-6 border rounded-md ${borderColor} ${bgColor} ${hoverBg} transition-colors duration-200 mx-auto relative flex items-center justify-center`}
+        className={`w-7 h-7 border-2 rounded-md ${borderColor} ${bgColor} ${hoverBg} transition-all duration-200 mx-auto relative flex items-center justify-center`}
+        style={{ 
+          transform: isHovered ? 'translateY(-1px)' : 'translateY(0)',
+          boxShadow: isHovered ? '0 2px 6px rgba(0,0,0,0.15)' : 'none'
+        }}
         title={`Foil type: ${tooltipText}${quantity > 0 ? ` (${quantity} in collection)` : ''}`}
       >
         {quantity > 0 ? (
-          <span className="text-xs text-white">
+          <span className="text-xs font-semibold text-white">
             {quantity}
           </span>
         ) : (
@@ -93,8 +100,11 @@ function CardFoil({
       
       {/* Plus button */}
       <button 
-        className="absolute right-[-8px] w-4 h-4 flex items-center justify-center rounded-full bg-gray-800 shadow-md hover:bg-gray-700 z-20 transition-opacity"
-        style={{ opacity: isHovered ? 0.9 : 0.6 }}
+        className="absolute right-[-14px] w-5 h-5 flex items-center justify-center rounded-full hover:bg-gray-800/30 z-20 transition-all duration-200"
+        style={{ 
+          opacity: isHovered ? 1 : 0.7,
+          transform: isHovered ? 'scale(1.1)' : 'scale(1)'
+        }}
         onClick={(e) => {
           e.preventDefault();
           e.stopPropagation();
@@ -538,7 +548,7 @@ export default function FoilContainer({
   return (
     <div 
       className={`flex ${className}`} 
-      style={{ gap: '20px', zIndex: 0 }}
+      style={{ gap: '20px', zIndex: 0, marginLeft: '-10px' }}
       onClick={(e) => e.stopPropagation()}
     >
       {foilTypes.map((foilType, index) => {
@@ -549,7 +559,8 @@ export default function FoilContainer({
         return (
           <div 
             key={`${cardId}-${foilType}`}
-            className="relative"
+            className="relative transition-transform duration-200 hover:scale-105"
+            style={{ margin: '0 4px' }}
           >
             <CardFoil 
               foilType={foilType}
