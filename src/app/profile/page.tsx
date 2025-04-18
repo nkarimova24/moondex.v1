@@ -41,6 +41,7 @@ import RefreshIcon from "@mui/icons-material/Refresh";
 import CardGrid from "@/app/components/CardGrid";
 import { PokemonCard, User, UpdateProfileData } from "@/app/lib/api/types";
 import SetSearchbar from "@/app/components/SetSearchbar";
+import CardFilters from "@/app/components/CardFilters";
 import { Search } from "lucide-react";
 
 interface TabPanelProps {
@@ -95,6 +96,8 @@ export default function ProfilePage() {
   const [loadingCards, setLoadingCards] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [isSearching, setIsSearching] = useState(false);
+  const [sortOption, setSortOption] = useState("number-asc");
+  const [selectedType, setSelectedType] = useState("All Types");
   
   // Profile editing state
   const [editProfileDialogOpen, setEditProfileDialogOpen] = useState(false);
@@ -107,7 +110,7 @@ export default function ProfilePage() {
   
   // Add a local user state that we can update immediately
   const [user, setUser] = useState<User | null>(null);
-  
+
   useEffect(() => {
     if (!authLoading && !isAuthenticated) {
       router.push("/signin");
@@ -197,34 +200,85 @@ export default function ProfilePage() {
     fetchCardDetails();
   }, [selectedCollection?.id]);
 
-  // Filter cards based on search term
+  // Filter cards based on search term and type
   useEffect(() => {
     if (!pokemonCards.length) {
       setFilteredCards([]);
       return;
     }
     
-    if (!searchTerm.trim()) {
-      setFilteredCards(pokemonCards);
-      return;
+    // Start with all cards
+    let filtered = [...pokemonCards];
+    
+    // Filter by search term if exists
+    if (searchTerm.trim()) {
+      const searchTermLower = searchTerm.toLowerCase();
+      filtered = filtered.filter(card => {
+        return (
+          card.name.toLowerCase().includes(searchTermLower) ||
+          card.id.toLowerCase().includes(searchTermLower) ||
+          card.number.toLowerCase().includes(searchTermLower) ||
+          (card.types && card.types.some(type => type.toLowerCase().includes(searchTermLower))) ||
+          (card.subtypes && card.subtypes.some(subtype => subtype.toLowerCase().includes(searchTermLower))) ||
+          (card.rarity && card.rarity.toLowerCase().includes(searchTermLower))
+        );
+      });
     }
     
-    // Filter cards based on search term (case insensitive)
-    const searchTermLower = searchTerm.toLowerCase();
-    const filtered = pokemonCards.filter(card => {
-      return (
-        card.name.toLowerCase().includes(searchTermLower) ||
-        card.id.toLowerCase().includes(searchTermLower) ||
-        card.number.toLowerCase().includes(searchTermLower) ||
-        (card.types && card.types.some(type => type.toLowerCase().includes(searchTermLower))) ||
-        (card.subtypes && card.subtypes.some(subtype => subtype.toLowerCase().includes(searchTermLower))) ||
-        (card.rarity && card.rarity.toLowerCase().includes(searchTermLower))
+    // Filter by type if not "All Types"
+    if (selectedType !== "All Types") {
+      filtered = filtered.filter(card => 
+        card.types && card.types.includes(selectedType)
       );
-    });
+    }
     
-    setFilteredCards(filtered);
+    // Sort the filtered cards
+    const sortCards = (cards: CollectionPokemonCard[], sortOption: string): CollectionPokemonCard[] => {
+      const [field, direction] = sortOption.split('-');
+      const multiplier = direction === 'asc' ? 1 : -1;
+      
+      return [...cards].sort((a, b) => {
+        if (field === 'number') {
+          // Parse card numbers and compare them numerically
+          const aNum = parseInt(a.number.replace(/\D/g, '')) || 0;
+          const bNum = parseInt(b.number.replace(/\D/g, '')) || 0;
+          return multiplier * (aNum - bNum);
+        } 
+        else if (field === 'name') {
+          return multiplier * a.name.localeCompare(b.name);
+        } 
+        else if (field === 'price') {
+          const aPrice = a.cardmarket?.prices?.averageSellPrice || 
+                        a.cardmarket?.prices?.trendPrice || 0;
+          const bPrice = b.cardmarket?.prices?.averageSellPrice || 
+                        b.cardmarket?.prices?.trendPrice || 0;
+          return multiplier * (aPrice - bPrice);
+        } 
+        else if (field === 'rarity') {
+          const rarityOrder: Record<string, number> = {
+            'Common': 1,
+            'Uncommon': 2,
+            'Rare': 3,
+            'Rare Holo': 4,
+            'Rare Ultra': 5,
+            'Rare Holo GX': 6,
+            'Rare Secret': 7
+          };
+          const aRarityOrder = rarityOrder[a.rarity || ''] || 0;
+          const bRarityOrder = rarityOrder[b.rarity || ''] || 0;
+          return multiplier * (aRarityOrder - bRarityOrder);
+        }
+        
+        return 0;
+      });
+    };
+    
+    // Apply sorting
+    const sortedAndFiltered = sortCards(filtered, sortOption);
+    
+    setFilteredCards(sortedAndFiltered);
     setIsSearching(false);
-  }, [pokemonCards, searchTerm]);
+  }, [pokemonCards, searchTerm, selectedType, sortOption]);
 
   // Update local user state whenever authUser changes
   useEffect(() => {
@@ -369,6 +423,14 @@ export default function ProfilePage() {
     }, 300);
   };
 
+  const handleSortChange = (value: string) => {
+    setSortOption(value);
+  };
+  
+  const handleTypeChange = (type: string) => {
+    setSelectedType(type);
+  };
+
   if (authLoading) {
     return (
       <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
@@ -382,18 +444,18 @@ export default function ProfilePage() {
       <Paper elevation={3} sx={{ mb: 4, p: 3, borderRadius: 2, background: 'linear-gradient(to right, rgba(138, 63, 63, 0.05), rgba(138, 63, 63, 0.15))' }}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 3 }}>
           <Box sx={{ position: 'relative' }}>
-            <Avatar 
+          <Avatar 
               src={getUserAvatarUrl(user)}
-              sx={{ 
-                width: 80, 
-                height: 80,
-                background: 'linear-gradient(to bottom right, #8A3F3F, #612B2B)',
-                fontSize: '2rem',
-                fontWeight: 'bold',
-              }}
-            >
+            sx={{ 
+              width: 80, 
+              height: 80,
+              background: 'linear-gradient(to bottom right, #8A3F3F, #612B2B)',
+              fontSize: '2rem',
+              fontWeight: 'bold',
+            }}
+          >
               {user?.name?.[0]?.toUpperCase() || 'U'}
-            </Avatar>
+          </Avatar>
           </Box>
           <Box>
             <Typography variant="h4" fontWeight="bold" sx={{ mb: 0.5 }}>
@@ -504,7 +566,7 @@ export default function ProfilePage() {
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
                           {t("profile.decks")}
-                        </Typography>
+                          </Typography>
                       </CardContent>
                     </Card>
                   </Grid>
@@ -541,37 +603,97 @@ export default function ProfilePage() {
                     </Box>
                   ) : (
                     <>
-                      <Box sx={{ mb: 3 }}>
-                        <SetSearchbar 
-                          onSearch={handleSearch}
-                          value={searchTerm}
-                          placeholder={t("search.collection.placeholder") || "Search your collection..."}
-                          isLoading={isSearching}
-                        />
-                        {searchTerm && (
-                          <Box sx={{ mt: 2, display: 'flex', alignItems: 'center' }}>
-                            <Search size={16} style={{ color: '#8A3F3F', marginRight: '4px' }} />
-                            <Typography variant="body2" color="text.secondary">
-                              {filteredCards.length} {filteredCards.length === 1 ? 'card' : 'cards'} found for "{searchTerm}"
-                            </Typography>
-                            {searchTerm && (
-                              <Button 
-                                size="small" 
-                                sx={{ ml: 2, color: '#8A3F3F' }}
-                                onClick={() => {
-                                  // Clear the search term
-                                  setSearchTerm('');
-                                  // Immediately clear the searching state
-                                  setIsSearching(false);
-                                }}
-                              >
-                                Clear search
-                              </Button>
-                            )}
-                          </Box>
-                        )}
+                      <Box sx={{ 
+                        mb: 3,
+                        display: 'flex',
+                        flexDirection: { xs: 'column', sm: 'row' },
+                        alignItems: { xs: 'stretch', sm: 'flex-start' },
+                        gap: 2
+                      }}>
+                        <Box sx={{ flexGrow: 1, width: { xs: '100%', sm: '70%' } }}>
+                          <SetSearchbar 
+                            onSearch={handleSearch}
+                            value={searchTerm}
+                            placeholder={t("search.collection.placeholder") || "Search your collection..."}
+                            isLoading={isSearching}
+                          />
+                          {searchTerm && (
+                            <Box sx={{ mt: 2, display: 'flex', alignItems: 'center' }}>
+                              <Search size={16} style={{ color: '#8A3F3F', marginRight: '4px' }} />
+                              <Typography variant="body2" color="text.secondary">
+                                {filteredCards.length} {filteredCards.length === 1 ? 'card' : 'cards'} found for "{searchTerm}"
+                              </Typography>
+                              {searchTerm && (
+                                <Button 
+                                  size="small" 
+                                  sx={{ ml: 2, color: '#8A3F3F' }}
+                                  onClick={() => {
+                                    // Clear the search term
+                                    setSearchTerm('');
+                                    // Immediately clear the searching state
+                                    setIsSearching(false);
+                                  }}
+                                >
+                                  Clear search
+                                </Button>
+                              )}
+                            </Box>
+                          )}
+                        </Box>
+                        
+                        <Box sx={{ 
+                          display: 'flex', 
+                          justifyContent: { xs: 'flex-start', sm: 'flex-end' },
+                          width: { xs: '100%', sm: '30%' }
+                        }}>
+                          <CardFilters
+                            value={sortOption}
+                            onChange={handleSortChange}
+                            selectedType={selectedType}
+                            onTypeChange={handleTypeChange}
+                          />
+                        </Box>
                       </Box>
-                      <CardGrid cards={filteredCards} baseRoute="/collections" collectionMode={true} />
+                      
+                      {filteredCards.length === 0 ? (
+                        <Box sx={{ textAlign: 'center', my: 4 }}>
+                          <Typography variant="body1" sx={{ mb: 2 }}>
+                            {selectedType !== "All Types" 
+                              ? `No ${selectedType} type cards found${searchTerm ? ` for "${searchTerm}"` : ""}`
+                              : searchTerm 
+                                ? `No cards found for "${searchTerm}"`
+                                : "No cards found with the current filters"}
+                          </Typography>
+                          <Button 
+                            variant="outlined"
+                            onClick={() => {
+                              setSearchTerm('');
+                              setSelectedType('All Types');
+                              setSortOption('number-asc');
+                            }}
+                            sx={{ 
+                              borderColor: '#8A3F3F',
+                              color: '#8A3F3F',
+                              '&:hover': { 
+                                borderColor: '#612B2B',
+                                backgroundColor: 'rgba(138, 63, 63, 0.05)'
+                              } 
+                            }}
+                          >
+                            Reset Filters
+                          </Button>
+                        </Box>
+                      ) : (
+                        <CardGrid cards={filteredCards} baseRoute="/collections" collectionMode={true} />
+                      )}
+                      
+                      {selectedType !== "All Types" && filteredCards.length > 0 && (
+                        <Box sx={{ mt: 2, textAlign: 'center' }}>
+                          <Typography variant="body2" color="text.secondary">
+                            Showing {filteredCards.length} {selectedType} type cards
+                          </Typography>
+                        </Box>
+                      )}
                     </>
                   )}
                 </Box>
@@ -744,4 +866,4 @@ export default function ProfilePage() {
       )}
     </Container>
   );
-}
+} 
