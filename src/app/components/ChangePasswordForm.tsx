@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { useLanguage } from '@/context/LanguageContext';
 import {
@@ -9,10 +9,11 @@ import {
   Box,
   Alert
 } from '@mui/material';
+import InfoIcon from '@mui/icons-material/Info';
 
 const ChangePasswordForm = ({ onClose }: { onClose?: () => void }) => {
   const { t } = useLanguage();
-  const { changePassword } = useAuth();
+  const { changePassword, user } = useAuth();
   
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
@@ -20,6 +21,20 @@ const ChangePasswordForm = ({ onClose }: { onClose?: () => void }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
+  const [confirmationSent, setConfirmationSent] = useState(false);
+  
+  // Add refs for the form fields
+  const currentPasswordRef = useRef<HTMLInputElement>(null);
+  const newPasswordRef = useRef<HTMLInputElement>(null);
+  const confirmPasswordRef = useRef<HTMLInputElement>(null);
+  
+  // Focus management effect
+  useEffect(() => {
+    // If there's an error and the currentPassword is empty, focus it
+    if (error && !currentPassword && currentPasswordRef.current) {
+      currentPasswordRef.current.focus();
+    }
+  }, [error, currentPassword]);
   
   // Form validation
   const [errors, setErrors] = useState<{
@@ -63,29 +78,69 @@ const ChangePasswordForm = ({ onClose }: { onClose?: () => void }) => {
     setLoading(true);
     setError(null);
     setSuccess(false);
+    setConfirmationSent(false);
     
     try {
+      console.log('Submitting password change with:', { currentPassword, newPasswordLength: newPassword.length });
       const result = await changePassword(currentPassword, newPassword);
+      console.log('Password change result:', result);
       
       if (result.success) {
-        setSuccess(true);
-        // Reset form after successful password change
+        // Check if the message indicates a confirmation email was sent
+        const isConfirmationFlow = 
+          result.message?.toLowerCase().includes('confirmation') || 
+          result.message?.toLowerCase().includes('email') ||
+          result.message?.toLowerCase().includes('verify');
+        
+        if (isConfirmationFlow) {
+          setConfirmationSent(true);
+        } else {
+          setSuccess(true);
+        }
+        
+        // Reset form after successful submission
         setCurrentPassword('');
         setNewPassword('');
         setConfirmPassword('');
         
-        // Close the form after a delay if onClose is provided
-        if (onClose) {
+        // Close the form after a delay if onClose is provided and it's not a confirmation flow
+        if (onClose && !isConfirmationFlow) {
           setTimeout(() => {
             onClose();
           }, 2000);
         }
       } else {
+        // Check if the error contains "current password" or "password incorrect" to provide better feedback
+        const isCurrentPasswordError = 
+          result.message?.toLowerCase().includes('current password') || 
+          result.message?.toLowerCase().includes('password incorrect') ||
+          result.message?.toLowerCase().includes('does not match');
+        
         setError(result.message || t('profile.passwordChangeError'));
+        
+        // Reset only the current password field if that's the issue
+        if (isCurrentPasswordError) {
+          setCurrentPassword('');
+          // Set focus on the current password field
+          setTimeout(() => {
+            if (currentPasswordRef.current) {
+              currentPasswordRef.current.focus();
+            }
+          }, 0);
+        } else {
+          // If it's not specifically a current password error, clear all fields
+          setCurrentPassword('');
+          setNewPassword('');
+          setConfirmPassword('');
+        }
       }
     } catch (err) {
-      setError(t('profile.passwordChangeError'));
       console.error('Error changing password:', err);
+      setError(t('profile.passwordChangeError'));
+      // Reset form on unexpected errors
+      setCurrentPassword('');
+      setNewPassword('');
+      setConfirmPassword('');
     } finally {
       setLoading(false);
     }
@@ -114,77 +169,120 @@ const ChangePasswordForm = ({ onClose }: { onClose?: () => void }) => {
         </Alert>
       )}
       
-      <TextField
-        label={t('profile.currentPassword')}
-        type="password"
-        value={currentPassword}
-        onChange={(e) => setCurrentPassword(e.target.value)}
-        fullWidth
-        margin="normal"
-        variant="outlined"
-        error={!!errors.currentPassword}
-        helperText={errors.currentPassword}
-        disabled={loading}
-        sx={{ mt: 0 }}
-      />
-      
-      <TextField
-        label={t('profile.newPassword')}
-        type="password"
-        value={newPassword}
-        onChange={(e) => setNewPassword(e.target.value)}
-        fullWidth
-        margin="normal"
-        variant="outlined"
-        error={!!errors.newPassword}
-        helperText={errors.newPassword}
-        disabled={loading}
-        sx={{ mt: 0 }}
-      />
-      
-      <TextField
-        label={t('profile.confirmNewPassword')}
-        type="password"
-        value={confirmPassword}
-        onChange={(e) => setConfirmPassword(e.target.value)}
-        fullWidth
-        margin="normal"
-        variant="outlined"
-        error={!!errors.confirmPassword}
-        helperText={errors.confirmPassword}
-        disabled={loading}
-        sx={{ mt: 0 }}
-      />
-      
-      <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 2 }}>
-        {onClose && (
-          <Button 
-            onClick={onClose}
-            sx={{ mr: 2, color: 'text.secondary' }}
-            disabled={loading}
-          >
-            {t('button.cancel')}
-          </Button>
-        )}
-        
-        <Button 
-          type="submit"
-          variant="contained"
-          disabled={loading}
-          sx={{
-            backgroundColor: '#8A3F3F',
-            '&:hover': {
-              backgroundColor: '#612B2B',
+      {confirmationSent && (
+        <Alert 
+          severity="info" 
+          icon={<InfoIcon />}
+          sx={{ 
+            mb: 2,
+            backgroundColor: 'rgba(245, 193, 66, 0.1)',
+            border: '1px solid rgba(245, 193, 66, 0.3)',
+            '& .MuiAlert-icon': {
+              color: '#F5C142',
             }
           }}
         >
-          {loading ? (
-            <CircularProgress size={24} color="inherit" />
-          ) : (
-            t('button.save')
-          )}
-        </Button>
-      </Box>
+          <Typography variant="body2">
+            A confirmation email has been sent to {user?.email}. Please check your inbox and click on the confirmation link to complete your password change.
+          </Typography>
+        </Alert>
+      )}
+      
+      {!confirmationSent && (
+        <>
+          <TextField
+            label={t('profile.currentPassword')}
+            type="password"
+            value={currentPassword}
+            onChange={(e) => setCurrentPassword(e.target.value)}
+            fullWidth
+            margin="normal"
+            variant="outlined"
+            error={!!errors.currentPassword}
+            helperText={errors.currentPassword}
+            disabled={loading || success}
+            sx={{ mt: 0 }}
+            inputRef={currentPasswordRef}
+          />
+          
+          <TextField
+            label={t('profile.newPassword')}
+            type="password"
+            value={newPassword}
+            onChange={(e) => setNewPassword(e.target.value)}
+            fullWidth
+            margin="normal"
+            variant="outlined"
+            error={!!errors.newPassword}
+            helperText={errors.newPassword}
+            disabled={loading || success}
+            sx={{ mt: 0 }}
+            inputRef={newPasswordRef}
+          />
+          
+          <TextField
+            label={t('profile.confirmNewPassword')}
+            type="password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            fullWidth
+            margin="normal"
+            variant="outlined"
+            error={!!errors.confirmPassword}
+            helperText={errors.confirmPassword}
+            disabled={loading || success}
+            sx={{ mt: 0 }}
+            inputRef={confirmPasswordRef}
+          />
+          
+          <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 2 }}>
+            {onClose && (
+              <Button 
+                onClick={onClose}
+                sx={{ mr: 2, color: 'text.secondary' }}
+                disabled={loading}
+              >
+                {t('button.cancel')}
+              </Button>
+            )}
+            
+            <Button 
+              type="submit"
+              variant="contained"
+              disabled={loading || success}
+              sx={{
+                backgroundColor: '#8A3F3F',
+                '&:hover': {
+                  backgroundColor: '#612B2B',
+                }
+              }}
+            >
+              {loading ? (
+                <CircularProgress size={24} color="inherit" />
+              ) : (
+                t('button.save')
+              )}
+            </Button>
+          </Box>
+        </>
+      )}
+      
+      {confirmationSent && (
+        <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 2 }}>
+          <Button 
+            onClick={onClose}
+            variant="contained"
+            sx={{
+              backgroundColor: '#8A3F3F',
+              '&:hover': {
+                backgroundColor: '#612B2B',
+              }
+            }}
+          >
+            {t('button.close')}
+          </Button>
+        </Box>
+      )}
     </Box>
   );
 };

@@ -83,7 +83,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       name: user?.name,
       email: user?.email,
       avatar: user?.avatar,
-      profile_picture: (user as any)?.profile_picture
+      profile_picture: user?.profile_picture
     });
   }, [user]);
   
@@ -199,15 +199,15 @@ const register = async (userData: RegisterData): Promise<AuthResult> => {
         // Get the avatar URL from various possible sources
         const avatarUrl = 
           result.user.avatar || 
-          (result.user as any).profile_picture ||
+          result.user.profile_picture ||
           user.avatar || 
-          (user as any).profile_picture;
+          user.profile_picture;
         
         console.log('Profile update avatar resolution:', {
           'result.user.avatar': result.user.avatar,
-          'result.user.profile_picture': (result.user as any).profile_picture,
+          'result.user.profile_picture': result.user.profile_picture,
           'existing user.avatar': user.avatar,
-          'existing user.profile_picture': (user as any).profile_picture,
+          'existing user.profile_picture': user.profile_picture,
           'resolved': avatarUrl
         });
         
@@ -295,7 +295,7 @@ const register = async (userData: RegisterData): Promise<AuthResult> => {
         // Log raw response data to check field names
         console.log('Raw user data from avatar update:', result.user);
         console.log('Field check - avatar:', result.user.avatar);
-        console.log('Field check - profile_picture:', (result.user as any).profile_picture);
+        console.log('Field check - profile_picture:', result.user.profile_picture);
         
         // Get the avatar URL from the result, ensuring we have a non-empty string
         const rawAvatarUrl = result.user.avatar || '';
@@ -442,7 +442,7 @@ const register = async (userData: RegisterData): Promise<AuthResult> => {
               email: result.user.email || user.email,
               // Preserve avatar - crucial for maintaining profile picture
               avatar: result.user.avatar || user.avatar,
-              profile_picture: (result.user as any).profile_picture || (user as any).profile_picture,
+              profile_picture: result.user.profile_picture || user.profile_picture,
               // Other fields to preserve
               pending_email: result.user.pending_email || user.pending_email
             };
@@ -453,14 +453,14 @@ const register = async (userData: RegisterData): Promise<AuthResult> => {
                 name: user.name,
                 email: user.email,
                 avatar: user.avatar,
-                profile_picture: (user as any).profile_picture
+                profile_picture: user.profile_picture
               },
               after: {
                 id: mergedUser.id,
                 name: mergedUser.name,
                 email: mergedUser.email,
                 avatar: mergedUser.avatar,
-                profile_picture: (mergedUser as any).profile_picture
+                profile_picture: mergedUser.profile_picture
               }
             });
             

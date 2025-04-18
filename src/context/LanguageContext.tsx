@@ -229,6 +229,10 @@ const translations: Record<Language, Record<string, string>> = {
     "profile.requiredField": "This field is required",
     "profile.passwordLength": "Password must be at least 8 characters",
     "profile.passwordMismatch": "Passwords do not match",
+    "profile.passwordChangeConfirmation": "Password Change Confirmation",
+    "profile.passwordChangeFailed": "Password change failed",
+    "profile.processingRequest": "Processing your request...",
+    "profile.redirectingToLogin": "You will be redirected to the login page shortly",
     
     // Misc
     "misc.updatedAt": "Updated at",
@@ -248,6 +252,10 @@ const translations: Record<Language, Record<string, string>> = {
     "sidebar.signIn": "Sign In",
     "sidebar.signUp": "Sign Up",
     "sidebar.logout": "Logout",
+    
+    // Common
+    "common.loading": "Loading...",
+    "common.backToProfile": "Back to Profile",
   },
   nl: {
     // Algemeen
@@ -461,6 +469,10 @@ const translations: Record<Language, Record<string, string>> = {
     "profile.requiredField": "Dit veld is verplicht",
     "profile.passwordLength": "Wachtwoord moet minimaal 8 tekens bevatten",
     "profile.passwordMismatch": "Wachtwoorden komen niet overeen",
+    "profile.passwordChangeConfirmation": "Wachtwoord Wijziging Bevestiging",
+    "profile.passwordChangeFailed": "Wachtwoord wijziging mislukt",
+    "profile.processingRequest": "Verwerken van je aanvraag...",
+    "profile.redirectingToLogin": "Je wordt binnenkort doorgestuurd naar de inlogpagina",
     
     // Misc
     "misc.updatedAt": "Bijgewerkt op",
@@ -480,6 +492,10 @@ const translations: Record<Language, Record<string, string>> = {
     "sidebar.signIn": "Inloggen",
     "sidebar.signUp": "Registreren",
     "sidebar.logout": "Uitloggen",
+    
+    // Common
+    "common.loading": "Laden...",
+    "common.backToProfile": "Terug naar Profiel",
   }
 };
 

@@ -211,6 +211,26 @@ export default function SignIn() {
             >
               {loading ? "Signing in..." : "Sign In"}
             </Button>
+            <Box textAlign="center" sx={{ mb: 2 }}>
+              <Typography 
+                variant="body2" 
+                sx={{ 
+                  color: 'rgba(255, 255, 255, 0.7)',
+                  '& a': {
+                    color: '#8A3F3F',
+                    textDecoration: 'none',
+                    fontWeight: 'bold',
+                    '&:hover': {
+                      textDecoration: 'underline',
+                    },
+                  },
+                }}
+              >
+                <Link href="/forgot-password">
+                  Forgot password?
+                </Link>
+              </Typography>
+            </Box>
             <Box textAlign="center">
               <Typography 
                 variant="body2" 

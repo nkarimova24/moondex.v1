@@ -22,6 +22,7 @@ interface ApiError extends Error {
     data?: {
       error?: string | Record<string, string>;
       status?: string;
+      message?: string;
     };
     status?: number;
   };
@@ -839,9 +840,12 @@ export const changePassword = async (currentPassword: string, newPassword: strin
     };
     
     console.log(`Making password change request to: ${endpoint}`);
+    console.log('Password change request data:', JSON.stringify(passwordData).replace(/"current_password":"[^"]*"/, '"current_password":"[REDACTED]"').replace(/"new_password":"[^"]*"/, '"new_password":"[REDACTED]"').replace(/"confirm_password":"[^"]*"/, '"confirm_password":"[REDACTED]"'));
+    
     const response = await authApiClient.post<any>(endpoint, passwordData);
     
-    console.log('Password change response:', response.data);
+    console.log('Password change response status:', response.status);
+    console.log('Password change response data:', JSON.stringify(response.data));
     
     if (response.data && (response.data.status === 'success' || response.data.message?.includes('success'))) {
       // Extract user data from response if available
@@ -864,6 +868,7 @@ export const changePassword = async (currentPassword: string, newPassword: strin
       }
       
       if (userData) {
+        console.log('Password change successful with user data');
         return {
           success: true,
           user: userData,
@@ -872,19 +877,25 @@ export const changePassword = async (currentPassword: string, newPassword: strin
       }
       
       // If we don't have user data but the request was successful
+      console.log('Password change successful without user data');
       return {
         success: true,
         message: response.data.message || 'Password changed successfully'
       };
     }
     
+    console.log('Password change failed with server response:', response.data);
     return { 
       success: false, 
       message: response.data.message || 'Failed to change password' 
     };
   } catch (error) {
     const apiError = error as ApiError;
-    console.error('Password change error:', apiError.response?.data);
+    console.error('Password change error details:', {
+      status: apiError.response?.status,
+      data: apiError.response?.data,
+      message: apiError.message
+    });
     
     let errorMessage = 'Failed to change password';
     let errorDetails: Record<string, string> | undefined = undefined;
@@ -894,13 +905,248 @@ export const changePassword = async (currentPassword: string, newPassword: strin
         errorMessage = apiError.response.data.error;
       } else {
         errorDetails = apiError.response.data.error;
+        // Create a readable message from the error details
+        if (errorDetails) {
+          const errorMessages = Object.values(errorDetails);
+          if (errorMessages.length > 0) {
+            errorMessage = errorMessages.join('. ');
+          }
+        }
       }
+    } else if (apiError.response?.data?.message) {
+      errorMessage = apiError.response.data.message;
     }
     
+    console.log('Final error message for password change:', errorMessage);
     return {
       success: false,
       message: errorMessage,
       errors: errorDetails
+    };
+  }
+};
+
+/**
+ * Confirm password reset using the token received via email
+ */
+export const confirmPasswordReset = async (userId: string, token: string, redirectUrl?: string): Promise<AuthResult> => {
+  try {
+    console.log('Confirming password reset with:', { userId, token });
+    
+    interface PasswordResetResponse {
+      status?: string;
+      message?: string;
+      error?: string | Record<string, string>;
+      data?: any;
+    }
+    
+    // Add the redirect URL as a query parameter if provided
+    let endpoint = `/password/confirm/${userId}/${token}`;
+    if (redirectUrl) {
+      endpoint += `?redirect=${encodeURIComponent(redirectUrl)}`;
+    }
+    
+    // If this is being called directly by a browser (not via fetch),
+    // we should redirect to the success page instead of returning JSON
+    const isDirectBrowserRequest = typeof window !== 'undefined' && 
+      window.location.pathname.includes(`/password/confirm/${userId}/${token}`);
+      
+    if (isDirectBrowserRequest) {
+      console.log('Direct browser navigation to password reset link detected');
+      // This is being accessed directly in the browser, so handle it differently
+      try {
+        // Try to log out from all sessions first
+        await logoutFromAllSessions();
+        
+        // Redirect to success page
+        window.location.href = '/password/reset-success.html';
+        
+        // Return a dummy success result since we're redirecting anyway
+        return {
+          success: true,
+          message: 'Password reset successful, redirecting...'
+        };
+      } catch (error) {
+        console.error('Error during direct browser navigation flow:', error);
+        // Continue with the regular flow if this fails
+      }
+    }
+    
+    const response = await authApiClient.get<PasswordResetResponse>(endpoint);
+    
+    console.log('Password reset confirmation response:', response.data);
+    
+    // If we get a successful result, try to log out from all sessions
+    if (response.data && (response.data.status === 'success' || (response.data.message && response.data.message.includes('success')))) {
+      // Try to log out from all sessions
+      try {
+        await logoutFromAllSessions();
+      } catch (logoutError) {
+        console.error('Error logging out after password reset:', logoutError);
+        // Continue even if logout fails
+      }
+      
+      // Check if this is a direct API access that returned JSON instead of redirecting
+      if (typeof window !== 'undefined' && 
+          document.body && 
+          document.body.textContent && 
+          document.body.textContent.trim().startsWith('{') && 
+          document.body.textContent.includes('success')) {
+        
+        console.log('Detected raw JSON response in browser, handling redirection');
+        
+        // Set a small timeout to let the browser finish processing
+        setTimeout(() => {
+          // Try to redirect to the success page
+          window.location.href = '/password/reset-success.html';
+        }, 100);
+      }
+      
+      return {
+        success: true,
+        message: response.data.message || 'Password reset successful'
+      };
+    }
+    
+    return { 
+      success: false, 
+      message: response.data.message || 'Failed to reset password' 
+    };
+  } catch (error) {
+    const apiError = error as ApiError;
+    console.error('Password reset confirmation error:', apiError.response?.data);
+    
+    let errorMessage = 'Failed to reset password';
+    
+    if (apiError.response?.data?.error) {
+      if (typeof apiError.response.data.error === 'string') {
+        errorMessage = apiError.response.data.error;
+      } 
+    } else if (apiError.response?.data?.message) {
+      errorMessage = apiError.response.data.message;
+    }
+    
+    return {
+      success: false,
+      message: errorMessage
+    };
+  }
+};
+
+/**
+ * Logout from all devices/sessions
+ */
+export const logoutFromAllSessions = async (): Promise<boolean> => {
+  try {
+    // Try the standard endpoint for logging out from all sessions
+    await authApiClient.post('/logout/all');
+    console.log('Successfully logged out from all sessions');
+    
+    // Remove the authentication token from cookies regardless of API response
+    Cookies.remove('auth_token');
+    
+    // Also try to clear any stored user data
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('user');
+    }
+    
+    return true;
+  } catch (error) {
+    console.error('Error logging out from all sessions:', error);
+    
+    // Even if the API call fails, we should still try to remove the token
+    Cookies.remove('auth_token');
+    
+    // Also try to clear any stored user data
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('user');
+    }
+    
+    return false;
+  }
+};
+
+/**
+ * Request a password reset email
+ */
+export const requestPasswordReset = async (email: string): Promise<{success: boolean; message: string}> => {
+  try {
+    console.log('Requesting password reset for email:', email);
+    
+    // Get the current frontend URL for redirection
+    const frontendUrl = typeof window !== 'undefined' 
+      ? window.location.origin 
+      : process.env.NEXT_PUBLIC_FRONTEND_URL || 'https://moondex.nl';
+    
+    // Try different variations of the password reset endpoint
+    const endpoints = [
+      '/password/reset',
+      '/password/email',
+      '/forgot-password'
+    ];
+    
+    let response = null;
+    let successfulEndpoint = '';
+    
+    // Try each endpoint until one works
+    for (const endpoint of endpoints) {
+      try {
+        console.log(`Trying password reset endpoint: ${endpoint}`);
+        response = await authApiClient.post(endpoint, { 
+          email,
+          redirect_url: `${frontendUrl}/password-reset`,
+          reset_url: `${frontendUrl}/password-reset`, // Alternative parameter name
+        });
+        
+        successfulEndpoint = endpoint;
+        console.log(`Password reset request succeeded with endpoint: ${endpoint}`);
+        break;
+      } catch (endpointError) {
+        console.warn(`Endpoint ${endpoint} failed:`, endpointError);
+      }
+    }
+    
+    if (!response) {
+      console.error('All password reset endpoints failed');
+      return {
+        success: false,
+        message: 'We could not process your password reset request. Please try again later.'
+      };
+    }
+    
+    console.log(`Password reset response from ${successfulEndpoint}:`, response.data);
+    
+    // Check for success response from the API
+    if ((response.data as any).status === 'success' || 
+        ((response.data as any).message && (response.data as any).message.toLowerCase().includes('sent'))) {
+      return {
+        success: true,
+        message: (response.data as any).message || 'Password reset email sent. Please check your inbox.'
+      };
+    }
+    
+    // If we received a response but it wasn't a success
+    return {
+      success: false,
+      message: (response.data as any).message || 'Failed to send password reset email. Please try again.'
+    };
+  } catch (error: unknown) {
+    const apiError = error as ApiError;
+    console.error('Password reset request error:', apiError.response?.data || apiError);
+    
+    let errorMessage = 'Failed to send password reset email';
+    
+    if (apiError.response?.data?.error) {
+      if (typeof apiError.response.data.error === 'string') {
+        errorMessage = apiError.response.data.error;
+      }
+    } else if (apiError.response?.data?.message) {
+      errorMessage = apiError.response.data.message;
+    }
+    
+    return {
+      success: false,
+      message: errorMessage
     };
   }
 };
