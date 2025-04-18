@@ -63,22 +63,23 @@ function CardFoil({
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Minus button  */}
-      <button 
-        className="absolute left-[-14px] w-5 h-5 flex items-center justify-center rounded-full hover:bg-gray-800/30 z-20 transition-all duration-200"
-        style={{ 
-          opacity: isHovered ? 1 : 0.7,
-          transform: isHovered ? 'scale(1.1)' : 'scale(1)'
-        }}
-        onClick={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          onDecrement();
-        }}
-        disabled={quantity <= 0}
-      >
-        <span className="text-white text-xs font-bold">-</span>
-      </button>
+      {/* Minus button - only show when quantity > 0 */}
+      {quantity > 0 && (
+        <button 
+          className="absolute left-[-14px] w-5 h-5 flex items-center justify-center rounded-full hover:bg-gray-800/30 z-20 transition-all duration-200"
+          style={{ 
+            opacity: isHovered ? 1 : 0.7,
+            transform: isHovered ? 'scale(1.1)' : 'scale(1)'
+          }}
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            onDecrement();
+          }}
+        >
+          <span className="text-white text-xs font-bold">-</span>
+        </button>
+      )}
       
       {/* Foil indicator box with quantity inside */}
       <div 
@@ -548,7 +549,7 @@ export default function FoilContainer({
   return (
     <div 
       className={`flex ${className}`} 
-      style={{ gap: '20px', zIndex: 0, marginLeft: '-10px' }}
+      style={{ gap: '20px', zIndex: 0, marginLeft: '5px' }}
       onClick={(e) => e.stopPropagation()}
     >
       {foilTypes.map((foilType, index) => {
@@ -570,10 +571,6 @@ export default function FoilContainer({
               onDecrement={() => handleDecrement(foilType)}
               quantity={cardQuantities[foilTypeKey] || 0}
             />
-            
-            {loading[foilType] && (
-              <div className="absolute top-[-8px] right-[-8px] w-3 h-3 rounded-full border-2 border-white border-t-transparent animate-spin"></div>
-            )}
           </div>
         );
       })}
