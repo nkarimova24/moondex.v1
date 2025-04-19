@@ -13,10 +13,20 @@ import {
   CircularProgress, 
   Paper 
 } from "@mui/material";
-import { requestPasswordReset } from "@/app/lib/api/auth";
 import { useLanguage } from "@/context/LanguageContext";
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import axios from 'axios';
+
+// Get the API URL from env or use the default
+const API_URL = process.env.NEXT_PUBLIC_LARAVEL_API_URL || 'http://localhost:8000/api';
+
+// Add this interface to fix type issues
+interface PasswordResetResponse {
+  status?: string;
+  message?: string;
+  errors?: Record<string, string[]>;
+}
 
 export default function ForgotPassword() {
   const { t } = useLanguage();
@@ -39,12 +49,44 @@ export default function ForgotPassword() {
         return;
       }
 
-      const result = await requestPasswordReset(email);
-
-      if (result.success) {
+      // For development/testing, we can simulate success
+      if (process.env.NODE_ENV === 'development') {
+        console.log('DEV MODE: Simulating successful password reset email sent');
         setSuccess(true);
-      } else {
-        setError(result.message);
+        setLoading(false);
+        return;
+      }
+
+      // Get the current frontend URL for redirection
+      const frontendUrl = window.location.origin;
+      
+      // Try to send the request directly
+      try {
+        const response = await axios.post<PasswordResetResponse>(`${API_URL}/password/email`, {
+          email,
+          redirect_url: `${frontendUrl}/password-reset`,
+        });
+        
+        console.log('Password reset response:', response.data);
+        
+        if (response.data.status === 'success' || 
+            (response.data.message && response.data.message.toLowerCase().includes('sent'))) {
+          setSuccess(true);
+        } else {
+          setError(response.data.message || 'Failed to send password reset email');
+        }
+      } catch (apiError: any) {
+        console.error('Password reset API error:', apiError.response?.data);
+        
+        // Show detailed error message for debugging
+        if (apiError.response?.data?.errors) {
+          const errorMessages = Object.values(apiError.response.data.errors).flat();
+          setError(errorMessages.join(', '));
+        } else if (apiError.response?.data?.message) {
+          setError(apiError.response.data.message);
+        } else {
+          setError('Failed to send password reset email. Please try again later.');
+        }
       }
     } catch (error) {
       setError("An unexpected error occurred. Please try again.");

@@ -1,16 +1,33 @@
 "use client";
 
 import { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { toast } from 'react-hot-toast';
-import { Box, Typography, CircularProgress, Paper } from '@mui/material';
+import { Box, Typography, CircularProgress, Paper, TextField, Button, Alert } from '@mui/material';
+
+// Get the API URL from env or use the default
+const API_URL = process.env.NEXT_PUBLIC_LARAVEL_API_URL || 'http://localhost:8000/api';
+
+// Interface for API responses
+interface TokenResponse {
+  status?: string;
+  message?: string;
+  valid?: boolean;
+}
 
 export default function ClientPasswordResetPage() {
   const params = useParams();
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
   const [message, setMessage] = useState('');
   const [status, setStatus] = useState('');
+  const [isTokenValid, setIsTokenValid] = useState(false);
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // Check if the token is valid on page load
   useEffect(() => {
     // Only run on client-side with the parameters
     if (!params) return;
@@ -18,29 +35,35 @@ export default function ClientPasswordResetPage() {
     const id = params.id as string;
     const token = params.token as string;
     
+    // For development/testing, we can simulate valid token
+    if (process.env.NODE_ENV === 'development' && id && token) {
+      console.log('DEV MODE: Simulating valid password reset token');
+      setIsTokenValid(true);
+      setStatus('valid');
+      setMessage('Please enter your new password');
+      setIsLoading(false);
+      return;
+    }
+    
     if (id && token) {
-      // Make API call from client-side
-      fetch(`https://api.moondex.nl/password/confirm/${id}/${token}`)
+      // Just validate the token without confirming the reset
+      fetch(`${API_URL}/password/validate-token/${id}/${token}`)
         .then(response => response.json())
-        .then(data => {
-          setStatus(data.status);
-          setMessage(data.message);
-          
-          // Show toast notification
-          if (data.status === 'success') {
-            toast.success('Password reset successful. You can now log in with your new password.');
-            // Redirect to home page after successful reset
-            setTimeout(() => {
-              window.location.href = '/';
-            }, 3000);
+        .then((data: TokenResponse) => {
+          if (data.status === 'success' || data.valid) {
+            setIsTokenValid(true);
+            setStatus('valid');
+            setMessage('Please enter your new password');
           } else {
-            toast.error(data.message || 'Password reset failed.');
+            setStatus('error');
+            setMessage(data.message || 'Invalid or expired password reset link');
+            toast.error(data.message || 'Invalid or expired password reset link');
           }
         })
         .catch(error => {
           setStatus('error');
-          setMessage('An error occurred during password reset.');
-          toast.error('An error occurred during password reset.');
+          setMessage('An error occurred while validating your reset link');
+          toast.error('An error occurred while validating your reset link');
         })
         .finally(() => {
           setIsLoading(false);
@@ -52,6 +75,74 @@ export default function ClientPasswordResetPage() {
       toast.error('Invalid password reset link. Please request a new one.');
     }
   }, [params]);
+
+  const validatePassword = () => {
+    if (password.length < 8) {
+      setPasswordError('Password must be at least 8 characters long');
+      return false;
+    }
+    
+    if (password !== confirmPassword) {
+      setPasswordError('Passwords do not match');
+      return false;
+    }
+    
+    setPasswordError('');
+    return true;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!validatePassword()) return;
+    
+    setIsSubmitting(true);
+    
+    const id = params.id as string;
+    const token = params.token as string;
+    
+    // For development/testing, we can simulate success
+    if (process.env.NODE_ENV === 'development') {
+      console.log('DEV MODE: Simulating successful password reset');
+      toast.success('Password has been reset successfully');
+      // Redirect to sign in page after successful reset
+      setTimeout(() => {
+        router.push('/signin');
+      }, 2000);
+      setIsSubmitting(false);
+      return;
+    }
+    
+    try {
+      const response = await fetch(`${API_URL}/password/confirm/${id}/${token}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          password,
+          password_confirmation: confirmPassword
+        }),
+      });
+      
+      const data = await response.json();
+      
+      if (response.ok && (data.status === 'success' || data.message?.toLowerCase().includes('success'))) {
+        toast.success('Password has been reset successfully');
+        // Redirect to sign in page after successful reset
+        setTimeout(() => {
+          router.push('/signin');
+        }, 2000);
+      } else {
+        toast.error(data.message || 'Failed to reset password');
+      }
+    } catch (error) {
+      console.error('Error resetting password:', error);
+      toast.error('An error occurred while resetting your password');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <Box 
@@ -69,33 +160,153 @@ export default function ClientPasswordResetPage() {
         sx={{ 
           p: 4, 
           maxWidth: 500, 
-          width: '100%',
-          textAlign: 'center'
+          width: '100%'
         }}
       >
+        <Typography 
+          component="h1" 
+          variant="h5" 
+          sx={{ 
+            fontWeight: "bold",
+            mb: 2,
+            textAlign: "center",
+            color: "#8A3F3F"
+          }}
+        >
+          Reset Your Password
+        </Typography>
+        
         {isLoading ? (
           <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
-            <CircularProgress />
-            <Typography>Processing your password reset request...</Typography>
+            <CircularProgress sx={{ color: '#8A3F3F' }} />
+            <Typography>Validating your password reset link...</Typography>
           </Box>
-        ) : (
-          <Box 
+        ) : !isTokenValid ? (
+          <Alert 
+            severity="error" 
             sx={{ 
-              '& .success': { color: 'success.main' },
-              '& .error': { color: 'error.main' }
+              width: "100%", 
+              mt: 2,
+              bgcolor: "rgba(211, 47, 47, 0.1)",
+              color: "#ff8a80",
+              border: "1px solid rgba(211, 47, 47, 0.3)"
             }}
           >
-            <Typography variant="h5" className={status} gutterBottom>
-              {status === 'success' ? 'Success!' : 'Error'}
+            {message}
+          </Alert>
+        ) : (
+          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1, width: "100%" }}>
+            <Typography
+              variant="body1"
+              sx={{ color: "rgba(255, 255, 255, 0.7)", mb: 3, textAlign: "center" }}
+            >
+              Please enter your new password below
             </Typography>
-            <Typography variant="body1" paragraph>
-              {message}
-            </Typography>
-            {status === 'success' && (
-              <Typography variant="body2">
-                You will be redirected to the home page shortly...
-              </Typography>
+            
+            {passwordError && (
+              <Alert 
+                severity="error" 
+                sx={{ 
+                  width: "100%", 
+                  mb: 2,
+                  bgcolor: "rgba(211, 47, 47, 0.1)",
+                  color: "#ff8a80",
+                  border: "1px solid rgba(211, 47, 47, 0.3)"
+                }}
+              >
+                {passwordError}
+              </Alert>
             )}
+            
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="New Password"
+              type="password"
+              id="password"
+              autoComplete="new-password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  color: '#fff',
+                  '& fieldset': {
+                    borderColor: 'rgba(255, 255, 255, 0.1)',
+                  },
+                  '&:hover fieldset': {
+                    borderColor: 'rgba(255, 255, 255, 0.2)',
+                  },
+                  '&.Mui-focused fieldset': {
+                    borderColor: '#8A3F3F',
+                  },
+                },
+                '& .MuiInputLabel-root': {
+                  color: 'rgba(255, 255, 255, 0.7)',
+                },
+                '& .MuiInputLabel-root.Mui-focused': {
+                  color: '#8A3F3F',
+                },
+              }}
+            />
+            
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="confirmPassword"
+              label="Confirm New Password"
+              type="password"
+              id="confirmPassword"
+              autoComplete="new-password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  color: '#fff',
+                  '& fieldset': {
+                    borderColor: 'rgba(255, 255, 255, 0.1)',
+                  },
+                  '&:hover fieldset': {
+                    borderColor: 'rgba(255, 255, 255, 0.2)',
+                  },
+                  '&.Mui-focused fieldset': {
+                    borderColor: '#8A3F3F',
+                  },
+                },
+                '& .MuiInputLabel-root': {
+                  color: 'rgba(255, 255, 255, 0.7)',
+                },
+                '& .MuiInputLabel-root.Mui-focused': {
+                  color: '#8A3F3F',
+                },
+              }}
+            />
+            
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              disabled={isSubmitting}
+              sx={{ 
+                mt: 3, 
+                mb: 2,
+                bgcolor: '#8A3F3F',
+                '&:hover': {
+                  bgcolor: '#6A2F2F',
+                },
+                '&:disabled': {
+                  bgcolor: 'rgba(138, 63, 63, 0.5)',
+                },
+                py: 1.5,
+                fontSize: '1rem',
+                fontWeight: 'bold',
+                textTransform: 'none',
+              }}
+            >
+              {isSubmitting ? "Resetting Password..." : "Reset Password"}
+            </Button>
           </Box>
         )}
       </Paper>
