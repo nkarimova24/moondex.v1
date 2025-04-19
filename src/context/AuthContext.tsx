@@ -58,7 +58,21 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         
         if (result.success && result.user) {
           console.log('Auth check successful, user found:', result.user.name);
-          setUser(result.user);
+          // Create a merged user object that preserves avatar data properly
+          const mergedUser: User = {
+            ...result.user,
+            // Ensure avatar is properly set from all potential sources
+            avatar: result.user.avatar || result.user.profile_picture
+          };
+          
+          // Log the avatar URL to help with debugging
+          console.log('Setting user with avatar data in checkAuth:', {
+            'result.user.avatar': result.user.avatar,
+            'result.user.profile_picture': result.user.profile_picture,
+            'resolved': mergedUser.avatar
+          });
+          
+          setUser(mergedUser);
         } else {
           console.log('Auth check failed, no valid user found');
           setUser(null);
@@ -95,7 +109,22 @@ const register = async (userData: RegisterData): Promise<AuthResult> => {
     
     if (result.success && result.user) {
       console.log('Registration successful:', result.user.name);
-      setUser(result.user);
+      
+      // Create a merged user object that preserves avatar data properly
+      const mergedUser: User = {
+        ...result.user,
+        // Ensure avatar is properly set from all potential sources
+        avatar: result.user.avatar || result.user.profile_picture
+      };
+      
+      // Log the avatar URL to help with debugging
+      console.log('Setting user with avatar data in register:', {
+        'result.user.avatar': result.user.avatar,
+        'result.user.profile_picture': result.user.profile_picture,
+        'resolved': mergedUser.avatar
+      });
+      
+      setUser(mergedUser);
       return result;
     }
     
@@ -121,7 +150,21 @@ const register = async (userData: RegisterData): Promise<AuthResult> => {
       
       if (result.success && result.user) {
         console.log('Login successful:', result.user.name);
-        setUser(result.user);
+        // Create a merged user object that preserves avatar data properly
+        const mergedUser: User = {
+          ...result.user,
+          // Ensure avatar is properly set from all potential sources
+          avatar: result.user.avatar || result.user.profile_picture
+        };
+        
+        // Log the avatar URL to help with debugging
+        console.log('Setting user with avatar data:', {
+          'result.user.avatar': result.user.avatar,
+          'result.user.profile_picture': result.user.profile_picture,
+          'resolved': mergedUser.avatar
+        });
+        
+        setUser(mergedUser);
         return result;
       }
       
@@ -169,8 +212,25 @@ const register = async (userData: RegisterData): Promise<AuthResult> => {
           result.user.avatar = correctLaravelStorageUrl(result.user.avatar) || result.user.avatar;
         }
         
-        // Force a full state update
-        setUser({...result.user});
+        // Create a merged user object that preserves avatar data properly
+        const mergedUser: User = {
+          ...user,
+          ...result.user,
+          // Ensure avatar is properly set from all potential sources
+          avatar: result.user.avatar || result.user.profile_picture || user?.avatar || user?.profile_picture
+        };
+        
+        // Log the avatar URL to help with debugging
+        console.log('Setting user with avatar data in refreshUser:', {
+          'result.user.avatar': result.user.avatar,
+          'result.user.profile_picture': result.user.profile_picture,
+          'existing user.avatar': user?.avatar,
+          'existing user.profile_picture': user?.profile_picture,
+          'resolved': mergedUser.avatar
+        });
+        
+        // Force a full state update with the merged user data
+        setUser({...mergedUser});
       } else {
         console.error('User data refresh failed:', result);
       }
@@ -520,6 +580,13 @@ export const getUserAvatarUrl = (user: User | null): string | undefined => {
   const avatarUrl = user.avatar || user.profile_picture;
   if (!avatarUrl) return undefined;
   
+  // Log the raw URL to help with debugging
+  console.log('Getting avatar URL from user:', {
+    id: user.id,
+    name: user.name,
+    rawAvatarUrl: avatarUrl
+  });
+  
   // Add a cache-busting parameter to the URL to force browser to reload the image
   if (avatarUrl.startsWith('data:')) {
     return avatarUrl; // Don't modify data URLs
@@ -533,13 +600,27 @@ export const getUserAvatarUrl = (user: User | null): string | undefined => {
     // Construct a URL relative to the current origin
     const correctedUrl = `${window.location.origin}/storage/${storagePath}`;
     
+    console.log('Corrected localhost storage URL:', correctedUrl);
+    
     // Add a timestamp to force the browser to reload the image
     const timestamp = Date.now();
     const separator = correctedUrl.includes('?') ? '&' : '?';
     return `${correctedUrl}${separator}t=${timestamp}`;
   }
   
-  // Add a timestamp to force the browser to reload the image
+  // Handle other specific URL cases that need correction
+  if (avatarUrl.includes('/storage/') && !avatarUrl.startsWith('http')) {
+    // Potentially a relative storage URL that needs the origin prepended
+    const correctedUrl = `${window.location.origin}${avatarUrl.startsWith('/') ? '' : '/'}${avatarUrl}`;
+    console.log('Corrected relative storage URL:', correctedUrl);
+    
+    // Add a timestamp to force the browser to reload the image
+    const timestamp = Date.now();
+    const separator = correctedUrl.includes('?') ? '&' : '?';
+    return `${correctedUrl}${separator}t=${timestamp}`;
+  }
+  
+  // Add a timestamp to force the browser to reload the image for all other URLs
   const timestamp = Date.now();
   const separator = avatarUrl.includes('?') ? '&' : '?';
   return `${avatarUrl}${separator}t=${timestamp}`;
