@@ -35,12 +35,12 @@ export default function ClientPasswordResetPage() {
     const id = params.id as string;
     const token = params.token as string;
     
-    // For development/testing, we can simulate valid token
-    if (process.env.NODE_ENV === 'development' && id && token) {
-      console.log('DEV MODE: Simulating valid password reset token');
+    // For development testing with a test token
+    if (process.env.NODE_ENV === 'development' && id === 'test-user-id' && token === 'test-token') {
+      console.log('DEV MODE: Using test token for password reset testing');
       setIsTokenValid(true);
       setStatus('valid');
-      setMessage('Please enter your new password');
+      setMessage('This is a test password reset. Enter your new password.');
       setIsLoading(false);
       return;
     }
@@ -61,6 +61,7 @@ export default function ClientPasswordResetPage() {
           }
         })
         .catch(error => {
+          console.error('Token validation error:', error);
           setStatus('error');
           setMessage('An error occurred while validating your reset link');
           toast.error('An error occurred while validating your reset link');
@@ -101,11 +102,10 @@ export default function ClientPasswordResetPage() {
     const id = params.id as string;
     const token = params.token as string;
     
-    // For development/testing, we can simulate success
-    if (process.env.NODE_ENV === 'development') {
-      console.log('DEV MODE: Simulating successful password reset');
-      toast.success('Password has been reset successfully');
-      // Redirect to sign in page after successful reset
+    // For development testing with a test token
+    if (process.env.NODE_ENV === 'development' && id === 'test-user-id' && token === 'test-token') {
+      console.log('DEV MODE: Simulating successful password reset with test token');
+      toast.success('Test password has been reset successfully');
       setTimeout(() => {
         router.push('/signin');
       }, 2000);
@@ -118,6 +118,7 @@ export default function ClientPasswordResetPage() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json',
         },
         body: JSON.stringify({
           password,

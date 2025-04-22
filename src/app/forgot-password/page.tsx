@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { 
@@ -28,13 +28,95 @@ interface PasswordResetResponse {
   errors?: Record<string, string[]>;
 }
 
+// Define a global debugging function
+const testResetEmailApi = async (email: string) => {
+  const frontendUrl = typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3000';
+  
+  console.log('Test parameters:');
+  console.log('- API URL:', API_URL);
+  console.log('- Frontend URL:', frontendUrl);
+  console.log('- Email:', email);
+
+  try {
+    // Test with fetch first
+    console.log('Testing with fetch API...');
+    const fetchResponse = await fetch(`${API_URL}/password/email`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      body: JSON.stringify({
+        email,
+        redirect_url: `${frontendUrl}/password-reset`,
+      }),
+    });
+    
+    console.log('Fetch response status:', fetchResponse.status);
+    const fetchData = await fetchResponse.json().catch(() => 'No JSON response');
+    console.log('Fetch response data:', fetchData);
+    
+    // Then test with axios
+    console.log('Testing with axios...');
+    const axios = (await import('axios')).default;
+    const axiosResponse = await axios.post(`${API_URL}/password/email`, {
+      email,
+      redirect_url: `${frontendUrl}/password-reset`,
+    }, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+    });
+    
+    console.log('Axios response status:', axiosResponse.status);
+    console.log('Axios response data:', axiosResponse.data);
+    
+    return 'Test completed successfully';
+  } catch (error) {
+    console.error('Test failed with error:', error);
+    return 'Test failed, check console for details';
+  }
+};
+
+// Make it globally accessible in the browser
+if (typeof window !== 'undefined') {
+  (window as any).testResetEmailApi = testResetEmailApi;
+}
+
 export default function ForgotPassword() {
   const { t } = useLanguage();
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
+  const [apiStatus, setApiStatus] = useState<string | null>(null);
   const router = useRouter();
+
+  // Add a function to test API connectivity
+  const testApiConnection = async () => {
+    setApiStatus("Testing connection...");
+    try {
+      // Try a simple OPTIONS request to check CORS
+      const response = await fetch(`${API_URL}/password/email`, {
+        method: 'OPTIONS',
+      });
+      
+      if (response.ok) {
+        setApiStatus(`API is reachable (Status: ${response.status})`);
+      } else {
+        setApiStatus(`API returned error status: ${response.status}`);
+      }
+    } catch (error) {
+      console.error("API connection test error:", error);
+      setApiStatus(`Failed to connect to API: ${error instanceof Error ? error.message : String(error)}`);
+    }
+  };
+
+  // Test the connection on component mount
+  useEffect(() => {
+    console.log("Current API URL:", API_URL);
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -49,23 +131,32 @@ export default function ForgotPassword() {
         return;
       }
 
-      // For development/testing, we can simulate success
-      if (process.env.NODE_ENV === 'development') {
-        console.log('DEV MODE: Simulating successful password reset email sent');
-        setSuccess(true);
-        setLoading(false);
-        return;
-      }
-
       // Get the current frontend URL for redirection
       const frontendUrl = window.location.origin;
       
       // Try to send the request directly
       try {
-        const response = await axios.post<PasswordResetResponse>(`${API_URL}/password/email`, {
-          email,
-          redirect_url: `${frontendUrl}/password-reset`,
-        });
+        console.log('Sending password reset request to:', `${API_URL}/password/email`);
+        console.log('With payload:', { email, redirect_url: `${frontendUrl}/password-reset` });
+        
+        const response = await axios.post<PasswordResetResponse>(
+          `${API_URL}/password/email`, 
+          {
+            email,
+            redirect_url: `${frontendUrl}/password-reset`,
+          },
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json',
+              'X-Requested-With': 'XMLHttpRequest',
+            },
+            // Ensure we're sending cookies if needed
+            withCredentials: true,
+            // Increase timeout for slow connections
+            timeout: 10000,
+          }
+        );
         
         console.log('Password reset response:', response.data);
         
@@ -77,6 +168,19 @@ export default function ForgotPassword() {
         }
       } catch (apiError: any) {
         console.error('Password reset API error:', apiError.response?.data);
+        console.error('Full API error details:', {
+          message: apiError.message,
+          status: apiError.response?.status,
+          statusText: apiError.response?.statusText,
+          name: apiError.name,
+          code: apiError.code
+        });
+        
+        // Network errors won't have a response
+        if (!apiError.response) {
+          setError(`Network error: ${apiError.message || 'Unable to connect to server'}`);
+          return;
+        }
         
         // Show detailed error message for debugging
         if (apiError.response?.data?.errors) {
@@ -85,7 +189,7 @@ export default function ForgotPassword() {
         } else if (apiError.response?.data?.message) {
           setError(apiError.response.data.message);
         } else {
-          setError('Failed to send password reset email. Please try again later.');
+          setError(`Error ${apiError.response.status}: Failed to send password reset email. Please try again later.`);
         }
       }
     } catch (error) {
@@ -94,6 +198,11 @@ export default function ForgotPassword() {
     } finally {
       setLoading(false);
     }
+  };
+
+  // Add extra button for manual testing
+  const runConsoleTest = () => {
+    setApiStatus("Check browser console and run window.testResetEmailApi('your-email@example.com')");
   };
 
   return (
@@ -125,6 +234,26 @@ export default function ForgotPassword() {
             Reset Password
           </Typography>
 
+          {/* Display API Status for debugging */}
+          {apiStatus && (
+            <Alert
+              severity={apiStatus.includes("reachable") ? "success" : "warning"}
+              sx={{
+                width: "100%",
+                mb: 2,
+                bgcolor: apiStatus.includes("reachable") 
+                  ? "rgba(46, 125, 50, 0.1)" 
+                  : "rgba(237, 108, 2, 0.1)",
+                color: apiStatus.includes("reachable") ? "#69f0ae" : "#ffb74d",
+                border: apiStatus.includes("reachable")
+                  ? "1px solid rgba(46, 125, 50, 0.3)"
+                  : "1px solid rgba(237, 108, 2, 0.3)",
+              }}
+            >
+              {apiStatus}
+            </Alert>
+          )}
+
           {success ? (
             <Box sx={{ textAlign: "center", mt: 2 }}>
               <CheckCircleOutlineIcon color="success" sx={{ fontSize: 60, mb: 2 }} />
@@ -132,6 +261,26 @@ export default function ForgotPassword() {
                 If an account exists with that email, we've sent password reset instructions.
                 Please check your inbox and spam folder.
               </Typography>
+              
+              {/* Development mode testing link */}
+              {process.env.NODE_ENV === 'development' && (
+                <Box sx={{ mb: 3, p: 2, border: '1px dashed rgba(255,255,255,0.3)', borderRadius: 1 }}>
+                  <Typography variant="body2" sx={{ color: 'orange', mb: 1 }}>
+                    DEV MODE: Test the reset flow with this link:
+                  </Typography>
+                  <Link 
+                    href={`/password-reset/test-user-id/test-token`}
+                    style={{ 
+                      color: '#8A3F3F', 
+                      wordBreak: 'break-all',
+                      textDecoration: 'underline' 
+                    }}
+                  >
+                    {`${window.location.origin}/password-reset/test-user-id/test-token`}
+                  </Link>
+                </Box>
+              )}
+              
               <Button
                 variant="outlined"
                 startIcon={<ArrowBackIcon />}
@@ -157,6 +306,40 @@ export default function ForgotPassword() {
               >
                 Enter your email address and we'll send you instructions to reset your password.
               </Typography>
+
+              {/* Debug buttons */}
+              <Box sx={{ width: "100%", mb: 2, display: "flex", justifyContent: "center", gap: 1 }}>
+                <Button
+                  variant="outlined"
+                  size="small"
+                  onClick={testApiConnection}
+                  sx={{
+                    fontSize: "0.75rem",
+                    color: "rgba(255, 255, 255, 0.5)",
+                    borderColor: "rgba(255, 255, 255, 0.1)",
+                    "&:hover": {
+                      borderColor: "rgba(255, 255, 255, 0.2)",
+                    },
+                  }}
+                >
+                  Test API Connection
+                </Button>
+                <Button
+                  variant="outlined"
+                  size="small"
+                  onClick={runConsoleTest}
+                  sx={{
+                    fontSize: "0.75rem",
+                    color: "rgba(255, 255, 255, 0.5)",
+                    borderColor: "rgba(255, 255, 255, 0.1)",
+                    "&:hover": {
+                      borderColor: "rgba(255, 255, 255, 0.2)",
+                    },
+                  }}
+                >
+                  Console Test Info
+                </Button>
+              </Box>
 
               {error && (
                 <Alert

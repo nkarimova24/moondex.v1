@@ -8,7 +8,6 @@ import Link from 'next/link';
 
 export default function PasswordResetConfirmationPage() {
   useEffect(() => {
-    // Show success toast
     toast.success('Your password has been reset successfully');
   }, []);
 

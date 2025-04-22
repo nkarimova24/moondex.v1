@@ -4,12 +4,10 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Box, Typography, CircularProgress, Paper, Container } from '@mui/material';
 
-// This is a special route for handling password reset redirects
 export default function PasswordResetRedirectPage() {
   const router = useRouter();
   
   useEffect(() => {
-    // Try to parse token from URL query params
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get('id') || urlParams.get('user_id') || urlParams.get('userId');
     const token = urlParams.get('token') || urlParams.get('reset_token');
