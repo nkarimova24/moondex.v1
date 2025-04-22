@@ -35,16 +35,6 @@ export default function ClientPasswordResetPage() {
     const id = params.id as string;
     const token = params.token as string;
     
-    // For development testing with a test token
-    if (process.env.NODE_ENV === 'development' && id === 'test-user-id' && token === 'test-token') {
-      console.log('DEV MODE: Using test token for password reset testing');
-      setIsTokenValid(true);
-      setStatus('valid');
-      setMessage('This is a test password reset. Enter your new password.');
-      setIsLoading(false);
-      return;
-    }
-    
     if (id && token) {
       // Just validate the token without confirming the reset
       fetch(`${API_URL}/password/validate-token/${id}/${token}`)
@@ -101,17 +91,6 @@ export default function ClientPasswordResetPage() {
     
     const id = params.id as string;
     const token = params.token as string;
-    
-    // For development testing with a test token
-    if (process.env.NODE_ENV === 'development' && id === 'test-user-id' && token === 'test-token') {
-      console.log('DEV MODE: Simulating successful password reset with test token');
-      toast.success('Test password has been reset successfully');
-      setTimeout(() => {
-        router.push('/signin');
-      }, 2000);
-      setIsSubmitting(false);
-      return;
-    }
     
     try {
       const response = await fetch(`${API_URL}/password/confirm/${id}/${token}`, {
@@ -256,10 +235,10 @@ export default function ClientPasswordResetPage() {
               margin="normal"
               required
               fullWidth
-              name="confirmPassword"
+              name="password_confirmation"
               label="Confirm New Password"
               type="password"
-              id="confirmPassword"
+              id="password_confirmation"
               autoComplete="new-password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
@@ -290,23 +269,24 @@ export default function ClientPasswordResetPage() {
               fullWidth
               variant="contained"
               disabled={isSubmitting}
-              sx={{ 
-                mt: 3, 
+              sx={{
+                mt: 3,
                 mb: 2,
                 bgcolor: '#8A3F3F',
                 '&:hover': {
-                  bgcolor: '#6A2F2F',
+                  bgcolor: '#AC4C4C',
                 },
-                '&:disabled': {
-                  bgcolor: 'rgba(138, 63, 63, 0.5)',
-                },
-                py: 1.5,
-                fontSize: '1rem',
+                color: 'white',
                 fontWeight: 'bold',
+                padding: '12px',
                 textTransform: 'none',
               }}
             >
-              {isSubmitting ? "Resetting Password..." : "Reset Password"}
+              {isSubmitting ? (
+                <CircularProgress size={24} sx={{ color: 'white' }} />
+              ) : (
+                'Reset Password'
+              )}
             </Button>
           </Box>
         )}

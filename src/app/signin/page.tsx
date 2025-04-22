@@ -47,7 +47,20 @@ export default function SignIn() {
       const result = await login(credentials);
 
       if (result.success) {
-        router.push("/profile"); // Redirect to profile instead of home
+        console.log('Login successful, user data:', {
+          id: result.user?.id,
+          name: result.user?.name,
+          email: result.user?.email,
+          password_change_required: result.user?.password_change_required
+        });
+        
+        if (result.user?.password_change_required) {
+          console.log('User has temporary password, redirecting to change password page');
+          router.push("/change-temporary-password");
+        } else {
+          console.log('User does not have temporary password, redirecting to profile');
+          router.push("/profile");
+        }
       } else {
         if (result.errors) {
           setErrors(result.errors);

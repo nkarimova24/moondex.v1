@@ -29,12 +29,25 @@ export default function ChangeTemporaryPasswordPage() {
   // Check if user is authenticated and needs to change password
   useEffect(() => {
     if (!authLoading) {
+      console.log("Checking if user needs to change password:", {
+        isAuthenticated,
+        user: {
+          id: user?.id,
+          name: user?.name,
+          passwordChangeRequired: user?.password_change_required
+        }
+      });
+      
       if (!isAuthenticated) {
         // Redirect to login if not authenticated
+        console.log("User not authenticated, redirecting to login");
         router.push("/signin");
       } else if (user && !user.password_change_required) {
         // Redirect to profile if user doesn't need to change password
+        console.log("User doesn't need to change password, redirecting to profile");
         router.push("/profile");
+      } else {
+        console.log("User needs to change password, staying on page");
       }
     }
   }, [isAuthenticated, user, authLoading, router]);
@@ -75,10 +88,18 @@ export default function ChangeTemporaryPasswordPage() {
     
     setLoading(true);
     try {
+      console.log("Attempting to update temporary password");
+      
       const result = await updateTemporaryPassword(
         passwords.newPassword,
         passwords.confirmPassword
       );
+      
+      console.log("Password update result:", {
+        success: result.success,
+        message: result.message,
+        hasErrors: !!result.errors
+      });
       
       if (result.success) {
         setSuccess(true);
@@ -87,15 +108,17 @@ export default function ChangeTemporaryPasswordPage() {
         }, 2000);
       } else {
         if (result.errors) {
+          console.error("Password update validation errors:", result.errors);
           setErrors(result.errors);
         }
         if (result.message) {
+          console.error("Password update error message:", result.message);
           setGeneralError(result.message);
         }
       }
     } catch (error) {
+      console.error("Unexpected error updating temporary password:", error);
       setGeneralError("An unexpected error occurred. Please try again.");
-      console.error("Error updating temporary password:", error);
     } finally {
       setLoading(false);
     }

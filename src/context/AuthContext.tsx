@@ -98,7 +98,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       name: user?.name,
       email: user?.email,
       avatar: user?.avatar,
-      profile_picture: user?.profile_picture
+      profile_picture: user?.profile_picture,
+      password_change_required: user?.password_change_required
     });
   }, [user]);
   

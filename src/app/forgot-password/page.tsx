@@ -139,29 +139,24 @@ export default function ForgotPassword() {
         console.log('Sending password reset request to:', `${API_URL}/password/email`);
         console.log('With payload:', { email, redirect_url: `${frontendUrl}/password-reset` });
         
-        const response = await axios.post<PasswordResetResponse>(
-          `${API_URL}/password/email`, 
-          {
-            email,
-            redirect_url: `${frontendUrl}/password-reset`,
+        const response = await axios.post<PasswordResetResponse>(`${API_URL}/password/email`, {
+          email,
+          redirect_url: `${frontendUrl}/password-reset`,
+        }, {
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest',
           },
-          {
-            headers: {
-              'Content-Type': 'application/json',
-              'Accept': 'application/json',
-              'X-Requested-With': 'XMLHttpRequest',
-            },
-            // Ensure we're sending cookies if needed
-            withCredentials: true,
-            // Increase timeout for slow connections
-            timeout: 10000,
-          }
-        );
+          withCredentials: true,
+          timeout: 10000,
+        });
         
         console.log('Password reset response:', response.data);
         
         if (response.data.status === 'success' || 
             (response.data.message && response.data.message.toLowerCase().includes('sent'))) {
+          console.log('TEMPORARY PASSWORD EMAIL SENT SUCCESSFULLY!');
           setSuccess(true);
         } else {
           setError(response.data.message || 'Failed to send password reset email');

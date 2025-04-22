@@ -39,9 +39,21 @@ export function middleware(request: NextRequest) {
       decoded = jwtDecode(token);
       const currentTime = Math.floor(Date.now() / 1000);
       
-      if (decoded.exp && decoded.exp > currentTime) {
+      if (decoded) {
+        console.log('JWT Token debugging:', {
+          decodedToken: decoded,
+          passwordChangeRequired: decoded.password_change_required,
+          tokenExpiration: decoded.exp,
+          currentTime,
+          isValid: decoded.exp && decoded.exp > currentTime
+        });
+      }
+      
+      if (decoded && decoded.exp && decoded.exp > currentTime) {
         isTokenValid = true;
       }
+    } else {
+      console.log('No auth token found in request');
     }
   } catch (error) {
     console.error('Error decoding token:', error);
@@ -51,6 +63,7 @@ export function middleware(request: NextRequest) {
   // If user has password_change_required flag set to true, redirect to change password page
   // unless they're already on that page
   if (isTokenValid && decoded && decoded.password_change_required && currentPath !== '/change-temporary-password') {
+    console.log('Redirecting to change-temporary-password due to password_change_required flag');
     return NextResponse.redirect(new URL('/change-temporary-password', request.url));
   }
   
@@ -72,7 +85,7 @@ export function middleware(request: NextRequest) {
 // Configure which paths this middleware will run on
 export const config = {
   matcher: [
-    // Run middleware on password reset paths
-    '/password-reset/:id/:token*',
+    // Run middleware on all routes except static files and API routes
+    '/((?!api|_next/static|_next/image|favicon.ico).*)',
   ],
 }; 
