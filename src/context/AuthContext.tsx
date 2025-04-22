@@ -127,7 +127,10 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
           'resolved': mergedUser.avatar
         });
         
+        // Set user early to trigger authentication change
         setUser(mergedUser);
+        // Set loading to false before creating the collection to allow UI to respond
+        setLoading(false);
         
         // Create a default collection for the new user
         try {
@@ -146,16 +149,16 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       }
       
       console.error("Registration failed with response:", result);
+      setLoading(false);
       return result;
     } catch (err: unknown) {
       const apiError = err as ApiError;
       console.error('Registration error in context:', apiError);
+      setLoading(false);
       return { 
         success: false, 
         message: 'Registration failed due to an unexpected error',
       };
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -181,20 +184,22 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
           'resolved': mergedUser.avatar
         });
         
+        // Set user and loading state early
         setUser(mergedUser);
+        setLoading(false);
         return result;
       }
       
+      setLoading(false);
       return result;
     } catch (err: unknown) {
       const apiError = err as ApiError;
       console.error('Login error in context:', apiError);
+      setLoading(false);
       return { 
         success: false, 
         message: 'Login failed due to an unexpected error',
       };
-    } finally {
-      setLoading(false);
     }
   };
 

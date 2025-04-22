@@ -54,13 +54,19 @@ export default function SignIn() {
           password_change_required: result.user?.password_change_required
         });
         
-        if (result.user?.password_change_required) {
-          console.log('User has temporary password, redirecting to change password page');
-          router.push("/change-temporary-password");
-        } else {
-          console.log('User does not have temporary password, redirecting to profile');
-          router.push("/profile");
-        }
+        const redirectPath = result.user?.password_change_required ? 
+          "/change-temporary-password" : "/profile";
+        
+        // Clear any previous errors
+        setGeneralError("");
+        
+        // Immediate redirect attempt
+        router.push(redirectPath);
+        
+        // Also set a fallback redirect timer in case the router.push doesn't trigger immediately
+        setTimeout(() => {
+          window.location.href = redirectPath;
+        }, 1500); // Redirect after 1.5 seconds if router.push doesn't work immediately
       } else {
         if (result.errors) {
           setErrors(result.errors);

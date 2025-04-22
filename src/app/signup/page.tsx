@@ -54,7 +54,16 @@ export default function SignUp() {
       });
 
       if (result.success) {
-        router.push("/profile"); // Redirect to profile instead of home
+        // Show a success message
+        setGeneralError("");
+        
+        // Immediate redirect attempt
+        router.push("/profile");
+        
+        // Also set a fallback redirect timer in case the router.push doesn't trigger immediately
+        setTimeout(() => {
+          window.location.href = "/profile";
+        }, 1500); // Redirect after 1.5 seconds if router.push doesn't work immediately
       } else {
         if (result.errors) {
           setErrors(result.errors);
