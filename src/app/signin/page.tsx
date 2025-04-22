@@ -14,15 +14,21 @@ export default function SignIn() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(false);
   const [generalError, setGeneralError] = useState("");
-  const { login, isAuthenticated, loading: authLoading } = useAuth();
+  const { login, isAuthenticated, loading: authLoading, user } = useAuth();
   const router = useRouter();
 
   // Redirect already authenticated users to profile page
   useEffect(() => {
     if (!authLoading && isAuthenticated) {
-      router.push("/profile");
+      if (user?.password_change_required) {
+        // Redirect to temporary password change page if required
+        router.push("/change-temporary-password");
+      } else {
+        // Otherwise redirect to profile
+        router.push("/profile");
+      }
     }
-  }, [isAuthenticated, authLoading, router]);
+  }, [isAuthenticated, authLoading, router, user]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCredentials({

@@ -29,6 +29,7 @@ interface AuthContextType {
   uploadAvatar: (file: File) => Promise<AuthResult>;
   changeEmail: (newEmail: string) => Promise<AuthResult>; // Added changeEmail function
   changePassword: (currentPassword: string, newPassword: string) => Promise<AuthResult>; // Added changePassword function
+  updateTemporaryPassword: (newPassword: string, confirmPassword: string) => Promise<AuthResult>; // Added updateTemporaryPassword function
 }
 
 interface AuthProviderProps {
@@ -550,6 +551,32 @@ const register = async (userData: RegisterData): Promise<AuthResult> => {
         return { 
           success: false, 
           message: 'Failed to change password' 
+        };
+      } finally {
+        setLoading(false);
+      }
+    },
+    updateTemporaryPassword: async (newPassword: string, confirmPassword: string): Promise<AuthResult> => {
+      setLoading(true);
+      try {
+        const result = await api.updateTemporaryPassword(newPassword, confirmPassword);
+        
+        if (result.success) {
+          // Update user to remove the password_change_required flag
+          if (user) {
+            setUser({
+              ...user,
+              password_change_required: false
+            });
+          }
+        }
+        
+        return result;
+      } catch (error) {
+        console.error('Error updating temporary password:', error);
+        return {
+          success: false,
+          message: 'Failed to update temporary password due to an unexpected error'
         };
       } finally {
         setLoading(false);

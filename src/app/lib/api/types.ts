@@ -155,6 +155,7 @@ export interface PokemonSet {
     pending_email?: string;
     created_at?: string;
     updated_at?: string;
+    password_change_required?: boolean;
   }
   
   export interface RegisterData {

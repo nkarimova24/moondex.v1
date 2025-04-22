@@ -15,6 +15,7 @@ interface UserResponseData {
   token?: string;
   avatar?: string;
   profile_picture?: string;
+  password_change_required?: boolean;
 }
 
 interface ApiError extends Error {
@@ -49,6 +50,7 @@ export const login = async (credentials: LoginCredentials): Promise<AuthResult> 
           name: data.data.name,
           email: data.data.email,
           id: data.data.id,
+          password_change_required: data.data.password_change_required
         },
         token: data.data.token
       };
@@ -197,7 +199,8 @@ export const getCurrentUser = async (): Promise<AuthResult> => {
         name: data.data.name,
         email: data.data.email,
         id: data.data.id,
-        avatar: avatarUrl
+        avatar: avatarUrl,
+        password_change_required: data.data.password_change_required || false
       };
       
       console.log('Parsed user data with avatar:', userData);
@@ -1147,6 +1150,54 @@ export const requestPasswordReset = async (email: string): Promise<{success: boo
     return {
       success: false,
       message: errorMessage
+    };
+  }
+};
+
+/**
+ * Update a temporary password
+ */
+export const updateTemporaryPassword = async (newPassword: string, confirmPassword: string): Promise<AuthResult> => {
+  try {
+    console.log('Updating temporary password');
+    
+    const response = await authApiClient.post<any>('/update-temporary-password', {
+      password: newPassword,
+      password_confirmation: confirmPassword
+    });
+    
+    const data = response.data;
+    
+    if (data.status === 'success') {
+      return {
+        success: true,
+        message: data.message || 'Password has been updated successfully'
+      };
+    }
+    
+    return {
+      success: false,
+      message: data.message || 'Failed to update password'
+    };
+  } catch (error: unknown) {
+    const apiError = error as ApiError;
+    console.error('Update temporary password error:', apiError.response?.data);
+    
+    let errorMessage = 'Failed to update password';
+    let errorDetails: Record<string, string> | undefined = undefined;
+    
+    if (apiError.response?.data?.error) {
+      if (typeof apiError.response.data.error === 'string') {
+        errorMessage = apiError.response.data.error;
+      } else {
+        errorDetails = apiError.response.data.error;
+      }
+    }
+    
+    return {
+      success: false,
+      message: errorMessage,
+      errors: errorDetails
     };
   }
 };
