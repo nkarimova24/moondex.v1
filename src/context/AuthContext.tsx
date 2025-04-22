@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import Cookies from 'js-cookie';
 import * as api from '@/app/lib/api/';
 import { User, LoginCredentials, RegisterData, AuthResult, UpdateProfileData } from '@/app/lib/api/types';
+import { authApiClient } from '@/app/lib/api/client';
 
 // Define a more specific error type
 interface ApiError extends Error {
@@ -104,45 +105,59 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   }, [user]);
   
   // Register a new user
-const register = async (userData: RegisterData): Promise<AuthResult> => {
-  setLoading(true);
-  try {
-    const result = await api.register(userData);
-    
-    if (result.success && result.user) {
-      console.log('Registration successful:', result.user.name);
+  const register = async (userData: RegisterData): Promise<AuthResult> => {
+    setLoading(true);
+    try {
+      const result = await api.register(userData);
       
-      // Create a merged user object that preserves avatar data properly
-      const mergedUser: User = {
-        ...result.user,
-        // Ensure avatar is properly set from all potential sources
-        avatar: result.user.avatar || result.user.profile_picture
-      };
+      if (result.success && result.user) {
+        console.log('Registration successful:', result.user.name);
+        
+        // Create a merged user object that preserves avatar data properly
+        const mergedUser: User = {
+          ...result.user,
+          // Ensure avatar is properly set from all potential sources
+          avatar: result.user.avatar || result.user.profile_picture
+        };
+        
+        // Log the avatar URL to help with debugging
+        console.log('Setting user with avatar data in register:', {
+          'result.user.avatar': result.user.avatar,
+          'result.user.profile_picture': result.user.profile_picture,
+          'resolved': mergedUser.avatar
+        });
+        
+        setUser(mergedUser);
+        
+        // Create a default collection for the new user
+        try {
+          const response = await authApiClient.post('/collections', {
+            name: "My Collection",
+            description: "Your default collection"
+          });
+          
+          console.log("Default collection created successfully:", response.data);
+        } catch (error) {
+          console.error("Error creating default collection:", error);
+          // Don't fail registration if collection creation fails
+        }
+        
+        return result;
+      }
       
-      // Log the avatar URL to help with debugging
-      console.log('Setting user with avatar data in register:', {
-        'result.user.avatar': result.user.avatar,
-        'result.user.profile_picture': result.user.profile_picture,
-        'resolved': mergedUser.avatar
-      });
-      
-      setUser(mergedUser);
+      console.error("Registration failed with response:", result);
       return result;
+    } catch (err: unknown) {
+      const apiError = err as ApiError;
+      console.error('Registration error in context:', apiError);
+      return { 
+        success: false, 
+        message: 'Registration failed due to an unexpected error',
+      };
+    } finally {
+      setLoading(false);
     }
-    
-    console.error("Registration failed with response:", result);
-    return result;
-  } catch (err: unknown) {
-    const apiError = err as ApiError;
-    console.error('Registration error in context:', apiError);
-    return { 
-      success: false, 
-      message: 'Registration failed due to an unexpected error',
-    };
-  } finally {
-    setLoading(false);
-  }
-};
+  };
 
   // Login user
   const login = async (credentials: LoginCredentials): Promise<AuthResult> => {

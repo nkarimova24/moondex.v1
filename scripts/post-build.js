@@ -6,7 +6,6 @@ const { execSync } = require('child_process');
 const srcDir = path.join(__dirname, '..', 'src');
 const outDir = path.join(__dirname, '..', 'out');
 
-// Known tokens from errors (we'll create static files for these)
 const knownTokens = [
   { id: '1', token: 'U8XTLkUbnirU7JE81nrcwMrj5sc0glAtOyJT3UGKavDkPSapSsgy2egIkzki' },
   { id: '1', token: 'gShW5VqZMbGawcjZQFO48TILeEDLMOm78AHwLs1OQf2BlXFSCcRDLzQYvnkQ' }
@@ -14,7 +13,6 @@ const knownTokens = [
 
 console.log('Running post-build script...');
 
-// Check for the static wrapper HTML file
 const staticWrapperSrc = path.join(srcDir, 'app', 'password-reset', 'static-wrapper.html');
 if (fs.existsSync(staticWrapperSrc)) {
   console.log(`Found static wrapper: ${staticWrapperSrc}`);
