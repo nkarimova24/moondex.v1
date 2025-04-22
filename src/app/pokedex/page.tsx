@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense } from 'react';
+import { Suspense, lazy } from 'react';
 import { useEffect, useState, useCallback} from "react";
 import { useSearchParams } from "next/navigation";
 import { 
@@ -10,13 +10,17 @@ import {
 } from "@/app/lib/api/pokemon";
 import { PokemonCard, PokemonSet } from "@/app/lib/api/types";
 import { sortCards } from "@/app/lib/sortUtils";
-import CardGrid from "@/app/components/CardGrid";
+import { CircularProgress, Box } from "@mui/material";
 import SetHeader from "@/app/components/SetHeader";
 import SetSearchbar from "@/app/components/SetSearchbar";
 import HeaderToggleButton from "@/app/components/HeaderToggleButton";
 import ToTopButton from "@/app/components/ToTopButton"; 
 import CardFilters from "@/app/components/CardFilters";
 import { useLanguage } from "@/context/LanguageContext";
+import { Typography } from "@mui/material";
+
+// Lazily load the heavy CardGrid component
+const CardGrid = lazy(() => import("@/app/components/CardGrid"));
 
 function PokeDexContent() {
   const { t } = useLanguage();
@@ -358,7 +362,15 @@ function PokeDexContent() {
                 {totalResults > displayedCards.length && selectedType === "All Types" && ` (${displayedCards.length} ${t("search.loaded")})`}
               </p>
               
-              <CardGrid cards={displayedCards} />
+              <Suspense fallback={
+                <Box 
+                  sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 4, minHeight: '300px' }}
+                >
+                  <CircularProgress sx={{ color: "#8A3F3F" }} />
+                </Box>
+              }>
+                <CardGrid cards={displayedCards} baseRoute="/pokedex" />
+              </Suspense>
               
               <div className="my-4 sm:my-8">
               {totalResults > displayedCards.length && selectedType === "All Types" && (

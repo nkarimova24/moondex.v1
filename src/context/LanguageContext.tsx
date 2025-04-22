@@ -133,6 +133,11 @@ const translations: Record<Language, Record<string, string>> = {
     "set.value": "Value",
     "set.showDetails": "Show set details",
     "set.hideDetails": "Hide",
+    "set.series": "Series",
+    "set.released": "Released",
+    "set.code": "Code",
+    "set.totalValue": "Total Value",
+    "set.valueMissing": "Value not available",
     
     // Sets Page
     "sets.title": "Pokémon TCG Sets",
@@ -375,6 +380,11 @@ const translations: Record<Language, Record<string, string>> = {
     "set.value": "Waarde",
     "set.showDetails": "Toon set details",
     "set.hideDetails": "Verbergen",
+    "set.series": "Serie",
+    "set.released": "Uitgebracht",
+    "set.code": "Code",
+    "set.totalValue": "Totale Waarde",
+    "set.valueMissing": "Waarde niet beschikbaar",
     
     // Sets Page
     "sets.title": "Pokémon TCG Sets",

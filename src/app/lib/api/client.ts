@@ -6,6 +6,76 @@ export const POKEMON_TCG_API_URL = 'https://api.pokemontcg.io/v2';
 export const LARAVEL_API_URL = process.env.NEXT_PUBLIC_LARAVEL_API_URL || 'http://localhost:8000/api';
 export const API_KEY = process.env.NEXT_PUBLIC_POKEMON_TCG_API_KEY;
 
+// Simple in-memory cache
+interface CacheEntry {
+  data: any;
+  timestamp: number;
+}
+
+const apiCache: Record<string, CacheEntry> = {};
+
+// Cache durations in milliseconds
+export const CACHE_DURATIONS = {
+  SHORT: 5 * 60 * 1000, // 5 minutes
+  MEDIUM: 30 * 60 * 1000, // 30 minutes
+  LONG: 60 * 60 * 1000, // 1 hour
+  VERY_LONG: 24 * 60 * 60 * 1000, // 24 hours
+};
+
+// Function to cache API responses
+export const cacheRequest = async (
+  url: string, 
+  fetchFunction: () => Promise<any>, 
+  duration: number = CACHE_DURATIONS.MEDIUM,
+  forceRefresh: boolean = false
+): Promise<any> => {
+  const cacheKey = url;
+  const now = Date.now();
+  
+  // If we have a cached response that hasn't expired and we're not forcing a refresh
+  if (
+    !forceRefresh && 
+    apiCache[cacheKey] && 
+    now - apiCache[cacheKey].timestamp < duration
+  ) {
+    console.log(`Using cached response for: ${url}`);
+    return apiCache[cacheKey].data;
+  }
+  
+  // Otherwise, fetch fresh data
+  try {
+    const result = await fetchFunction();
+    
+    // Cache the new result
+    apiCache[cacheKey] = {
+      data: result,
+      timestamp: now
+    };
+    
+    return result;
+  } catch (error) {
+    // If we have a cached response and there's an error fetching, use the cached data
+    if (apiCache[cacheKey]) {
+      console.warn(`Error fetching fresh data for ${url}, using stale cache`);
+      return apiCache[cacheKey].data;
+    }
+    throw error;
+  }
+};
+
+// Function to clear the entire cache or specific keys
+export const clearCache = (keys?: string[]) => {
+  if (keys && keys.length > 0) {
+    keys.forEach(key => {
+      delete apiCache[key];
+    });
+  } else {
+    Object.keys(apiCache).forEach(key => {
+      delete apiCache[key];
+    });
+  }
+};
+
 // Laravel Auth API Client
 export const authApiClient = axios.create({
   baseURL: LARAVEL_API_URL,

@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useState, useEffect, useContext, ReactNode } from 'react';
+import { createContext, useState, useEffect, useContext, ReactNode, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import Cookies from 'js-cookie';
 import * as api from '@/app/lib/api/';
@@ -340,68 +340,44 @@ const register = async (userData: RegisterData): Promise<AuthResult> => {
    * Upload a profile picture
    */
   const uploadAvatar = async (file: File): Promise<AuthResult> => {
+    setLoading(true);
     try {
-      console.log('Uploading avatar in context', user?.id);
-      setLoading(true);
+      const result = await api.uploadProfilePicture(file, user?.id);
       
-      if (!user) {
-        return { 
-          success: false, 
-          message: 'No authenticated user found' 
-        };
-      }
-      
-      const result = await api.uploadProfilePicture(file, user.id);
-      
-      if (result.success && result.user) {
-        // Log raw response data to check field names
-        console.log('Raw user data from avatar update:', result.user);
-        console.log('Field check - avatar:', result.user.avatar);
-        console.log('Field check - profile_picture:', result.user.profile_picture);
-        
-        // Get the avatar URL from the result, ensuring we have a non-empty string
-        const rawAvatarUrl = result.user.avatar || '';
-        
-        // Correct the URL if it's a Laravel storage URL
-        const avatarUrl = correctLaravelStorageUrl(rawAvatarUrl) || '';
-        
-        console.log('Avatar update response successful:', {
-          oldAvatar: user.avatar,
-          rawNewAvatar: rawAvatarUrl,
-          correctedNewAvatar: avatarUrl
-        });
-        
-        if (!avatarUrl) {
-          console.warn('No avatar URL found in API response - will attempt forced refresh');
-          // If no avatar URL in the response, refresh user data instead
-          await refreshUser();
-          return { success: true };
-        }
-        
-        // Create a completely new user object to ensure React detects the change
+      if (result.success) {
+        // Create a new user object that preserves fields that might be missing in the response
         const mergedUser: User = {
-          ...user,        // Keep all existing properties
-          avatar: avatarUrl // Replace only the avatar property
+          ...user,                            // Start with existing user data
+          ...result.user,                     // Update with new data in the response
+          name: result.user?.name || user?.name || '',  // Preserve name if missing, default to empty string
+          email: result.user?.email || user?.email || '', // Preserve email if missing, default to empty string
+          id: result.user?.id || user?.id || 0,    // Preserve ID if missing, default to 0
+          // Use avatar from response, fallback to response profile_picture, then existing values
+          avatar: result.user?.avatar || result.user?.profile_picture || 
+                 user?.avatar || user?.profile_picture
         };
         
-        // Log the before and after state
-        console.log('About to update user state:', {
-          before: JSON.stringify(user),
-          after: JSON.stringify(mergedUser)
+        // Log the before/after state to help with debugging
+        console.log('Avatar update - before:', {
+          avatar: user?.avatar,
+          profile_picture: user?.profile_picture
+        });
+        console.log('Avatar update - after:', {
+          avatar: mergedUser.avatar,
+          profile_picture: mergedUser.profile_picture
         });
         
-        // Set state with a new object to ensure React detects the change
-        setUser({...mergedUser});
+        // Update state with the merged user data
+        setUser(mergedUser);
         
-        // As a last resort, offer a hard reload option after a delay
-        setTimeout(() => {
-          console.log('Consider forcing a hard page reload to refresh avatar');
-          // Uncomment the next line to force a hard page reload
-          // window.location.reload();
-          
-          // Instead, schedule a normal refresh
-          refreshUser();
-        }, 1000);
+        // Refresh the page after a short delay to ensure the new avatar is shown
+        // setTimeout(() => {
+        //   console.log('Reloading page to refresh avatar display');
+        //   window.location.reload();
+        // }, 1000);
+        
+        // Instead, schedule a normal refresh
+        refreshUser();
         
         return { 
           success: true, 
@@ -423,167 +399,188 @@ const register = async (userData: RegisterData): Promise<AuthResult> => {
     }
   };
 
-  const contextValue: AuthContextType = {
+  // Define the changeEmail function
+  const changeEmail = async (newEmail: string): Promise<AuthResult> => {
+    try {
+      setLoading(true);
+      if (!user) {
+        return { 
+          success: false, 
+          message: 'No authenticated user found' 
+        };
+      }
+      
+      const result = await api.changeEmail(newEmail, user.id);
+      
+      if (result.success && result.user) {
+        console.log('Email change request submitted:', result.user);
+        // Create a completely new user object to ensure React detects the change
+        setUser({...result.user});
+      } else if (result.success) {
+        // If we didn't get a user object back but the operation was successful,
+        // create a new user object with the pending email to ensure UI updates
+        if (user) {
+          const updatedUser = {
+            ...user,
+            pending_email: newEmail
+          };
+          console.log('Updating user with pending email:', updatedUser);
+          setUser(updatedUser);
+        }
+        // Also refresh user data from the server
+        await refreshUser();
+      }
+      
+      return result;
+    } catch (error) {
+      console.error('Error changing email:', error);
+      return { 
+        success: false, 
+        message: 'Failed to change email' 
+      };
+    } finally {
+      setLoading(false);
+    }
+  };
+  
+  // Define the changePassword function
+  const changePassword = async (currentPassword: string, newPassword: string): Promise<AuthResult> => {
+    if (!user) {
+      return { 
+        success: false, 
+        message: 'No authenticated user' 
+      };
+    }
+
+    setLoading(true);
+    
+    try {
+      // Store current avatar URL before making the API call
+      const currentAvatarUrl = getUserAvatarUrl(user);
+      
+      // Call the API function from auth.ts
+      const result = await api.changePassword(currentPassword, newPassword, user.id);
+      
+      if (result.success) {
+        // If password change succeeds and returns user data, merge it with existing user data
+        if (result.user) {
+          // Create a merged user object that preserves existing values if they're missing in the response
+          const mergedUser: User = {
+            ...user,                                        // Start with all existing user data
+            ...result.user,                                // Override with new data from response
+            // Ensure we keep these properties even if not returned in response
+            name: result.user.name || user.name,
+            email: result.user.email || user.email,
+            // Preserve avatar - crucial for maintaining profile picture
+            avatar: result.user.avatar || user.avatar,
+            profile_picture: result.user.profile_picture || user.profile_picture,
+            // Other fields to preserve
+            pending_email: result.user.pending_email || user.pending_email
+          };
+          
+          console.log('Preserving user data after password change:', {
+            before: {
+              id: user.id,
+              name: user.name,
+              email: user.email,
+              avatar: user.avatar,
+              profile_picture: user.profile_picture
+            },
+            after: {
+              id: mergedUser.id,
+              name: mergedUser.name,
+              email: mergedUser.email,
+              avatar: mergedUser.avatar,
+              profile_picture: mergedUser.profile_picture
+            }
+          });
+          
+          // Update with merged data to maintain all user information
+          setUser(mergedUser);
+          
+          // Optionally update local storage if you're using it
+          if (typeof window !== 'undefined') {
+            localStorage.setItem('user', JSON.stringify(mergedUser));
+          }
+        } else {
+          // If no user data returned but operation was successful,
+          // just preserve the current user state
+          console.log('No user data in password change response, preserving current state:', user);
+        }
+        
+        // Refresh user data from server, but don't await it
+        // This runs in background and will update state when complete
+        refreshUser().catch(err => {
+          console.error('Error refreshing user after password change:', err);
+        });
+      }
+      
+      return result;
+    } catch (error) {
+      console.error('Error changing password:', error);
+      return { 
+        success: false, 
+        message: 'Failed to change password' 
+      };
+    } finally {
+      setLoading(false);
+    }
+  };
+  
+  // Define the updateTemporaryPassword function
+  const updateTemporaryPassword = async (newPassword: string, confirmPassword: string): Promise<AuthResult> => {
+    setLoading(true);
+    try {
+      const result = await api.updateTemporaryPassword(newPassword, confirmPassword);
+      
+      if (result.success) {
+        // Update user to remove the password_change_required flag
+        if (user) {
+          setUser({
+            ...user,
+            password_change_required: false
+          });
+        }
+      }
+      
+      return result;
+    } catch (error) {
+      console.error('Error updating temporary password:', error);
+      return {
+        success: false,
+        message: 'Failed to update temporary password due to an unexpected error'
+      };
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const contextValue = useMemo(() => ({
     user, 
     loading, 
     isAuthenticated: !!user,
-    register, 
-    login, 
+    register,
+    login,
     logout,
     refreshUser,
     updateProfile,
     uploadAvatar,
-    changeEmail: async (newEmail: string) => {
-      try {
-        setLoading(true);
-        if (!user) {
-          return { 
-            success: false, 
-            message: 'No authenticated user found' 
-          };
-        }
-        
-        const result = await api.changeEmail(newEmail, user.id);
-        
-        if (result.success && result.user) {
-          console.log('Email change request submitted:', result.user);
-          // Create a completely new user object to ensure React detects the change
-          setUser({...result.user});
-        } else if (result.success) {
-          // If we didn't get a user object back but the operation was successful,
-          // create a new user object with the pending email to ensure UI updates
-          if (user) {
-            const updatedUser = {
-              ...user,
-              pending_email: newEmail
-            };
-            console.log('Updating user with pending email:', updatedUser);
-            setUser(updatedUser);
-          }
-          // Also refresh user data from the server
-          await refreshUser();
-        }
-        
-        return result;
-      } catch (error) {
-        console.error('Error changing email:', error);
-        return { 
-          success: false, 
-          message: 'Failed to change email' 
-        };
-      } finally {
-        setLoading(false);
-      }
-    },
-    changePassword: async (currentPassword: string, newPassword: string): Promise<AuthResult> => {
-      if (!user) {
-        return { 
-          success: false, 
-          message: 'No authenticated user' 
-        };
-      }
-
-      setLoading(true);
-      
-      try {
-        // Store current avatar URL before making the API call
-        const currentAvatarUrl = getUserAvatarUrl(user);
-        
-        // Call the API function from auth.ts
-        const result = await api.changePassword(currentPassword, newPassword, user.id);
-        
-        if (result.success) {
-          // If password change succeeds and returns user data, merge it with existing user data
-          if (result.user) {
-            // Create a merged user object that preserves existing values if they're missing in the response
-            const mergedUser: User = {
-              ...user,                                        // Start with all existing user data
-              ...result.user,                                // Override with new data from response
-              // Ensure we keep these properties even if not returned in response
-              name: result.user.name || user.name,
-              email: result.user.email || user.email,
-              // Preserve avatar - crucial for maintaining profile picture
-              avatar: result.user.avatar || user.avatar,
-              profile_picture: result.user.profile_picture || user.profile_picture,
-              // Other fields to preserve
-              pending_email: result.user.pending_email || user.pending_email
-            };
-            
-            console.log('Preserving user data after password change:', {
-              before: {
-                id: user.id,
-                name: user.name,
-                email: user.email,
-                avatar: user.avatar,
-                profile_picture: user.profile_picture
-              },
-              after: {
-                id: mergedUser.id,
-                name: mergedUser.name,
-                email: mergedUser.email,
-                avatar: mergedUser.avatar,
-                profile_picture: mergedUser.profile_picture
-              }
-            });
-            
-            // Update with merged data to maintain all user information
-            setUser(mergedUser);
-            
-            // Optionally update local storage if you're using it
-            if (typeof window !== 'undefined') {
-              localStorage.setItem('user', JSON.stringify(mergedUser));
-            }
-          } else {
-            // If no user data returned but operation was successful,
-            // just preserve the current user state
-            console.log('No user data in password change response, preserving current state:', user);
-          }
-          
-          // Refresh user data from server, but don't await it
-          // This runs in background and will update state when complete
-          refreshUser().catch(err => {
-            console.error('Error refreshing user after password change:', err);
-          });
-        }
-        
-        return result;
-      } catch (error) {
-        console.error('Error changing password:', error);
-        return { 
-          success: false, 
-          message: 'Failed to change password' 
-        };
-      } finally {
-        setLoading(false);
-      }
-    },
-    updateTemporaryPassword: async (newPassword: string, confirmPassword: string): Promise<AuthResult> => {
-      setLoading(true);
-      try {
-        const result = await api.updateTemporaryPassword(newPassword, confirmPassword);
-        
-        if (result.success) {
-          // Update user to remove the password_change_required flag
-          if (user) {
-            setUser({
-              ...user,
-              password_change_required: false
-            });
-          }
-        }
-        
-        return result;
-      } catch (error) {
-        console.error('Error updating temporary password:', error);
-        return {
-          success: false,
-          message: 'Failed to update temporary password due to an unexpected error'
-        };
-      } finally {
-        setLoading(false);
-      }
-    }
-  };
+    changeEmail,
+    changePassword,
+    updateTemporaryPassword
+  }), [
+    user, 
+    loading, 
+    register,
+    login,
+    logout,
+    refreshUser,
+    updateProfile,
+    uploadAvatar,
+    changeEmail,
+    changePassword,
+    updateTemporaryPassword
+  ]);
 
   return (
     <AuthContext.Provider value={contextValue}>

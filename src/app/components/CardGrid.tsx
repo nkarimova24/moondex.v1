@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, memo } from "react";
 import { PokemonCard } from "@/app/lib/api/types";
 import CardDetails from "./CardDetails";
 import FoilContainer from "./FoilContainer";
@@ -26,7 +26,7 @@ interface CardGridProps {
   collectionMode?: boolean;
 }
 
-export default function CardGrid({ cards, baseRoute, collectionMode }: CardGridProps) {
+function CardGrid({ cards, baseRoute, collectionMode }: CardGridProps) {
   const [selectedCard, setSelectedCard] = useState<CollectionPokemonCard | null>(null);
   const [loadedImages, setLoadedImages] = useState<Record<string, boolean>>({});
   const [isMobile, setIsMobile] = useState(false);
@@ -192,3 +192,32 @@ export default function CardGrid({ cards, baseRoute, collectionMode }: CardGridP
     </>
   );
 }
+
+// Custom comparison function for the memo wrapper
+function arePropsEqual(prevProps: CardGridProps, nextProps: CardGridProps) {
+  // Quick length check first
+  if (prevProps.cards.length !== nextProps.cards.length) return false;
+  
+  // Check if baseRoute or collectionMode have changed
+  if (prevProps.baseRoute !== nextProps.baseRoute) return false;
+  if (prevProps.collectionMode !== nextProps.collectionMode) return false;
+  
+  // Deep check cards array
+  // Note: This is a simplified comparison, might need adjusting based on your needs
+  for (let i = 0; i < prevProps.cards.length; i++) {
+    const prevCard = prevProps.cards[i];
+    const nextCard = nextProps.cards[i];
+    
+    if (prevCard.id !== nextCard.id) return false;
+    
+    // Check collection properties if they exist
+    if (prevCard.collection?.id !== nextCard.collection?.id) return false;
+    if (prevCard.collection?.quantity !== nextCard.collection?.quantity) return false;
+    if (prevCard.collection?.is_foil !== nextCard.collection?.is_foil) return false;
+    if (prevCard.collection?.is_reverse_holo !== nextCard.collection?.is_reverse_holo) return false;
+  }
+  
+  return true;
+}
+
+export default memo(CardGrid, arePropsEqual);
