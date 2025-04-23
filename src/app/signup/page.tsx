@@ -58,11 +58,11 @@ export default function SignUp() {
         setGeneralError("");
         
         // Immediate redirect attempt
-        router.push("/profile");
+        router.push("/");
         
         // Also set a fallback redirect timer in case the router.push doesn't trigger immediately
         setTimeout(() => {
-          window.location.href = "/profile";
+          window.location.href = "/";
         }, 1500); // Redirect after 1.5 seconds if router.push doesn't work immediately
       } else {
         if (result.errors) {
@@ -70,9 +70,11 @@ export default function SignUp() {
         }
         if (result.message) {
           setGeneralError(result.message);
-        }
-        
-        if (!result.errors && !result.message) {
+        } else if (result.errors && Object.keys(result.errors).length > 0) {
+          // If we have field errors but no general message, use the first error message
+          const firstError = Object.values(result.errors)[0];
+          setGeneralError(firstError);
+        } else {
           setGeneralError("Registration failed. Please try again.");
         }
       }

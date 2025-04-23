@@ -111,8 +111,16 @@ authApiClient.interceptors.response.use(
       headers: error.config?.headers,
       status: error.response?.status,
       statusText: error.response?.statusText,
-      responseData: error.response?.data
+      responseData: error.response?.data,
+      validationErrors: error.response?.data?.errors,
+      errorMessage: error.response?.data?.message
     });
+
+    // If we have validation errors, log them specifically
+    if (error.response?.status === 422 && error.response?.data?.errors) {
+      console.error('Validation errors:', error.response.data.errors);
+    }
+
     return Promise.reject(error);
   }
 );
