@@ -525,17 +525,19 @@ export default function CardDetails({ card, allCards, onClose, onNavigate, baseR
                 background: `radial-gradient(circle, ${primaryTypeColor}30 0%, #1A1A1A 100%)`,
               }}
             >
-              <div className="relative flex items-center justify-center">
+              <div className="relative flex items-center justify-center w-full h-full">
                 <Image
                   src={currentCard.images.large || currentCard.images.small}
                   alt={currentCard.name}
                   width={500}
                   height={700}
-                  className="max-h-[30vh] sm:max-h-[45vh] md:max-h-[65vh] object-contain drop-shadow-xl transform transition-transform duration-300 hover:scale-105"
+                  className="max-h-[30vh] sm:max-h-[45vh] md:max-h-[50vh] lg:max-h-[55vh] object-contain drop-shadow-2xl transform transition-transform duration-300 hover:scale-105"
                   priority
                   style={{ 
                     width: 'auto', 
-                    maxWidth: isMobile ? '100%' : '500px' 
+                    maxWidth: isMobile ? '100%' : '400px',
+                    borderRadius: '8px',
+                    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.3)'
                   }}
                 />
               </div>
@@ -814,17 +816,19 @@ export default function CardDetails({ card, allCards, onClose, onNavigate, baseR
                 background: `radial-gradient(circle, ${primaryTypeColor}30 0%, #1A1A1A 100%)`,
               }}
             >
-              <div className="relative flex items-center justify-center">
+              <div className="relative flex items-center justify-center w-full h-full">
                 <Image
                   src={currentCard.images.large || currentCard.images.small}
                   alt={currentCard.name}
                   width={500}
                   height={700}
-                  className="max-h-[30vh] sm:max-h-[45vh] md:max-h-[65vh] object-contain drop-shadow-xl transition-transform duration-300 hover:scale-105 opacity-70"
+                  className="max-h-[30vh] sm:max-h-[45vh] md:max-h-[50vh] lg:max-h-[55vh] object-contain drop-shadow-2xl transform transition-transform duration-300 hover:scale-105"
                   priority
                   style={{ 
                     width: 'auto', 
-                    maxWidth: isMobile ? '100%' : '500px' 
+                    maxWidth: isMobile ? '100%' : '400px',
+                    borderRadius: '8px',
+                    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.3)'
                   }}
                 />
               </div>

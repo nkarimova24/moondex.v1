@@ -95,7 +95,7 @@ export default function SignUp() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
+    <div className="min-h-screen flex items-center justify-center py-12">
       <Container component="main" maxWidth="xs">
         <Box
           sx={{
@@ -107,6 +107,7 @@ export default function SignUp() {
             borderRadius: 2,
             boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
             backdropFilter: "blur(10px)",
+            mt: -8,
           }}
         >
           <Typography 

@@ -249,6 +249,7 @@ const translations: Record<Language, Record<string, string>> = {
     "misc.cardsAreLoading": "Cards are loading",
     "misc.searchingForCards": "Searching for cards",
     "misc.noImage": "No image",
+    "misc.loadMore": "Load More",
     
     // Language toggle
     "language.switch": "Switch to Dutch",
@@ -496,6 +497,7 @@ const translations: Record<Language, Record<string, string>> = {
     "misc.cardsAreLoading": "Kaarten worden geladen",
     "misc.searchingForCards": "Zoeken naar kaarten",
     "misc.noImage": "Geen afbeelding",
+    "misc.loadMore": "Meer Laden",
     
     // Language toggle
     "language.switch": "Schakel naar Engels",

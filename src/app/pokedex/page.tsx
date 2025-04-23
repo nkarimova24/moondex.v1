@@ -44,6 +44,8 @@ function PokeDexContent() {
   const [pokemonSearchTerm, setPokemonSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [totalResults, setTotalResults] = useState(0);
+  const [totalPages, setTotalPages] = useState(1);
+  const [pageSize] = useState(24);
   const [hasMore, setHasMore] = useState(false);
 
   useEffect(() => {
@@ -110,7 +112,7 @@ function PokeDexContent() {
     
     try {
       if (isPokemonSearch) {
-        const results = await searchCardsByType(pokemonSearchTerm, "all", page, 24);
+        const results = await searchCardsByType(pokemonSearchTerm, "all", page, pageSize);
         const calculatedTotalPages = Math.ceil(results.totalCount / results.pageSize);
         
         if (append) {
@@ -121,8 +123,9 @@ function PokeDexContent() {
         
         setTotalResults(results.totalCount);
         setHasMore(page < calculatedTotalPages);
+        setTotalPages(calculatedTotalPages);
       } else if (isGlobalSearch) {
-        const results = await searchCardsByType(globalSearchTerm, "all", page, 24);
+        const results = await searchCardsByType(globalSearchTerm, "all", page, pageSize);
         const calculatedTotalPages = Math.ceil(results.totalCount / results.pageSize);
         
         if (append) {
@@ -133,11 +136,20 @@ function PokeDexContent() {
         
         setTotalResults(results.totalCount);
         setHasMore(page < calculatedTotalPages);
+        setTotalPages(calculatedTotalPages);
       } else {
-        const fetchedCards = await fetchCardsBySet(setId!, searchTerm);
-        setCards(fetchedCards);
-        setTotalResults(fetchedCards.length);
-        setHasMore(false);
+        const results = await fetchCardsBySet(setId!, searchTerm, "all", page, pageSize);
+        const calculatedTotalPages = Math.ceil(results.totalCount / results.pageSize);
+        
+        if (append) {
+          setCards(prev => [...prev, ...results.cards]);
+        } else {
+          setCards(results.cards);
+        }
+        
+        setTotalResults(results.totalCount);
+        setHasMore(page < calculatedTotalPages);
+        setTotalPages(calculatedTotalPages);
       }
     } catch (error) {
       console.error("Error loading cards:", error);
@@ -151,7 +163,8 @@ function PokeDexContent() {
     isGlobalSearch, 
     isPokemonSearch, 
     globalSearchTerm, 
-    pokemonSearchTerm
+    pokemonSearchTerm,
+    pageSize
   ]);
   
   useEffect(() => {
@@ -208,13 +221,13 @@ function PokeDexContent() {
     setCards([]);
   }, [isGlobalSearch, isPokemonSearch]);
 
-  const handleLoadMore = useCallback(() => {
-    if (loadingMore || !hasMore) return;
-    
-    const nextPage = currentPage + 1;
-    setCurrentPage(nextPage);
-    loadCards(nextPage, true);
-  }, [currentPage, loadingMore, hasMore, loadCards]);
+  const handleLoadMore = () => {
+    if (hasMore && !loadingMore) {
+      const nextPage = currentPage + 1;
+      setCurrentPage(nextPage);
+      loadCards(nextPage, true);
+    }
+  };
 
   const handleSortChange = (value: string) => {
     setSortOption(value);
@@ -372,28 +385,24 @@ function PokeDexContent() {
                 <CardGrid cards={displayedCards} baseRoute="/pokedex" />
               </Suspense>
               
-              <div className="my-4 sm:my-8">
-              {totalResults > displayedCards.length && selectedType === "All Types" && (
-                <button
-                  onClick={handleLoadMore}
-                  className="w-full py-2 sm:py-3 text-white bg-[#8A3F3F] rounded-md hover:bg-[#6E2F2F] disabled:bg-gray-600 disabled:text-gray-400 text-sm sm:text-base"
-                  disabled={loadingMore}
-                >
-                  {loadingMore 
-                    ? t("search.loadingMore")
-                    : `(${displayedCards.length} ${t("search.of")} ${totalResults})`}
-                </button>
-              )}
-              
-              {(!loadingMore && displayedCards.length >= totalResults && totalResults > 0 && selectedType === "All Types") || 
-               (selectedType !== "All Types" && displayedCards.length > 0) ? (
-                <div className="text-center text-gray-500 mt-4 text-sm sm:text-base">
-                  {selectedType !== "All Types" 
-                    ? `${t("search.showingAll")} ${selectedType} ${t("search.typeCards")}` 
-                    : t("search.allCardsLoaded")}
+              {hasMore && (
+                <div className="flex justify-center mt-8">
+                  <button
+                    onClick={handleLoadMore}
+                    disabled={loadingMore}
+                    className="px-6 py-2 bg-[#8A3F3F] text-white rounded-md hover:bg-[#6E2F2F] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {loadingMore ? (
+                      <div className="flex items-center gap-2">
+                        <CircularProgress size={20} sx={{ color: "#fff" }} />
+                        <span>{t("misc.loading")}</span>
+                      </div>
+                    ) : (
+                      t("misc.loadMore")
+                    )}
+                  </button>
                 </div>
-              ) : null}
-            </div>
+              )}
             </div>
           )}
         </>

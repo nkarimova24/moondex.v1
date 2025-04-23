@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback, memo } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { PokemonCard } from "@/app/lib/api/types";
 import CardDetails from "./CardDetails";
 import FoilContainer from "./FoilContainer";
@@ -26,47 +26,47 @@ interface CardGridProps {
   collectionMode?: boolean;
 }
 
-function CardGrid({ cards, baseRoute, collectionMode }: CardGridProps) {
+export default function CardGrid({ cards, baseRoute, collectionMode }: CardGridProps) {
   const [selectedCard, setSelectedCard] = useState<CollectionPokemonCard | null>(null);
   const [loadedImages, setLoadedImages] = useState<Record<string, boolean>>({});
   const [isMobile, setIsMobile] = useState(false);
   const { removeCardFromCollection } = useCollection();
-  
+
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768); 
     };
-    
+
     checkMobile();
-    
+
     window.addEventListener('resize', checkMobile);
-    
+
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
-  
+
   const handleCardClick = useCallback((card: CollectionPokemonCard) => {
     setSelectedCard(card);
   }, []);
-  
+
   const handleCloseDetails = useCallback(() => {
     setSelectedCard(null);
   }, []);
-  
+
   const handleNavigate = useCallback((card: CollectionPokemonCard) => {
     setSelectedCard(card);
   }, []);
-  
+
   const handleImageLoad = useCallback((cardId: string) => {
     setLoadedImages(prev => ({
       ...prev,
       [cardId]: true
     }));
   }, []);
-  
+
   const handleRemoveFromCollection = useCallback(async (card: CollectionPokemonCard, e: React.MouseEvent) => {
     e.stopPropagation();
     if (!card.collection) return;
-    
+
     if (window.confirm('Are you sure you want to remove this card from your collection?')) {
       try {
         await removeCardFromCollection(
@@ -78,13 +78,13 @@ function CardGrid({ cards, baseRoute, collectionMode }: CardGridProps) {
       }
     }
   }, [removeCardFromCollection]);
-  
+
   if (cards.length === 0) {
     return null;
   }
-  
+
   const gridColsClass = "grid-cols-2 md:grid-cols-4";
-  
+
   return (
     <>
       <div className={`grid ${gridColsClass} gap-x-3 sm:gap-x-4 gap-y-8 sm:gap-y-10 w-full`}>
@@ -110,13 +110,13 @@ function CardGrid({ cards, baseRoute, collectionMode }: CardGridProps) {
                 onLoad={() => handleImageLoad(card.id)}
               />
             </div>
-            
+
             <div className="p-1.5">
               <div className="flex justify-between items-start">
                 <h3 className="text-white font-medium text-xs truncate w-4/5">{card.name}</h3>
                 <span className="text-xs text-gray-400">#{card.number}</span>
               </div>
-              
+
               <div className="mt-2 flex flex-wrap items-center justify-between">
                 {/* Price indicator */}
                 {card.cardmarket?.prices && (
@@ -131,7 +131,7 @@ function CardGrid({ cards, baseRoute, collectionMode }: CardGridProps) {
                       : card.cardmarket.prices.trendPrice?.toFixed(2) || "N/A"}
                   </span>
                 )}
-                
+
                 {/* Card Foil indicator */}
                 {card.tcgplayer?.prices ? (
                   (() => {
@@ -139,7 +139,7 @@ function CardGrid({ cards, baseRoute, collectionMode }: CardGridProps) {
                     if (card.tcgplayer.prices.normal) foilTypes.push("normal");
                     if (card.tcgplayer.prices.holofoil) foilTypes.push("holo");
                     if (card.tcgplayer.prices.reverseHolofoil) foilTypes.push("reverse holo");
-                    
+
                     return foilTypes.length > 0 ? (
                       <FoilContainer 
                         foilTypes={foilTypes} 
@@ -163,7 +163,7 @@ function CardGrid({ cards, baseRoute, collectionMode }: CardGridProps) {
                     />
                   )
                 )}
-                
+
                 {card.collection && !card.tcgplayer?.prices && (
                   <div className="text-xs px-1.5 py-0.5 border rounded-sm">
                     {card.collection.is_reverse_holo 
@@ -178,7 +178,7 @@ function CardGrid({ cards, baseRoute, collectionMode }: CardGridProps) {
           </div>
         ))}
       </div>
-      
+
       {selectedCard && (
         <CardDetails 
           card={selectedCard} 
@@ -192,32 +192,3 @@ function CardGrid({ cards, baseRoute, collectionMode }: CardGridProps) {
     </>
   );
 }
-
-// Custom comparison function for the memo wrapper
-function arePropsEqual(prevProps: CardGridProps, nextProps: CardGridProps) {
-  // Quick length check first
-  if (prevProps.cards.length !== nextProps.cards.length) return false;
-  
-  // Check if baseRoute or collectionMode have changed
-  if (prevProps.baseRoute !== nextProps.baseRoute) return false;
-  if (prevProps.collectionMode !== nextProps.collectionMode) return false;
-  
-  // Deep check cards array
-  // Note: This is a simplified comparison, might need adjusting based on your needs
-  for (let i = 0; i < prevProps.cards.length; i++) {
-    const prevCard = prevProps.cards[i];
-    const nextCard = nextProps.cards[i];
-    
-    if (prevCard.id !== nextCard.id) return false;
-    
-    // Check collection properties if they exist
-    if (prevCard.collection?.id !== nextCard.collection?.id) return false;
-    if (prevCard.collection?.quantity !== nextCard.collection?.quantity) return false;
-    if (prevCard.collection?.is_foil !== nextCard.collection?.is_foil) return false;
-    if (prevCard.collection?.is_reverse_holo !== nextCard.collection?.is_reverse_holo) return false;
-  }
-  
-  return true;
-}
-
-export default memo(CardGrid, arePropsEqual);

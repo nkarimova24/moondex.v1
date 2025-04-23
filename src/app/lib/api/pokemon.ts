@@ -42,8 +42,16 @@ export const fetchPokemonSets = async (): Promise<{ [key: string]: PokemonSet[] 
 export const fetchCardsBySet = async (
   setId: string, 
   searchTerm?: string, 
-  cardType: SearchType = "all"
-): Promise<PokemonCard[]> => {
+  cardType: SearchType = "all",
+  page = 1,
+  pageSize = 24
+): Promise<{
+  cards: PokemonCard[];
+  totalCount: number;
+  page: number;
+  pageSize: number;
+  totalPages: number;
+}> => {
   let query = `set.id:${setId}`;
   
   if (cardType !== "all") {
@@ -66,7 +74,7 @@ export const fetchCardsBySet = async (
     }
   }
   
-  const url = `${POKEMON_TCG_API_URL}/cards?q=${encodeURIComponent(query)}&orderBy=number`;
+  const url = `${POKEMON_TCG_API_URL}/cards?q=${encodeURIComponent(query)}&orderBy=number&page=${page}&pageSize=${pageSize}`;
   
   // If there's a search term, don't cache as results are more specific
   const duration = searchTerm ? 0 : CACHE_DURATIONS.LONG;
@@ -77,10 +85,22 @@ export const fetchCardsBySet = async (
       try {
         const response = await fetchWithAuth(url);
         const data = await response.json();
-        return data.data;
+        return {
+          cards: data.data || [],
+          totalCount: data.totalCount || 0,
+          page: data.page || page,
+          pageSize: data.pageSize || pageSize,
+          totalPages: data.totalPages || 0
+        };
       } catch (error) {
         console.error("Error fetching cards:", error);
-        return [];
+        return {
+          cards: [],
+          totalCount: 0,
+          page,
+          pageSize,
+          totalPages: 0
+        };
       }
     },
     duration
