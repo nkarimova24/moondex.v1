@@ -21,7 +21,8 @@ export default function SetHeader({ setInfo }: SetHeaderProps) {
     const calculateSetValue = async () => {
       setLoading(true);
       try {
-        const cards = await fetchCardsBySet(setInfo.id);
+        const response = await fetchCardsBySet(setInfo.id);
+        const cards = response.cards;
 
         let sum = 0;
         let validPrices = 0;

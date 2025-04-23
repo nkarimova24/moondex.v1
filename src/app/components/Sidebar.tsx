@@ -112,7 +112,12 @@ export default function Sidebar({ isOpen: propIsOpen, onToggle }: SidebarProps) 
   };
 
   const handleSeriesToggle = (series: string) => {
-    setExpandedSeries((prev) => (prev === series ? null : series));
+    setExpandedSeries((prev) => {
+      if (prev === series) {
+        return null;
+      }
+      return series;
+    });
   };
 
   const handleLogout = async () => {
@@ -463,10 +468,10 @@ export default function Sidebar({ isOpen: propIsOpen, onToggle }: SidebarProps) 
                               sx={{ 
                                 pl: 2, 
                                 py: 1,
-                                transition: 'all 0.2s ease',
+                                transition: 'background-color 0.2s ease, padding-left 0.2s ease',
                                 position: 'relative',
                                 "&:hover": {
-                                  backgroundColor: "rgba(138, 63, 63, 0.1)",
+                                  backgroundColor: "rgba(138, 63, 63, 0.08)",
                                   pl: 5,
                                 },
                                 '&:after': {
@@ -476,18 +481,18 @@ export default function Sidebar({ isOpen: propIsOpen, onToggle }: SidebarProps) 
                                   top: '50%',
                                   transform: 'translateY(-50%)',
                                   width: 0,
-                                  height: '60%',
+                                  height: '70%',
                                   backgroundColor: '#8A3F3F',
                                   transition: 'width 0.2s ease',
-                                  opacity: 0.7,
+                                  opacity: 0.6,
                                 },
                                 '&:hover:after': {
-                                  width: '3px',
+                                  width: '2px',
                                 }
                               }}
                               onClick={isMobile ? handleDrawerToggle : undefined}
                             >
-                              <ListItemText 
+                              <ListItemText
                                 primary={
                                   <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                                     {set.images?.symbol && (
@@ -500,7 +505,8 @@ export default function Sidebar({ isOpen: propIsOpen, onToggle }: SidebarProps) 
                                           alignItems: 'center',
                                           justifyContent: 'center',
                                           overflow: 'hidden',
-                                          opacity: hoveredSet === set.id ? 1 : 0.7,
+                                          opacity: hoveredSet === set.id ? 1 : 0.6,
+                                          transition: 'opacity 0.2s ease',
                                         }}
                                       >
                                         <Image 
@@ -510,7 +516,7 @@ export default function Sidebar({ isOpen: propIsOpen, onToggle }: SidebarProps) 
                                           height={16}
                                           style={{ 
                                             maxWidth: '100%', 
-                                            maxHeight: '100%' 
+                                            maxHeight: '100%',
                                           }}
                                         />
                                       </Box>
@@ -519,7 +525,8 @@ export default function Sidebar({ isOpen: propIsOpen, onToggle }: SidebarProps) 
                                       variant="body2" 
                                       sx={{ 
                                         fontSize: '13px',
-                                        color: hoveredSet === set.id ? 'rgba(255,255,255,0.95)' : 'rgba(255,255,255,0.8)',
+                                        color: hoveredSet === set.id ? 'rgba(255,255,255,1)' : 'rgba(255,255,255,0.7)',
+                                        transition: 'color 0.2s ease',
                                       }}
                                     >
                                       {set.name}
