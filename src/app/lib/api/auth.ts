@@ -148,12 +148,12 @@ export const register = async (userData: RegisterData): Promise<AuthResult> => {
       } else {
         // If we have a 422 but no specific errors, check the request data to determine the issue
         const requestData = apiError.config?.data ? JSON.parse(apiError.config.data) : null;
-        if (requestData?.name) {
-          errorMessage = 'This username is already taken. Please choose a different username.';
-          errorDetails = { name: 'This username is already taken' };
-        } else if (requestData?.email) {
+        if (requestData?.email) {
           errorMessage = 'This email is already registered. Please use a different email address.';
           errorDetails = { email: 'This email is already registered' };
+        } else if (requestData?.name) {
+          errorMessage = 'This username is already taken. Please choose a different username.';
+          errorDetails = { name: 'This username is already taken' };
         } else {
           errorMessage = 'Please check your input and try again.';
           errorDetails = {
