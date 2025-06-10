@@ -89,33 +89,26 @@ export const sortByPriceDesc = (cards) => {
   });
 };
 
-// Official rarity order mapping based on provided hierarchy
+//official rarity order mapping based on provided hierarchy
 const RARITY_ORDER = {
-  // Common
   'Common': 10,
   
-  // Uncommon
   'Uncommon': 20,
   
-  // Rare
   'Rare': 30,
   
-  // Double Rare
   'Double Rare': 40,
   'Rare Holo': 40,
   'Rare Holographic': 40,
   'Holo Rare': 40,
   
-  // ACE SPEC Rare
   'ACE SPEC Rare': 50,
   'ACE SPEC': 50,
   
-  // Illustration Rare
   'Illustration Rare': 60,
   'Illustration': 60,
   'Alternate Art': 60,
   
-  // Ultra Rare
   'Ultra Rare': 70,
   'Rare Ultra': 70,
   'V': 70,
@@ -125,24 +118,20 @@ const RARITY_ORDER = {
   'ex': 70,
   'GX': 70,
   
-  // Shiny Rare
   'Shiny Rare': 80,
   'Shiny': 80,
   'Shining': 80,
   
-  // Shiny Ultra Rare
   'Shiny Ultra Rare': 90,
   'Shiny EX': 90,
   'Shiny GX': 90,
   'Shiny V': 90,
   
-  // Special Illustration Rare
   'Special Illustration Rare': 100,
   'Special Illustration': 100,
   'Special Art': 100,
   'SA': 100,
   
-  // Hyper Rare
   'Hyper Rare': 110,
   'Rainbow Rare': 110,
   'Rare Rainbow': 110,

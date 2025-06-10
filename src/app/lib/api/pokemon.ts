@@ -32,7 +32,7 @@ export const fetchPokemonSets = async (): Promise<{ [key: string]: PokemonSet[] 
         return {};
       }
     },
-    CACHE_DURATIONS.VERY_LONG // Sets don't change often, cache for 24 hours
+    CACHE_DURATIONS.VERY_LONG //cache for 24 hours as sets rarely change
   );
 };
 
@@ -76,7 +76,6 @@ export const fetchCardsBySet = async (
   
   const url = `${POKEMON_TCG_API_URL}/cards?q=${encodeURIComponent(query)}&orderBy=number&page=${page}&pageSize=${pageSize}`;
   
-  // If there's a search term, don't cache as results are more specific
   const duration = searchTerm ? 0 : CACHE_DURATIONS.LONG;
   
   return cacheRequest(
@@ -125,7 +124,7 @@ export const fetchSetDetails = async (setId: string): Promise<PokemonSet | null>
         return null;
       }
     },
-    CACHE_DURATIONS.VERY_LONG // Set details rarely change
+    CACHE_DURATIONS.VERY_LONG 
   );
 };
 
@@ -175,7 +174,7 @@ export const searchCardsByType = async (
   
   const url = `${POKEMON_TCG_API_URL}/cards?q=${encodeURIComponent(query)}&page=${page}&pageSize=${pageSize}&orderBy=set.releaseDate,number`;
   
-  // Search results are often unique, so cache briefly
+  //search results are often unique -> cache briefly
   return cacheRequest(
     url,
     async () => {
@@ -201,7 +200,7 @@ export const searchCardsByType = async (
         };
       }
     },
-    CACHE_DURATIONS.SHORT // Search results should be fresher
+    CACHE_DURATIONS.SHORT 
   );
 };
 

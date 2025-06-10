@@ -2,7 +2,6 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { jwtDecode } from 'jwt-decode';
 
-// Define interface for decoded JWT payload
 interface JwtPayload {
   id?: number;
   name?: string;
@@ -11,17 +10,14 @@ interface JwtPayload {
   exp?: number;
 }
 
-// Protected routes that require authentication
 const protectedRoutes = ['/profile', '/dashboard', '/settings'];
 
-// Public routes that should be accessible without auth
 const publicRoutes = ['/signin', '/signup', '/forgot-password', '/change-temporary-password'];
 
 export function middleware(request: NextRequest) {
   const token = request.cookies.get('auth_token')?.value;
   const currentPath = request.nextUrl.pathname;
   
-  // Skip middleware for API routes, static files, etc.
   if (
     currentPath.startsWith('/_next') || 
     currentPath.startsWith('/api') ||
@@ -57,7 +53,6 @@ export function middleware(request: NextRequest) {
     }
   } catch (error) {
     console.error('Error decoding token:', error);
-    // Token is invalid, proceed with redirection logic
   }
   
   // If user has password_change_required flag set to true, redirect to change password page
@@ -82,10 +77,8 @@ export function middleware(request: NextRequest) {
   return NextResponse.next();
 }
 
-// Configure which paths this middleware will run on
 export const config = {
   matcher: [
-    // Run middleware on all routes except static files and API routes
     '/((?!api|_next/static|_next/image|favicon.ico).*)',
   ],
 }; 
