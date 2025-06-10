@@ -26,7 +26,6 @@ export default function ChangeTemporaryPasswordPage() {
   const { user, updateTemporaryPassword, isAuthenticated, loading: authLoading } = useAuth();
   const router = useRouter();
 
-  // Check if user is authenticated and needs to change password
   useEffect(() => {
     if (!authLoading) {
       console.log("Checking if user needs to change password:", {
@@ -39,11 +38,9 @@ export default function ChangeTemporaryPasswordPage() {
       });
       
       if (!isAuthenticated) {
-        // Redirect to login if not authenticated
         console.log("User not authenticated, redirecting to login");
         router.push("/signin");
       } else if (user && !user.password_change_required) {
-        // Redirect to profile if user doesn't need to change password
         console.log("User doesn't need to change password, redirecting to profile");
         router.push("/profile");
       } else {
@@ -91,6 +88,7 @@ export default function ChangeTemporaryPasswordPage() {
       console.log("Attempting to update temporary password");
       
       const result = await updateTemporaryPassword(
+        
         passwords.newPassword,
         passwords.confirmPassword
       );

@@ -1,17 +1,15 @@
 import { Suspense } from 'react';
 import ClientPasswordResetPage from './client-page';
 
-// Mark this route for dynamic rendering at runtime
-export const dynamic = 'force-dynamic'; 
+// For static export support, we'll use static rendering
+export const dynamic = 'error';
 
-// This tells Next.js to skip static generation for this route
-export const dynamicParams = true;
+// This tells Next.js to only render the statically generated parameters
+export const dynamicParams = false;
 
-// Export a dummy generateStaticParams to satisfy the static export requirement
-// while using dynamic rendering for the actual content
+// Export a generateStaticParams to satisfy the static export requirement
 export function generateStaticParams() {
-  // We'll create placeholder params for static export
-  // but use client-side JavaScript to handle actual tokens
+  // Create a set of placeholder params for static export
   return [
     { id: 'placeholder-id', token: 'placeholder-token' }
   ];

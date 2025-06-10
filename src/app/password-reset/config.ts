@@ -1,12 +1,14 @@
 // Configuration specific to password reset routes
 // This helps with static exports and dynamic routes
 
-// Export format for dynamic routes
-export const dynamic = 'force-dynamic';
-export const dynamicParams = true; // Enables dynamic params for non-export scenarios
+// Export format for dynamic routes - for static exports, we'll use 'error'
+export const dynamic = 'error';
+
+// Set dynamicParams to false for static export compatibility
+export const dynamicParams = false;
 
 // Special handling for static export mode
-export const isStaticExport = process.env.NEXT_PHASE === 'phase-export';
+export const isStaticExport = process.env.NEXT_PHASE === 'phase-export' || true;
 
 // Handle specific token value from error message
 export const knownTokens = [

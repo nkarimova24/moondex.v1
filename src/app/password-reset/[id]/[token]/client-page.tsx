@@ -5,10 +5,8 @@ import { useParams, useRouter } from 'next/navigation';
 import { toast } from 'react-hot-toast';
 import { Box, Typography, CircularProgress, Paper, TextField, Button, Alert } from '@mui/material';
 
-// Get the API URL from env or use the default
 const API_URL = process.env.NEXT_PUBLIC_LARAVEL_API_URL || 'http://localhost:8000/api';
 
-// Interface for API responses
 interface TokenResponse {
   status?: string;
   message?: string;
@@ -27,16 +25,13 @@ export default function ClientPasswordResetPage() {
   const [passwordError, setPasswordError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Check if the token is valid on page load
   useEffect(() => {
-    // Only run on client-side with the parameters
     if (!params) return;
 
     const id = params.id as string;
     const token = params.token as string;
     
     if (id && token) {
-      // Just validate the token without confirming the reset
       fetch(`${API_URL}/password/validate-token/${id}/${token}`)
         .then(response => response.json())
         .then((data: TokenResponse) => {
@@ -100,8 +95,8 @@ export default function ClientPasswordResetPage() {
           'Accept': 'application/json',
         },
         body: JSON.stringify({
-          password,
-          password_confirmation: confirmPassword
+          new_password: password,
+          confirm_password: confirmPassword
         }),
       });
       
@@ -109,7 +104,6 @@ export default function ClientPasswordResetPage() {
       
       if (response.ok && (data.status === 'success' || data.message?.toLowerCase().includes('success'))) {
         toast.success('Password has been reset successfully');
-        // Redirect to sign in page after successful reset
         setTimeout(() => {
           router.push('/signin');
         }, 2000);

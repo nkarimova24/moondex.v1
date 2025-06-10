@@ -1,13 +1,14 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Box, Typography, Paper, Button, CircularProgress } from '@mui/material';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import { toast } from 'react-hot-toast';
 import Link from 'next/link';
 
-export default function PasswordResetSuccessPage() {
+// Inner component that uses searchParams
+function PasswordResetSuccessContent() {
   const searchParams = useSearchParams();
   const [countdown, setCountdown] = useState(3);
   const [message, setMessage] = useState('');
@@ -93,5 +94,18 @@ export default function PasswordResetSuccessPage() {
         </Button>
       </Paper>
     </Box>
+  );
+}
+
+// Wrap the page component with Suspense
+export default function PasswordResetSuccessPage() {
+  return (
+    <Suspense fallback={
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50vh' }}>
+        <CircularProgress />
+      </Box>
+    }>
+      <PasswordResetSuccessContent />
+    </Suspense>
   );
 } 

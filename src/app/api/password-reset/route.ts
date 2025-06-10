@@ -1,6 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { logoutFromAllSessions } from '@/app/lib/api/auth';
 
+// Configure for static export compatibility
+export const dynamic = 'force-static';
+
+// Define all possible static paths
+export async function generateStaticParams() {
+  return [];
+}
+
 export async function GET(request: NextRequest) {
   // This is a fallback route for password reset confirmation
   try {

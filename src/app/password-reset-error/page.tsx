@@ -1,13 +1,14 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { Box, Typography, Paper, Button } from '@mui/material';
+import { Box, Typography, Paper, Button, CircularProgress } from '@mui/material';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import { toast } from 'react-hot-toast';
 import Link from 'next/link';
 
-export default function PasswordResetErrorPage() {
+// Inner component that uses searchParams
+function PasswordResetErrorContent() {
   const searchParams = useSearchParams();
   const [message, setMessage] = useState('');
   
@@ -82,5 +83,18 @@ export default function PasswordResetErrorPage() {
         </Box>
       </Paper>
     </Box>
+  );
+}
+
+// Main component wrapped with Suspense
+export default function PasswordResetErrorPage() {
+  return (
+    <Suspense fallback={
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50vh' }}>
+        <CircularProgress />
+      </Box>
+    }>
+      <PasswordResetErrorContent />
+    </Suspense>
   );
 } 

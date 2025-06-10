@@ -54,10 +54,8 @@ export default function SignUp() {
       });
 
       if (result.success) {
-        // Show a success message
         setGeneralError("");
         
-        // Immediate redirect attempt
         router.push("/");
         
         // Also set a fallback redirect timer in case the router.push doesn't trigger immediately
