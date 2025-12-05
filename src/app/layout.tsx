@@ -33,7 +33,7 @@ export default function RootLayout({
 
   useEffect(() => {
     const checkMobile = () => {
-      const mobile = window.innerWidth < 768; 
+      const mobile = window.innerWidth < 768;
       setIsMobile(mobile);
       setSidebarOpen(!mobile); // Set sidebarOpen based on mobile state
     };
@@ -59,38 +59,38 @@ export default function RootLayout({
           <AuthProvider>
             <LanguageProvider>
               <CollectionProvider>
-              <NotesProvider>
-              <Sidebar
-                isOpen={sidebarOpen}
-                onToggle={handleToggleSidebar}
-              />
-              
-              <div 
-                style={{ 
-                  marginLeft: isMobile ? 0 : (sidebarOpen ? "240px" : "0px"),
-                  transition: "margin 0.3s ease-in-out"
-                }}
-              >
-                <GlobalSearchbar />
+                <NotesProvider>
+                  <Sidebar
+                    isOpen={sidebarOpen}
+                    onToggle={handleToggleSidebar}
+                  />
 
-                <main style={{ padding: "20px" }}>
-                  {children}
-                </main>
-                
-                <Container maxWidth="lg">
-                  <div className="flex flex-col md:flex-row justify-between items-center py-3 text-gray-500 text-xs">
-                    <div className="flex space-x-4 mb-2 md:mb-0">
-                      <Link href="/about" className="hover:text-gray-800 dark:hover:text-gray-300 transition">About</Link>
-                      <Link href="/contact" className="hover:text-gray-800 dark:hover:text-gray-300 transition">Contact</Link>
-                      <Link href="/changelog" className="hover:text-gray-800 dark:hover:text-gray-300 transition">Changelog</Link>
-                    </div>
-                    <div className="text-center md:text-right">
-                      © 2025 MoonDex
-                    </div>
+                  <div
+                    style={{
+                      marginLeft: isMobile ? 0 : (sidebarOpen ? "240px" : "0px"),
+                      transition: "margin 0.3s ease-in-out"
+                    }}
+                  >
+                    <GlobalSearchbar />
+
+                    <main style={{ padding: "20px" }}>
+                      {children}
+                    </main>
+
+                    <Container maxWidth="lg">
+                      <div className="flex flex-col md:flex-row justify-between items-center py-3 text-gray-500 text-xs">
+                        <div className="flex space-x-4 mb-2 md:mb-0">
+                          <Link href="/about" className="hover:text-gray-800 dark:hover:text-gray-300 transition">About</Link>
+                          <Link href="/contact" className="hover:text-gray-800 dark:hover:text-gray-300 transition">Contact</Link>
+                          <Link href="/changelog" className="hover:text-gray-800 dark:hover:text-gray-300 transition">Changelog</Link>
+                        </div>
+                        <div className="text-center md:text-right">
+                          © 2025 MoonDex
+                        </div>
+                      </div>
+                    </Container>
                   </div>
-                </Container>
-              </div>
-              </NotesProvider>
+                </NotesProvider>
               </CollectionProvider>
             </LanguageProvider>
           </AuthProvider>

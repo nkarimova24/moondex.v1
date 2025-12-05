@@ -16,38 +16,38 @@ const apiCache: Record<string, CacheEntry> = {};
 export const CACHE_DURATIONS = {
   SHORT: 5 * 60 * 1000,
   MEDIUM: 30 * 60 * 1000,
-  LONG: 60 * 60 * 1000, 
-  VERY_LONG: 24 * 60 * 60 * 1000, 
+  LONG: 60 * 60 * 1000,
+  VERY_LONG: 24 * 60 * 60 * 1000,
 };
 
 //function to cache API responses
 export const cacheRequest = async (
-  url: string, 
-  fetchFunction: () => Promise<any>, 
+  url: string,
+  fetchFunction: () => Promise<any>,
   duration: number = CACHE_DURATIONS.MEDIUM,
   forceRefresh: boolean = false
 ): Promise<any> => {
   const cacheKey = url;
   const now = Date.now();
-  
+
   //if we have a cached response that hasn't expired and we're not forcing a refresh
   if (
-    !forceRefresh && 
-    apiCache[cacheKey] && 
+    !forceRefresh &&
+    apiCache[cacheKey] &&
     now - apiCache[cacheKey].timestamp < duration
   ) {
     console.log(`Using cached response for: ${url}`);
     return apiCache[cacheKey].data;
   }
-  
+
   try {
     const result = await fetchFunction();
-    
+
     apiCache[cacheKey] = {
       data: result,
       timestamp: now
     };
-    
+
     return result;
   } catch (error) {
     //if we have a cached response and there's an error fetching, use the cached data
@@ -124,10 +124,10 @@ export const fetchWithAuth = async (url: string) => {
   const headers: HeadersInit = {
     'Content-Type': 'application/json',
   };
-  
+
   if (API_KEY) {
     headers['X-Api-Key'] = API_KEY;
   }
-  
+
   return fetch(url, { headers });
 };
