@@ -1,4 +1,4322 @@
 {
-  "data": [],
-  "totalCount": 0
+  "data": [
+    {
+      "id": "np-1",
+      "name": "Kyogre ex",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic",
+        "EX"
+      ],
+      "hp": "120",
+      "types": [
+        "Water"
+      ],
+      "rules": [
+        "When Pokémon-ex has been Knocked Out, your opponent takes 2 Prize cards."
+      ],
+      "attacks": [
+        {
+          "name": "Major Flood",
+          "cost": [
+            "Water",
+            "Water",
+            "Water",
+            "Water"
+          ],
+          "convertedEnergyCost": 4,
+          "damage": "60",
+          "text": "Discard a Water Energy card attached to Kyogre ex. Does 10 damage to each Benched Pokémon (both yours and your opponent's). (Don't apply Weakness and Resistance for Benched Pokémon.)"
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Lightning",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 3,
+      "set": {
+        "id": "np",
+        "name": "Nintendo Black Star Promos",
+        "series": "NP",
+        "printedTotal": 40,
+        "total": 40,
+        "legalities": {
+          "unlimited": "Legal"
+        },
+        "ptcgoCode": "PR-NP",
+        "releaseDate": "2003/10/01",
+        "updatedAt": "2020/05/01 16:06:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/np/symbol.png",
+          "logo": "https://images.pokemontcg.io/np/logo.png"
+        }
+      },
+      "number": "1",
+      "artist": "Hiromichi Sugiyama",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        382
+      ],
+      "legalities": {
+        "unlimited": "Legal"
+      },
+      "images": {
+        "small": "https://images.pokemontcg.io/np/1.png",
+        "large": "https://images.pokemontcg.io/np/1_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/np-1",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "normal": {
+            "low": 9.09,
+            "mid": 13.98,
+            "high": 19.99,
+            "market": 17.67,
+            "directLow": null
+          },
+          "holofoil": {
+            "low": 350,
+            "mid": 425,
+            "high": 500,
+            "market": 75,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/np-1",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 33.73,
+          "lowPrice": 9.99,
+          "trendPrice": 70.29,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 25.5,
+          "lowPriceExPlus": 25,
+          "avg1": 10,
+          "avg7": 58.11,
+          "avg30": 51.39,
+          "reverseHoloAvg1": 28.12,
+          "reverseHoloAvg7": 21.14,
+          "reverseHoloAvg30": 17.58
+        }
+      }
+    },
+    {
+      "id": "np-2",
+      "name": "Groudon ex",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic",
+        "EX"
+      ],
+      "hp": "120",
+      "types": [
+        "Fighting"
+      ],
+      "rules": [
+        "When Pokémon-ex has been Knocked Out, your opponent takes 2 Prize cards."
+      ],
+      "attacks": [
+        {
+          "name": "Major Earthquake",
+          "cost": [
+            "Fighting",
+            "Fighting",
+            "Fighting",
+            "Fighting"
+          ],
+          "convertedEnergyCost": 4,
+          "damage": "80",
+          "text": "Discard a Fighting Energy card attached to Groudon ex. Does 10 damage to your Benched Pokémon. (Don't apply Weakness and Resistance for Benched Pokémon.)"
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Grass",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 3,
+      "set": {
+        "id": "np",
+        "name": "Nintendo Black Star Promos",
+        "series": "NP",
+        "printedTotal": 40,
+        "total": 40,
+        "legalities": {
+          "unlimited": "Legal"
+        },
+        "ptcgoCode": "PR-NP",
+        "releaseDate": "2003/10/01",
+        "updatedAt": "2020/05/01 16:06:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/np/symbol.png",
+          "logo": "https://images.pokemontcg.io/np/logo.png"
+        }
+      },
+      "number": "2",
+      "artist": "Kazuo Yazawa",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        383
+      ],
+      "legalities": {
+        "unlimited": "Legal"
+      },
+      "images": {
+        "small": "https://images.pokemontcg.io/np/2.png",
+        "large": "https://images.pokemontcg.io/np/2_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/np-2",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "normal": {
+            "low": 9.01,
+            "mid": 11.99,
+            "high": 15.99,
+            "market": 16.74,
+            "directLow": null
+          },
+          "holofoil": {
+            "low": 84.95,
+            "mid": 94.95,
+            "high": 150,
+            "market": 72,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/np-2",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 19.95,
+          "lowPrice": 14,
+          "trendPrice": 53.47,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 31.43,
+          "lowPriceExPlus": 21.99,
+          "avg1": 9.9,
+          "avg7": 49.64,
+          "avg30": 41.21,
+          "reverseHoloAvg1": 1.99,
+          "reverseHoloAvg7": 28.07,
+          "reverseHoloAvg30": 22.74
+        }
+      }
+    },
+    {
+      "id": "np-3",
+      "name": "Treecko",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic"
+      ],
+      "hp": "40",
+      "types": [
+        "Grass"
+      ],
+      "evolvesTo": [
+        "Grovyle"
+      ],
+      "attacks": [
+        {
+          "name": "Tail Slap",
+          "cost": [
+            "Colorless"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "10",
+          "text": ""
+        },
+        {
+          "name": "Razor Leaf",
+          "cost": [
+            "Grass",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "20",
+          "text": ""
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Fire",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Water",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "set": {
+        "id": "np",
+        "name": "Nintendo Black Star Promos",
+        "series": "NP",
+        "printedTotal": 40,
+        "total": 40,
+        "legalities": {
+          "unlimited": "Legal"
+        },
+        "ptcgoCode": "PR-NP",
+        "releaseDate": "2003/10/01",
+        "updatedAt": "2020/05/01 16:06:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/np/symbol.png",
+          "logo": "https://images.pokemontcg.io/np/logo.png"
+        }
+      },
+      "number": "3",
+      "artist": "Atsuko Nishida",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        252
+      ],
+      "legalities": {
+        "unlimited": "Legal"
+      },
+      "images": {
+        "small": "https://images.pokemontcg.io/np/3.png",
+        "large": "https://images.pokemontcg.io/np/3_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/np-3",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "reverseHolofoil": {
+            "low": 50.01,
+            "mid": 50.01,
+            "high": 50.01,
+            "market": 13.26,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/np-3",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 7.7,
+          "lowPrice": 2.49,
+          "trendPrice": 9.67,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 2.38,
+          "lowPriceExPlus": 4.5,
+          "avg1": 12.9,
+          "avg7": 8.23,
+          "avg30": 8.05,
+          "reverseHoloAvg1": 3,
+          "reverseHoloAvg7": 2.71,
+          "reverseHoloAvg30": 2.34
+        }
+      }
+    },
+    {
+      "id": "np-4",
+      "name": "Grovyle",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Stage 1"
+      ],
+      "hp": "70",
+      "types": [
+        "Grass"
+      ],
+      "evolvesFrom": "Treecko",
+      "evolvesTo": [
+        "Sceptile"
+      ],
+      "attacks": [
+        {
+          "name": "Poison Breath",
+          "cost": [
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "",
+          "text": "The Defending Pokémon is now Poisoned."
+        },
+        {
+          "name": "Swift",
+          "cost": [
+            "Grass",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "30",
+          "text": "This attack's damage isn't affected by Weakness, Resistance, Poké-Powers, Poké-Bodies, or any other effects on the Defending Pokémon."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Fire",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Water",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "set": {
+        "id": "np",
+        "name": "Nintendo Black Star Promos",
+        "series": "NP",
+        "printedTotal": 40,
+        "total": 40,
+        "legalities": {
+          "unlimited": "Legal"
+        },
+        "ptcgoCode": "PR-NP",
+        "releaseDate": "2003/10/01",
+        "updatedAt": "2020/05/01 16:06:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/np/symbol.png",
+          "logo": "https://images.pokemontcg.io/np/logo.png"
+        }
+      },
+      "number": "4",
+      "artist": "Midori Harada",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        253
+      ],
+      "legalities": {
+        "unlimited": "Legal"
+      },
+      "images": {
+        "small": "https://images.pokemontcg.io/np/4.png",
+        "large": "https://images.pokemontcg.io/np/4_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/np-4",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "normal": {
+            "low": 90,
+            "mid": 94.95,
+            "high": 175,
+            "market": 49.99,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/np-4",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 0,
+          "lowPrice": 0,
+          "trendPrice": 0,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0,
+          "avg1": 0,
+          "avg7": 0,
+          "avg30": 0,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "np-5",
+      "name": "Mudkip",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic"
+      ],
+      "hp": "50",
+      "types": [
+        "Water"
+      ],
+      "evolvesTo": [
+        "Marshtomp"
+      ],
+      "attacks": [
+        {
+          "name": "Pound",
+          "cost": [
+            "Colorless"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "10",
+          "text": ""
+        },
+        {
+          "name": "Fury Swipes",
+          "cost": [
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "10×",
+          "text": "Flip 3 coins. This attack does 10 damage times the number of heads."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Lightning",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "set": {
+        "id": "np",
+        "name": "Nintendo Black Star Promos",
+        "series": "NP",
+        "printedTotal": 40,
+        "total": 40,
+        "legalities": {
+          "unlimited": "Legal"
+        },
+        "ptcgoCode": "PR-NP",
+        "releaseDate": "2003/10/01",
+        "updatedAt": "2020/05/01 16:06:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/np/symbol.png",
+          "logo": "https://images.pokemontcg.io/np/logo.png"
+        }
+      },
+      "number": "5",
+      "artist": "Ken Sugimori",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        258
+      ],
+      "legalities": {
+        "unlimited": "Legal"
+      },
+      "images": {
+        "small": "https://images.pokemontcg.io/np/5.png",
+        "large": "https://images.pokemontcg.io/np/5_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/np-5",
+        "updatedAt": "2024/02/04",
+        "prices": {
+          "holofoil": {
+            "low": 299.95,
+            "mid": 299.95,
+            "high": 299.95
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/np-5",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 225,
+          "lowPrice": 0,
+          "trendPrice": 221.92,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 74.08,
+          "lowPriceExPlus": 0,
+          "avg1": 225,
+          "avg7": 224.29,
+          "avg30": 178.52,
+          "reverseHoloAvg1": 39.99,
+          "reverseHoloAvg7": 66.87,
+          "reverseHoloAvg30": 50.13
+        }
+      }
+    },
+    {
+      "id": "np-6",
+      "name": "Torchic",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic"
+      ],
+      "hp": "40",
+      "types": [
+        "Fire"
+      ],
+      "evolvesTo": [
+        "Combusken"
+      ],
+      "attacks": [
+        {
+          "name": "Peck",
+          "cost": [
+            "Colorless"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "10",
+          "text": ""
+        },
+        {
+          "name": "Fireworks",
+          "cost": [
+            "Fire",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "30",
+          "text": "Flip a coin. If tails, discard a Fire Energy card attached to Torchic."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Water",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "set": {
+        "id": "np",
+        "name": "Nintendo Black Star Promos",
+        "series": "NP",
+        "printedTotal": 40,
+        "total": 40,
+        "legalities": {
+          "unlimited": "Legal"
+        },
+        "ptcgoCode": "PR-NP",
+        "releaseDate": "2003/10/01",
+        "updatedAt": "2020/05/01 16:06:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/np/symbol.png",
+          "logo": "https://images.pokemontcg.io/np/logo.png"
+        }
+      },
+      "number": "6",
+      "artist": "Ken Sugimori",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        255
+      ],
+      "legalities": {
+        "unlimited": "Legal"
+      },
+      "images": {
+        "small": "https://images.pokemontcg.io/np/6.png",
+        "large": "https://images.pokemontcg.io/np/6_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/np-6",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 179.99,
+            "mid": 179.99,
+            "high": 179.99,
+            "market": 238.9,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/np-6",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 699.99,
+          "lowPrice": 125,
+          "trendPrice": 475.53,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 105.6,
+          "lowPriceExPlus": 849.95,
+          "avg1": 699.99,
+          "avg7": 419.28,
+          "avg30": 303.08,
+          "reverseHoloAvg1": 90,
+          "reverseHoloAvg7": 77.5,
+          "reverseHoloAvg30": 71.66
+        }
+      }
+    },
+    {
+      "id": "np-7",
+      "name": "Treecko",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic"
+      ],
+      "hp": "40",
+      "types": [
+        "Grass"
+      ],
+      "evolvesTo": [
+        "Grovyle"
+      ],
+      "attacks": [
+        {
+          "name": "Tail Slap",
+          "cost": [
+            "Colorless"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "10",
+          "text": ""
+        },
+        {
+          "name": "Razor Leaf",
+          "cost": [
+            "Grass",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "20",
+          "text": ""
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Fire",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Water",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "set": {
+        "id": "np",
+        "name": "Nintendo Black Star Promos",
+        "series": "NP",
+        "printedTotal": 40,
+        "total": 40,
+        "legalities": {
+          "unlimited": "Legal"
+        },
+        "ptcgoCode": "PR-NP",
+        "releaseDate": "2003/10/01",
+        "updatedAt": "2020/05/01 16:06:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/np/symbol.png",
+          "logo": "https://images.pokemontcg.io/np/logo.png"
+        }
+      },
+      "number": "7",
+      "artist": "Ken Sugimori",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        252
+      ],
+      "legalities": {
+        "unlimited": "Legal"
+      },
+      "images": {
+        "small": "https://images.pokemontcg.io/np/7.png",
+        "large": "https://images.pokemontcg.io/np/7_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/np-7",
+        "updatedAt": "2025/08/29",
+        "prices": {
+          "holofoil": {
+            "low": 499.99,
+            "mid": 499.99,
+            "high": 499.99,
+            "market": 374.95,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/np-7",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 200,
+          "lowPrice": 1999,
+          "trendPrice": 182.73,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 259.15,
+          "lowPriceExPlus": 1999,
+          "avg1": 200,
+          "avg7": 152.05,
+          "avg30": 130.81,
+          "reverseHoloAvg1": 89.99,
+          "reverseHoloAvg7": 130.55,
+          "reverseHoloAvg30": 130.55
+        }
+      }
+    },
+    {
+      "id": "np-8",
+      "name": "Torchic",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic"
+      ],
+      "hp": "40",
+      "types": [
+        "Fire"
+      ],
+      "evolvesTo": [
+        "Combusken"
+      ],
+      "attacks": [
+        {
+          "name": "Peck",
+          "cost": [
+            "Colorless"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "10",
+          "text": ""
+        },
+        {
+          "name": "Fireworks",
+          "cost": [
+            "Fire",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "30",
+          "text": "Flip a coin. If tails, discard a Fire Energy card attached to Torchic."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Water",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "set": {
+        "id": "np",
+        "name": "Nintendo Black Star Promos",
+        "series": "NP",
+        "printedTotal": 40,
+        "total": 40,
+        "legalities": {
+          "unlimited": "Legal"
+        },
+        "ptcgoCode": "PR-NP",
+        "releaseDate": "2003/10/01",
+        "updatedAt": "2020/05/01 16:06:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/np/symbol.png",
+          "logo": "https://images.pokemontcg.io/np/logo.png"
+        }
+      },
+      "number": "8",
+      "artist": "Atsuko Nishida",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        255
+      ],
+      "legalities": {
+        "unlimited": "Legal"
+      },
+      "images": {
+        "small": "https://images.pokemontcg.io/np/8.png",
+        "large": "https://images.pokemontcg.io/np/8_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/np-8",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "reverseHolofoil": {
+            "low": 8.16,
+            "mid": 8.16,
+            "high": 8.16,
+            "market": 15.01,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/np-8",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 24.99,
+          "lowPrice": 2,
+          "trendPrice": 11.66,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 1.88,
+          "lowPriceExPlus": 5.84,
+          "avg1": 24.99,
+          "avg7": 11,
+          "avg30": 10.13,
+          "reverseHoloAvg1": 1.79,
+          "reverseHoloAvg7": 2.23,
+          "reverseHoloAvg30": 1.7
+        }
+      }
+    },
+    {
+      "id": "np-9",
+      "name": "Combusken",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Stage 1"
+      ],
+      "hp": "70",
+      "types": [
+        "Fire"
+      ],
+      "evolvesFrom": "Torchic",
+      "evolvesTo": [
+        "Blaziken"
+      ],
+      "attacks": [
+        {
+          "name": "Flare",
+          "cost": [
+            "Fire"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "20",
+          "text": ""
+        },
+        {
+          "name": "Double Kick",
+          "cost": [
+            "Colorless",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "40×",
+          "text": "Flip 2 coins. This attack does 40 damage times the number of heads."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Water",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "set": {
+        "id": "np",
+        "name": "Nintendo Black Star Promos",
+        "series": "NP",
+        "printedTotal": 40,
+        "total": 40,
+        "legalities": {
+          "unlimited": "Legal"
+        },
+        "ptcgoCode": "PR-NP",
+        "releaseDate": "2003/10/01",
+        "updatedAt": "2020/05/01 16:06:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/np/symbol.png",
+          "logo": "https://images.pokemontcg.io/np/logo.png"
+        }
+      },
+      "number": "9",
+      "artist": "Kouki Saitou",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        256
+      ],
+      "legalities": {
+        "unlimited": "Legal"
+      },
+      "images": {
+        "small": "https://images.pokemontcg.io/np/9.png",
+        "large": "https://images.pokemontcg.io/np/9_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/np-9",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "normal": {
+            "low": 34.95,
+            "mid": 34.95,
+            "high": 34.95,
+            "market": 33.28,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/np-9",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 54.5,
+          "lowPrice": 50,
+          "trendPrice": 80.96,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 5.5,
+          "lowPriceExPlus": 50,
+          "avg1": 60,
+          "avg7": 100.54,
+          "avg30": 31.36,
+          "reverseHoloAvg1": 4.95,
+          "reverseHoloAvg7": 4.76,
+          "reverseHoloAvg30": 4.76
+        }
+      }
+    },
+    {
+      "id": "np-10",
+      "name": "Mudkip",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic"
+      ],
+      "hp": "50",
+      "types": [
+        "Water"
+      ],
+      "evolvesTo": [
+        "Marshtomp"
+      ],
+      "attacks": [
+        {
+          "name": "Pound",
+          "cost": [
+            "Colorless"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "10",
+          "text": ""
+        },
+        {
+          "name": "Fury Swipes",
+          "cost": [
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "10×",
+          "text": "Flip 3 coins. This attack does 10 damage times the number of heads."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Lightning",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "set": {
+        "id": "np",
+        "name": "Nintendo Black Star Promos",
+        "series": "NP",
+        "printedTotal": 40,
+        "total": 40,
+        "legalities": {
+          "unlimited": "Legal"
+        },
+        "ptcgoCode": "PR-NP",
+        "releaseDate": "2003/10/01",
+        "updatedAt": "2020/05/01 16:06:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/np/symbol.png",
+          "logo": "https://images.pokemontcg.io/np/logo.png"
+        }
+      },
+      "number": "10",
+      "artist": "Atsuko Nishida",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        258
+      ],
+      "legalities": {
+        "unlimited": "Legal"
+      },
+      "images": {
+        "small": "https://images.pokemontcg.io/np/10.png",
+        "large": "https://images.pokemontcg.io/np/10_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/np-10",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "reverseHolofoil": {
+            "low": 50.01,
+            "mid": 50.01,
+            "high": 50.01,
+            "market": 24.38,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/np-10",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 3.24,
+          "lowPrice": 11,
+          "trendPrice": 7.53,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 2.36,
+          "lowPriceExPlus": 11,
+          "avg1": 3.24,
+          "avg7": 12.85,
+          "avg30": 12.57,
+          "reverseHoloAvg1": 2.99,
+          "reverseHoloAvg7": 2.87,
+          "reverseHoloAvg30": 1.68
+        }
+      }
+    },
+    {
+      "id": "np-11",
+      "name": "Marshtomp",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Stage 1"
+      ],
+      "hp": "70",
+      "types": [
+        "Water"
+      ],
+      "evolvesFrom": "Mudkip",
+      "evolvesTo": [
+        "Swampert"
+      ],
+      "attacks": [
+        {
+          "name": "Bubble",
+          "cost": [
+            "Water"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "10",
+          "text": "Flip a coin. If heads, the Defending Pokémon is now Paralyzed."
+        },
+        {
+          "name": "Slash",
+          "cost": [
+            "Colorless",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "40",
+          "text": ""
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Lightning",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "set": {
+        "id": "np",
+        "name": "Nintendo Black Star Promos",
+        "series": "NP",
+        "printedTotal": 40,
+        "total": 40,
+        "legalities": {
+          "unlimited": "Legal"
+        },
+        "ptcgoCode": "PR-NP",
+        "releaseDate": "2003/10/01",
+        "updatedAt": "2020/05/01 16:06:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/np/symbol.png",
+          "logo": "https://images.pokemontcg.io/np/logo.png"
+        }
+      },
+      "number": "11",
+      "artist": "Mitsuhiro Arita",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        259
+      ],
+      "legalities": {
+        "unlimited": "Legal"
+      },
+      "images": {
+        "small": "https://images.pokemontcg.io/np/11.png",
+        "large": "https://images.pokemontcg.io/np/11_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/np-11",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "normal": {
+            "low": 72.95,
+            "mid": 78.5,
+            "high": 84.95,
+            "market": 50.99,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/np-11",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 110,
+          "lowPrice": 0,
+          "trendPrice": 110,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0,
+          "avg1": 110,
+          "avg7": 77,
+          "avg30": 77,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "np-12",
+      "name": "Pikachu",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic"
+      ],
+      "hp": "50",
+      "types": [
+        "Lightning"
+      ],
+      "evolvesTo": [
+        "Raichu"
+      ],
+      "attacks": [
+        {
+          "name": "Agility",
+          "cost": [
+            "Colorless"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "Flip a coin. If heads, prevent all effects of an attack, including damage, done to Pikachu during your opponent's next turn."
+        },
+        {
+          "name": "Thundershock",
+          "cost": [
+            "Lightning",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "20",
+          "text": "Flip a coin. If heads, the Defending Pokémon is now Paralyzed."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Fighting",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "set": {
+        "id": "np",
+        "name": "Nintendo Black Star Promos",
+        "series": "NP",
+        "printedTotal": 40,
+        "total": 40,
+        "legalities": {
+          "unlimited": "Legal"
+        },
+        "ptcgoCode": "PR-NP",
+        "releaseDate": "2003/10/01",
+        "updatedAt": "2020/05/01 16:06:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/np/symbol.png",
+          "logo": "https://images.pokemontcg.io/np/logo.png"
+        }
+      },
+      "number": "12",
+      "artist": "Kouki Saitou",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        25
+      ],
+      "legalities": {
+        "unlimited": "Legal"
+      },
+      "images": {
+        "small": "https://images.pokemontcg.io/np/12.png",
+        "large": "https://images.pokemontcg.io/np/12_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/np-12",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 70.67,
+            "mid": 93.99,
+            "high": 285.58,
+            "market": 78.92,
+            "directLow": 78.92
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/np-12",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 76.47,
+          "lowPrice": 37.95,
+          "trendPrice": 54.38,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 57.69,
+          "lowPriceExPlus": 65,
+          "avg1": 64.99,
+          "avg7": 73.86,
+          "avg30": 71.6,
+          "reverseHoloAvg1": 29.95,
+          "reverseHoloAvg7": 43.55,
+          "reverseHoloAvg30": 36.66
+        }
+      }
+    },
+    {
+      "id": "np-13",
+      "name": "Meowth",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic"
+      ],
+      "hp": "50",
+      "types": [
+        "Colorless"
+      ],
+      "evolvesTo": [
+        "Persian"
+      ],
+      "attacks": [
+        {
+          "name": "Plunder",
+          "cost": [
+            "Colorless"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "10",
+          "text": "Before doing damage, discard all Trainer cards attached to the Defending Pokémon (before they affect the damage.)."
+        },
+        {
+          "name": "Scratch",
+          "cost": [
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "20",
+          "text": ""
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Fighting",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "set": {
+        "id": "np",
+        "name": "Nintendo Black Star Promos",
+        "series": "NP",
+        "printedTotal": 40,
+        "total": 40,
+        "legalities": {
+          "unlimited": "Legal"
+        },
+        "ptcgoCode": "PR-NP",
+        "releaseDate": "2003/10/01",
+        "updatedAt": "2020/05/01 16:06:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/np/symbol.png",
+          "logo": "https://images.pokemontcg.io/np/logo.png"
+        }
+      },
+      "number": "13",
+      "artist": "Kouki Saitou",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        52
+      ],
+      "legalities": {
+        "unlimited": "Legal"
+      },
+      "images": {
+        "small": "https://images.pokemontcg.io/np/13.png",
+        "large": "https://images.pokemontcg.io/np/13_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/np-13",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 14.99,
+            "mid": 20.39,
+            "high": 129.99,
+            "market": 18.28,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/np-13",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 12.79,
+          "lowPrice": 9.99,
+          "trendPrice": 24.3,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 7.42,
+          "lowPriceExPlus": 12,
+          "avg1": 14.99,
+          "avg7": 14.06,
+          "avg30": 19.83,
+          "reverseHoloAvg1": 4,
+          "reverseHoloAvg7": 7.07,
+          "reverseHoloAvg30": 5.11
+        }
+      }
+    },
+    {
+      "id": "np-14",
+      "name": "Latias",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic"
+      ],
+      "hp": "70",
+      "types": [
+        "Colorless"
+      ],
+      "attacks": [
+        {
+          "name": "Super Psy",
+          "cost": [
+            "Psychic"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "10",
+          "text": ""
+        },
+        {
+          "name": "Searing Flame",
+          "cost": [
+            "Fire",
+            "Water"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "20",
+          "text": "Flip a coin. If heads, the Defending Pokémon is now Burned."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Psychic",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "set": {
+        "id": "np",
+        "name": "Nintendo Black Star Promos",
+        "series": "NP",
+        "printedTotal": 40,
+        "total": 40,
+        "legalities": {
+          "unlimited": "Legal"
+        },
+        "ptcgoCode": "PR-NP",
+        "releaseDate": "2003/10/01",
+        "updatedAt": "2020/05/01 16:06:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/np/symbol.png",
+          "logo": "https://images.pokemontcg.io/np/logo.png"
+        }
+      },
+      "number": "14",
+      "artist": "Ken Sugimori",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        380
+      ],
+      "legalities": {
+        "unlimited": "Legal"
+      },
+      "images": {
+        "small": "https://images.pokemontcg.io/np/14.png",
+        "large": "https://images.pokemontcg.io/np/14_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/np-14",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "normal": {
+            "low": 6.26,
+            "mid": 17.47,
+            "high": 32.75,
+            "market": 17.47,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/np-14",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 21.45,
+          "lowPrice": 16,
+          "trendPrice": 19.25,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 16.95,
+          "avg1": 29.5,
+          "avg7": 20.88,
+          "avg30": 16.68,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "np-15",
+      "name": "Latios",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic"
+      ],
+      "hp": "80",
+      "types": [
+        "Colorless"
+      ],
+      "attacks": [
+        {
+          "name": "Super Psy",
+          "cost": [
+            "Psychic"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "10",
+          "text": ""
+        },
+        {
+          "name": "Freeze Dry",
+          "cost": [
+            "Water",
+            "Psychic",
+            "Lightning"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "30",
+          "text": "Flip a coin. If heads, the Defending Pokémon is now Paralyzed."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Psychic",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 3,
+      "set": {
+        "id": "np",
+        "name": "Nintendo Black Star Promos",
+        "series": "NP",
+        "printedTotal": 40,
+        "total": 40,
+        "legalities": {
+          "unlimited": "Legal"
+        },
+        "ptcgoCode": "PR-NP",
+        "releaseDate": "2003/10/01",
+        "updatedAt": "2020/05/01 16:06:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/np/symbol.png",
+          "logo": "https://images.pokemontcg.io/np/logo.png"
+        }
+      },
+      "number": "15",
+      "artist": "Ken Sugimori",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        381
+      ],
+      "legalities": {
+        "unlimited": "Legal"
+      },
+      "images": {
+        "small": "https://images.pokemontcg.io/np/15.png",
+        "large": "https://images.pokemontcg.io/np/15_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/np-15",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "normal": {
+            "low": 6.49,
+            "mid": 9.81,
+            "high": 25,
+            "market": 13.75,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/np-15",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 27.98,
+          "lowPrice": 26.95,
+          "trendPrice": 21.51,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 7.99,
+          "lowPriceExPlus": 26.99,
+          "avg1": 30,
+          "avg7": 24.11,
+          "avg30": 17.74,
+          "reverseHoloAvg1": 7.99,
+          "reverseHoloAvg7": 7.99,
+          "reverseHoloAvg30": 7.99
+        }
+      }
+    },
+    {
+      "id": "np-16",
+      "name": "Treecko",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic"
+      ],
+      "hp": "40",
+      "types": [
+        "Grass"
+      ],
+      "evolvesTo": [
+        "Grovyle"
+      ],
+      "attacks": [
+        {
+          "name": "Pound",
+          "cost": [
+            "Colorless"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "10",
+          "text": ""
+        },
+        {
+          "name": "Sporadic Sponging",
+          "cost": [
+            "Grass"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "10",
+          "text": "Flip a coin. If heads, remove 1 damage counter from Treecko."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Fire",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Water",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "set": {
+        "id": "np",
+        "name": "Nintendo Black Star Promos",
+        "series": "NP",
+        "printedTotal": 40,
+        "total": 40,
+        "legalities": {
+          "unlimited": "Legal"
+        },
+        "ptcgoCode": "PR-NP",
+        "releaseDate": "2003/10/01",
+        "updatedAt": "2020/05/01 16:06:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/np/symbol.png",
+          "logo": "https://images.pokemontcg.io/np/logo.png"
+        }
+      },
+      "number": "16",
+      "artist": "Kagemaru Himeno",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        252
+      ],
+      "legalities": {
+        "unlimited": "Legal"
+      },
+      "images": {
+        "small": "https://images.pokemontcg.io/np/16.png",
+        "large": "https://images.pokemontcg.io/np/16_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/np-16",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 9.68,
+            "mid": 16.85,
+            "high": 20.95,
+            "market": 13.47,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/np-16",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 4.71,
+          "lowPrice": 1,
+          "trendPrice": 4.16,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 1.92,
+          "lowPriceExPlus": 4,
+          "avg1": 8,
+          "avg7": 5.34,
+          "avg30": 6.96,
+          "reverseHoloAvg1": 1.49,
+          "reverseHoloAvg7": 2.26,
+          "reverseHoloAvg30": 1.82
+        }
+      }
+    },
+    {
+      "id": "np-17",
+      "name": "Torchic",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic"
+      ],
+      "hp": "50",
+      "types": [
+        "Fire"
+      ],
+      "evolvesTo": [
+        "Combusken"
+      ],
+      "attacks": [
+        {
+          "name": "Ember",
+          "cost": [
+            "Fire",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "30",
+          "text": "Discard a Fire Energy card attached to Torchic."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Water",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "set": {
+        "id": "np",
+        "name": "Nintendo Black Star Promos",
+        "series": "NP",
+        "printedTotal": 40,
+        "total": 40,
+        "legalities": {
+          "unlimited": "Legal"
+        },
+        "ptcgoCode": "PR-NP",
+        "releaseDate": "2003/10/01",
+        "updatedAt": "2020/05/01 16:06:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/np/symbol.png",
+          "logo": "https://images.pokemontcg.io/np/logo.png"
+        }
+      },
+      "number": "17",
+      "artist": "Kagemaru Himeno",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        255
+      ],
+      "legalities": {
+        "unlimited": "Legal"
+      },
+      "images": {
+        "small": "https://images.pokemontcg.io/np/17.png",
+        "large": "https://images.pokemontcg.io/np/17_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/np-17",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 8.65,
+            "mid": 11.08,
+            "high": 30,
+            "market": 13.24,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/np-17",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 5.9,
+          "lowPrice": 0.99,
+          "trendPrice": 9.77,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 2.1,
+          "lowPriceExPlus": 3.5,
+          "avg1": 17.75,
+          "avg7": 9.24,
+          "avg30": 6.78,
+          "reverseHoloAvg1": 0.49,
+          "reverseHoloAvg7": 2.22,
+          "reverseHoloAvg30": 1.51
+        }
+      }
+    },
+    {
+      "id": "np-18",
+      "name": "Mudkip",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic"
+      ],
+      "hp": "50",
+      "types": [
+        "Water"
+      ],
+      "evolvesTo": [
+        "Marshtomp"
+      ],
+      "attacks": [
+        {
+          "name": "Surf",
+          "cost": [
+            "Water"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "10",
+          "text": ""
+        },
+        {
+          "name": "Whirlpool",
+          "cost": [
+            "Water",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "10",
+          "text": "Flip a coin. If heads, discard an Energy card attached to the Defending Pokémon."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Lightning",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "set": {
+        "id": "np",
+        "name": "Nintendo Black Star Promos",
+        "series": "NP",
+        "printedTotal": 40,
+        "total": 40,
+        "legalities": {
+          "unlimited": "Legal"
+        },
+        "ptcgoCode": "PR-NP",
+        "releaseDate": "2003/10/01",
+        "updatedAt": "2020/05/01 16:06:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/np/symbol.png",
+          "logo": "https://images.pokemontcg.io/np/logo.png"
+        }
+      },
+      "number": "18",
+      "artist": "Kagemaru Himeno",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        258
+      ],
+      "legalities": {
+        "unlimited": "Legal"
+      },
+      "images": {
+        "small": "https://images.pokemontcg.io/np/18.png",
+        "large": "https://images.pokemontcg.io/np/18_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/np-18",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 11.79,
+            "mid": 23.99,
+            "high": 55.98,
+            "market": 17.75,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/np-18",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 11.37,
+          "lowPrice": 1.39,
+          "trendPrice": 14,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 6.94,
+          "lowPriceExPlus": 5,
+          "avg1": 29.97,
+          "avg7": 16.95,
+          "avg30": 11.97,
+          "reverseHoloAvg1": 9.99,
+          "reverseHoloAvg7": 6.59,
+          "reverseHoloAvg30": 4.26
+        }
+      }
+    },
+    {
+      "id": "np-19",
+      "name": "Whismur",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic"
+      ],
+      "hp": "50",
+      "types": [
+        "Colorless"
+      ],
+      "evolvesTo": [
+        "Loudred"
+      ],
+      "attacks": [
+        {
+          "name": "Supersonic",
+          "cost": [
+            "Colorless"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "Flip a coin. If heads, the Defending Pokémon is now Confused."
+        },
+        {
+          "name": "Pound",
+          "cost": [
+            "Colorless"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "10",
+          "text": ""
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Fighting",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "set": {
+        "id": "np",
+        "name": "Nintendo Black Star Promos",
+        "series": "NP",
+        "printedTotal": 40,
+        "total": 40,
+        "legalities": {
+          "unlimited": "Legal"
+        },
+        "ptcgoCode": "PR-NP",
+        "releaseDate": "2003/10/01",
+        "updatedAt": "2020/05/01 16:06:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/np/symbol.png",
+          "logo": "https://images.pokemontcg.io/np/logo.png"
+        }
+      },
+      "number": "19",
+      "artist": "Kagemaru Himeno",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        293
+      ],
+      "legalities": {
+        "unlimited": "Legal"
+      },
+      "images": {
+        "small": "https://images.pokemontcg.io/np/19.png",
+        "large": "https://images.pokemontcg.io/np/19_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/np-19",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 2.45,
+            "mid": 5,
+            "high": 33.33,
+            "market": 4.53,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/np-19",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 3.01,
+          "lowPrice": 0.5,
+          "trendPrice": 2.61,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 1.24,
+          "lowPriceExPlus": 0.99,
+          "avg1": 3.95,
+          "avg7": 3.01,
+          "avg30": 2.67,
+          "reverseHoloAvg1": 1.49,
+          "reverseHoloAvg7": 1.11,
+          "reverseHoloAvg30": 1.43
+        }
+      }
+    },
+    {
+      "id": "np-20",
+      "name": "Ludicolo",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Stage 2"
+      ],
+      "hp": "90",
+      "types": [
+        "Water"
+      ],
+      "evolvesFrom": "Lombre",
+      "abilities": [
+        {
+          "name": "Rain Dish",
+          "text": "At any time between turns, remove 1 damage counter from Ludicolo.",
+          "type": "Poké-Body"
+        }
+      ],
+      "attacks": [
+        {
+          "name": "Fury Swipes",
+          "cost": [
+            "Water",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "30×",
+          "text": "Flip 3 coins. This attack does 30 damage times the number of heads."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Lightning",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "set": {
+        "id": "np",
+        "name": "Nintendo Black Star Promos",
+        "series": "NP",
+        "printedTotal": 40,
+        "total": 40,
+        "legalities": {
+          "unlimited": "Legal"
+        },
+        "ptcgoCode": "PR-NP",
+        "releaseDate": "2003/10/01",
+        "updatedAt": "2020/05/01 16:06:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/np/symbol.png",
+          "logo": "https://images.pokemontcg.io/np/logo.png"
+        }
+      },
+      "number": "20",
+      "artist": "Kouki Saitou",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        272
+      ],
+      "legalities": {
+        "unlimited": "Legal"
+      },
+      "images": {
+        "small": "https://images.pokemontcg.io/np/20.png",
+        "large": "https://images.pokemontcg.io/np/20_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/np-20",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 6.38,
+            "mid": 9.99,
+            "high": 27,
+            "market": 10.22,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/np-20",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 9.97,
+          "lowPrice": 7.95,
+          "trendPrice": 27.84,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 6.97,
+          "lowPriceExPlus": 15,
+          "avg1": 9.95,
+          "avg7": 16.86,
+          "avg30": 22.25,
+          "reverseHoloAvg1": 8.5,
+          "reverseHoloAvg7": 8.18,
+          "reverseHoloAvg30": 8.26
+        }
+      }
+    },
+    {
+      "id": "np-21",
+      "name": "Jirachi",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic"
+      ],
+      "hp": "50",
+      "types": [
+        "Psychic"
+      ],
+      "attacks": [
+        {
+          "name": "The Third Eye",
+          "cost": [
+            "Colorless"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "Discard an Energy card attached to Jirachi and draw 3 cards."
+        },
+        {
+          "name": "Psywave",
+          "cost": [
+            "Psychic"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "10×",
+          "text": "Does 10 damage times the amount of Energy attached to the Defending Pokémon."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Psychic",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "set": {
+        "id": "np",
+        "name": "Nintendo Black Star Promos",
+        "series": "NP",
+        "printedTotal": 40,
+        "total": 40,
+        "legalities": {
+          "unlimited": "Legal"
+        },
+        "ptcgoCode": "PR-NP",
+        "releaseDate": "2003/10/01",
+        "updatedAt": "2020/05/01 16:06:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/np/symbol.png",
+          "logo": "https://images.pokemontcg.io/np/logo.png"
+        }
+      },
+      "number": "21",
+      "artist": "Atsuko Nishida",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        385
+      ],
+      "legalities": {
+        "unlimited": "Legal"
+      },
+      "images": {
+        "small": "https://images.pokemontcg.io/np/21.png",
+        "large": "https://images.pokemontcg.io/np/21_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/np-21",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "normal": {
+            "low": 11.66,
+            "mid": 29.03,
+            "high": 82,
+            "market": 17.73,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/np-21",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 19.98,
+          "lowPrice": 19.95,
+          "trendPrice": 33.79,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 27.99,
+          "avg1": 19.98,
+          "avg7": 30.98,
+          "avg30": 22.71,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "np-22",
+      "name": "Beldum",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic"
+      ],
+      "hp": "50",
+      "types": [
+        "Metal"
+      ],
+      "evolvesTo": [
+        "Metang"
+      ],
+      "abilities": [
+        {
+          "name": "Magnetic Call",
+          "text": "Once during your turn (before your attack), you may flip a coin. If heads, search your deck for a Metal Basic Pokémon and put it onto your Bench. Shuffle your deck afterward. This power can't be used if Beldum is affected by a Special Condition.",
+          "type": "Poké-Power"
+        }
+      ],
+      "attacks": [
+        {
+          "name": "Metal Charge",
+          "cost": [
+            "Metal",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "30",
+          "text": "Put 1 damage counter on Beldum."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Fire",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Grass",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "set": {
+        "id": "np",
+        "name": "Nintendo Black Star Promos",
+        "series": "NP",
+        "printedTotal": 40,
+        "total": 40,
+        "legalities": {
+          "unlimited": "Legal"
+        },
+        "ptcgoCode": "PR-NP",
+        "releaseDate": "2003/10/01",
+        "updatedAt": "2020/05/01 16:06:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/np/symbol.png",
+          "logo": "https://images.pokemontcg.io/np/logo.png"
+        }
+      },
+      "number": "22",
+      "artist": "Mitsuhiro Arita",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        374
+      ],
+      "legalities": {
+        "unlimited": "Legal"
+      },
+      "images": {
+        "small": "https://images.pokemontcg.io/np/22.png",
+        "large": "https://images.pokemontcg.io/np/22_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/np-22",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "normal": {
+            "low": 2.2,
+            "mid": 6,
+            "high": 19.99,
+            "market": 2.49,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/np-22",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 15.17,
+          "lowPrice": 9.99,
+          "trendPrice": 16.39,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 12.49,
+          "avg1": 18,
+          "avg7": 17.78,
+          "avg30": 13.79,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "np-23",
+      "name": "Metang",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Stage 1"
+      ],
+      "hp": "80",
+      "types": [
+        "Metal"
+      ],
+      "evolvesFrom": "Beldum",
+      "evolvesTo": [
+        "Metagross"
+      ],
+      "attacks": [
+        {
+          "name": "Metal Load",
+          "cost": [
+            "Colorless"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "Search your discard pile for a Metal Energy card and attach it to Metang."
+        },
+        {
+          "name": "Metal Claw",
+          "cost": [
+            "Metal",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "30",
+          "text": ""
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Fire",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Grass",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "set": {
+        "id": "np",
+        "name": "Nintendo Black Star Promos",
+        "series": "NP",
+        "printedTotal": 40,
+        "total": 40,
+        "legalities": {
+          "unlimited": "Legal"
+        },
+        "ptcgoCode": "PR-NP",
+        "releaseDate": "2003/10/01",
+        "updatedAt": "2020/05/01 16:06:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/np/symbol.png",
+          "logo": "https://images.pokemontcg.io/np/logo.png"
+        }
+      },
+      "number": "23",
+      "artist": "Mitsuhiro Arita",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        375
+      ],
+      "legalities": {
+        "unlimited": "Legal"
+      },
+      "images": {
+        "small": "https://images.pokemontcg.io/np/23.png",
+        "large": "https://images.pokemontcg.io/np/23_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/np-23",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "normal": {
+            "low": 225,
+            "mid": 294.89,
+            "high": 295.95,
+            "market": 294.89,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/np-23",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 150,
+          "lowPrice": 300,
+          "trendPrice": 71.16,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 300,
+          "avg1": 150,
+          "avg7": 33.99,
+          "avg30": 29.05,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "np-24",
+      "name": "Chimecho",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic"
+      ],
+      "hp": "70",
+      "types": [
+        "Psychic"
+      ],
+      "attacks": [
+        {
+          "name": "Resonate",
+          "cost": [
+            "Colorless"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "Your opponent switches each Defending Pokémon with his or her Benched Pokémon. If your opponent has only 1 Benched Pokémon, you choose the Defending Pokémon to switch."
+        },
+        {
+          "name": "Healing Sound",
+          "cost": [
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "",
+          "text": "Remove 3 damage counters from each of your Active Pokémon. Each Defending Pokémon is now Asleep."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Psychic",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "set": {
+        "id": "np",
+        "name": "Nintendo Black Star Promos",
+        "series": "NP",
+        "printedTotal": 40,
+        "total": 40,
+        "legalities": {
+          "unlimited": "Legal"
+        },
+        "ptcgoCode": "PR-NP",
+        "releaseDate": "2003/10/01",
+        "updatedAt": "2020/05/01 16:06:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/np/symbol.png",
+          "logo": "https://images.pokemontcg.io/np/logo.png"
+        }
+      },
+      "number": "24",
+      "artist": "Atsuko Nishida",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        358
+      ],
+      "legalities": {
+        "unlimited": "Legal"
+      },
+      "images": {
+        "small": "https://images.pokemontcg.io/np/24.png",
+        "large": "https://images.pokemontcg.io/np/24_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/np-24",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "normal": {
+            "low": 4,
+            "mid": 5.55,
+            "high": 19.99,
+            "market": 5.5,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/np-24",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 28.95,
+          "lowPrice": 20,
+          "trendPrice": 23.3,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 20,
+          "avg1": 23,
+          "avg7": 20.94,
+          "avg30": 15.69,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "np-25",
+      "name": "Flygon",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Stage 2"
+      ],
+      "hp": "120",
+      "types": [
+        "Colorless"
+      ],
+      "evolvesFrom": "Vibrava",
+      "attacks": [
+        {
+          "name": "Sand Pit",
+          "cost": [
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "20",
+          "text": "The Defending Pokémon can't retreat until the end of your opponent's next turn."
+        },
+        {
+          "name": "Dragonbreath",
+          "cost": [
+            "Grass",
+            "Lightning",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 4,
+          "damage": "80",
+          "text": "Flip a coin. If heads, the Defending Pokémon is now Paralyzed. If tails, this attack does nothing."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Colorless",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Lightning",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "set": {
+        "id": "np",
+        "name": "Nintendo Black Star Promos",
+        "series": "NP",
+        "printedTotal": 40,
+        "total": 40,
+        "legalities": {
+          "unlimited": "Legal"
+        },
+        "ptcgoCode": "PR-NP",
+        "releaseDate": "2003/10/01",
+        "updatedAt": "2020/05/01 16:06:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/np/symbol.png",
+          "logo": "https://images.pokemontcg.io/np/logo.png"
+        }
+      },
+      "number": "25",
+      "artist": "Kouki Saitou",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        330
+      ],
+      "legalities": {
+        "unlimited": "Legal"
+      },
+      "images": {
+        "small": "https://images.pokemontcg.io/np/25.png",
+        "large": "https://images.pokemontcg.io/np/25_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/np-25",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "normal": {
+            "low": 25,
+            "mid": 31.04,
+            "high": 34.99,
+            "market": 30.26,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/np-25",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 58.75,
+          "lowPrice": 100,
+          "trendPrice": 65.46,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 100,
+          "avg1": 58.75,
+          "avg7": 55.89,
+          "avg30": 50.41,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "np-26",
+      "name": "Tropical Wind",
+      "supertype": "Trainer",
+      "subtypes": [
+        "Item"
+      ],
+      "rules": [
+        "Flip a coin. If heads, remove 2 damage counters from each Active Pokémon (remove 1 damage counter if a Pokémon has only 1). If tails, each Active Pokémon is now Asleep."
+      ],
+      "set": {
+        "id": "np",
+        "name": "Nintendo Black Star Promos",
+        "series": "NP",
+        "printedTotal": 40,
+        "total": 40,
+        "legalities": {
+          "unlimited": "Legal"
+        },
+        "ptcgoCode": "PR-NP",
+        "releaseDate": "2003/10/01",
+        "updatedAt": "2020/05/01 16:06:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/np/symbol.png",
+          "logo": "https://images.pokemontcg.io/np/logo.png"
+        }
+      },
+      "number": "26",
+      "artist": "Sumiyoshi Kizuki",
+      "rarity": "Promo",
+      "legalities": {
+        "unlimited": "Legal"
+      },
+      "images": {
+        "small": "https://images.pokemontcg.io/np/26.png",
+        "large": "https://images.pokemontcg.io/np/26_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/np-26",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "normal": {
+            "low": 149.99,
+            "mid": 149.99,
+            "high": 149.99,
+            "market": 62.16,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/np-26",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 135,
+          "lowPrice": 74.9,
+          "trendPrice": 55.17,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 20,
+          "lowPriceExPlus": 74.9,
+          "avg1": 135,
+          "avg7": 121.42,
+          "avg30": 158.85,
+          "reverseHoloAvg1": 20,
+          "reverseHoloAvg7": 16,
+          "reverseHoloAvg30": 16
+        }
+      }
+    },
+    {
+      "id": "np-27",
+      "name": "Tropical Tidal Wave",
+      "supertype": "Trainer",
+      "subtypes": [
+        "Item"
+      ],
+      "rules": [
+        "Flip a coin. If heads, discard all Trainer cards your opponent has in play. If tails, discard all Trainer (excluding Supporter cards) you have in play."
+      ],
+      "set": {
+        "id": "np",
+        "name": "Nintendo Black Star Promos",
+        "series": "NP",
+        "printedTotal": 40,
+        "total": 40,
+        "legalities": {
+          "unlimited": "Legal"
+        },
+        "ptcgoCode": "PR-NP",
+        "releaseDate": "2003/10/01",
+        "updatedAt": "2020/05/01 16:06:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/np/symbol.png",
+          "logo": "https://images.pokemontcg.io/np/logo.png"
+        }
+      },
+      "number": "27",
+      "artist": "Sumiyoshi Kizuki",
+      "rarity": "Promo",
+      "legalities": {
+        "unlimited": "Legal"
+      },
+      "images": {
+        "small": "https://images.pokemontcg.io/np/27.png",
+        "large": "https://images.pokemontcg.io/np/27_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/np-27",
+        "updatedAt": "2023/03/27"
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/np-27",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 350,
+          "lowPrice": 239.95,
+          "trendPrice": 397.93,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 50,
+          "lowPriceExPlus": 239.95,
+          "avg1": 350,
+          "avg7": 430.26,
+          "avg30": 453.42,
+          "reverseHoloAvg1": 50,
+          "reverseHoloAvg7": 50,
+          "reverseHoloAvg30": 50
+        }
+      }
+    },
+    {
+      "id": "np-28",
+      "name": "Championship Arena",
+      "supertype": "Trainer",
+      "subtypes": [
+        "Stadium"
+      ],
+      "rules": [
+        "This card stays in play when you play it. Discard this card if another Stadium card comes into play. If another card with the same name is in play, you can't play this card.",
+        "At the end of each player's turn, if that player has 8 or more cards in his or her hand, that player discards a number of cards until that player has 7 cards left in his or her hand."
+      ],
+      "set": {
+        "id": "np",
+        "name": "Nintendo Black Star Promos",
+        "series": "NP",
+        "printedTotal": 40,
+        "total": 40,
+        "legalities": {
+          "unlimited": "Legal"
+        },
+        "ptcgoCode": "PR-NP",
+        "releaseDate": "2003/10/01",
+        "updatedAt": "2020/05/01 16:06:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/np/symbol.png",
+          "logo": "https://images.pokemontcg.io/np/logo.png"
+        }
+      },
+      "number": "28",
+      "artist": "Ryo Ueda",
+      "rarity": "Promo",
+      "legalities": {
+        "unlimited": "Legal"
+      },
+      "images": {
+        "small": "https://images.pokemontcg.io/np/28.png",
+        "large": "https://images.pokemontcg.io/np/28_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/np-28",
+        "updatedAt": "2023/03/27"
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/np-28",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 0,
+          "lowPrice": 4400,
+          "trendPrice": 2999,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 4400,
+          "avg1": 2999,
+          "avg7": 2624.5,
+          "avg30": 2624.5,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "np-29",
+      "name": "Celebi",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic"
+      ],
+      "hp": "50",
+      "types": [
+        "Grass"
+      ],
+      "attacks": [
+        {
+          "name": "Leaf Slice",
+          "cost": [
+            "Grass",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "20×",
+          "text": "Flip 2 coins. This attack does 20 damage times the number of heads."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Fire",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "set": {
+        "id": "np",
+        "name": "Nintendo Black Star Promos",
+        "series": "NP",
+        "printedTotal": 40,
+        "total": 40,
+        "legalities": {
+          "unlimited": "Legal"
+        },
+        "ptcgoCode": "PR-NP",
+        "releaseDate": "2003/10/01",
+        "updatedAt": "2020/05/01 16:06:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/np/symbol.png",
+          "logo": "https://images.pokemontcg.io/np/logo.png"
+        }
+      },
+      "number": "29",
+      "artist": "Hajime Kusajima",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        251
+      ],
+      "legalities": {
+        "unlimited": "Legal"
+      },
+      "images": {
+        "small": "https://images.pokemontcg.io/np/29.png",
+        "large": "https://images.pokemontcg.io/np/29_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/np-29",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 15,
+            "mid": 26.19,
+            "high": 50,
+            "market": 31.73,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/np-29",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 15.8,
+          "lowPrice": 2,
+          "trendPrice": 14.72,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 6.14,
+          "lowPriceExPlus": 17,
+          "avg1": 20.99,
+          "avg7": 18.81,
+          "avg30": 13.21,
+          "reverseHoloAvg1": 15,
+          "reverseHoloAvg7": 6.43,
+          "reverseHoloAvg30": 5.27
+        }
+      }
+    },
+    {
+      "id": "np-30",
+      "name": "Suicune",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic"
+      ],
+      "hp": "70",
+      "types": [
+        "Water"
+      ],
+      "abilities": [
+        {
+          "name": "Pure Body",
+          "text": "Whenever you attach a Water Energy card from your hand to Suicune, discard an Energy card attached to Suicune. (You can't attach a Water Energy card from your hand if Suicune has no Energy cards attached.)",
+          "type": "Poké-Body"
+        }
+      ],
+      "attacks": [
+        {
+          "name": "Hypno Wave",
+          "cost": [
+            "Water",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "30+",
+          "text": "Flip a coin. If heads, this attack does 30 damage plus 20 more damage. If tails, this attack does 30 damage and the Defending Pokémon is now Asleep."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Lightning",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "set": {
+        "id": "np",
+        "name": "Nintendo Black Star Promos",
+        "series": "NP",
+        "printedTotal": 40,
+        "total": 40,
+        "legalities": {
+          "unlimited": "Legal"
+        },
+        "ptcgoCode": "PR-NP",
+        "releaseDate": "2003/10/01",
+        "updatedAt": "2020/05/01 16:06:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/np/symbol.png",
+          "logo": "https://images.pokemontcg.io/np/logo.png"
+        }
+      },
+      "number": "30",
+      "artist": "Atsuko Nishida",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        245
+      ],
+      "legalities": {
+        "unlimited": "Legal"
+      },
+      "images": {
+        "small": "https://images.pokemontcg.io/np/30.png",
+        "large": "https://images.pokemontcg.io/np/30_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/np-30",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 16.01,
+            "mid": 17.93,
+            "high": 23,
+            "market": 20.12,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/np-30",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 11.78,
+          "lowPrice": 1.49,
+          "trendPrice": 14.3,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 7.59,
+          "lowPriceExPlus": 10.99,
+          "avg1": 23.45,
+          "avg7": 14.04,
+          "avg30": 10.82,
+          "reverseHoloAvg1": 4.99,
+          "reverseHoloAvg7": 6.25,
+          "reverseHoloAvg30": 5.59
+        }
+      }
+    },
+    {
+      "id": "np-31",
+      "name": "Moltres ex",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic",
+        "EX"
+      ],
+      "hp": "100",
+      "types": [
+        "Fire"
+      ],
+      "rules": [
+        "When Pokémon-ex has been Knocked Out, your opponent takes 2 Prize cards."
+      ],
+      "abilities": [
+        {
+          "name": "Synchronized Lift",
+          "text": "As long as you have Articuno ex and Zapdos ex in play, the Retreat Cost for Moltres ex is 0.",
+          "type": "Poké-Body"
+        }
+      ],
+      "attacks": [
+        {
+          "name": "Flame Gift",
+          "cost": [
+            "Colorless"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "10",
+          "text": "You may move a Fire Energy card attached to Moltres ex to 1 of your Pokémon."
+        },
+        {
+          "name": "Scorching Wing",
+          "cost": [
+            "Fire",
+            "Fire",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "90",
+          "text": "Discard all Fire Energy attached to Moltres ex."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Water",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "set": {
+        "id": "np",
+        "name": "Nintendo Black Star Promos",
+        "series": "NP",
+        "printedTotal": 40,
+        "total": 40,
+        "legalities": {
+          "unlimited": "Legal"
+        },
+        "ptcgoCode": "PR-NP",
+        "releaseDate": "2003/10/01",
+        "updatedAt": "2020/05/01 16:06:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/np/symbol.png",
+          "logo": "https://images.pokemontcg.io/np/logo.png"
+        }
+      },
+      "number": "31",
+      "artist": "Ken Ikuji",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        146
+      ],
+      "legalities": {
+        "unlimited": "Legal"
+      },
+      "images": {
+        "small": "https://images.pokemontcg.io/np/31.png",
+        "large": "https://images.pokemontcg.io/np/31_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/np-31",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 56.64,
+            "mid": 99.69,
+            "high": 149.99,
+            "market": 101.98,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/np-31",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 25.08,
+          "lowPrice": 10,
+          "trendPrice": 19.35,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 5.82,
+          "lowPriceExPlus": 50,
+          "avg1": 10,
+          "avg7": 21.81,
+          "avg30": 41.93,
+          "reverseHoloAvg1": 3.7,
+          "reverseHoloAvg7": 6.38,
+          "reverseHoloAvg30": 8.55
+        }
+      }
+    },
+    {
+      "id": "np-32",
+      "name": "Articuno ex",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic",
+        "EX"
+      ],
+      "hp": "100",
+      "types": [
+        "Water"
+      ],
+      "rules": [
+        "When Pokémon-ex has been Knocked Out, your opponent takes 2 Prize cards."
+      ],
+      "abilities": [
+        {
+          "name": "Synchronized Lift",
+          "text": "As long as you have Zapdos ex and Moltres ex in play, the Retreat Cost for Articuno ex is 0.",
+          "type": "Poké-Body"
+        }
+      ],
+      "attacks": [
+        {
+          "name": "Ice Gift",
+          "cost": [
+            "Colorless"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "10",
+          "text": "You may move a Water Energy attached to Articuno ex to 1 of your Pokémon."
+        },
+        {
+          "name": "Freezing Wing",
+          "cost": [
+            "Water",
+            "Water",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "50",
+          "text": "Flip a coin. If heads, the Defending Pokémon is now Asleep."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Metal",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "set": {
+        "id": "np",
+        "name": "Nintendo Black Star Promos",
+        "series": "NP",
+        "printedTotal": 40,
+        "total": 40,
+        "legalities": {
+          "unlimited": "Legal"
+        },
+        "ptcgoCode": "PR-NP",
+        "releaseDate": "2003/10/01",
+        "updatedAt": "2020/05/01 16:06:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/np/symbol.png",
+          "logo": "https://images.pokemontcg.io/np/logo.png"
+        }
+      },
+      "number": "32",
+      "artist": "Nakaoka",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        144
+      ],
+      "legalities": {
+        "unlimited": "Legal"
+      },
+      "images": {
+        "small": "https://images.pokemontcg.io/np/32.png",
+        "large": "https://images.pokemontcg.io/np/32_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/np-32",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 76.44,
+            "mid": 103.99,
+            "high": 199.99,
+            "market": 143,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/np-32",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 30.98,
+          "lowPrice": 10,
+          "trendPrice": 37.98,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 7.88,
+          "lowPriceExPlus": 24.99,
+          "avg1": 11,
+          "avg7": 33.26,
+          "avg30": 36,
+          "reverseHoloAvg1": 4.48,
+          "reverseHoloAvg7": 5.4,
+          "reverseHoloAvg30": 12.82
+        }
+      }
+    },
+    {
+      "id": "np-33",
+      "name": "Zapdos ex",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic",
+        "EX"
+      ],
+      "hp": "100",
+      "types": [
+        "Lightning"
+      ],
+      "rules": [
+        "When Pokémon-ex has been Knocked Out, your opponent takes 2 Prize cards."
+      ],
+      "abilities": [
+        {
+          "name": "Synchronized Lift",
+          "text": "As long as you have Articuno ex and Moltres ex in play, the Retreat Cost for Zapdos ex is 0.",
+          "type": "Poké-Body"
+        }
+      ],
+      "attacks": [
+        {
+          "name": "Thunder Gift",
+          "cost": [
+            "Colorless"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "10",
+          "text": "You may move a Lightning Energy card attached to Zapdos ex to 1 of your Pokémon."
+        },
+        {
+          "name": "Lightning Wing",
+          "cost": [
+            "Lightning",
+            "Lightning",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "60",
+          "text": "Does 10 damage to 1 of your Benched Pokémon. (Don't apply Weakness and Resistance for Benched Pokémon.)"
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Lightning",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "set": {
+        "id": "np",
+        "name": "Nintendo Black Star Promos",
+        "series": "NP",
+        "printedTotal": 40,
+        "total": 40,
+        "legalities": {
+          "unlimited": "Legal"
+        },
+        "ptcgoCode": "PR-NP",
+        "releaseDate": "2003/10/01",
+        "updatedAt": "2020/05/01 16:06:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/np/symbol.png",
+          "logo": "https://images.pokemontcg.io/np/logo.png"
+        }
+      },
+      "number": "33",
+      "artist": "K. Hoshiba",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        145
+      ],
+      "legalities": {
+        "unlimited": "Legal"
+      },
+      "images": {
+        "small": "https://images.pokemontcg.io/np/33.png",
+        "large": "https://images.pokemontcg.io/np/33_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/np-33",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 94.4,
+            "mid": 103.85,
+            "high": 139.99,
+            "market": 113.36,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/np-33",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 31.76,
+          "lowPrice": 4.99,
+          "trendPrice": 32.49,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 24.5,
+          "lowPriceExPlus": 19.9,
+          "avg1": 7.5,
+          "avg7": 32.05,
+          "avg30": 36.75,
+          "reverseHoloAvg1": 6,
+          "reverseHoloAvg7": 26.55,
+          "reverseHoloAvg30": 11.91
+        }
+      }
+    },
+    {
+      "id": "np-34",
+      "name": "Typhlosion",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Stage 2"
+      ],
+      "hp": "110",
+      "types": [
+        "Fire"
+      ],
+      "evolvesFrom": "Quilava",
+      "abilities": [
+        {
+          "name": "Burning Aura",
+          "text": "As long as Typhlosion is your Active Pokémon, put 1 damage counter on each Active Pokémon (both yours and your opponent's) between turns.",
+          "type": "Poké-Body"
+        }
+      ],
+      "attacks": [
+        {
+          "name": "Flickering Flames",
+          "cost": [
+            "Fire"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "20",
+          "text": "The Defending Pokémon is now Asleep."
+        },
+        {
+          "name": "Rage",
+          "cost": [
+            "Fire",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "50+",
+          "text": "Does 50 damage plus 10 more damage for each damage counter on Typhlosion."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Water",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "set": {
+        "id": "np",
+        "name": "Nintendo Black Star Promos",
+        "series": "NP",
+        "printedTotal": 40,
+        "total": 40,
+        "legalities": {
+          "unlimited": "Legal"
+        },
+        "ptcgoCode": "PR-NP",
+        "releaseDate": "2003/10/01",
+        "updatedAt": "2020/05/01 16:06:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/np/symbol.png",
+          "logo": "https://images.pokemontcg.io/np/logo.png"
+        }
+      },
+      "number": "34",
+      "artist": "Hajime Kusajima",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        157
+      ],
+      "legalities": {
+        "unlimited": "Legal"
+      },
+      "images": {
+        "small": "https://images.pokemontcg.io/np/34.png",
+        "large": "https://images.pokemontcg.io/np/34_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/np-34",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 26.14,
+            "mid": 31.11,
+            "high": 65.98,
+            "market": 24.77,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/np-34",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 5.08,
+          "lowPrice": 0.49,
+          "trendPrice": 3.15,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 4.44,
+          "lowPriceExPlus": 7.5,
+          "avg1": 6.5,
+          "avg7": 5.19,
+          "avg30": 5.29,
+          "reverseHoloAvg1": 0.75,
+          "reverseHoloAvg7": 3.22,
+          "reverseHoloAvg30": 3.41
+        }
+      }
+    },
+    {
+      "id": "np-35",
+      "name": "Pikachu δ",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic"
+      ],
+      "hp": "40",
+      "types": [
+        "Metal"
+      ],
+      "evolvesTo": [
+        "Raichu"
+      ],
+      "attacks": [
+        {
+          "name": "Thunder Wave",
+          "cost": [
+            "Colorless"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "Flip a coin. If heads, the Defending Pokémon is now Paralyzed."
+        },
+        {
+          "name": "Iron Tail",
+          "cost": [
+            "Metal",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "20×",
+          "text": "Flip a coin until you get tails. This attack does 20 damage times the number of heads."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Fighting",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "set": {
+        "id": "np",
+        "name": "Nintendo Black Star Promos",
+        "series": "NP",
+        "printedTotal": 40,
+        "total": 40,
+        "legalities": {
+          "unlimited": "Legal"
+        },
+        "ptcgoCode": "PR-NP",
+        "releaseDate": "2003/10/01",
+        "updatedAt": "2020/05/01 16:06:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/np/symbol.png",
+          "logo": "https://images.pokemontcg.io/np/logo.png"
+        }
+      },
+      "number": "35",
+      "artist": "Ryo Ueda",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        25
+      ],
+      "legalities": {
+        "unlimited": "Legal"
+      },
+      "images": {
+        "small": "https://images.pokemontcg.io/np/35.png",
+        "large": "https://images.pokemontcg.io/np/35_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/np-35",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "normal": {
+            "low": 76.1,
+            "mid": 76.1,
+            "high": 76.1,
+            "market": 150,
+            "directLow": null
+          },
+          "holofoil": {
+            "low": 178.99,
+            "mid": 189.69,
+            "high": 219.99,
+            "market": 85.16,
+            "directLow": 149.99
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/np-35",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 141.25,
+          "lowPrice": 69.99,
+          "trendPrice": 147.96,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 33.91,
+          "lowPriceExPlus": 149.99,
+          "avg1": 169.99,
+          "avg7": 156,
+          "avg30": 126.23,
+          "reverseHoloAvg1": 29.5,
+          "reverseHoloAvg7": 37.06,
+          "reverseHoloAvg30": 36.04
+        }
+      }
+    },
+    {
+      "id": "np-36",
+      "name": "Tropical Tidal Wave",
+      "supertype": "Trainer",
+      "subtypes": [
+        "Item"
+      ],
+      "rules": [
+        "Flip a coin. If heads, discard all Trainer cards your opponent has in play. If tails, discard all Trainer cards (excluding Supporter cards) you have in play."
+      ],
+      "set": {
+        "id": "np",
+        "name": "Nintendo Black Star Promos",
+        "series": "NP",
+        "printedTotal": 40,
+        "total": 40,
+        "legalities": {
+          "unlimited": "Legal"
+        },
+        "ptcgoCode": "PR-NP",
+        "releaseDate": "2003/10/01",
+        "updatedAt": "2020/05/01 16:06:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/np/symbol.png",
+          "logo": "https://images.pokemontcg.io/np/logo.png"
+        }
+      },
+      "number": "36",
+      "artist": "Sumiyoshi Kizuki",
+      "rarity": "Promo",
+      "legalities": {
+        "unlimited": "Legal"
+      },
+      "images": {
+        "small": "https://images.pokemontcg.io/np/36.png",
+        "large": "https://images.pokemontcg.io/np/36_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/np-36",
+        "updatedAt": "2023/03/27"
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/np-36",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 150,
+          "lowPrice": 145,
+          "trendPrice": 155.83,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 49.9,
+          "lowPriceExPlus": 145,
+          "avg1": 150,
+          "avg7": 251.98,
+          "avg30": 279.56,
+          "reverseHoloAvg1": 49.9,
+          "reverseHoloAvg7": 49.9,
+          "reverseHoloAvg30": 49.9
+        }
+      }
+    },
+    {
+      "id": "np-37",
+      "name": "Kyogre ex",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic",
+        "EX"
+      ],
+      "hp": "100",
+      "types": [
+        "Water"
+      ],
+      "rules": [
+        "When Pokémon-ex has been Knocked Out, your opponent takes 2 Prize cards."
+      ],
+      "abilities": [
+        {
+          "name": "Frenzy",
+          "text": "As long as your opponent has Groudon, Groudon ex, Rayquaza, or Rayquaza ex in play. Kyogre ex's attacks do 40 more damage to the Defending Pokémon (before applying Weakness and Resistance).",
+          "type": "Poké-Body"
+        }
+      ],
+      "attacks": [
+        {
+          "name": "Aqua Supply",
+          "cost": [
+            "Water",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "30",
+          "text": "You may attach a basic Energy card from your hand to 1 of your Pokémon."
+        },
+        {
+          "name": "Tsunami",
+          "cost": [
+            "Water",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "40",
+          "text": "Does 10 damage to each of your opponent's Benched Pokémon. (Don't apply Weakness and Resistance for Benched Pokémon.)"
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Lightning",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "set": {
+        "id": "np",
+        "name": "Nintendo Black Star Promos",
+        "series": "NP",
+        "printedTotal": 40,
+        "total": 40,
+        "legalities": {
+          "unlimited": "Legal"
+        },
+        "ptcgoCode": "PR-NP",
+        "releaseDate": "2003/10/01",
+        "updatedAt": "2020/05/01 16:06:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/np/symbol.png",
+          "logo": "https://images.pokemontcg.io/np/logo.png"
+        }
+      },
+      "number": "37",
+      "artist": "Ryo Ueda",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        382
+      ],
+      "legalities": {
+        "unlimited": "Legal"
+      },
+      "images": {
+        "small": "https://images.pokemontcg.io/np/37.png",
+        "large": "https://images.pokemontcg.io/np/37_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/np-37",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 68.91,
+            "mid": 90.48,
+            "high": 149.99,
+            "market": 75.04,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/np-37",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 27.44,
+          "lowPrice": 3.75,
+          "trendPrice": 10.94,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 11.03,
+          "lowPriceExPlus": 20,
+          "avg1": 21.14,
+          "avg7": 23.31,
+          "avg30": 30.72,
+          "reverseHoloAvg1": 5,
+          "reverseHoloAvg7": 4,
+          "reverseHoloAvg30": 11.26
+        }
+      }
+    },
+    {
+      "id": "np-38",
+      "name": "Groudon ex",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic",
+        "EX"
+      ],
+      "hp": "100",
+      "types": [
+        "Fighting"
+      ],
+      "rules": [
+        "When Pokémon-ex has been Knocked Out, your opponent takes 2 Prize cards."
+      ],
+      "abilities": [
+        {
+          "name": "Frenzy",
+          "text": "As long as your opponent has Kyogre, Kyogre ex, Rayquaza, or Rayquaza ex in play, Groudon ex's attacks do 40 more damage to the Defending Pokémon (before applying Weakness and Resistance).",
+          "type": "Poké-Body"
+        }
+      ],
+      "attacks": [
+        {
+          "name": "Mix-Up",
+          "cost": [
+            "Fighting",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "30",
+          "text": "Flip a coin. If heads, your opponent discards the top card from his or her deck."
+        },
+        {
+          "name": "Earthquake",
+          "cost": [
+            "Fighting",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "60",
+          "text": "Does 10 damage to each of your Benched Pokémon. (Don't apply Weakness and Resistance for Benched Pokémon.)"
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Water",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "set": {
+        "id": "np",
+        "name": "Nintendo Black Star Promos",
+        "series": "NP",
+        "printedTotal": 40,
+        "total": 40,
+        "legalities": {
+          "unlimited": "Legal"
+        },
+        "ptcgoCode": "PR-NP",
+        "releaseDate": "2003/10/01",
+        "updatedAt": "2020/05/01 16:06:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/np/symbol.png",
+          "logo": "https://images.pokemontcg.io/np/logo.png"
+        }
+      },
+      "number": "38",
+      "artist": "Ryo Ueda",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        383
+      ],
+      "legalities": {
+        "unlimited": "Legal"
+      },
+      "images": {
+        "small": "https://images.pokemontcg.io/np/38.png",
+        "large": "https://images.pokemontcg.io/np/38_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/np-38",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 64,
+            "mid": 79.99,
+            "high": 99.94,
+            "market": 67.15,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/np-38",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 22.9,
+          "lowPrice": 4,
+          "trendPrice": 15.43,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 9.24,
+          "lowPriceExPlus": 11.95,
+          "avg1": 21.14,
+          "avg7": 18.73,
+          "avg30": 40.07,
+          "reverseHoloAvg1": 2.99,
+          "reverseHoloAvg7": 7.2,
+          "reverseHoloAvg30": 10.44
+        }
+      }
+    },
+    {
+      "id": "np-39",
+      "name": "Rayquaza ex",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic",
+        "EX"
+      ],
+      "hp": "100",
+      "types": [
+        "Colorless"
+      ],
+      "rules": [
+        "When Pokémon-ex has been Knocked Out, your opponent takes 2 Prize cards."
+      ],
+      "abilities": [
+        {
+          "name": "Frenzy",
+          "text": "As long as your opponent has Kyogre, Kyogre ex, Groudon, or Groudon ex in play, Rayquaza ex's attacks do 40 damage to the Defending Pokémon (before applying Weakness and Resistance).",
+          "type": "Poké-Body"
+        }
+      ],
+      "attacks": [
+        {
+          "name": "Dragon Bind",
+          "cost": [
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "20",
+          "text": "Flip a coin. If heads, the Defending Pokémon is now Paralyzed."
+        },
+        {
+          "name": "Twister",
+          "cost": [
+            "Fire",
+            "Lightning",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "50",
+          "text": "Flip 2 coins. If both are tails, this attack does nothing. For each heads, discard an Energy attached to the Defending Pokémon."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Colorless",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Water",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "set": {
+        "id": "np",
+        "name": "Nintendo Black Star Promos",
+        "series": "NP",
+        "printedTotal": 40,
+        "total": 40,
+        "legalities": {
+          "unlimited": "Legal"
+        },
+        "ptcgoCode": "PR-NP",
+        "releaseDate": "2003/10/01",
+        "updatedAt": "2020/05/01 16:06:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/np/symbol.png",
+          "logo": "https://images.pokemontcg.io/np/logo.png"
+        }
+      },
+      "number": "39",
+      "artist": "Ryo Ueda",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        384
+      ],
+      "legalities": {
+        "unlimited": "Legal"
+      },
+      "images": {
+        "small": "https://images.pokemontcg.io/np/39.png",
+        "large": "https://images.pokemontcg.io/np/39_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/np-39",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 230,
+            "mid": 299.99,
+            "high": 399.99,
+            "market": 192.5,
+            "directLow": 259.99
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/np-39",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 106.14,
+          "lowPrice": 14.99,
+          "trendPrice": 84.2,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 17.92,
+          "lowPriceExPlus": 40,
+          "avg1": 80,
+          "avg7": 91,
+          "avg30": 81.18,
+          "reverseHoloAvg1": 4.5,
+          "reverseHoloAvg7": 17.42,
+          "reverseHoloAvg30": 15.64
+        }
+      }
+    },
+    {
+      "id": "np-40",
+      "name": "Mew",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic"
+      ],
+      "hp": "50",
+      "types": [
+        "Psychic"
+      ],
+      "attacks": [
+        {
+          "name": "Psywave",
+          "cost": [
+            "Colorless"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "10×",
+          "text": "Does 10 damage times the amount of Energy attached to the Defending Pokémon."
+        },
+        {
+          "name": "Devolution Beam",
+          "cost": [
+            "Psychic"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "Flip a coin. If heads, choose 1 of either player's Evolved Pokémon, remove the highest stage Evolution card from that Pokémon, and put it into that player's hand."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Psychic",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "set": {
+        "id": "np",
+        "name": "Nintendo Black Star Promos",
+        "series": "NP",
+        "printedTotal": 40,
+        "total": 40,
+        "legalities": {
+          "unlimited": "Legal"
+        },
+        "ptcgoCode": "PR-NP",
+        "releaseDate": "2003/10/01",
+        "updatedAt": "2020/05/01 16:06:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/np/symbol.png",
+          "logo": "https://images.pokemontcg.io/np/logo.png"
+        }
+      },
+      "number": "40",
+      "artist": "Masakazu Fukuda",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        151
+      ],
+      "legalities": {
+        "unlimited": "Legal"
+      },
+      "images": {
+        "small": "https://images.pokemontcg.io/np/40.png",
+        "large": "https://images.pokemontcg.io/np/40_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/np-40",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 30,
+            "mid": 54.24,
+            "high": 99.99,
+            "market": 77.82,
+            "directLow": 85
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/np-40",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 62.49,
+          "lowPrice": 31,
+          "trendPrice": 68.19,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 26.56,
+          "lowPriceExPlus": 89.45,
+          "avg1": 19.99,
+          "avg7": 67.06,
+          "avg30": 32.96,
+          "reverseHoloAvg1": 24.99,
+          "reverseHoloAvg7": 25.16,
+          "reverseHoloAvg30": 23.18
+        }
+      }
+    }
+  ],
+  "totalCount": 40
 }

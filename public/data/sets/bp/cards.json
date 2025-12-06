@@ -1,4 +1,967 @@
 {
-  "data": [],
-  "totalCount": 0
+  "data": [
+    {
+      "id": "bp-1",
+      "name": "Electabuzz",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic"
+      ],
+      "level": "35",
+      "hp": "70",
+      "types": [
+        "Lightning"
+      ],
+      "evolvesTo": [
+        "Electivire"
+      ],
+      "attacks": [
+        {
+          "name": "Thundershock",
+          "cost": [
+            "Lightning"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "10",
+          "text": "Flip a coin. If heads, the Defending Pokémon is now Paralyzed."
+        },
+        {
+          "name": "Thunderpunch",
+          "cost": [
+            "Lightning",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "30+",
+          "text": "Flip a coin. If heads, this attack does 30 damage plus 10 more damage; if tails, this attack does 30 damage plus Electabuzz does 10 damage to itself."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Fighting",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "set": {
+        "id": "bp",
+        "name": "Best of Game",
+        "series": "Other",
+        "printedTotal": 9,
+        "total": 9,
+        "legalities": {
+          "unlimited": "Legal"
+        },
+        "ptcgoCode": "BP",
+        "releaseDate": "2002/12/01",
+        "updatedAt": "2021/10/16 09:52:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/bp/symbol.png",
+          "logo": "https://images.pokemontcg.io/bp/logo.png"
+        }
+      },
+      "number": "1",
+      "artist": "Ken Sugimori",
+      "rarity": "Promo",
+      "flavorText": "Normally found near power plants, it can wander away and cause major blackouts in cities.",
+      "nationalPokedexNumbers": [
+        125
+      ],
+      "legalities": {
+        "unlimited": "Legal"
+      },
+      "images": {
+        "small": "https://images.pokemontcg.io/bp/1.png",
+        "large": "https://images.pokemontcg.io/bp/1_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/bp-1",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "reverseHolofoil": {
+            "low": 17.49,
+            "mid": 26.97,
+            "high": 49.14,
+            "market": 20.99,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/bp-1",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 23.13,
+          "lowPrice": 19.99,
+          "trendPrice": 29.94,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 17.01,
+          "lowPriceExPlus": 22.5,
+          "avg1": 21.89,
+          "avg7": 24.54,
+          "avg30": 23.29,
+          "reverseHoloAvg1": 20,
+          "reverseHoloAvg7": 19.16,
+          "reverseHoloAvg30": 11.11
+        }
+      }
+    },
+    {
+      "id": "bp-2",
+      "name": "Hitmonchan",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic"
+      ],
+      "level": "33",
+      "hp": "70",
+      "types": [
+        "Fighting"
+      ],
+      "attacks": [
+        {
+          "name": "Jab",
+          "cost": [
+            "Fighting"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "20",
+          "text": ""
+        },
+        {
+          "name": "Special Punch",
+          "cost": [
+            "Fighting",
+            "Fighting",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "40",
+          "text": ""
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Psychic",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "set": {
+        "id": "bp",
+        "name": "Best of Game",
+        "series": "Other",
+        "printedTotal": 9,
+        "total": 9,
+        "legalities": {
+          "unlimited": "Legal"
+        },
+        "ptcgoCode": "BP",
+        "releaseDate": "2002/12/01",
+        "updatedAt": "2021/10/16 09:52:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/bp/symbol.png",
+          "logo": "https://images.pokemontcg.io/bp/logo.png"
+        }
+      },
+      "number": "2",
+      "artist": "Ken Sugimori",
+      "rarity": "Promo",
+      "flavorText": "While seeming to do nothing, it fires punches in lightning-fast volleys that are impossible to see.",
+      "nationalPokedexNumbers": [
+        107
+      ],
+      "legalities": {
+        "unlimited": "Legal"
+      },
+      "images": {
+        "small": "https://images.pokemontcg.io/bp/2.png",
+        "large": "https://images.pokemontcg.io/bp/2_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/bp-2",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "reverseHolofoil": {
+            "low": 24,
+            "mid": 29.12,
+            "high": 39.99,
+            "market": 26.24,
+            "directLow": 37.99
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/bp-2",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 0,
+          "lowPrice": 220,
+          "trendPrice": 16.66,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 220,
+          "avg1": 29.99,
+          "avg7": 41.66,
+          "avg30": 41.66,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "bp-4",
+      "name": "Rocket's Scizor",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic"
+      ],
+      "hp": "60",
+      "types": [
+        "Metal"
+      ],
+      "attacks": [
+        {
+          "name": "Focus",
+          "cost": [
+            "Colorless"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "During your next turn, Rocket's Scizor's Agility attack's damage is doubled."
+        },
+        {
+          "name": "Agility",
+          "cost": [
+            "Metal",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "20",
+          "text": "Flip a coin. If heads, during your opponent's next turn, prevent all effects of attacks, including damage, done to Rocket's Scizor."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Fire",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Grass",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "set": {
+        "id": "bp",
+        "name": "Best of Game",
+        "series": "Other",
+        "printedTotal": 9,
+        "total": 9,
+        "legalities": {
+          "unlimited": "Legal"
+        },
+        "ptcgoCode": "BP",
+        "releaseDate": "2002/12/01",
+        "updatedAt": "2021/10/16 09:52:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/bp/symbol.png",
+          "logo": "https://images.pokemontcg.io/bp/logo.png"
+        }
+      },
+      "number": "4",
+      "artist": "K Hoshiba",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        212
+      ],
+      "legalities": {
+        "unlimited": "Legal"
+      },
+      "images": {
+        "small": "https://images.pokemontcg.io/bp/4.png",
+        "large": "https://images.pokemontcg.io/bp/4_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/bp-4",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "normal": {
+            "low": 21,
+            "mid": 29.57,
+            "high": 88.58,
+            "market": 24.95,
+            "directLow": 29.57
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/bp-4",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 14.88,
+          "lowPrice": 15,
+          "trendPrice": 18.21,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 3.49,
+          "lowPriceExPlus": 15,
+          "avg1": 20,
+          "avg7": 14.26,
+          "avg30": 15.65,
+          "reverseHoloAvg1": 3.49,
+          "reverseHoloAvg7": 3.49,
+          "reverseHoloAvg30": 3.49
+        }
+      }
+    },
+    {
+      "id": "bp-3",
+      "name": "Professor Elm",
+      "supertype": "Trainer",
+      "rules": [
+        "Shuffle your hand into your deck. Then, draw 7 cards. You can't play any more Trainer cards this turn."
+      ],
+      "set": {
+        "id": "bp",
+        "name": "Best of Game",
+        "series": "Other",
+        "printedTotal": 9,
+        "total": 9,
+        "legalities": {
+          "unlimited": "Legal"
+        },
+        "ptcgoCode": "BP",
+        "releaseDate": "2002/12/01",
+        "updatedAt": "2021/10/16 09:52:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/bp/symbol.png",
+          "logo": "https://images.pokemontcg.io/bp/logo.png"
+        }
+      },
+      "number": "3",
+      "artist": "Ken Sugimori",
+      "rarity": "Promo",
+      "legalities": {
+        "unlimited": "Legal"
+      },
+      "images": {
+        "small": "https://images.pokemontcg.io/bp/3.png",
+        "large": "https://images.pokemontcg.io/bp/3_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/bp-3",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "reverseHolofoil": {
+            "low": 12.68,
+            "mid": 13,
+            "high": 29,
+            "market": 13.81,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/bp-3",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 19.99,
+          "lowPrice": 14.9,
+          "trendPrice": 22.06,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 15.1,
+          "lowPriceExPlus": 14.9,
+          "avg1": 20,
+          "avg7": 24.67,
+          "avg30": 17.26,
+          "reverseHoloAvg1": 19.97,
+          "reverseHoloAvg7": 15.21,
+          "reverseHoloAvg30": 9.89
+        }
+      }
+    },
+    {
+      "id": "bp-6",
+      "name": "Dark Ivysaur",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Stage 1"
+      ],
+      "hp": "50",
+      "types": [
+        "Grass"
+      ],
+      "evolvesFrom": "Bulbasaur",
+      "evolvesTo": [
+        "Dark Venusaur"
+      ],
+      "abilities": [
+        {
+          "name": "Vine Pull",
+          "text": "Once during your turn when Dark Ivysaur retreats, choose 1 of your opponent's Benched Pokémon and switch it with his or her Active Pokémon.",
+          "type": "Poké-Body"
+        }
+      ],
+      "attacks": [
+        {
+          "name": "Fury Strikes",
+          "cost": [
+            "Grass",
+            "Grass"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "",
+          "text": "Your opponent puts 3 markers onto his or her Pokémon (divided as he or she chooses). (More than 1 marker can be put on the same Pokémon.) Then, this attack does 10 damage to each Pokémon for each marker on it. Don't apply Weakness and Resistance. Remove the markers at the end of the turn."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Fire",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "set": {
+        "id": "bp",
+        "name": "Best of Game",
+        "series": "Other",
+        "printedTotal": 9,
+        "total": 9,
+        "legalities": {
+          "unlimited": "Legal"
+        },
+        "ptcgoCode": "BP",
+        "releaseDate": "2002/12/01",
+        "updatedAt": "2021/10/16 09:52:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/bp/symbol.png",
+          "logo": "https://images.pokemontcg.io/bp/logo.png"
+        }
+      },
+      "number": "6",
+      "artist": "Shin-ichi Yoshida",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        2
+      ],
+      "legalities": {
+        "unlimited": "Legal"
+      },
+      "images": {
+        "small": "https://images.pokemontcg.io/bp/6.png",
+        "large": "https://images.pokemontcg.io/bp/6_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/bp-6",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "normal": {
+            "low": 30,
+            "mid": 34.69,
+            "high": 39.99,
+            "market": 29.03,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/bp-6",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 30.7,
+          "lowPrice": 15,
+          "trendPrice": 30.77,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 4.98,
+          "lowPriceExPlus": 30,
+          "avg1": 34.5,
+          "avg7": 31.31,
+          "avg30": 21.97,
+          "reverseHoloAvg1": 4.99,
+          "reverseHoloAvg7": 4.32,
+          "reverseHoloAvg30": 4.32
+        }
+      }
+    },
+    {
+      "id": "bp-5",
+      "name": "Rocket's Sneasel",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic"
+      ],
+      "hp": "60",
+      "types": [
+        "Darkness"
+      ],
+      "attacks": [
+        {
+          "name": "Entrap",
+          "cost": [
+            "Darkness"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "The Defending Pokémon can't retreat during your opponent's next turn."
+        },
+        {
+          "name": "Continuous Scratch",
+          "cost": [
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "10×",
+          "text": "Flip 4 coins. This attack does 10 damage times the number of heads."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Fighting",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Psychic",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "set": {
+        "id": "bp",
+        "name": "Best of Game",
+        "series": "Other",
+        "printedTotal": 9,
+        "total": 9,
+        "legalities": {
+          "unlimited": "Legal"
+        },
+        "ptcgoCode": "BP",
+        "releaseDate": "2002/12/01",
+        "updatedAt": "2021/10/16 09:52:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/bp/symbol.png",
+          "logo": "https://images.pokemontcg.io/bp/logo.png"
+        }
+      },
+      "number": "5",
+      "artist": "Katsura Tabata",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        215
+      ],
+      "legalities": {
+        "unlimited": "Legal"
+      },
+      "images": {
+        "small": "https://images.pokemontcg.io/bp/5.png",
+        "large": "https://images.pokemontcg.io/bp/5_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/bp-5",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "normal": {
+            "low": 15.27,
+            "mid": 22,
+            "high": 24.99,
+            "market": 15.27,
+            "directLow": 22
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/bp-5",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 14.22,
+          "lowPrice": 7.5,
+          "trendPrice": 17.36,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 2.75,
+          "lowPriceExPlus": 13.5,
+          "avg1": 17.95,
+          "avg7": 13.2,
+          "avg30": 17.7,
+          "reverseHoloAvg1": 2.75,
+          "reverseHoloAvg7": 2.75,
+          "reverseHoloAvg30": 2.75
+        }
+      }
+    },
+    {
+      "id": "bp-7",
+      "name": "Dark Venusaur",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Stage 2"
+      ],
+      "hp": "70",
+      "types": [
+        "Grass"
+      ],
+      "evolvesFrom": "Dark Ivysaur",
+      "attacks": [
+        {
+          "name": "Horrid Pollen",
+          "cost": [
+            "Grass",
+            "Grass",
+            "Grass"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "30",
+          "text": "Flip 2 coins. If 1 is heads, the Defending Pokémon is now Asleep and Poisoned. If both are heads, the Defending Pokémon is now Confused and Poisoned. If both are tails, the Defending Pokémon is now Paralyzed and Poisoned."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Fire",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "set": {
+        "id": "bp",
+        "name": "Best of Game",
+        "series": "Other",
+        "printedTotal": 9,
+        "total": 9,
+        "legalities": {
+          "unlimited": "Legal"
+        },
+        "ptcgoCode": "BP",
+        "releaseDate": "2002/12/01",
+        "updatedAt": "2021/10/16 09:52:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/bp/symbol.png",
+          "logo": "https://images.pokemontcg.io/bp/logo.png"
+        }
+      },
+      "number": "7",
+      "artist": "Shin-ichi Yoshida",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        3
+      ],
+      "legalities": {
+        "unlimited": "Legal"
+      },
+      "images": {
+        "small": "https://images.pokemontcg.io/bp/7.png",
+        "large": "https://images.pokemontcg.io/bp/7_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/bp-7",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "normal": {
+            "low": 95,
+            "mid": 109.5,
+            "high": 124,
+            "market": 100.09,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/bp-7",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 59.98,
+          "lowPrice": 34,
+          "trendPrice": 64.5,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 8.95,
+          "lowPriceExPlus": 50,
+          "avg1": 79.9,
+          "avg7": 53.55,
+          "avg30": 50.52,
+          "reverseHoloAvg1": 8.95,
+          "reverseHoloAvg7": 9.45,
+          "reverseHoloAvg30": 9.45
+        }
+      }
+    },
+    {
+      "id": "bp-8",
+      "name": "Rocket's Mewtwo",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic"
+      ],
+      "level": "35",
+      "hp": "70",
+      "types": [
+        "Psychic"
+      ],
+      "attacks": [
+        {
+          "name": "Juxtapose",
+          "cost": [
+            "Psychic"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "Flip a coin. If heads, switch the number of damage counters on Rocket's Mewtwo with the number of damage counters on the Defending Pokémon (even if it would Knock Out either Pokémon). (It's okay if 1 of the Pokémon has no damage counters on it.)"
+        },
+        {
+          "name": "Hypnoblast",
+          "cost": [
+            "Psychic",
+            "Psychic"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "20",
+          "text": "Flip a coin. If heads, the Defending Pokémon is now Asleep."
+        },
+        {
+          "name": "Psyburn",
+          "cost": [
+            "Psychic",
+            "Psychic",
+            "Psychic",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 4,
+          "damage": "60",
+          "text": ""
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Psychic",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "set": {
+        "id": "bp",
+        "name": "Best of Game",
+        "series": "Other",
+        "printedTotal": 9,
+        "total": 9,
+        "legalities": {
+          "unlimited": "Legal"
+        },
+        "ptcgoCode": "BP",
+        "releaseDate": "2002/12/01",
+        "updatedAt": "2021/10/16 09:52:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/bp/symbol.png",
+          "logo": "https://images.pokemontcg.io/bp/logo.png"
+        }
+      },
+      "number": "8",
+      "artist": "Shin-ichi Yoshida",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        150
+      ],
+      "legalities": {
+        "unlimited": "Legal"
+      },
+      "images": {
+        "small": "https://images.pokemontcg.io/bp/8.png",
+        "large": "https://images.pokemontcg.io/bp/8_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/bp-8",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "reverseHolofoil": {
+            "low": 275,
+            "mid": 280,
+            "high": 325,
+            "market": 374.99,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/bp-8",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 163.37,
+          "lowPrice": 189,
+          "trendPrice": 313.84,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 92.64,
+          "lowPriceExPlus": 204.99,
+          "avg1": 235,
+          "avg7": 237.08,
+          "avg30": 258.44,
+          "reverseHoloAvg1": 180,
+          "reverseHoloAvg7": 87.64,
+          "reverseHoloAvg30": 43.31
+        }
+      }
+    },
+    {
+      "id": "bp-9",
+      "name": "Rocket's Hitmonchan",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic"
+      ],
+      "level": "29",
+      "hp": "60",
+      "types": [
+        "Fighting"
+      ],
+      "attacks": [
+        {
+          "name": "Crosscounter",
+          "cost": [
+            "Fighting"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "If an attack does damage to Rocket's Hitmonchan during your opponent's next turn (even if Rocket's Hitmonchan is Knocked Out), flip a coin. If heads, Rocket's Hitmonchan attacks your opponent's Active Pokémon for double that amount of damage. (If Rocket's Hitmonchan takes 20 damage, it does 40 damage to that Pokémon.)"
+        },
+        {
+          "name": "Magnum Punch",
+          "cost": [
+            "Fighting",
+            "Fighting",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "50",
+          "text": ""
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Psychic",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "set": {
+        "id": "bp",
+        "name": "Best of Game",
+        "series": "Other",
+        "printedTotal": 9,
+        "total": 9,
+        "legalities": {
+          "unlimited": "Legal"
+        },
+        "ptcgoCode": "BP",
+        "releaseDate": "2002/12/01",
+        "updatedAt": "2021/10/16 09:52:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/bp/symbol.png",
+          "logo": "https://images.pokemontcg.io/bp/logo.png"
+        }
+      },
+      "number": "9",
+      "artist": "Ken Sugimori",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        107
+      ],
+      "legalities": {
+        "unlimited": "Legal"
+      },
+      "images": {
+        "small": "https://images.pokemontcg.io/bp/9.png",
+        "large": "https://images.pokemontcg.io/bp/9_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/bp-9",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "reverseHolofoil": {
+            "low": 99.27,
+            "mid": 102.04,
+            "high": 150,
+            "market": 117,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/bp-9",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 77.5,
+          "lowPrice": 53.99,
+          "trendPrice": 74.75,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 48.73,
+          "lowPriceExPlus": 89.99,
+          "avg1": 110,
+          "avg7": 77.13,
+          "avg30": 71.79,
+          "reverseHoloAvg1": 95,
+          "reverseHoloAvg7": 55.41,
+          "reverseHoloAvg30": 29.2
+        }
+      }
+    }
+  ],
+  "totalCount": 9
 }

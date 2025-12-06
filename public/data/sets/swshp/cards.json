@@ -29227,7 +29227,6269 @@
           "reverseHoloAvg30": 0
         }
       }
+    },
+    {
+      "id": "swshp-SWSH253",
+      "name": "Origin Forme Palkia V",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic",
+        "V"
+      ],
+      "hp": "220",
+      "types": [
+        "Water"
+      ],
+      "rules": [
+        "V rule: When your Pokémon V is Knocked Out, your opponent takes 2 Prize cards."
+      ],
+      "attacks": [
+        {
+          "name": "Rule the Region",
+          "cost": [
+            "Water"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "Search your deck for a Stadium card, reveal it, and put it into your hand. Then, shuffle your deck."
+        },
+        {
+          "name": "Hydro Break",
+          "cost": [
+            "Water",
+            "Water",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "200",
+          "text": "During your next turn, this Pokémon can't attack."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Lightning",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "set": {
+        "id": "swshp",
+        "name": "SWSH Black Star Promos",
+        "series": "Sword & Shield",
+        "printedTotal": 307,
+        "total": 304,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "PR-SW",
+        "releaseDate": "2019/11/15",
+        "updatedAt": "2022/07/23 20:15:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swshp/symbol.png",
+          "logo": "https://images.pokemontcg.io/swshp/logo.png"
+        }
+      },
+      "number": "SWSH253",
+      "artist": "aky CG Works",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        484
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "F",
+      "images": {
+        "small": "https://images.pokemontcg.io/swshp/SWSH253.png",
+        "large": "https://images.pokemontcg.io/swshp/SWSH253_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swshp-SWSH253",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 1.15,
+            "mid": 2.34,
+            "high": 9999,
+            "market": 2.2,
+            "directLow": 1.97
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swshp-SWSH253",
+        "updatedAt": "2025/11/18",
+        "prices": {
+          "averageSellPrice": 2.2,
+          "lowPrice": 0.99,
+          "trendPrice": 2.35,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 1.1,
+          "avg1": 1.5,
+          "avg7": 2.1,
+          "avg30": 2.14,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swshp-SWSH254",
+      "name": "Origin Forme Palkia VSTAR",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "VSTAR"
+      ],
+      "hp": "280",
+      "types": [
+        "Water"
+      ],
+      "evolvesFrom": "Origin Forme Palkia V",
+      "rules": [
+        "VSTAR rule: When your Pokémon VSTAR is Knocked Out, your opponent takes 2 Prize cards."
+      ],
+      "abilities": [
+        {
+          "name": "Star Portal",
+          "text": "During your turn, you may attach up to 3 Water Energy cards from your discard pile to your Water Pokémon in any way you like. (You can't use more than 1 VSTAR Power in a game.)",
+          "type": "Ability"
+        }
+      ],
+      "attacks": [
+        {
+          "name": "Subspace Swell",
+          "cost": [
+            "Water",
+            "Water"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "60+",
+          "text": "This attack does 20 more damage for each Benched Pokémon (both yours and your opponent's)."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Lightning",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "set": {
+        "id": "swshp",
+        "name": "SWSH Black Star Promos",
+        "series": "Sword & Shield",
+        "printedTotal": 307,
+        "total": 304,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "PR-SW",
+        "releaseDate": "2019/11/15",
+        "updatedAt": "2022/07/23 20:15:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swshp/symbol.png",
+          "logo": "https://images.pokemontcg.io/swshp/logo.png"
+        }
+      },
+      "number": "SWSH254",
+      "artist": "aky CG Works",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        484
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "F",
+      "images": {
+        "small": "https://images.pokemontcg.io/swshp/SWSH254.png",
+        "large": "https://images.pokemontcg.io/swshp/SWSH254_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swshp-SWSH254",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 0.84,
+            "mid": 1.6,
+            "high": 19.99,
+            "market": 1.45,
+            "directLow": 1.3
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swshp-SWSH254",
+        "updatedAt": "2025/11/18",
+        "prices": {
+          "averageSellPrice": 1.71,
+          "lowPrice": 0.5,
+          "trendPrice": 1.61,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.5,
+          "avg1": 1.56,
+          "avg7": 1.73,
+          "avg30": 1.71,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swshp-SWSH255",
+      "name": "Origin Forme Dialga V",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic",
+        "V"
+      ],
+      "hp": "220",
+      "types": [
+        "Metal"
+      ],
+      "rules": [
+        "V rule: When your Pokémon V is Knocked Out, your opponent takes 2 Prize cards."
+      ],
+      "attacks": [
+        {
+          "name": "Metal Coating",
+          "cost": [
+            "Colorless"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "Attach up to 2 Metal Energy cards from your discard pile to this Pokémon."
+        },
+        {
+          "name": "Temporal Rupture",
+          "cost": [
+            "Metal",
+            "Metal",
+            "Metal",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 4,
+          "damage": "180",
+          "text": ""
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Fire",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Grass",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "set": {
+        "id": "swshp",
+        "name": "SWSH Black Star Promos",
+        "series": "Sword & Shield",
+        "printedTotal": 307,
+        "total": 304,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "PR-SW",
+        "releaseDate": "2019/11/15",
+        "updatedAt": "2022/07/23 20:15:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swshp/symbol.png",
+          "logo": "https://images.pokemontcg.io/swshp/logo.png"
+        }
+      },
+      "number": "SWSH255",
+      "artist": "5ban Graphics",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        483
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "F",
+      "images": {
+        "small": "https://images.pokemontcg.io/swshp/SWSH255.png",
+        "large": "https://images.pokemontcg.io/swshp/SWSH255_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swshp-SWSH255",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 1.95,
+            "mid": 3,
+            "high": 9999,
+            "market": 2.49,
+            "directLow": 3.58
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swshp-SWSH255",
+        "updatedAt": "2025/11/18",
+        "prices": {
+          "averageSellPrice": 3,
+          "lowPrice": 1.79,
+          "trendPrice": 3.15,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 1.79,
+          "avg1": 3,
+          "avg7": 3.39,
+          "avg30": 3.01,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swshp-SWSH256",
+      "name": "Origin Forme Dialga VSTAR",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "VSTAR"
+      ],
+      "hp": "280",
+      "types": [
+        "Metal"
+      ],
+      "evolvesFrom": "Origin Forme Dialga V",
+      "rules": [
+        "VSTAR rule: When your Pokémon VSTAR is Knocked Out, your opponent takes 2 Prize cards."
+      ],
+      "attacks": [
+        {
+          "name": "Metal Blast",
+          "cost": [
+            "Colorless"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "40+",
+          "text": "This attack does 40 more damage for each Metal Energy attached to this Pokémon."
+        },
+        {
+          "name": "Star Chronos",
+          "cost": [
+            "Metal",
+            "Metal",
+            "Metal",
+            "Metal",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 5,
+          "damage": "220",
+          "text": "Take another turn after this one. (Skip Pokémon Checkup.) (You can't use more than 1 VSTAR Power in a game.)"
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Fire",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Grass",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 3,
+      "set": {
+        "id": "swshp",
+        "name": "SWSH Black Star Promos",
+        "series": "Sword & Shield",
+        "printedTotal": 307,
+        "total": 304,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "PR-SW",
+        "releaseDate": "2019/11/15",
+        "updatedAt": "2022/07/23 20:15:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swshp/symbol.png",
+          "logo": "https://images.pokemontcg.io/swshp/logo.png"
+        }
+      },
+      "number": "SWSH256",
+      "artist": "5ban Graphics",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        483
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "F",
+      "images": {
+        "small": "https://images.pokemontcg.io/swshp/SWSH256.png",
+        "large": "https://images.pokemontcg.io/swshp/SWSH256_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swshp-SWSH256",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 1.25,
+            "mid": 2,
+            "high": 19.99,
+            "market": 1.77,
+            "directLow": 1.76
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swshp-SWSH256",
+        "updatedAt": "2025/11/18",
+        "prices": {
+          "averageSellPrice": 2.76,
+          "lowPrice": 0.9,
+          "trendPrice": 1.89,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.9,
+          "avg1": 3.5,
+          "avg7": 1.86,
+          "avg30": 2.43,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swshp-SWSH257",
+      "name": "Rotom V",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic",
+        "V"
+      ],
+      "hp": "190",
+      "types": [
+        "Lightning"
+      ],
+      "rules": [
+        "V rule: When your Pokémon V is Knocked Out, your opponent takes 2 Prize cards."
+      ],
+      "attacks": [
+        {
+          "name": "Lost Hack",
+          "cost": [
+            "Colorless"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "Put a Special Energy attached to 1 of your opponent's Pokémon in the Lost Zone."
+        },
+        {
+          "name": "Extreme Current",
+          "cost": [
+            "Lightning",
+            "Lightning",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "160",
+          "text": "Discard an Energy from this Pokémon."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Fighting",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "set": {
+        "id": "swshp",
+        "name": "SWSH Black Star Promos",
+        "series": "Sword & Shield",
+        "printedTotal": 307,
+        "total": 304,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "PR-SW",
+        "releaseDate": "2019/11/15",
+        "updatedAt": "2022/07/23 20:15:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swshp/symbol.png",
+          "logo": "https://images.pokemontcg.io/swshp/logo.png"
+        }
+      },
+      "number": "SWSH257",
+      "artist": "5ban Graphics",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        479
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "F",
+      "images": {
+        "small": "https://images.pokemontcg.io/swshp/SWSH257.png",
+        "large": "https://images.pokemontcg.io/swshp/SWSH257_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swshp-SWSH257",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 0.41,
+            "mid": 0.9,
+            "high": 19.99,
+            "market": 0.72,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swshp-SWSH257",
+        "updatedAt": "2025/11/18",
+        "prices": {
+          "averageSellPrice": 0.61,
+          "lowPrice": 0.2,
+          "trendPrice": 0.48,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.2,
+          "avg1": 0.4,
+          "avg7": 0.49,
+          "avg30": 0.55,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swshp-SWSH258",
+      "name": "Gallade V",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic",
+        "V"
+      ],
+      "hp": "220",
+      "types": [
+        "Fighting"
+      ],
+      "rules": [
+        "V rule: When your Pokémon V is Knocked Out, your opponent takes 2 Prize cards."
+      ],
+      "attacks": [
+        {
+          "name": "Rising Sword",
+          "cost": [
+            "Fighting",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "20+",
+          "text": "This attack does 50 more damage for each Prize card you have taken."
+        },
+        {
+          "name": "Buster Swing",
+          "cost": [
+            "Fighting",
+            "Fighting",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "130",
+          "text": "This attack's damage isn't affected by Resistance."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Psychic",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "set": {
+        "id": "swshp",
+        "name": "SWSH Black Star Promos",
+        "series": "Sword & Shield",
+        "printedTotal": 307,
+        "total": 304,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "PR-SW",
+        "releaseDate": "2019/11/15",
+        "updatedAt": "2022/07/23 20:15:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swshp/symbol.png",
+          "logo": "https://images.pokemontcg.io/swshp/logo.png"
+        }
+      },
+      "number": "SWSH258",
+      "artist": "Ryota Murayama",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        475
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "F",
+      "images": {
+        "small": "https://images.pokemontcg.io/swshp/SWSH258.png",
+        "large": "https://images.pokemontcg.io/swshp/SWSH258_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swshp-SWSH258",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 0.42,
+            "mid": 0.97,
+            "high": 19.99,
+            "market": 0.75,
+            "directLow": 0.97
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swshp-SWSH258",
+        "updatedAt": "2025/11/18",
+        "prices": {
+          "averageSellPrice": 0.79,
+          "lowPrice": 0.39,
+          "trendPrice": 1.04,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.39,
+          "avg1": 0.87,
+          "avg7": 0.97,
+          "avg30": 0.82,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swshp-SWSH259",
+      "name": "Giratina V",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic",
+        "V"
+      ],
+      "hp": "220",
+      "types": [
+        "Dragon"
+      ],
+      "rules": [
+        "V rule: When your Pokémon V is Knocked Out, your opponent takes 2 Prize cards."
+      ],
+      "attacks": [
+        {
+          "name": "Abyss Seeking",
+          "cost": [
+            "Colorless"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "Look at the top 4 cards of your deck and put 2 of them into your hand. Put the other cards in the Lost Zone."
+        },
+        {
+          "name": "Shred",
+          "cost": [
+            "Grass",
+            "Psychic",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "160",
+          "text": "This attack's damage isn't affected by any effects on your opponent's Active Pokémon."
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "set": {
+        "id": "swshp",
+        "name": "SWSH Black Star Promos",
+        "series": "Sword & Shield",
+        "printedTotal": 307,
+        "total": 304,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "PR-SW",
+        "releaseDate": "2019/11/15",
+        "updatedAt": "2022/07/23 20:15:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swshp/symbol.png",
+          "logo": "https://images.pokemontcg.io/swshp/logo.png"
+        }
+      },
+      "number": "SWSH259",
+      "artist": "PLANETA Mochizuki",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        487
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "F",
+      "images": {
+        "small": "https://images.pokemontcg.io/swshp/SWSH259.png",
+        "large": "https://images.pokemontcg.io/swshp/SWSH259_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swshp-SWSH259",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 2.49,
+            "mid": 4,
+            "high": 89.99,
+            "market": 3.42,
+            "directLow": 4.95
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swshp-SWSH259",
+        "updatedAt": "2025/11/18",
+        "prices": {
+          "averageSellPrice": 1.62,
+          "lowPrice": 0.55,
+          "trendPrice": 1.65,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.55,
+          "avg1": 2.5,
+          "avg7": 1.44,
+          "avg30": 1.57,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swshp-SWSH260",
+      "name": "Charizard V",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic",
+        "V"
+      ],
+      "hp": "220",
+      "types": [
+        "Fire"
+      ],
+      "rules": [
+        "V rule: When your Pokémon V is Knocked Out, your opponent takes 2 Prize cards."
+      ],
+      "attacks": [
+        {
+          "name": "Incinerate",
+          "cost": [
+            "Fire",
+            "Fire",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "90",
+          "text": "Before doing damage, discard all Pokémon Tools from your opponent's Active Pokémon."
+        },
+        {
+          "name": "Heat Blast",
+          "cost": [
+            "Fire",
+            "Fire",
+            "Fire",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 4,
+          "damage": "180",
+          "text": ""
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Water",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "set": {
+        "id": "swshp",
+        "name": "SWSH Black Star Promos",
+        "series": "Sword & Shield",
+        "printedTotal": 307,
+        "total": 304,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "PR-SW",
+        "releaseDate": "2019/11/15",
+        "updatedAt": "2022/07/23 20:15:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swshp/symbol.png",
+          "logo": "https://images.pokemontcg.io/swshp/logo.png"
+        }
+      },
+      "number": "SWSH260",
+      "artist": "Oswaldo KATO",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        6
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "F",
+      "images": {
+        "small": "https://images.pokemontcg.io/swshp/SWSH260.png",
+        "large": "https://images.pokemontcg.io/swshp/SWSH260_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swshp-SWSH260",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 20.99,
+            "mid": 34.95,
+            "high": 9999,
+            "market": 28.12,
+            "directLow": 25.98
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swshp-SWSH260",
+        "updatedAt": "2025/11/18",
+        "prices": {
+          "averageSellPrice": 39.26,
+          "lowPrice": 25,
+          "trendPrice": 37.95,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 25.99,
+          "avg1": 31.12,
+          "avg7": 44.25,
+          "avg30": 35.49,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swshp-SWSH261",
+      "name": "Charizard VMAX",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "VMAX"
+      ],
+      "hp": "330",
+      "types": [
+        "Fire"
+      ],
+      "evolvesFrom": "Charizard V",
+      "rules": [
+        "VMAX rule: When your Pokémon VMAX is Knocked Out, your opponent takes 3 Prize cards."
+      ],
+      "attacks": [
+        {
+          "name": "Claw Slash",
+          "cost": [
+            "Colorless",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "100",
+          "text": ""
+        },
+        {
+          "name": "G-Max Wildfire",
+          "cost": [
+            "Fire",
+            "Fire",
+            "Fire",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 5,
+          "damage": "300",
+          "text": "Discard 2 Energy from this Pokémon."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Water",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 3,
+      "set": {
+        "id": "swshp",
+        "name": "SWSH Black Star Promos",
+        "series": "Sword & Shield",
+        "printedTotal": 307,
+        "total": 304,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "PR-SW",
+        "releaseDate": "2019/11/15",
+        "updatedAt": "2022/07/23 20:15:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swshp/symbol.png",
+          "logo": "https://images.pokemontcg.io/swshp/logo.png"
+        }
+      },
+      "number": "SWSH261",
+      "artist": "Shiburingaru",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        6
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "D",
+      "images": {
+        "small": "https://images.pokemontcg.io/swshp/SWSH261.png",
+        "large": "https://images.pokemontcg.io/swshp/SWSH261_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swshp-SWSH261",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 33.42,
+            "mid": 43.47,
+            "high": 534.98,
+            "market": 36.05,
+            "directLow": 34.95
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swshp-SWSH261",
+        "updatedAt": "2025/11/18",
+        "prices": {
+          "averageSellPrice": 34.15,
+          "lowPrice": 21.5,
+          "trendPrice": 31.5,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 21.5,
+          "avg1": 27.01,
+          "avg7": 29.62,
+          "avg30": 31.72,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swshp-SWSH262",
+      "name": "Charizard VSTAR",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "VSTAR"
+      ],
+      "hp": "280",
+      "types": [
+        "Fire"
+      ],
+      "evolvesFrom": "Charizard V",
+      "rules": [
+        "VSTAR rule: When your Pokémon VSTAR is Knocked Out, your opponent takes 2 Prize cards."
+      ],
+      "attacks": [
+        {
+          "name": "Explosive Fire",
+          "cost": [
+            "Fire",
+            "Fire",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "130+",
+          "text": "If this Pokémon has any damage counters on it, this attack does 100 more damage."
+        },
+        {
+          "name": "Star Blaze",
+          "cost": [
+            "Fire",
+            "Fire",
+            "Fire",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 4,
+          "damage": "320",
+          "text": "Discard 2 Energy from this Pokémon. (You can't use more than 1 VSTAR Power in a game.)"
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Water",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "set": {
+        "id": "swshp",
+        "name": "SWSH Black Star Promos",
+        "series": "Sword & Shield",
+        "printedTotal": 307,
+        "total": 304,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "PR-SW",
+        "releaseDate": "2019/11/15",
+        "updatedAt": "2022/07/23 20:15:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swshp/symbol.png",
+          "logo": "https://images.pokemontcg.io/swshp/logo.png"
+        }
+      },
+      "number": "SWSH262",
+      "artist": "KIYOTAKA OSHIYAMA",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        6
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "F",
+      "images": {
+        "small": "https://images.pokemontcg.io/swshp/SWSH262.png",
+        "large": "https://images.pokemontcg.io/swshp/SWSH262_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swshp-SWSH262",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 40,
+            "mid": 58.95,
+            "high": 9999,
+            "market": 52.93,
+            "directLow": 45.99
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swshp-SWSH262",
+        "updatedAt": "2025/11/18",
+        "prices": {
+          "averageSellPrice": 65.55,
+          "lowPrice": 35,
+          "trendPrice": 35.31,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 35,
+          "avg1": 41.5,
+          "avg7": 45.66,
+          "avg30": 62.05,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swshp-SWSH263",
+      "name": "Zeraora V",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic",
+        "V"
+      ],
+      "hp": "210",
+      "types": [
+        "Lightning"
+      ],
+      "rules": [
+        "V rule: When your Pokémon V is Knocked Out, your opponent takes 2 Prize cards."
+      ],
+      "attacks": [
+        {
+          "name": "Claw Slash",
+          "cost": [
+            "Lightning",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "50",
+          "text": ""
+        },
+        {
+          "name": "Thunderous Bolt",
+          "cost": [
+            "Lightning",
+            "Lightning",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "190",
+          "text": "During your next turn, this Pokémon can't attack."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Fighting",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "set": {
+        "id": "swshp",
+        "name": "SWSH Black Star Promos",
+        "series": "Sword & Shield",
+        "printedTotal": 307,
+        "total": 304,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "PR-SW",
+        "releaseDate": "2019/11/15",
+        "updatedAt": "2022/07/23 20:15:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swshp/symbol.png",
+          "logo": "https://images.pokemontcg.io/swshp/logo.png"
+        }
+      },
+      "number": "SWSH263",
+      "artist": "N-DESIGN Inc.",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        807
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "F",
+      "images": {
+        "small": "https://images.pokemontcg.io/swshp/SWSH263.png",
+        "large": "https://images.pokemontcg.io/swshp/SWSH263_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swshp-SWSH263",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 0.5,
+            "mid": 1,
+            "high": 19.99,
+            "market": 0.9,
+            "directLow": 0.87
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swshp-SWSH263",
+        "updatedAt": "2025/11/18",
+        "prices": {
+          "averageSellPrice": 1.19,
+          "lowPrice": 0.46,
+          "trendPrice": 1.62,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.54,
+          "avg1": 1.5,
+          "avg7": 1.74,
+          "avg30": 1.36,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swshp-SWSH264",
+      "name": "Zeraora VMAX",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "VMAX"
+      ],
+      "hp": "320",
+      "types": [
+        "Lightning"
+      ],
+      "evolvesFrom": "Zeraora V",
+      "rules": [
+        "VMAX rule: When your Pokémon VMAX is Knocked Out, your opponent takes 3 Prize cards."
+      ],
+      "attacks": [
+        {
+          "name": "Reactive Pulse",
+          "cost": [
+            "Lightning",
+            "Lightning"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "60×",
+          "text": "This attack does 60 damage for each of your opponent's Pokémon in play that has an Ability."
+        },
+        {
+          "name": "Max Fist",
+          "cost": [
+            "Lightning",
+            "Lightning",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "240",
+          "text": "Discard 2 Energy from this Pokémon."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Fighting",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "set": {
+        "id": "swshp",
+        "name": "SWSH Black Star Promos",
+        "series": "Sword & Shield",
+        "printedTotal": 307,
+        "total": 304,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "PR-SW",
+        "releaseDate": "2019/11/15",
+        "updatedAt": "2022/07/23 20:15:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swshp/symbol.png",
+          "logo": "https://images.pokemontcg.io/swshp/logo.png"
+        }
+      },
+      "number": "SWSH264",
+      "artist": "N-DESIGN Inc.",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        807
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "F",
+      "images": {
+        "small": "https://images.pokemontcg.io/swshp/SWSH264.png",
+        "large": "https://images.pokemontcg.io/swshp/SWSH264_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swshp-SWSH264",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 2,
+            "mid": 3.48,
+            "high": 9999,
+            "market": 3.57,
+            "directLow": 5.4
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swshp-SWSH264",
+        "updatedAt": "2025/11/18",
+        "prices": {
+          "averageSellPrice": 2.76,
+          "lowPrice": 1.8,
+          "trendPrice": 3.03,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 1.8,
+          "avg1": 3.49,
+          "avg7": 3.13,
+          "avg30": 3.02,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swshp-SWSH265",
+      "name": "Zeraora VSTAR",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "VSTAR"
+      ],
+      "hp": "270",
+      "types": [
+        "Lightning"
+      ],
+      "evolvesFrom": "Zeraora V",
+      "rules": [
+        "VSTAR rule: When your Pokémon VSTAR is Knocked Out, your opponent takes 2 Prize cards."
+      ],
+      "attacks": [
+        {
+          "name": "Crushing Beat",
+          "cost": [
+            "Lightning",
+            "Lightning",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "190",
+          "text": "You may discard a Stadium in play."
+        },
+        {
+          "name": "Lightning Storm Star",
+          "cost": [
+            "Lightning",
+            "Lightning",
+            "Lightning",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 4,
+          "damage": "",
+          "text": "Choose 1 of your opponent's Pokémon 4 times. (You can choose the same Pokémon more than once.) For each time you chose a Pokémon, do 60 damage to it. This damage isn't affected by Weakness or Resistance. (You can't use more than 1 VSTAR Power in a game.)"
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Fighting",
+          "value": "×2"
+        }
+      ],
+      "set": {
+        "id": "swshp",
+        "name": "SWSH Black Star Promos",
+        "series": "Sword & Shield",
+        "printedTotal": 307,
+        "total": 304,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "PR-SW",
+        "releaseDate": "2019/11/15",
+        "updatedAt": "2022/07/23 20:15:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swshp/symbol.png",
+          "logo": "https://images.pokemontcg.io/swshp/logo.png"
+        }
+      },
+      "number": "SWSH265",
+      "artist": "aky CG Works",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        807
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "F",
+      "images": {
+        "small": "https://images.pokemontcg.io/swshp/SWSH265.png",
+        "large": "https://images.pokemontcg.io/swshp/SWSH265_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swshp-SWSH265",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 1.21,
+            "mid": 2.23,
+            "high": 9999,
+            "market": 2.17,
+            "directLow": 2.99
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swshp-SWSH265",
+        "updatedAt": "2025/11/18",
+        "prices": {
+          "averageSellPrice": 2.4,
+          "lowPrice": 1.4,
+          "trendPrice": 2.66,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 1.5,
+          "avg1": 4,
+          "avg7": 2.47,
+          "avg30": 2.34,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swshp-SWSH266",
+      "name": "Deoxys V",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic",
+        "V"
+      ],
+      "hp": "210",
+      "types": [
+        "Psychic"
+      ],
+      "rules": [
+        "V rule: When your Pokémon V is Knocked Out, your opponent takes 2 Prize cards."
+      ],
+      "attacks": [
+        {
+          "name": "Psychic",
+          "cost": [
+            "Psychic",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "30+",
+          "text": "This attack does 30 more damage for each Energy attached to your opponent's Active Pokémon."
+        },
+        {
+          "name": "Power Edge",
+          "cost": [
+            "Psychic",
+            "Psychic",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "140",
+          "text": ""
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Darkness",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Fighting",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "set": {
+        "id": "swshp",
+        "name": "SWSH Black Star Promos",
+        "series": "Sword & Shield",
+        "printedTotal": 307,
+        "total": 304,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "PR-SW",
+        "releaseDate": "2019/11/15",
+        "updatedAt": "2022/07/23 20:15:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swshp/symbol.png",
+          "logo": "https://images.pokemontcg.io/swshp/logo.png"
+        }
+      },
+      "number": "SWSH266",
+      "artist": "N-DESIGN Inc.",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        386
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "F",
+      "images": {
+        "small": "https://images.pokemontcg.io/swshp/SWSH266.png",
+        "large": "https://images.pokemontcg.io/swshp/SWSH266_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swshp-SWSH266",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 0.9,
+            "mid": 1.64,
+            "high": 80,
+            "market": 1.59,
+            "directLow": 1.52
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swshp-SWSH266",
+        "updatedAt": "2025/11/18",
+        "prices": {
+          "averageSellPrice": 1.7,
+          "lowPrice": 0.5,
+          "trendPrice": 1.72,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 1.19,
+          "avg1": 1.69,
+          "avg7": 1.62,
+          "avg30": 1.72,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swshp-SWSH267",
+      "name": "Deoxys VMAX",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "VMAX"
+      ],
+      "hp": "330",
+      "types": [
+        "Psychic"
+      ],
+      "evolvesFrom": "Deoxys V",
+      "rules": [
+        "VMAX rule: When your Pokémon VMAX is Knocked Out, your opponent takes 3 Prize cards."
+      ],
+      "abilities": [
+        {
+          "name": "Protective DNA",
+          "text": "All of your Pokémon take 30 less damage from attacks from your opponent's Pokémon VSTAR (after applying Weakness and Resistance).",
+          "type": "Ability"
+        }
+      ],
+      "attacks": [
+        {
+          "name": "Max Drain",
+          "cost": [
+            "Psychic",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "160",
+          "text": "Heal 30 damage from this Pokémon."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Darkness",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Fighting",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 3,
+      "set": {
+        "id": "swshp",
+        "name": "SWSH Black Star Promos",
+        "series": "Sword & Shield",
+        "printedTotal": 307,
+        "total": 304,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "PR-SW",
+        "releaseDate": "2019/11/15",
+        "updatedAt": "2022/07/23 20:15:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swshp/symbol.png",
+          "logo": "https://images.pokemontcg.io/swshp/logo.png"
+        }
+      },
+      "number": "SWSH267",
+      "artist": "N-DESIGN Inc.",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        386
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "F",
+      "images": {
+        "small": "https://images.pokemontcg.io/swshp/SWSH267.png",
+        "large": "https://images.pokemontcg.io/swshp/SWSH267_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swshp-SWSH267",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 3.87,
+            "mid": 4.66,
+            "high": 19.99,
+            "market": 4.4,
+            "directLow": 4.38
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swshp-SWSH267",
+        "updatedAt": "2025/11/18",
+        "prices": {
+          "averageSellPrice": 2.76,
+          "lowPrice": 1.75,
+          "trendPrice": 2.5,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 1.75,
+          "avg1": 2.85,
+          "avg7": 2.41,
+          "avg30": 2.73,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swshp-SWSH268",
+      "name": "Deoxys VSTAR",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "VSTAR"
+      ],
+      "hp": "270",
+      "types": [
+        "Psychic"
+      ],
+      "evolvesFrom": "Deoxys V",
+      "rules": [
+        "VSTAR rule: When your Pokémon VSTAR is Knocked Out, your opponent takes 2 Prize cards."
+      ],
+      "attacks": [
+        {
+          "name": "Psychic Javelin",
+          "cost": [
+            "Psychic",
+            "Psychic",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "190",
+          "text": "This attack also does 60 damage to 1 of your opponent's Benched Pokémon V. (Don't apply Weakness and Resistance for Benched Pokémon.)"
+        },
+        {
+          "name": "Star Force",
+          "cost": [
+            "Psychic"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "60×",
+          "text": "This attack does 60 damage for each Energy attached to both Active Pokémon. (You can't use more than 1 VSTAR Power in a game.)"
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Darkness",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Fighting",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "set": {
+        "id": "swshp",
+        "name": "SWSH Black Star Promos",
+        "series": "Sword & Shield",
+        "printedTotal": 307,
+        "total": 304,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "PR-SW",
+        "releaseDate": "2019/11/15",
+        "updatedAt": "2022/07/23 20:15:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swshp/symbol.png",
+          "logo": "https://images.pokemontcg.io/swshp/logo.png"
+        }
+      },
+      "number": "SWSH268",
+      "artist": "5ban Graphics",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        386
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "F",
+      "images": {
+        "small": "https://images.pokemontcg.io/swshp/SWSH268.png",
+        "large": "https://images.pokemontcg.io/swshp/SWSH268_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swshp-SWSH268",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 4,
+            "mid": 4.78,
+            "high": 9999,
+            "market": 4.4,
+            "directLow": 5.66
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swshp-SWSH268",
+        "updatedAt": "2025/11/18",
+        "prices": {
+          "averageSellPrice": 3.51,
+          "lowPrice": 0.75,
+          "trendPrice": 2.88,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 1.99,
+          "avg1": 2.49,
+          "avg7": 2.72,
+          "avg30": 3.32,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swshp-SWSH269",
+      "name": "Sunflora",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Stage 1"
+      ],
+      "hp": "90",
+      "types": [
+        "Grass"
+      ],
+      "evolvesFrom": "Sunkern",
+      "attacks": [
+        {
+          "name": "Bright Beam",
+          "cost": [
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "10+",
+          "text": "You may discard up to 3 Energy cards from your hand. This attack does 70 more damage for each card you discarded in this way."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Fire",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "set": {
+        "id": "swshp",
+        "name": "SWSH Black Star Promos",
+        "series": "Sword & Shield",
+        "printedTotal": 307,
+        "total": 304,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "PR-SW",
+        "releaseDate": "2019/11/15",
+        "updatedAt": "2022/07/23 20:15:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swshp/symbol.png",
+          "logo": "https://images.pokemontcg.io/swshp/logo.png"
+        }
+      },
+      "number": "SWSH269",
+      "artist": "Shigenori Negishi",
+      "rarity": "Promo",
+      "flavorText": "It gets energy from warm sunlight and is known for its habit of moving in pursuit of it.",
+      "nationalPokedexNumbers": [
+        192
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "F",
+      "images": {
+        "small": "https://images.pokemontcg.io/swshp/SWSH269.png",
+        "large": "https://images.pokemontcg.io/swshp/SWSH269_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swshp-SWSH269",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 31,
+            "mid": 41.28,
+            "high": 60,
+            "market": 21.24,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swshp-SWSH269",
+        "updatedAt": "2025/11/18",
+        "prices": {
+          "averageSellPrice": 0.98,
+          "lowPrice": 0.2,
+          "trendPrice": 1.21,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.39,
+          "avg1": 1,
+          "avg7": 1.06,
+          "avg30": 0.98,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swshp-SWSH270",
+      "name": "Rapidash",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Stage 1"
+      ],
+      "hp": "100",
+      "types": [
+        "Fire"
+      ],
+      "evolvesFrom": "Ponyta",
+      "abilities": [
+        {
+          "name": "Heat Boost",
+          "text": "Once during your turn, you may discard a Fire Energy card from your hand in order to use this Ability. During this turn, your Fire Pokémon's attacks do 30 more damage to your opponent's Active Pokémon (before applying Weakness and Resistance).",
+          "type": "Ability"
+        }
+      ],
+      "attacks": [
+        {
+          "name": "Fire Mane",
+          "cost": [
+            "Fire",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "60",
+          "text": ""
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Water",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "set": {
+        "id": "swshp",
+        "name": "SWSH Black Star Promos",
+        "series": "Sword & Shield",
+        "printedTotal": 307,
+        "total": 304,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "PR-SW",
+        "releaseDate": "2019/11/15",
+        "updatedAt": "2022/07/23 20:15:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swshp/symbol.png",
+          "logo": "https://images.pokemontcg.io/swshp/logo.png"
+        }
+      },
+      "number": "SWSH270",
+      "artist": "aoki",
+      "rarity": "Promo",
+      "flavorText": "This Pokémon can be seen galloping through fields at speeds of up to 150 mph, its fiery mane fluttering in the wind.",
+      "nationalPokedexNumbers": [
+        78
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "F",
+      "images": {
+        "small": "https://images.pokemontcg.io/swshp/SWSH270.png",
+        "large": "https://images.pokemontcg.io/swshp/SWSH270_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swshp-SWSH270",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 49.99,
+            "mid": 80,
+            "high": 99.98,
+            "market": 28.28,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swshp-SWSH270",
+        "updatedAt": "2025/11/18",
+        "prices": {
+          "averageSellPrice": 2.09,
+          "lowPrice": 0.5,
+          "trendPrice": 1.92,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.5,
+          "avg1": 2.88,
+          "avg7": 1.44,
+          "avg30": 1.81,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swshp-SWSH271",
+      "name": "Kirlia",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Stage 1"
+      ],
+      "hp": "80",
+      "types": [
+        "Psychic"
+      ],
+      "evolvesFrom": "Ralts",
+      "evolvesTo": [
+        "Gardevoir",
+        "Gallade"
+      ],
+      "abilities": [
+        {
+          "name": "Refinement",
+          "text": "You must discard a card from your hand in order to use this Ability. Once during your turn, you may draw 2 cards.",
+          "type": "Ability"
+        }
+      ],
+      "attacks": [
+        {
+          "name": "Slap",
+          "cost": [
+            "Psychic",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "30",
+          "text": ""
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Metal",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "set": {
+        "id": "swshp",
+        "name": "SWSH Black Star Promos",
+        "series": "Sword & Shield",
+        "printedTotal": 307,
+        "total": 304,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "PR-SW",
+        "releaseDate": "2019/11/15",
+        "updatedAt": "2022/07/23 20:15:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swshp/symbol.png",
+          "logo": "https://images.pokemontcg.io/swshp/logo.png"
+        }
+      },
+      "number": "SWSH271",
+      "artist": "Taira Akitsu",
+      "rarity": "Promo",
+      "flavorText": "If its Trainer becomes happy, it overflows with energy, dancing joyously while spinning about.",
+      "nationalPokedexNumbers": [
+        281
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "F",
+      "images": {
+        "small": "https://images.pokemontcg.io/swshp/SWSH271.png",
+        "large": "https://images.pokemontcg.io/swshp/SWSH271_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swshp-SWSH271",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 0.68,
+            "mid": 1.25,
+            "high": 25,
+            "market": 1.16,
+            "directLow": 0.97
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swshp-SWSH271",
+        "updatedAt": "2025/11/18",
+        "prices": {
+          "averageSellPrice": 2.08,
+          "lowPrice": 0.69,
+          "trendPrice": 2.09,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.69,
+          "avg1": 1.6,
+          "avg7": 1.72,
+          "avg30": 1.64,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swshp-SWSH272",
+      "name": "Archeops",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Stage 2"
+      ],
+      "hp": "150",
+      "types": [
+        "Colorless"
+      ],
+      "evolvesFrom": "Archen",
+      "abilities": [
+        {
+          "name": "Primal Turbo",
+          "text": "Once during your turn, you may search your deck for up to 2 Special Energy cards and attach them to 1 of your Pokémon. Then, shuffle your deck.",
+          "type": "Ability"
+        }
+      ],
+      "attacks": [
+        {
+          "name": "Speed Wing",
+          "cost": [
+            "Colorless",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "120",
+          "text": ""
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Lightning",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Fighting",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "set": {
+        "id": "swshp",
+        "name": "SWSH Black Star Promos",
+        "series": "Sword & Shield",
+        "printedTotal": 307,
+        "total": 304,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "PR-SW",
+        "releaseDate": "2019/11/15",
+        "updatedAt": "2022/07/23 20:15:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swshp/symbol.png",
+          "logo": "https://images.pokemontcg.io/swshp/logo.png"
+        }
+      },
+      "number": "SWSH272",
+      "artist": "Nisota Niso",
+      "rarity": "Promo",
+      "flavorText": "It needs a running start to take off. If Archeops wants to fly, it first needs to run nearly 25 mph, building speed over a course of about 2.5 miles.",
+      "nationalPokedexNumbers": [
+        567
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "F",
+      "images": {
+        "small": "https://images.pokemontcg.io/swshp/SWSH272.png",
+        "large": "https://images.pokemontcg.io/swshp/SWSH272_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swshp-SWSH272",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 19.14,
+            "mid": 21.5,
+            "high": 99.98,
+            "market": 20.55,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swshp-SWSH272",
+        "updatedAt": "2025/11/18",
+        "prices": {
+          "averageSellPrice": 1.96,
+          "lowPrice": 0.25,
+          "trendPrice": 1.38,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.8,
+          "avg1": 1.16,
+          "avg7": 1.76,
+          "avg30": 1.92,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swshp-SWSH273",
+      "name": "Hisuian Basculin",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic"
+      ],
+      "hp": "50",
+      "types": [
+        "Water"
+      ],
+      "attacks": [
+        {
+          "name": "Submerge Silently",
+          "cost": [
+            "Colorless"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "You can use this attack only if you go second, and only during your first turn. During your opponent's next turn, prevent all damage done to this Pokémon by attacks."
+        },
+        {
+          "name": "Bite",
+          "cost": [
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "20",
+          "text": ""
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Lightning",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "set": {
+        "id": "swshp",
+        "name": "SWSH Black Star Promos",
+        "series": "Sword & Shield",
+        "printedTotal": 307,
+        "total": 304,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "PR-SW",
+        "releaseDate": "2019/11/15",
+        "updatedAt": "2022/07/23 20:15:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swshp/symbol.png",
+          "logo": "https://images.pokemontcg.io/swshp/logo.png"
+        }
+      },
+      "number": "SWSH273",
+      "artist": "Shin Nagasawa",
+      "rarity": "Promo",
+      "flavorText": "Though it differs from other Basculin in several respects, including demeanor - this one is gentle - I have categorized it as a regional form given the vast array of shared qualities.",
+      "nationalPokedexNumbers": [
+        550
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "F",
+      "images": {
+        "small": "https://images.pokemontcg.io/swshp/SWSH273.png",
+        "large": "https://images.pokemontcg.io/swshp/SWSH273_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swshp-SWSH273",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 0.04,
+            "mid": 0.25,
+            "high": 19.99,
+            "market": 0.3,
+            "directLow": 0.17
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swshp-SWSH273",
+        "updatedAt": "2025/11/18",
+        "prices": {
+          "averageSellPrice": 0.28,
+          "lowPrice": 0.04,
+          "trendPrice": 0.59,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.04,
+          "avg1": 0.15,
+          "avg7": 0.35,
+          "avg30": 0.32,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swshp-SWSH274",
+      "name": "Cranidos",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Stage 1"
+      ],
+      "hp": "90",
+      "types": [
+        "Fighting"
+      ],
+      "evolvesFrom": "Unidentified Fossil",
+      "evolvesTo": [
+        "Rampardos"
+      ],
+      "attacks": [
+        {
+          "name": "Ram",
+          "cost": [
+            "Fighting"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "20",
+          "text": ""
+        },
+        {
+          "name": "Stone Edge",
+          "cost": [
+            "Fighting",
+            "Fighting"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "40+",
+          "text": "Flip a coin. If heads, this attack does 40 more damage."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Grass",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "set": {
+        "id": "swshp",
+        "name": "SWSH Black Star Promos",
+        "series": "Sword & Shield",
+        "printedTotal": 307,
+        "total": 304,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "PR-SW",
+        "releaseDate": "2019/11/15",
+        "updatedAt": "2022/07/23 20:15:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swshp/symbol.png",
+          "logo": "https://images.pokemontcg.io/swshp/logo.png"
+        }
+      },
+      "number": "SWSH274",
+      "artist": "GIDORA",
+      "rarity": "Promo",
+      "flavorText": "Its hard skull is its distinguishing feature. It snapped trees by headbutting them, and then it fed on their ripe berries.",
+      "nationalPokedexNumbers": [
+        408
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "F",
+      "images": {
+        "small": "https://images.pokemontcg.io/swshp/SWSH274.png",
+        "large": "https://images.pokemontcg.io/swshp/SWSH274_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swshp-SWSH274",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 0.05,
+            "mid": 0.3,
+            "high": 19.99,
+            "market": 0.37,
+            "directLow": 0.2
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swshp-SWSH274",
+        "updatedAt": "2025/11/18",
+        "prices": {
+          "averageSellPrice": 0.28,
+          "lowPrice": 0.1,
+          "trendPrice": 0.46,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.1,
+          "avg1": 0.4,
+          "avg7": 0.63,
+          "avg30": 0.43,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swshp-SWSH275",
+      "name": "Manaphy",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic"
+      ],
+      "hp": "70",
+      "types": [
+        "Water"
+      ],
+      "attacks": [
+        {
+          "name": "Pulling Currents",
+          "cost": [
+            "Water"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "Your opponent reveals their hand. Put up to 2 Basic Pokémon you find there onto your opponent's Bench."
+        },
+        {
+          "name": "Aqua Bullet",
+          "cost": [
+            "Water",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "40",
+          "text": "This attack also does 20 damage to 1 of your opponent's Benched Pokémon. (Don't apply Weakness and Resistance for Benched Pokémon.)"
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Lightning",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "set": {
+        "id": "swshp",
+        "name": "SWSH Black Star Promos",
+        "series": "Sword & Shield",
+        "printedTotal": 307,
+        "total": 304,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "PR-SW",
+        "releaseDate": "2019/11/15",
+        "updatedAt": "2022/07/23 20:15:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swshp/symbol.png",
+          "logo": "https://images.pokemontcg.io/swshp/logo.png"
+        }
+      },
+      "number": "SWSH275",
+      "artist": "NC Empire",
+      "rarity": "Promo",
+      "flavorText": "It starts life with a wondrous power that permits it to bond with any kind of Pokémon.",
+      "nationalPokedexNumbers": [
+        490
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "F",
+      "images": {
+        "small": "https://images.pokemontcg.io/swshp/SWSH275.png",
+        "large": "https://images.pokemontcg.io/swshp/SWSH275_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swshp-SWSH275",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 0.32,
+            "mid": 0.76,
+            "high": 19.99,
+            "market": 0.76,
+            "directLow": 1.23
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swshp-SWSH275",
+        "updatedAt": "2025/11/18",
+        "prices": {
+          "averageSellPrice": 0.33,
+          "lowPrice": 0.02,
+          "trendPrice": 0.25,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.02,
+          "avg1": 0.45,
+          "avg7": 0.29,
+          "avg30": 0.32,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swshp-SWSH276",
+      "name": "Togetic",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Stage 1"
+      ],
+      "hp": "80",
+      "types": [
+        "Psychic"
+      ],
+      "evolvesFrom": "Togepi",
+      "evolvesTo": [
+        "Togekiss"
+      ],
+      "abilities": [
+        {
+          "name": "Voice of Happiness",
+          "text": "When you play this Pokémon from your hand to evolve 1 of your Pokémon during your turn, you may heal 30 damage from your Active Pokémon.",
+          "type": "Ability"
+        }
+      ],
+      "attacks": [
+        {
+          "name": "Fairy Wind",
+          "cost": [
+            "Psychic",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "30",
+          "text": ""
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Metal",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "set": {
+        "id": "swshp",
+        "name": "SWSH Black Star Promos",
+        "series": "Sword & Shield",
+        "printedTotal": 307,
+        "total": 304,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "PR-SW",
+        "releaseDate": "2019/11/15",
+        "updatedAt": "2022/07/23 20:15:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swshp/symbol.png",
+          "logo": "https://images.pokemontcg.io/swshp/logo.png"
+        }
+      },
+      "number": "SWSH276",
+      "artist": "Narumi Sato",
+      "rarity": "Promo",
+      "flavorText": "They say that it will appear before kindhearted, caring people and shower them with happiness.",
+      "nationalPokedexNumbers": [
+        176
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "F",
+      "images": {
+        "small": "https://images.pokemontcg.io/swshp/SWSH276.png",
+        "large": "https://images.pokemontcg.io/swshp/SWSH276_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swshp-SWSH276",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 0.29,
+            "mid": 1,
+            "high": 19.99,
+            "market": 0.87,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swshp-SWSH276",
+        "updatedAt": "2025/11/18",
+        "prices": {
+          "averageSellPrice": 0.51,
+          "lowPrice": 0.02,
+          "trendPrice": 0.7,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.02,
+          "avg1": 1.95,
+          "avg7": 0.58,
+          "avg30": 0.53,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swshp-SWSH294",
+      "name": "Hisuian Electrode V",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic",
+        "V"
+      ],
+      "hp": "210",
+      "types": [
+        "Grass"
+      ],
+      "rules": [
+        "V rule: When your Pokémon V is Knocked Out, your opponent takes 2 Prize cards."
+      ],
+      "attacks": [
+        {
+          "name": "Tantrum Blast",
+          "cost": [],
+          "convertedEnergyCost": 0,
+          "damage": "100×",
+          "text": "This attack does 100 damage for each Special Condition affecting this Pokémon."
+        },
+        {
+          "name": "Solar Shot",
+          "cost": [
+            "Grass",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "120",
+          "text": "Discard all Energy from this Pokémon."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Fire",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "set": {
+        "id": "swshp",
+        "name": "SWSH Black Star Promos",
+        "series": "Sword & Shield",
+        "printedTotal": 307,
+        "total": 304,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "PR-SW",
+        "releaseDate": "2019/11/15",
+        "updatedAt": "2022/07/23 20:15:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swshp/symbol.png",
+          "logo": "https://images.pokemontcg.io/swshp/logo.png"
+        }
+      },
+      "number": "SWSH294",
+      "artist": "5ban Graphics",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        101
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "F",
+      "images": {
+        "small": "https://images.pokemontcg.io/swshp/SWSH294.png",
+        "large": "https://images.pokemontcg.io/swshp/SWSH294_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swshp-SWSH294",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 0.02,
+            "mid": 1,
+            "high": 40,
+            "market": 0.84,
+            "directLow": 0.98
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swshp-SWSH294",
+        "updatedAt": "2025/11/18",
+        "prices": {
+          "averageSellPrice": 0.64,
+          "lowPrice": 0.15,
+          "trendPrice": 0.61,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.15,
+          "avg1": 0.52,
+          "avg7": 0.74,
+          "avg30": 0.67,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swshp-SWSH295",
+      "name": "Virizion V",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic",
+        "V"
+      ],
+      "hp": "200",
+      "types": [
+        "Grass"
+      ],
+      "rules": [
+        "V rule: When your Pokémon V is Knocked Out, your opponent takes 2 Prize cards."
+      ],
+      "abilities": [
+        {
+          "name": "Verdant Wind",
+          "text": "Each of your Pokémon that has any Grass Energy attached to it can't be affected by any Special Conditions. (Remove any Special Conditions affecting those Pokémon.)",
+          "type": "Ability"
+        }
+      ],
+      "attacks": [
+        {
+          "name": "Emerald Blade",
+          "cost": [
+            "Grass",
+            "Grass",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "200",
+          "text": "During your next turn, this Pokémon can't attack."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Fire",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "set": {
+        "id": "swshp",
+        "name": "SWSH Black Star Promos",
+        "series": "Sword & Shield",
+        "printedTotal": 307,
+        "total": 304,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "PR-SW",
+        "releaseDate": "2019/11/15",
+        "updatedAt": "2022/07/23 20:15:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swshp/symbol.png",
+          "logo": "https://images.pokemontcg.io/swshp/logo.png"
+        }
+      },
+      "number": "SWSH295",
+      "artist": "Saki Hayashiro",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        640
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "F",
+      "images": {
+        "small": "https://images.pokemontcg.io/swshp/SWSH295.png",
+        "large": "https://images.pokemontcg.io/swshp/SWSH295_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swshp-SWSH295",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 0.35,
+            "mid": 0.9,
+            "high": 19.99,
+            "market": 0.79,
+            "directLow": 0.6
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swshp-SWSH295",
+        "updatedAt": "2025/11/18",
+        "prices": {
+          "averageSellPrice": 0.57,
+          "lowPrice": 0.1,
+          "trendPrice": 0.61,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.1,
+          "avg1": 0.72,
+          "avg7": 0.56,
+          "avg30": 0.57,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swshp-SWSH296",
+      "name": "Champions Festival",
+      "supertype": "Trainer",
+      "subtypes": [
+        "Stadium"
+      ],
+      "rules": [
+        "Once during each player's turn, if that player has 6 Pokémon in play, he or she may heal 10 damage from each of his or her Pokémon."
+      ],
+      "set": {
+        "id": "swshp",
+        "name": "SWSH Black Star Promos",
+        "series": "Sword & Shield",
+        "printedTotal": 307,
+        "total": 304,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "PR-SW",
+        "releaseDate": "2019/11/15",
+        "updatedAt": "2022/07/23 20:15:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swshp/symbol.png",
+          "logo": "https://images.pokemontcg.io/swshp/logo.png"
+        }
+      },
+      "number": "SWSH296",
+      "artist": "Naoki Saito",
+      "rarity": "Promo",
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "F",
+      "images": {
+        "small": "https://images.pokemontcg.io/swshp/SWSH296.png",
+        "large": "https://images.pokemontcg.io/swshp/SWSH296_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swshp-SWSH296",
+        "updatedAt": "2025/08/03",
+        "prices": {
+          "normal": {
+            "low": 5000,
+            "mid": 5000,
+            "high": 5000,
+            "market": null,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swshp-SWSH296",
+        "updatedAt": "2025/11/18",
+        "prices": {
+          "averageSellPrice": 258.5,
+          "lowPrice": 379.99,
+          "trendPrice": 301.92,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 379.99,
+          "avg1": 95,
+          "avg7": 413.71,
+          "avg30": 413.71,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swshp-SWSH297",
+      "name": "Hisuian Zoroark V",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic",
+        "V"
+      ],
+      "hp": "210",
+      "types": [
+        "Colorless"
+      ],
+      "rules": [
+        "V rule: When your Pokémon V is Knocked Out, your opponent takes 2 Prize cards."
+      ],
+      "attacks": [
+        {
+          "name": "Void Return",
+          "cost": [],
+          "convertedEnergyCost": 0,
+          "damage": "30",
+          "text": "You may switch this Pokémon with 1 of your Benched Pokémon."
+        },
+        {
+          "name": "Shadow Cyclone",
+          "cost": [
+            "Colorless",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "130",
+          "text": "Move an Energy from this Pokémon to 1 of your Benched Pokémon."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Fighting",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "set": {
+        "id": "swshp",
+        "name": "SWSH Black Star Promos",
+        "series": "Sword & Shield",
+        "printedTotal": 307,
+        "total": 304,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "PR-SW",
+        "releaseDate": "2019/11/15",
+        "updatedAt": "2022/07/23 20:15:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swshp/symbol.png",
+          "logo": "https://images.pokemontcg.io/swshp/logo.png"
+        }
+      },
+      "number": "SWSH297",
+      "artist": "aky CG Works",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        571
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "F",
+      "images": {
+        "small": "https://images.pokemontcg.io/swshp/SWSH297.png",
+        "large": "https://images.pokemontcg.io/swshp/SWSH297_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swshp-SWSH297",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 0.76,
+            "mid": 1.49,
+            "high": 999.99,
+            "market": 1.35,
+            "directLow": 0.76
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swshp-SWSH297",
+        "updatedAt": "2025/11/18",
+        "prices": {
+          "averageSellPrice": 1.21,
+          "lowPrice": 0.5,
+          "trendPrice": 1.06,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.65,
+          "avg1": 0.58,
+          "avg7": 1.26,
+          "avg30": 1.25,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swshp-SWSH298",
+      "name": "Hisuian Zoroark VSTAR",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "VSTAR"
+      ],
+      "hp": "270",
+      "types": [
+        "Colorless"
+      ],
+      "evolvesFrom": "Hisuian Zoroark V",
+      "rules": [
+        "VSTAR rule: When your Pokémon VSTAR is Knocked Out, your opponent takes 2 Prize cards."
+      ],
+      "abilities": [
+        {
+          "name": "Phantom Star",
+          "text": "During your turn, you may discard your hand and draw 7 cards. (You can't use more than 1 VSTAR Power in a game.)",
+          "type": "Ability"
+        }
+      ],
+      "attacks": [
+        {
+          "name": "Ticking Curse",
+          "cost": [
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "50×",
+          "text": "This attack does 50 damage for each of your Pokémon that has any damage counters on it."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Fighting",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "set": {
+        "id": "swshp",
+        "name": "SWSH Black Star Promos",
+        "series": "Sword & Shield",
+        "printedTotal": 307,
+        "total": 304,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "PR-SW",
+        "releaseDate": "2019/11/15",
+        "updatedAt": "2022/07/23 20:15:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swshp/symbol.png",
+          "logo": "https://images.pokemontcg.io/swshp/logo.png"
+        }
+      },
+      "number": "SWSH298",
+      "artist": "aky CG Works",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        571
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "F",
+      "images": {
+        "small": "https://images.pokemontcg.io/swshp/SWSH298.png",
+        "large": "https://images.pokemontcg.io/swshp/SWSH298_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swshp-SWSH298",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 0.5,
+            "mid": 1.25,
+            "high": 999.99,
+            "market": 1.06,
+            "directLow": 0.56
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swshp-SWSH298",
+        "updatedAt": "2025/11/18",
+        "prices": {
+          "averageSellPrice": 1.01,
+          "lowPrice": 0.45,
+          "trendPrice": 0.84,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.45,
+          "avg1": 0.48,
+          "avg7": 0.98,
+          "avg30": 0.97,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swshp-SWSH277",
+      "name": "Rillaboom",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Stage 2",
+        "Rapid Strike"
+      ],
+      "hp": "180",
+      "types": [
+        "Grass"
+      ],
+      "evolvesFrom": "Thwackey",
+      "attacks": [
+        {
+          "name": "Wood Drain",
+          "cost": [
+            "Grass",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "60",
+          "text": "Heal 30 damage from this Pokémon."
+        },
+        {
+          "name": "Raging Repeated Strike",
+          "cost": [
+            "Grass",
+            "Grass",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "120+",
+          "text": "Discard any amount of Energy from your Pokémon. This attack does 30 more damage for each card you discarded in this way."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Fire",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 3,
+      "set": {
+        "id": "swshp",
+        "name": "SWSH Black Star Promos",
+        "series": "Sword & Shield",
+        "printedTotal": 307,
+        "total": 304,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "PR-SW",
+        "releaseDate": "2019/11/15",
+        "updatedAt": "2022/07/23 20:15:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swshp/symbol.png",
+          "logo": "https://images.pokemontcg.io/swshp/logo.png"
+        }
+      },
+      "number": "SWSH277",
+      "artist": "DOM",
+      "rarity": "Promo",
+      "flavorText": "The one with the best drumming techniques becomes the boss of the troop. It has a gentle disposition and values harmony among its group.",
+      "nationalPokedexNumbers": [
+        812
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "E",
+      "images": {
+        "small": "https://images.pokemontcg.io/swshp/SWSH277.png",
+        "large": "https://images.pokemontcg.io/swshp/SWSH277_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swshp-SWSH277",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 0.25,
+            "mid": 0.49,
+            "high": 19.99,
+            "market": 0.43,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swshp-SWSH277",
+        "updatedAt": "2025/11/18",
+        "prices": {
+          "averageSellPrice": 0.27,
+          "lowPrice": 0.02,
+          "trendPrice": 0.22,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.02,
+          "avg1": 0.15,
+          "avg7": 0.2,
+          "avg30": 0.21,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swshp-SWSH278",
+      "name": "Cinderace",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Stage 2",
+        "Single Strike"
+      ],
+      "hp": "170",
+      "types": [
+        "Fire"
+      ],
+      "evolvesFrom": "Raboot",
+      "abilities": [
+        {
+          "name": "Crisis Power",
+          "text": "This Pokémon's attacks do 30 more damage to your opponent's Active Pokémon for each Prize card your opponent has taken (before applying Weakness and Resistance).",
+          "type": "Ability"
+        }
+      ],
+      "attacks": [
+        {
+          "name": "Fireball Shot",
+          "cost": [
+            "Fire",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "150",
+          "text": "During your next turn, this Pokémon can't attack."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Water",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "set": {
+        "id": "swshp",
+        "name": "SWSH Black Star Promos",
+        "series": "Sword & Shield",
+        "printedTotal": 307,
+        "total": 304,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "PR-SW",
+        "releaseDate": "2019/11/15",
+        "updatedAt": "2022/07/23 20:15:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swshp/symbol.png",
+          "logo": "https://images.pokemontcg.io/swshp/logo.png"
+        }
+      },
+      "number": "SWSH278",
+      "artist": "Yuya Oka",
+      "rarity": "Promo",
+      "flavorText": "It's skilled at both offense and defense, and it gets pumped up when cheered on. But if it starts showboating, it could put itself in a tough spot.",
+      "nationalPokedexNumbers": [
+        815
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "E",
+      "images": {
+        "small": "https://images.pokemontcg.io/swshp/SWSH278.png",
+        "large": "https://images.pokemontcg.io/swshp/SWSH278_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swshp-SWSH278",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 0.2,
+            "mid": 0.45,
+            "high": 19.99,
+            "market": 0.41,
+            "directLow": 0.47
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swshp-SWSH278",
+        "updatedAt": "2025/11/18",
+        "prices": {
+          "averageSellPrice": 0.26,
+          "lowPrice": 0.02,
+          "trendPrice": 0.24,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.02,
+          "avg1": 0.18,
+          "avg7": 0.31,
+          "avg30": 0.27,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swshp-SWSH279",
+      "name": "Inteleon",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Stage 2",
+        "Rapid Strike"
+      ],
+      "hp": "150",
+      "types": [
+        "Water"
+      ],
+      "evolvesFrom": "Drizzile",
+      "abilities": [
+        {
+          "name": "Quick Shooting",
+          "text": "Once during your turn, you may put 2 damage counters on 1 of your opponent's Pokémon.",
+          "type": "Ability"
+        }
+      ],
+      "attacks": [
+        {
+          "name": "Waterfall",
+          "cost": [
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "70",
+          "text": ""
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Lightning",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "set": {
+        "id": "swshp",
+        "name": "SWSH Black Star Promos",
+        "series": "Sword & Shield",
+        "printedTotal": 307,
+        "total": 304,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "PR-SW",
+        "releaseDate": "2019/11/15",
+        "updatedAt": "2022/07/23 20:15:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swshp/symbol.png",
+          "logo": "https://images.pokemontcg.io/swshp/logo.png"
+        }
+      },
+      "number": "SWSH279",
+      "artist": "GOSSAN",
+      "rarity": "Promo",
+      "flavorText": "Its nictitating membranes let it pick out foes' weak points so it can precisely blast them with water that shoots from its fingertips at Mach 3.",
+      "nationalPokedexNumbers": [
+        818
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "E",
+      "images": {
+        "small": "https://images.pokemontcg.io/swshp/SWSH279.png",
+        "large": "https://images.pokemontcg.io/swshp/SWSH279_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swshp-SWSH279",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 0.15,
+            "mid": 0.47,
+            "high": 19.99,
+            "market": 0.41,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swshp-SWSH279",
+        "updatedAt": "2025/11/18",
+        "prices": {
+          "averageSellPrice": 0.26,
+          "lowPrice": 0.02,
+          "trendPrice": 0.21,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.02,
+          "avg1": 0.11,
+          "avg7": 0.27,
+          "avg30": 0.2,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swshp-SWSH280",
+      "name": "Regieleki V",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic",
+        "V"
+      ],
+      "hp": "200",
+      "types": [
+        "Lightning"
+      ],
+      "rules": [
+        "V rule: When your Pokémon V is Knocked Out, your opponent takes 2 Prize cards."
+      ],
+      "attacks": [
+        {
+          "name": "Switching Bolt",
+          "cost": [
+            "Lightning"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "30",
+          "text": "Switch this Pokémon with 1 of your Benched Pokémon."
+        },
+        {
+          "name": "Lightning Wall",
+          "cost": [
+            "Lightning",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "100",
+          "text": "During your opponent's next turn, this Pokémon takes 100 less damage from attacks (after applying Weakness and Resistance)."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Fighting",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "set": {
+        "id": "swshp",
+        "name": "SWSH Black Star Promos",
+        "series": "Sword & Shield",
+        "printedTotal": 307,
+        "total": 304,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "PR-SW",
+        "releaseDate": "2019/11/15",
+        "updatedAt": "2022/07/23 20:15:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swshp/symbol.png",
+          "logo": "https://images.pokemontcg.io/swshp/logo.png"
+        }
+      },
+      "number": "SWSH280",
+      "artist": "Eske Yoshinob",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        894
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "F",
+      "images": {
+        "small": "https://images.pokemontcg.io/swshp/SWSH280.png",
+        "large": "https://images.pokemontcg.io/swshp/SWSH280_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swshp-SWSH280",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 0.3,
+            "mid": 0.75,
+            "high": 19.99,
+            "market": 0.55,
+            "directLow": 0.46
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swshp-SWSH280",
+        "updatedAt": "2025/11/18",
+        "prices": {
+          "averageSellPrice": 0.63,
+          "lowPrice": 0.05,
+          "trendPrice": 0.53,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.1,
+          "avg1": 0.5,
+          "avg7": 0.63,
+          "avg30": 0.59,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swshp-SWSH281",
+      "name": "Regidrago V",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic",
+        "V"
+      ],
+      "hp": "220",
+      "types": [
+        "Dragon"
+      ],
+      "rules": [
+        "V rule: When your Pokémon V is Knocked Out, your opponent takes 2 Prize cards."
+      ],
+      "attacks": [
+        {
+          "name": "Celestial Roar",
+          "cost": [
+            "Colorless"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "Discard the top 3 cards of your deck. If any of those cards are Energy cards, attach them to this Pokémon."
+        },
+        {
+          "name": "Dragon Laser",
+          "cost": [
+            "Grass",
+            "Grass",
+            "Fire"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "130",
+          "text": "This attack also does 30 damage to 1 of your opponent's Benched Pokémon. (Don't apply Weakness and Resistance for Benched Pokémon.)"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 3,
+      "set": {
+        "id": "swshp",
+        "name": "SWSH Black Star Promos",
+        "series": "Sword & Shield",
+        "printedTotal": 307,
+        "total": 304,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "PR-SW",
+        "releaseDate": "2019/11/15",
+        "updatedAt": "2022/07/23 20:15:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swshp/symbol.png",
+          "logo": "https://images.pokemontcg.io/swshp/logo.png"
+        }
+      },
+      "number": "SWSH281",
+      "artist": "PLANETA Hiiragi",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        895
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "F",
+      "images": {
+        "small": "https://images.pokemontcg.io/swshp/SWSH281.png",
+        "large": "https://images.pokemontcg.io/swshp/SWSH281_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swshp-SWSH281",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 0.24,
+            "mid": 0.89,
+            "high": 19.99,
+            "market": 0.54,
+            "directLow": 0.53
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swshp-SWSH281",
+        "updatedAt": "2025/11/18",
+        "prices": {
+          "averageSellPrice": 0.63,
+          "lowPrice": 0.2,
+          "trendPrice": 0.76,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.2,
+          "avg1": 0.63,
+          "avg7": 0.85,
+          "avg30": 0.75,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swshp-SWSH291",
+      "name": "Lucario VSTAR",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "VSTAR"
+      ],
+      "hp": "270",
+      "types": [
+        "Fighting"
+      ],
+      "evolvesFrom": "Lucario V",
+      "rules": [
+        "VSTAR rule: When your Pokémon VSTAR is Knocked Out, your opponent takes 2 Prize cards."
+      ],
+      "attacks": [
+        {
+          "name": "Fighting Knuckle",
+          "cost": [
+            "Fighting",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "120+",
+          "text": "If your opponent's Active Pokémon is a Pokémon V, this attack does 120 more damage."
+        },
+        {
+          "name": "Aura Star",
+          "cost": [
+            "Fighting",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "70×",
+          "text": "This attack does 70 damage for each Energy attached to all of your opponent's Pokémon. (You can't use more than 1 VSTAR Power in a game.)"
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Psychic",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "set": {
+        "id": "swshp",
+        "name": "SWSH Black Star Promos",
+        "series": "Sword & Shield",
+        "printedTotal": 307,
+        "total": 304,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "PR-SW",
+        "releaseDate": "2019/11/15",
+        "updatedAt": "2022/07/23 20:15:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swshp/symbol.png",
+          "logo": "https://images.pokemontcg.io/swshp/logo.png"
+        }
+      },
+      "number": "SWSH291",
+      "artist": "hncl",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        448
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "F",
+      "images": {
+        "small": "https://images.pokemontcg.io/swshp/SWSH291.png",
+        "large": "https://images.pokemontcg.io/swshp/SWSH291_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swshp-SWSH291",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 5.51,
+            "mid": 9.99,
+            "high": 9999,
+            "market": 6.93,
+            "directLow": 6.99
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swshp-SWSH291",
+        "updatedAt": "2025/11/18",
+        "prices": {
+          "averageSellPrice": 11.26,
+          "lowPrice": 4.94,
+          "trendPrice": 8.84,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 5,
+          "avg1": 9.3,
+          "avg7": 9.29,
+          "avg30": 10.16,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swshp-SWSH285",
+      "name": "Pikachu V",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic",
+        "V"
+      ],
+      "hp": "200",
+      "types": [
+        "Lightning"
+      ],
+      "evolvesTo": [
+        "Pikachu VMAX"
+      ],
+      "rules": [
+        "V rule: When your Pokémon V is Knocked Out, your opponent takes 2 Prize cards."
+      ],
+      "attacks": [
+        {
+          "name": "Pika Drive",
+          "cost": [
+            "Lightning",
+            "Lightning",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "200",
+          "text": "During your next turn, this Pokémon can't attack."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Fighting",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "set": {
+        "id": "swshp",
+        "name": "SWSH Black Star Promos",
+        "series": "Sword & Shield",
+        "printedTotal": 307,
+        "total": 304,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "PR-SW",
+        "releaseDate": "2019/11/15",
+        "updatedAt": "2022/07/23 20:15:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swshp/symbol.png",
+          "logo": "https://images.pokemontcg.io/swshp/logo.png"
+        }
+      },
+      "number": "SWSH285",
+      "artist": "You Iribi",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        25
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "F",
+      "images": {
+        "small": "https://images.pokemontcg.io/swshp/SWSH285.png",
+        "large": "https://images.pokemontcg.io/swshp/SWSH285_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swshp-SWSH285",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 1,
+            "mid": 2.43,
+            "high": 19.99,
+            "market": 1.95,
+            "directLow": 2.77
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swshp-SWSH285",
+        "updatedAt": "2025/11/18",
+        "prices": {
+          "averageSellPrice": 1.55,
+          "lowPrice": 0.3,
+          "trendPrice": 1.5,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.7,
+          "avg1": 1.7,
+          "avg7": 1.52,
+          "avg30": 1.59,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swshp-SWSH286",
+      "name": "Pikachu VMAX",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "VMAX"
+      ],
+      "hp": "310",
+      "types": [
+        "Lightning"
+      ],
+      "evolvesFrom": "Pikachu V",
+      "rules": [
+        "VMAX rule: When your Pokémon VMAX is Knocked Out, your opponent takes 3 Prize cards."
+      ],
+      "attacks": [
+        {
+          "name": "Tail Charge",
+          "cost": [
+            "Lightning"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "30",
+          "text": "Attach up to 3 Lightning Energy cards from your discard pile to 1 of your Pokémon."
+        },
+        {
+          "name": "G-Max Thunder",
+          "cost": [
+            "Lightning",
+            "Lightning",
+            "Lightning",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 4,
+          "damage": "250",
+          "text": ""
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Fighting",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "set": {
+        "id": "swshp",
+        "name": "SWSH Black Star Promos",
+        "series": "Sword & Shield",
+        "printedTotal": 307,
+        "total": 304,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "PR-SW",
+        "releaseDate": "2019/11/15",
+        "updatedAt": "2022/07/23 20:15:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swshp/symbol.png",
+          "logo": "https://images.pokemontcg.io/swshp/logo.png"
+        }
+      },
+      "number": "SWSH286",
+      "artist": "AKIRA EGAWA",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        25
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "F",
+      "images": {
+        "small": "https://images.pokemontcg.io/swshp/SWSH286.png",
+        "large": "https://images.pokemontcg.io/swshp/SWSH286_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swshp-SWSH286",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 3,
+            "mid": 5.14,
+            "high": 9999,
+            "market": 4.45,
+            "directLow": 3.75
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swshp-SWSH286",
+        "updatedAt": "2025/11/18",
+        "prices": {
+          "averageSellPrice": 1.24,
+          "lowPrice": 0.6,
+          "trendPrice": 1.24,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.6,
+          "avg1": 1.4,
+          "avg7": 1.71,
+          "avg30": 1.24,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swshp-SWSH075",
+      "name": "Special Delivery Charizard",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Stage 2"
+      ],
+      "hp": "160",
+      "types": [
+        "Fire"
+      ],
+      "evolvesFrom": "Charmeleon",
+      "attacks": [
+        {
+          "name": "Happy Delivery",
+          "cost": [
+            "Colorless"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "Search your deck for up to 2 Item cards, reveal them, and put them into your hand. Then, shuffle your deck."
+        },
+        {
+          "name": "Flamethrower",
+          "cost": [
+            "Fire",
+            "Fire",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "160",
+          "text": "Discard an Energy from this Pokémon."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Water",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 3,
+      "set": {
+        "id": "swshp",
+        "name": "SWSH Black Star Promos",
+        "series": "Sword & Shield",
+        "printedTotal": 307,
+        "total": 304,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "PR-SW",
+        "releaseDate": "2019/11/15",
+        "updatedAt": "2022/07/23 20:15:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swshp/symbol.png",
+          "logo": "https://images.pokemontcg.io/swshp/logo.png"
+        }
+      },
+      "number": "SWSH075",
+      "artist": "The Pokémon Company Art Team",
+      "rarity": "Promo",
+      "flavorText": "It spits fire that is hot enough to melt boulders. It may cause forest fires by blowing flames.",
+      "nationalPokedexNumbers": [
+        6
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "D",
+      "images": {
+        "small": "https://images.pokemontcg.io/swshp/SWSH075.png",
+        "large": "https://images.pokemontcg.io/swshp/SWSH075_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swshp-SWSH075",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 113.19,
+            "mid": 139.07,
+            "high": 250,
+            "market": 131.14,
+            "directLow": 129.99
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swshp-SWSH075",
+        "updatedAt": "2025/11/18",
+        "prices": {
+          "averageSellPrice": 147.07,
+          "lowPrice": 129.97,
+          "trendPrice": 147.29,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 129.97,
+          "avg1": 115,
+          "avg7": 146.44,
+          "avg30": 162.05,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swshp-SWSH282",
+      "name": "Galarian Articuno",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic"
+      ],
+      "hp": "120",
+      "types": [
+        "Psychic"
+      ],
+      "abilities": [
+        {
+          "name": "Cruel Charge",
+          "text": "When you play this Pokémon from your hand onto your Bench during your turn, you may attach up to 2 Psychic Energy cards from your hand to this Pokémon.",
+          "type": "Ability"
+        }
+      ],
+      "attacks": [
+        {
+          "name": "Psylaser",
+          "cost": [
+            "Psychic",
+            "Psychic",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "",
+          "text": "Discard all Psychic Energy from this Pokémon. This attack does 120 damage to 1 of your opponent's Pokémon. (Don't apply Weakness and Resistance for Benched Pokémon.)"
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Darkness",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Fighting",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "set": {
+        "id": "swshp",
+        "name": "SWSH Black Star Promos",
+        "series": "Sword & Shield",
+        "printedTotal": 307,
+        "total": 304,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "PR-SW",
+        "releaseDate": "2019/11/15",
+        "updatedAt": "2022/07/23 20:15:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swshp/symbol.png",
+          "logo": "https://images.pokemontcg.io/swshp/logo.png"
+        }
+      },
+      "number": "SWSH282",
+      "artist": "Shiburingaru",
+      "rarity": "Promo",
+      "flavorText": "Known as Articuno, this Pokémon fires beams that can immobilize opponents as if they had been frozen solid.",
+      "nationalPokedexNumbers": [
+        144
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "E",
+      "images": {
+        "small": "https://images.pokemontcg.io/swshp/SWSH282.png",
+        "large": "https://images.pokemontcg.io/swshp/SWSH282_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swshp-SWSH282",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 2.5,
+            "mid": 4.75,
+            "high": 9999,
+            "market": 3.7,
+            "directLow": 4.5
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swshp-SWSH282",
+        "updatedAt": "2025/11/18",
+        "prices": {
+          "averageSellPrice": 3.52,
+          "lowPrice": 1,
+          "trendPrice": 2.97,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 1,
+          "avg1": 3.44,
+          "avg7": 3.68,
+          "avg30": 3.47,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swshp-SWSH302",
+      "name": "Klara",
+      "supertype": "Trainer",
+      "subtypes": [
+        "Supporter"
+      ],
+      "rules": [
+        "Choose 1 or both: • Put up to 2 Pokémon from your discard pile into your hand. • Put up to 2 basic Energy cards from your discard pile into your hand.",
+        "You may play only 1 Supporter card during your turn."
+      ],
+      "set": {
+        "id": "swshp",
+        "name": "SWSH Black Star Promos",
+        "series": "Sword & Shield",
+        "printedTotal": 307,
+        "total": 304,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "PR-SW",
+        "releaseDate": "2019/11/15",
+        "updatedAt": "2022/07/23 20:15:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swshp/symbol.png",
+          "logo": "https://images.pokemontcg.io/swshp/logo.png"
+        }
+      },
+      "number": "SWSH302",
+      "artist": "Yuu Nishida",
+      "rarity": "Promo",
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "E",
+      "images": {
+        "small": "https://images.pokemontcg.io/swshp/SWSH302.png",
+        "large": "https://images.pokemontcg.io/swshp/SWSH302_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swshp-SWSH302",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 2,
+            "mid": 3,
+            "high": 21,
+            "market": 2.3,
+            "directLow": 2.07
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swshp-SWSH302",
+        "updatedAt": "2025/11/18",
+        "prices": {
+          "averageSellPrice": 2.42,
+          "lowPrice": 0.99,
+          "trendPrice": 2.18,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.99,
+          "avg1": 2,
+          "avg7": 2.03,
+          "avg30": 2.25,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swshp-SWSH305",
+      "name": "Greninja",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Stage 2"
+      ],
+      "hp": "140",
+      "types": [
+        "Water"
+      ],
+      "evolvesFrom": "Frogadier",
+      "attacks": [
+        {
+          "name": "Coordinated Shuriken",
+          "cost": [
+            "Water",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "120",
+          "text": "This attack also does 10 damage to 3 of your opponent's Benched Pokémon. (Don't apply Weakness and Resistance for Benched Pokémon.)"
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Lightning",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "set": {
+        "id": "swshp",
+        "name": "SWSH Black Star Promos",
+        "series": "Sword & Shield",
+        "printedTotal": 307,
+        "total": 304,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "PR-SW",
+        "releaseDate": "2019/11/15",
+        "updatedAt": "2022/07/23 20:15:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swshp/symbol.png",
+          "logo": "https://images.pokemontcg.io/swshp/logo.png"
+        }
+      },
+      "number": "SWSH305",
+      "artist": "Taiga Kasai",
+      "rarity": "Promo",
+      "flavorText": "It creates throwing stars out of compressed water. When it spins them and throws them at high speed, these stars can split metal in two.",
+      "nationalPokedexNumbers": [
+        658
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "F",
+      "images": {
+        "small": "https://images.pokemontcg.io/swshp/SWSH305.png",
+        "large": "https://images.pokemontcg.io/swshp/SWSH305_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swshp-SWSH305",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "normal": {
+            "low": 34.5,
+            "mid": 42,
+            "high": 99,
+            "market": 42.39,
+            "directLow": 53.42
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swshp-SWSH305",
+        "updatedAt": "2025/11/18",
+        "prices": {
+          "averageSellPrice": 56.98,
+          "lowPrice": 48,
+          "trendPrice": 61.88,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 48,
+          "avg1": 49,
+          "avg7": 55.55,
+          "avg30": 33.43,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swshp-SWSH288",
+      "name": "Morpeko V-UNION",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "V-UNION"
+      ],
+      "hp": "310",
+      "types": [
+        "Lightning"
+      ],
+      "rules": [
+        "How to play a Pokémon V-UNION: Once per game during your turn, combine 4 different Morpeko V-UNION from your discard pile and put them onto your Bench.",
+        "V-UNION rule: When your Pokémon V-UNION is Knocked Out, your opponent takes 3 Prize cards."
+      ],
+      "attacks": [
+        {
+          "name": "Union Gain",
+          "cost": [
+            "Colorless"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "Attach up to 2 Lightning Energy cards from your discard pile to this Pokémon."
+        },
+        {
+          "name": "All You Can Eat",
+          "cost": [
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "",
+          "text": "Draw cards until you have 10 cards in your hand."
+        },
+        {
+          "name": "Burst Wheel",
+          "cost": [
+            "Lightning",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "100×",
+          "text": "Discard all energy from this Pokémon. This attack does 100 damage for each card you discarded in this way."
+        },
+        {
+          "name": "Electric Ball",
+          "cost": [
+            "Lightning",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "160",
+          "text": ""
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Fighting",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "set": {
+        "id": "swshp",
+        "name": "SWSH Black Star Promos",
+        "series": "Sword & Shield",
+        "printedTotal": 307,
+        "total": 304,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "PR-SW",
+        "releaseDate": "2019/11/15",
+        "updatedAt": "2022/07/23 20:15:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swshp/symbol.png",
+          "logo": "https://images.pokemontcg.io/swshp/logo.png"
+        }
+      },
+      "number": "SWSH288",
+      "artist": "Yuu Nishida",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        877
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "E",
+      "images": {
+        "small": "https://images.pokemontcg.io/swshp/SWSH288.png",
+        "large": "https://images.pokemontcg.io/swshp/SWSH288_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swshp-SWSH288",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 0.5,
+            "mid": 1.15,
+            "high": 19.99,
+            "market": 1.19,
+            "directLow": 1.49
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swshp-SWSH288",
+        "updatedAt": "2025/11/18",
+        "prices": {
+          "averageSellPrice": 0.7,
+          "lowPrice": 0.4,
+          "trendPrice": 0.79,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.4,
+          "avg1": 0.85,
+          "avg7": 0.76,
+          "avg30": 0.74,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swshp-SWSH306",
+      "name": "Arceus V",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic",
+        "V"
+      ],
+      "hp": "220",
+      "types": [
+        "Colorless"
+      ],
+      "rules": [
+        "V rule: When your Pokémon V is Knocked Out, your opponent takes 2 Prize cards."
+      ],
+      "attacks": [
+        {
+          "name": "Trinity Charge",
+          "cost": [
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "",
+          "text": "Search your deck for up to 3 basic Energy cards and attach them to your Pokémon V in any way you like. Then, shuffle your deck."
+        },
+        {
+          "name": "Power Edge",
+          "cost": [
+            "Colorless",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "130",
+          "text": ""
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Fighting",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "set": {
+        "id": "swshp",
+        "name": "SWSH Black Star Promos",
+        "series": "Sword & Shield",
+        "printedTotal": 307,
+        "total": 304,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "PR-SW",
+        "releaseDate": "2019/11/15",
+        "updatedAt": "2022/07/23 20:15:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swshp/symbol.png",
+          "logo": "https://images.pokemontcg.io/swshp/logo.png"
+        }
+      },
+      "number": "SWSH306",
+      "artist": "5ban Graphics",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        493
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "F",
+      "images": {
+        "small": "https://images.pokemontcg.io/swshp/SWSH306.png",
+        "large": "https://images.pokemontcg.io/swshp/SWSH306_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swshp-SWSH306",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 2.05,
+            "mid": 3.11,
+            "high": 19.99,
+            "market": 3.07,
+            "directLow": 3.88
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swshp-SWSH306",
+        "updatedAt": "2025/11/18",
+        "prices": {
+          "averageSellPrice": 2.2,
+          "lowPrice": 0.79,
+          "trendPrice": 1.54,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.95,
+          "avg1": 1,
+          "avg7": 2.06,
+          "avg30": 2.21,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swshp-SWSH287",
+      "name": "Morpeko V-UNION",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "V-UNION"
+      ],
+      "hp": "310",
+      "types": [
+        "Lightning"
+      ],
+      "rules": [
+        "How to play a Pokémon V-UNION: Once per game during your turn, combine 4 different Morpeko V-UNION from your discard pile and put them onto your Bench.",
+        "V-UNION rule: When your Pokémon V-UNION is Knocked Out, your opponent takes 3 Prize cards."
+      ],
+      "attacks": [
+        {
+          "name": "Union Gain",
+          "cost": [
+            "Colorless"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "Attach up to 2 Lightning Energy cards from your discard pile to this Pokémon."
+        },
+        {
+          "name": "All You Can Eat",
+          "cost": [
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "",
+          "text": "Draw cards until you have 10 cards in your hand."
+        },
+        {
+          "name": "Burst Wheel",
+          "cost": [
+            "Lightning",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "100×",
+          "text": "Discard all energy from this Pokémon. This attack does 100 damage for each card you discarded in this way."
+        },
+        {
+          "name": "Electric Ball",
+          "cost": [
+            "Lightning",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "160",
+          "text": ""
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Fighting",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "set": {
+        "id": "swshp",
+        "name": "SWSH Black Star Promos",
+        "series": "Sword & Shield",
+        "printedTotal": 307,
+        "total": 304,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "PR-SW",
+        "releaseDate": "2019/11/15",
+        "updatedAt": "2022/07/23 20:15:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swshp/symbol.png",
+          "logo": "https://images.pokemontcg.io/swshp/logo.png"
+        }
+      },
+      "number": "SWSH287",
+      "artist": "Yuu Nishida",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        877
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "E",
+      "images": {
+        "small": "https://images.pokemontcg.io/swshp/SWSH287.png",
+        "large": "https://images.pokemontcg.io/swshp/SWSH287_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swshp-SWSH287",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 0.1,
+            "mid": 0.82,
+            "high": 19.99,
+            "market": 0.78,
+            "directLow": 0.89
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swshp-SWSH287",
+        "updatedAt": "2025/11/18",
+        "prices": {
+          "averageSellPrice": 0.79,
+          "lowPrice": 0.4,
+          "trendPrice": 0.98,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.4,
+          "avg1": 1.49,
+          "avg7": 0.81,
+          "avg30": 0.83,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swshp-SWSH292",
+      "name": "Zacian V",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic",
+        "V"
+      ],
+      "hp": "220",
+      "types": [
+        "Metal"
+      ],
+      "rules": [
+        "V rule: When your Pokémon V is Knocked Out, your opponent takes 2 Prize cards."
+      ],
+      "abilities": [
+        {
+          "name": "Intrepid Sword",
+          "text": "Once during your turn, you may look at the top 3 cards of your deck and attach any number of Metal Energy cards you find there to this Pokémon. Put the other cards into your hand. If you use this Ability, your turn ends.",
+          "type": "Ability"
+        }
+      ],
+      "attacks": [
+        {
+          "name": "Brave Blade",
+          "cost": [
+            "Metal",
+            "Metal",
+            "Metal"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "230",
+          "text": "During your next turn, this Pokémon can't attack."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Fire",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Grass",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "set": {
+        "id": "swshp",
+        "name": "SWSH Black Star Promos",
+        "series": "Sword & Shield",
+        "printedTotal": 307,
+        "total": 304,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "PR-SW",
+        "releaseDate": "2019/11/15",
+        "updatedAt": "2022/07/23 20:15:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swshp/symbol.png",
+          "logo": "https://images.pokemontcg.io/swshp/logo.png"
+        }
+      },
+      "number": "SWSH292",
+      "artist": "5ban Graphics",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        888
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "D",
+      "images": {
+        "small": "https://images.pokemontcg.io/swshp/SWSH292.png",
+        "large": "https://images.pokemontcg.io/swshp/SWSH292_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swshp-SWSH292",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 2.55,
+            "mid": 4.18,
+            "high": 9999,
+            "market": 3.34,
+            "directLow": 3.62
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swshp-SWSH292",
+        "updatedAt": "2025/11/18",
+        "prices": {
+          "averageSellPrice": 1.81,
+          "lowPrice": 0.99,
+          "trendPrice": 2.71,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 1,
+          "avg1": 1.98,
+          "avg7": 2.5,
+          "avg30": 2.04,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swshp-SWSH293",
+      "name": "Zamazenta V",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic",
+        "V"
+      ],
+      "hp": "230",
+      "types": [
+        "Metal"
+      ],
+      "rules": [
+        "V rule: When your Pokémon V is Knocked Out, your opponent takes 2 Prize cards."
+      ],
+      "abilities": [
+        {
+          "name": "Dauntless Shield",
+          "text": "Prevent all damage done to this Pokémon by attacks from your opponent's Pokémon VMAX.",
+          "type": "Ability"
+        }
+      ],
+      "attacks": [
+        {
+          "name": "Assault Tackle",
+          "cost": [
+            "Metal",
+            "Metal",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "130",
+          "text": "Discard a Special Energy from your opponent's Active Pokémon."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Fire",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Grass",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "set": {
+        "id": "swshp",
+        "name": "SWSH Black Star Promos",
+        "series": "Sword & Shield",
+        "printedTotal": 307,
+        "total": 304,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "PR-SW",
+        "releaseDate": "2019/11/15",
+        "updatedAt": "2022/07/23 20:15:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swshp/symbol.png",
+          "logo": "https://images.pokemontcg.io/swshp/logo.png"
+        }
+      },
+      "number": "SWSH293",
+      "artist": "aky CG Works",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        889
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "D",
+      "images": {
+        "small": "https://images.pokemontcg.io/swshp/SWSH293.png",
+        "large": "https://images.pokemontcg.io/swshp/SWSH293_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swshp-SWSH293",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 1.89,
+            "mid": 2.81,
+            "high": 9999,
+            "market": 2.53,
+            "directLow": 3.32
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swshp-SWSH293",
+        "updatedAt": "2025/11/18",
+        "prices": {
+          "averageSellPrice": 1.54,
+          "lowPrice": 0.7,
+          "trendPrice": 1.62,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.7,
+          "avg1": 2.63,
+          "avg7": 1.61,
+          "avg30": 1.53,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swshp-SWSH307",
+      "name": "Arceus VSTAR",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "VSTAR"
+      ],
+      "hp": "280",
+      "types": [
+        "Colorless"
+      ],
+      "evolvesFrom": "Arceus V",
+      "rules": [
+        "VSTAR rule: When your Pokémon VSTAR is Knocked Out, your opponent takes 2 Prize cards."
+      ],
+      "abilities": [
+        {
+          "name": "Starbirth",
+          "text": "During your turn, you may search your deck for up to 2 cards and put them into your hand. Then, shuffle your deck. (You can't use more than 1 VSTAR Power in a game.)",
+          "type": "Ability"
+        }
+      ],
+      "attacks": [
+        {
+          "name": "Trinity Nova",
+          "cost": [
+            "Colorless",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "200",
+          "text": "Search your deck for up to 3 basic Energy cards and attach them to your Pokémon V in any way you like. Then, shuffle your deck."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Fighting",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "set": {
+        "id": "swshp",
+        "name": "SWSH Black Star Promos",
+        "series": "Sword & Shield",
+        "printedTotal": 307,
+        "total": 304,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "PR-SW",
+        "releaseDate": "2019/11/15",
+        "updatedAt": "2022/07/23 20:15:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swshp/symbol.png",
+          "logo": "https://images.pokemontcg.io/swshp/logo.png"
+        }
+      },
+      "number": "SWSH307",
+      "artist": "5ban Graphics",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        493
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "F",
+      "images": {
+        "small": "https://images.pokemontcg.io/swshp/SWSH307.png",
+        "large": "https://images.pokemontcg.io/swshp/SWSH307_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swshp-SWSH307",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 3.29,
+            "mid": 4.65,
+            "high": 19.99,
+            "market": 4.45,
+            "directLow": 5.82
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swshp-SWSH307",
+        "updatedAt": "2025/11/18",
+        "prices": {
+          "averageSellPrice": 2.85,
+          "lowPrice": 1.49,
+          "trendPrice": 2.59,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 1.49,
+          "avg1": 1.99,
+          "avg7": 3.19,
+          "avg30": 2.88,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swshp-SWSH251",
+      "name": "Boss's Orders",
+      "supertype": "Trainer",
+      "subtypes": [
+        "Supporter"
+      ],
+      "rules": [
+        "Switch 1 of your opponent's Benched Pokémon with their Active Pokémon.",
+        "You may play only 1 Supporter card during your turn."
+      ],
+      "set": {
+        "id": "swshp",
+        "name": "SWSH Black Star Promos",
+        "series": "Sword & Shield",
+        "printedTotal": 307,
+        "total": 304,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "PR-SW",
+        "releaseDate": "2019/11/15",
+        "updatedAt": "2022/07/23 20:15:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swshp/symbol.png",
+          "logo": "https://images.pokemontcg.io/swshp/logo.png"
+        }
+      },
+      "number": "SWSH251",
+      "artist": "Mitsuhiro Arita",
+      "rarity": "Promo",
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "F",
+      "images": {
+        "small": "https://images.pokemontcg.io/swshp/SWSH251.png",
+        "large": "https://images.pokemontcg.io/swshp/SWSH251_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swshp-SWSH251",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 7.75,
+            "mid": 10.54,
+            "high": 19.99,
+            "market": 9.41,
+            "directLow": 11.34
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swshp-SWSH251",
+        "updatedAt": "2025/11/18",
+        "prices": {
+          "averageSellPrice": 5.89,
+          "lowPrice": 4.5,
+          "trendPrice": 6.5,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 4.5,
+          "avg1": 5.49,
+          "avg7": 6.18,
+          "avg30": 6.05,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swshp-SWSH283",
+      "name": "Galarian Zapdos",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic"
+      ],
+      "hp": "110",
+      "types": [
+        "Fighting"
+      ],
+      "abilities": [
+        {
+          "name": "Strong Legs Charge",
+          "text": "When you play this Pokémon from your hand onto your Bench during your turn, you may attach up to 2 Fighting Energy cards from your hand to this Pokémon.",
+          "type": "Ability"
+        }
+      ],
+      "attacks": [
+        {
+          "name": "Zapper Kick",
+          "cost": [
+            "Fighting",
+            "Fighting",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "70",
+          "text": "You may discard all Energy from this Pokémon. If you do, your opponent's Active Pokémon is now Paralyzed."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Psychic",
+          "value": "×2"
+        }
+      ],
+      "set": {
+        "id": "swshp",
+        "name": "SWSH Black Star Promos",
+        "series": "Sword & Shield",
+        "printedTotal": 307,
+        "total": 304,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "PR-SW",
+        "releaseDate": "2019/11/15",
+        "updatedAt": "2022/07/23 20:15:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swshp/symbol.png",
+          "logo": "https://images.pokemontcg.io/swshp/logo.png"
+        }
+      },
+      "number": "SWSH283",
+      "artist": "Rianti Hidayat",
+      "rarity": "Promo",
+      "flavorText": "One kick from its powerful legs will pulverize a dump truck. Supposedly, this Pokémon runs through the mountains at over 180 mph.",
+      "nationalPokedexNumbers": [
+        145
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "E",
+      "images": {
+        "small": "https://images.pokemontcg.io/swshp/SWSH283.png",
+        "large": "https://images.pokemontcg.io/swshp/SWSH283_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swshp-SWSH283",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 1.3,
+            "mid": 3,
+            "high": 9999,
+            "market": 2.28,
+            "directLow": 1.95
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swshp-SWSH283",
+        "updatedAt": "2025/11/18",
+        "prices": {
+          "averageSellPrice": 2.25,
+          "lowPrice": 1,
+          "trendPrice": 2.32,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 1,
+          "avg1": 2.33,
+          "avg7": 2.52,
+          "avg30": 2.31,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swshp-SWSH284",
+      "name": "Galarian Moltres",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic"
+      ],
+      "hp": "120",
+      "types": [
+        "Darkness"
+      ],
+      "abilities": [
+        {
+          "name": "Malevolent Charge",
+          "text": "When you play this Pokémon from your hand onto your Bench during your turn, you may attach up to 2 Darkness Energy cards from your hand to this Pokémon.",
+          "type": "Ability"
+        }
+      ],
+      "attacks": [
+        {
+          "name": "Fiery Wrath",
+          "cost": [
+            "Darkness",
+            "Darkness",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "20+",
+          "text": "This attack does 50 more damage for each Prize card your opponent has taken."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Grass",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "set": {
+        "id": "swshp",
+        "name": "SWSH Black Star Promos",
+        "series": "Sword & Shield",
+        "printedTotal": 307,
+        "total": 304,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "PR-SW",
+        "releaseDate": "2019/11/15",
+        "updatedAt": "2022/07/23 20:15:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swshp/symbol.png",
+          "logo": "https://images.pokemontcg.io/swshp/logo.png"
+        }
+      },
+      "number": "SWSH284",
+      "artist": "Shinji Kanda",
+      "rarity": "Promo",
+      "flavorText": "The sinister aura that blazes like molten fire around this Pokémon is what inspired the name Moltres.",
+      "nationalPokedexNumbers": [
+        146
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "E",
+      "images": {
+        "small": "https://images.pokemontcg.io/swshp/SWSH284.png",
+        "large": "https://images.pokemontcg.io/swshp/SWSH284_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swshp-SWSH284",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 7.46,
+            "mid": 11.94,
+            "high": 9999,
+            "market": 9.44,
+            "directLow": 8.99
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swshp-SWSH284",
+        "updatedAt": "2025/11/18",
+        "prices": {
+          "averageSellPrice": 11.52,
+          "lowPrice": 4.99,
+          "trendPrice": 7.78,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 6.45,
+          "avg1": 9.28,
+          "avg7": 10.92,
+          "avg30": 11.26,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swshp-SWSH289",
+      "name": "Morpeko V-UNION",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "V-UNION"
+      ],
+      "hp": "310",
+      "types": [
+        "Lightning"
+      ],
+      "rules": [
+        "How to play a Pokémon V-UNION: Once per game during your turn, combine 4 different Morpeko V-UNION from your discard pile and put them onto your Bench.",
+        "V-UNION rule: When your Pokémon V-UNION is Knocked Out, your opponent takes 3 Prize cards."
+      ],
+      "attacks": [
+        {
+          "name": "Union Gain",
+          "cost": [
+            "Colorless"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "Attach up to 2 Lightning Energy cards from your discard pile to this Pokémon."
+        },
+        {
+          "name": "All You Can Eat",
+          "cost": [
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "",
+          "text": "Draw cards until you have 10 cards in your hand."
+        },
+        {
+          "name": "Burst Wheel",
+          "cost": [
+            "Lightning",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "100×",
+          "text": "Discard all energy from this Pokémon. This attack does 100 damage for each card you discarded in this way."
+        },
+        {
+          "name": "Electric Ball",
+          "cost": [
+            "Lightning",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "160",
+          "text": ""
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Fighting",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "set": {
+        "id": "swshp",
+        "name": "SWSH Black Star Promos",
+        "series": "Sword & Shield",
+        "printedTotal": 307,
+        "total": 304,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "PR-SW",
+        "releaseDate": "2019/11/15",
+        "updatedAt": "2022/07/23 20:15:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swshp/symbol.png",
+          "logo": "https://images.pokemontcg.io/swshp/logo.png"
+        }
+      },
+      "number": "SWSH289",
+      "artist": "Yuu Nishida",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        877
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "E",
+      "images": {
+        "small": "https://images.pokemontcg.io/swshp/SWSH289.png",
+        "large": "https://images.pokemontcg.io/swshp/SWSH289_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swshp-SWSH289",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 0.5,
+            "mid": 0.94,
+            "high": 19.99,
+            "market": 0.9,
+            "directLow": 1.25
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swshp-SWSH289",
+        "updatedAt": "2025/11/18",
+        "prices": {
+          "averageSellPrice": 0.7,
+          "lowPrice": 0.19,
+          "trendPrice": 0.94,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.19,
+          "avg1": 1.12,
+          "avg7": 0.93,
+          "avg30": 0.79,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swshp-SWSH290",
+      "name": "Morpeko V-UNION",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "V-UNION"
+      ],
+      "hp": "310",
+      "types": [
+        "Lightning"
+      ],
+      "rules": [
+        "How to play a Pokémon V-UNION: Once per game during your turn, combine 4 different Morpeko V-UNION from your discard pile and put them onto your Bench.",
+        "V-UNION rule: When your Pokémon V-UNION is Knocked Out, your opponent takes 3 Prize cards."
+      ],
+      "attacks": [
+        {
+          "name": "Union Gain",
+          "cost": [
+            "Colorless"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "Attach up to 2 Lightning Energy cards from your discard pile to this Pokémon."
+        },
+        {
+          "name": "All You Can Eat",
+          "cost": [
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "",
+          "text": "Draw cards until you have 10 cards in your hand."
+        },
+        {
+          "name": "Burst Wheel",
+          "cost": [
+            "Lightning",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "100×",
+          "text": "Discard all energy from this Pokémon. This attack does 100 damage for each card you discarded in this way."
+        },
+        {
+          "name": "Electric Ball",
+          "cost": [
+            "Lightning",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "160",
+          "text": ""
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Fighting",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "set": {
+        "id": "swshp",
+        "name": "SWSH Black Star Promos",
+        "series": "Sword & Shield",
+        "printedTotal": 307,
+        "total": 304,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "PR-SW",
+        "releaseDate": "2019/11/15",
+        "updatedAt": "2022/07/23 20:15:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swshp/symbol.png",
+          "logo": "https://images.pokemontcg.io/swshp/logo.png"
+        }
+      },
+      "number": "SWSH290",
+      "artist": "Yuu Nishida",
+      "rarity": "Promo",
+      "nationalPokedexNumbers": [
+        877
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "E",
+      "images": {
+        "small": "https://images.pokemontcg.io/swshp/SWSH290.png",
+        "large": "https://images.pokemontcg.io/swshp/SWSH290_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swshp-SWSH290",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 0.5,
+            "mid": 2.01,
+            "high": 19.99,
+            "market": 2.2,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swshp-SWSH290",
+        "updatedAt": "2025/11/18",
+        "prices": {
+          "averageSellPrice": 0.68,
+          "lowPrice": 0.44,
+          "trendPrice": 0.87,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.44,
+          "avg1": 1.49,
+          "avg7": 0.79,
+          "avg30": 0.72,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swshp-SWSH303",
+      "name": "Bulbasaur",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic"
+      ],
+      "hp": "70",
+      "types": [
+        "Grass"
+      ],
+      "evolvesTo": [
+        "Ivysaur"
+      ],
+      "attacks": [
+        {
+          "name": "Shake and Gather",
+          "cost": [
+            "Grass"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "Flip a coin until you get tails. For each heads, draw a card."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Fire",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "set": {
+        "id": "swshp",
+        "name": "SWSH Black Star Promos",
+        "series": "Sword & Shield",
+        "printedTotal": 307,
+        "total": 304,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "PR-SW",
+        "releaseDate": "2019/11/15",
+        "updatedAt": "2022/07/23 20:15:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swshp/symbol.png",
+          "logo": "https://images.pokemontcg.io/swshp/logo.png"
+        }
+      },
+      "number": "SWSH303",
+      "artist": "Julie Hang",
+      "rarity": "Promo",
+      "flavorText": "There is a plant seed on its back right from the day this Pokémon is born. The seed slowly grows larger.",
+      "nationalPokedexNumbers": [
+        1
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "F",
+      "images": {
+        "small": "https://images.pokemontcg.io/swshp/SWSH303.png",
+        "large": "https://images.pokemontcg.io/swshp/SWSH303_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swshp-SWSH303",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "normal": {
+            "low": 35.99,
+            "mid": 42.83,
+            "high": 139.99,
+            "market": 35.21,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swshp-SWSH303",
+        "updatedAt": "2025/11/18",
+        "prices": {
+          "averageSellPrice": 80.85,
+          "lowPrice": 59.99,
+          "trendPrice": 80.01,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 59.99,
+          "avg1": 61.45,
+          "avg7": 73.11,
+          "avg30": 52.71,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swshp-SWSH304",
+      "name": "Arcanine",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Stage 1"
+      ],
+      "hp": "130",
+      "types": [
+        "Fire"
+      ],
+      "evolvesFrom": "Growlithe",
+      "attacks": [
+        {
+          "name": "Sun-Drenched Tackle",
+          "cost": [
+            "Fire",
+            "Fire",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "160",
+          "text": "During your next turn, this Pokémon can't attack."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Water",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 3,
+      "set": {
+        "id": "swshp",
+        "name": "SWSH Black Star Promos",
+        "series": "Sword & Shield",
+        "printedTotal": 307,
+        "total": 304,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "PR-SW",
+        "releaseDate": "2019/11/15",
+        "updatedAt": "2022/07/23 20:15:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swshp/symbol.png",
+          "logo": "https://images.pokemontcg.io/swshp/logo.png"
+        }
+      },
+      "number": "SWSH304",
+      "artist": "REND",
+      "rarity": "Promo",
+      "flavorText": "The sight of it running over 6,200 miles in a single day and night has captivated many people.",
+      "nationalPokedexNumbers": [
+        59
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "F",
+      "images": {
+        "small": "https://images.pokemontcg.io/swshp/SWSH304.png",
+        "large": "https://images.pokemontcg.io/swshp/SWSH304_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swshp-SWSH304",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "normal": {
+            "low": 23,
+            "mid": 27.45,
+            "high": 54,
+            "market": 27.41,
+            "directLow": null
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swshp-SWSH304",
+        "updatedAt": "2025/11/18",
+        "prices": {
+          "averageSellPrice": 44.89,
+          "lowPrice": 40,
+          "trendPrice": 63.43,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 40,
+          "avg1": 44.89,
+          "avg7": 55.47,
+          "avg30": 30,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
     }
   ],
-  "totalCount": 250
+  "totalCount": 304
 }

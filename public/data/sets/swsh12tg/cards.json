@@ -1,4 +1,3227 @@
 {
-  "data": [],
-  "totalCount": 0
+  "data": [
+    {
+      "id": "swsh12tg-TG01",
+      "name": "Braixen",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Stage 1"
+      ],
+      "hp": "90",
+      "types": [
+        "Fire"
+      ],
+      "evolvesFrom": "Fennekin",
+      "evolvesTo": [
+        "Delphox"
+      ],
+      "attacks": [
+        {
+          "name": "Combustion",
+          "cost": [
+            "Fire"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "30",
+          "text": ""
+        },
+        {
+          "name": "Flare Parade",
+          "cost": [
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "60×",
+          "text": "This attack does 60 damage for each Serena card in your discard pile."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Water",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "set": {
+        "id": "swsh12tg",
+        "name": "Silver Tempest Trainer Gallery",
+        "series": "Sword & Shield",
+        "printedTotal": 30,
+        "total": 30,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "SIT",
+        "releaseDate": "2022/11/11",
+        "updatedAt": "2022/11/11 11:45:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swsh12tg/symbol.png",
+          "logo": "https://images.pokemontcg.io/swsh12tg/logo.png"
+        }
+      },
+      "number": "TG01",
+      "artist": "Naoki Saito",
+      "rarity": "Trainer Gallery Rare Holo",
+      "flavorText": "When the twig is plucked from its tail, friction sets the twig alight. The flame is used to send signals to its allies.",
+      "nationalPokedexNumbers": [
+        654
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "F",
+      "images": {
+        "small": "https://images.pokemontcg.io/swsh12tg/TG01.png",
+        "large": "https://images.pokemontcg.io/swsh12tg/TG01_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swsh12tg-TG01",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 2,
+            "mid": 3.26,
+            "high": 999.99,
+            "market": 3.06,
+            "directLow": 3.42
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swsh12tg-TG01",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 2.86,
+          "lowPrice": 0.99,
+          "trendPrice": 2.93,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.99,
+          "avg1": 4.02,
+          "avg7": 3.03,
+          "avg30": 2.88,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swsh12tg-TG02",
+      "name": "Milotic",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Stage 1"
+      ],
+      "hp": "130",
+      "types": [
+        "Water"
+      ],
+      "evolvesFrom": "Feebas",
+      "attacks": [
+        {
+          "name": "Water Arrow",
+          "cost": [
+            "Water"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "This attack does 50 damage to 1 of your opponent's Pokémon. (Don't apply Weakness and Resistance for Benched Pokémon.)"
+        },
+        {
+          "name": "Mellow Wave",
+          "cost": [
+            "Water",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "60",
+          "text": "Your opponent's Active Pokémon is now Asleep."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Lightning",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "set": {
+        "id": "swsh12tg",
+        "name": "Silver Tempest Trainer Gallery",
+        "series": "Sword & Shield",
+        "printedTotal": 30,
+        "total": 30,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "SIT",
+        "releaseDate": "2022/11/11",
+        "updatedAt": "2022/11/11 11:45:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swsh12tg/symbol.png",
+          "logo": "https://images.pokemontcg.io/swsh12tg/logo.png"
+        }
+      },
+      "number": "TG02",
+      "artist": "chibi",
+      "rarity": "Trainer Gallery Rare Holo",
+      "flavorText": "Milotic has provided inspiration to many artists. It has even been referred to as the most beautiful Pokémon of all.",
+      "nationalPokedexNumbers": [
+        350
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "F",
+      "images": {
+        "small": "https://images.pokemontcg.io/swsh12tg/TG02.png",
+        "large": "https://images.pokemontcg.io/swsh12tg/TG02_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swsh12tg-TG02",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 2.81,
+            "mid": 4.98,
+            "high": 30,
+            "market": 3.95,
+            "directLow": 4.14
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swsh12tg-TG02",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 5.19,
+          "lowPrice": 2.94,
+          "trendPrice": 5.14,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 3,
+          "avg1": 4.7,
+          "avg7": 5.58,
+          "avg30": 5.16,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swsh12tg-TG03",
+      "name": "Flaaffy",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Stage 1"
+      ],
+      "hp": "90",
+      "types": [
+        "Lightning"
+      ],
+      "evolvesFrom": "Mareep",
+      "evolvesTo": [
+        "Ampharos"
+      ],
+      "abilities": [
+        {
+          "name": "Dynamotor",
+          "text": "Once during your turn (before your attack), you may attach a Lightning Energy card from your discard pile to 1 of your Benched Pokémon.",
+          "type": "Ability"
+        }
+      ],
+      "attacks": [
+        {
+          "name": "Electro Ball",
+          "cost": [
+            "Lightning",
+            "Lightning",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "50",
+          "text": ""
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Fighting",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "set": {
+        "id": "swsh12tg",
+        "name": "Silver Tempest Trainer Gallery",
+        "series": "Sword & Shield",
+        "printedTotal": 30,
+        "total": 30,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "SIT",
+        "releaseDate": "2022/11/11",
+        "updatedAt": "2022/11/11 11:45:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swsh12tg/symbol.png",
+          "logo": "https://images.pokemontcg.io/swsh12tg/logo.png"
+        }
+      },
+      "number": "TG03",
+      "artist": "saino misaki",
+      "rarity": "Trainer Gallery Rare Holo",
+      "flavorText": "It stores electricity in its fluffy fleece. If it stores up too much, it will start to go bald in those patches.",
+      "nationalPokedexNumbers": [
+        180
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "E",
+      "images": {
+        "small": "https://images.pokemontcg.io/swsh12tg/TG03.png",
+        "large": "https://images.pokemontcg.io/swsh12tg/TG03_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swsh12tg-TG03",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 1.98,
+            "mid": 3,
+            "high": 19.99,
+            "market": 2.62,
+            "directLow": 2.96
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swsh12tg-TG03",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 2.4,
+          "lowPrice": 0.7,
+          "trendPrice": 2.5,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.7,
+          "avg1": 2.88,
+          "avg7": 2.54,
+          "avg30": 2.39,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swsh12tg-TG04",
+      "name": "Jynx",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic"
+      ],
+      "hp": "100",
+      "types": [
+        "Psychic"
+      ],
+      "abilities": [
+        {
+          "name": "Selfish Lips",
+          "text": "If this Pokémon is Knocked Out by damage from an attack from your opponent's Pokémon V, your opponent can't take any Prize cards for it.",
+          "type": "Ability"
+        }
+      ],
+      "attacks": [
+        {
+          "name": "Psychic Assault",
+          "cost": [
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "10+",
+          "text": "This attack does 10 more damage for each damage counter on your opponent's Active Pokémon."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Darkness",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Fighting",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "set": {
+        "id": "swsh12tg",
+        "name": "Silver Tempest Trainer Gallery",
+        "series": "Sword & Shield",
+        "printedTotal": 30,
+        "total": 30,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "SIT",
+        "releaseDate": "2022/11/11",
+        "updatedAt": "2022/11/11 11:45:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swsh12tg/symbol.png",
+          "logo": "https://images.pokemontcg.io/swsh12tg/logo.png"
+        }
+      },
+      "number": "TG04",
+      "artist": "HYOGONOSUKE",
+      "rarity": "Trainer Gallery Rare Holo",
+      "flavorText": "In certain parts of Galar, Jynx was once feared and worshiped as the Queen of Ice.",
+      "nationalPokedexNumbers": [
+        124
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "F",
+      "images": {
+        "small": "https://images.pokemontcg.io/swsh12tg/TG04.png",
+        "large": "https://images.pokemontcg.io/swsh12tg/TG04_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swsh12tg-TG04",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 0.99,
+            "mid": 1.8,
+            "high": 999.99,
+            "market": 1.44,
+            "directLow": 1.67
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swsh12tg-TG04",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 1.96,
+          "lowPrice": 0.6,
+          "trendPrice": 1.9,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.98,
+          "avg1": 2.04,
+          "avg7": 2.1,
+          "avg30": 2.25,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swsh12tg-TG05",
+      "name": "Gardevoir",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Stage 2"
+      ],
+      "hp": "150",
+      "types": [
+        "Psychic"
+      ],
+      "evolvesFrom": "Kirlia",
+      "abilities": [
+        {
+          "name": "Refinement",
+          "text": "You must discard a card from your hand in order to use this Ability. Once during your turn, you may draw 2 cards.",
+          "type": "Ability"
+        }
+      ],
+      "attacks": [
+        {
+          "name": "Magical Shot",
+          "cost": [
+            "Psychic",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "120",
+          "text": ""
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Metal",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "set": {
+        "id": "swsh12tg",
+        "name": "Silver Tempest Trainer Gallery",
+        "series": "Sword & Shield",
+        "printedTotal": 30,
+        "total": 30,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "SIT",
+        "releaseDate": "2022/11/11",
+        "updatedAt": "2022/11/11 11:45:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swsh12tg/symbol.png",
+          "logo": "https://images.pokemontcg.io/swsh12tg/logo.png"
+        }
+      },
+      "number": "TG05",
+      "artist": "AKIRA EGAWA",
+      "rarity": "Trainer Gallery Rare Holo",
+      "flavorText": "It has the power to predict the future. Its power peaks when it is protecting its Trainer.",
+      "nationalPokedexNumbers": [
+        282
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "F",
+      "images": {
+        "small": "https://images.pokemontcg.io/swsh12tg/TG05.png",
+        "large": "https://images.pokemontcg.io/swsh12tg/TG05_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swsh12tg-TG05",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 3,
+            "mid": 5.41,
+            "high": 30,
+            "market": 4.66,
+            "directLow": 5.23
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swsh12tg-TG05",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 4.86,
+          "lowPrice": 1,
+          "trendPrice": 5.01,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 2.35,
+          "avg1": 4.46,
+          "avg7": 4.75,
+          "avg30": 4.84,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swsh12tg-TG06",
+      "name": "Malamar",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Stage 1",
+        "Rapid Strike"
+      ],
+      "hp": "120",
+      "types": [
+        "Psychic"
+      ],
+      "evolvesFrom": "Inkay",
+      "attacks": [
+        {
+          "name": "Rapid Strike Tentacles",
+          "cost": [
+            "Psychic"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "40×",
+          "text": "Reveal any number of Rapid Strike cards from your hand. This attack does 40 damage for each card you revealed in this way. Then, shuffle those cards into your deck."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Darkness",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Fighting",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 3,
+      "set": {
+        "id": "swsh12tg",
+        "name": "Silver Tempest Trainer Gallery",
+        "series": "Sword & Shield",
+        "printedTotal": 30,
+        "total": 30,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "SIT",
+        "releaseDate": "2022/11/11",
+        "updatedAt": "2022/11/11 11:45:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swsh12tg/symbol.png",
+          "logo": "https://images.pokemontcg.io/swsh12tg/logo.png"
+        }
+      },
+      "number": "TG06",
+      "artist": "Fumie Kittaka",
+      "rarity": "Trainer Gallery Rare Holo",
+      "flavorText": "It's said that Malamar's hypnotic powers played a role in certain history-changing events.",
+      "nationalPokedexNumbers": [
+        687
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "E",
+      "images": {
+        "small": "https://images.pokemontcg.io/swsh12tg/TG06.png",
+        "large": "https://images.pokemontcg.io/swsh12tg/TG06_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swsh12tg-TG06",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 0.75,
+            "mid": 1.42,
+            "high": 999.99,
+            "market": 1.1,
+            "directLow": 1.2
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swsh12tg-TG06",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 1.2,
+          "lowPrice": 0.49,
+          "trendPrice": 1.18,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.5,
+          "avg1": 1.19,
+          "avg7": 1.14,
+          "avg30": 1.19,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swsh12tg-TG07",
+      "name": "Rockruff",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic",
+        "Single Strike"
+      ],
+      "hp": "70",
+      "types": [
+        "Fighting"
+      ],
+      "evolvesTo": [
+        "Lycanroc"
+      ],
+      "attacks": [
+        {
+          "name": "Crunch",
+          "cost": [
+            "Fighting",
+            "Fighting"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "30",
+          "text": "Flip a coin. If heads, discard an Energy from your opponent's Active Pokémon."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Grass",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "set": {
+        "id": "swsh12tg",
+        "name": "Silver Tempest Trainer Gallery",
+        "series": "Sword & Shield",
+        "printedTotal": 30,
+        "total": 30,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "SIT",
+        "releaseDate": "2022/11/11",
+        "updatedAt": "2022/11/11 11:45:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swsh12tg/symbol.png",
+          "logo": "https://images.pokemontcg.io/swsh12tg/logo.png"
+        }
+      },
+      "number": "TG07",
+      "artist": "Hideki Ishikawa",
+      "rarity": "Trainer Gallery Rare Holo",
+      "flavorText": "When it rubs the rocks on its neck against you, that's proof of its love for you. However, the rocks are sharp, so the gesture is quite painful!",
+      "nationalPokedexNumbers": [
+        744
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "E",
+      "images": {
+        "small": "https://images.pokemontcg.io/swsh12tg/TG07.png",
+        "large": "https://images.pokemontcg.io/swsh12tg/TG07_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swsh12tg-TG07",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 1.46,
+            "mid": 2.99,
+            "high": 200,
+            "market": 2.86,
+            "directLow": 3.72
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swsh12tg-TG07",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 2.53,
+          "lowPrice": 0.8,
+          "trendPrice": 2.35,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 1,
+          "avg1": 2.94,
+          "avg7": 2.37,
+          "avg30": 2.54,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swsh12tg-TG08",
+      "name": "Passimian",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic",
+        "Rapid Strike"
+      ],
+      "hp": "110",
+      "types": [
+        "Fighting"
+      ],
+      "abilities": [
+        {
+          "name": "Throwing Coach",
+          "text": "Your Rapid Strike Pokémon's attacks do 30 more damage to your opponent's Benched Pokémon V and Benched Pokémon-GX (before applying Weakness and Resistance). You can't apply more than 1 Throwing Coach Ability at a time.",
+          "type": "Ability"
+        }
+      ],
+      "attacks": [
+        {
+          "name": "Fling",
+          "cost": [
+            "Fighting"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "This attack does 20 damage to 1 of your opponent's Pokémon. (Don't apply Weakness and Resistance for Benched Pokémon.)"
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Psychic",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "set": {
+        "id": "swsh12tg",
+        "name": "Silver Tempest Trainer Gallery",
+        "series": "Sword & Shield",
+        "printedTotal": 30,
+        "total": 30,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "SIT",
+        "releaseDate": "2022/11/11",
+        "updatedAt": "2022/11/11 11:45:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swsh12tg/symbol.png",
+          "logo": "https://images.pokemontcg.io/swsh12tg/logo.png"
+        }
+      },
+      "number": "TG08",
+      "artist": "nagimiso",
+      "rarity": "Trainer Gallery Rare Holo",
+      "flavorText": "Passimian live in groups of about 20, with each member performing an assigned role. Through cooperation, the group survives.",
+      "nationalPokedexNumbers": [
+        766
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "E",
+      "images": {
+        "small": "https://images.pokemontcg.io/swsh12tg/TG08.png",
+        "large": "https://images.pokemontcg.io/swsh12tg/TG08_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swsh12tg-TG08",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 0.5,
+            "mid": 1.27,
+            "high": 999.99,
+            "market": 0.95,
+            "directLow": 0.99
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swsh12tg-TG08",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 1.18,
+          "lowPrice": 0.29,
+          "trendPrice": 1.18,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.3,
+          "avg1": 1.06,
+          "avg7": 1.12,
+          "avg30": 1.18,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swsh12tg-TG09",
+      "name": "Druddigon",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic"
+      ],
+      "hp": "120",
+      "types": [
+        "Dragon"
+      ],
+      "attacks": [
+        {
+          "name": "Revenge",
+          "cost": [
+            "Fire",
+            "Water"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "40+",
+          "text": "If any of your Pokémon were Knocked Out by damage from an attack from your opponent's Pokémon during their last turn, this attack does 120 more damage."
+        },
+        {
+          "name": "Dragon Claw",
+          "cost": [
+            "Fire",
+            "Water",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "120",
+          "text": ""
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "set": {
+        "id": "swsh12tg",
+        "name": "Silver Tempest Trainer Gallery",
+        "series": "Sword & Shield",
+        "printedTotal": 30,
+        "total": 30,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "SIT",
+        "releaseDate": "2022/11/11",
+        "updatedAt": "2022/11/11 11:45:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swsh12tg/symbol.png",
+          "logo": "https://images.pokemontcg.io/swsh12tg/logo.png"
+        }
+      },
+      "number": "TG09",
+      "artist": "Teeziro",
+      "rarity": "Trainer Gallery Rare Holo",
+      "flavorText": "Druddigon are vicious and cunning. They take up residence in nests dug out by other Pokémon, treating the stolen nests as their own lairs.",
+      "nationalPokedexNumbers": [
+        621
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "E",
+      "images": {
+        "small": "https://images.pokemontcg.io/swsh12tg/TG09.png",
+        "large": "https://images.pokemontcg.io/swsh12tg/TG09_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swsh12tg-TG09",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 1.7,
+            "mid": 2.77,
+            "high": 999.99,
+            "market": 2.49,
+            "directLow": 2.51
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swsh12tg-TG09",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 2.34,
+          "lowPrice": 1,
+          "trendPrice": 2.48,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 1.5,
+          "avg1": 2.67,
+          "avg7": 2.51,
+          "avg30": 2.35,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swsh12tg-TG10",
+      "name": "Smeargle",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic"
+      ],
+      "hp": "70",
+      "types": [
+        "Colorless"
+      ],
+      "attacks": [
+        {
+          "name": "Colorful Palette",
+          "cost": [
+            "Colorless"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "Look at the top 5 cards of your deck. You may attach any number of basic Energy cards you find there to 1 of your Pokémon. Shuffle the other cards back into your deck."
+        },
+        {
+          "name": "Ram",
+          "cost": [
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "30",
+          "text": ""
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Fighting",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "set": {
+        "id": "swsh12tg",
+        "name": "Silver Tempest Trainer Gallery",
+        "series": "Sword & Shield",
+        "printedTotal": 30,
+        "total": 30,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "SIT",
+        "releaseDate": "2022/11/11",
+        "updatedAt": "2022/11/11 11:45:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swsh12tg/symbol.png",
+          "logo": "https://images.pokemontcg.io/swsh12tg/logo.png"
+        }
+      },
+      "number": "TG10",
+      "artist": "KIYOTAKA OSHIYAMA",
+      "rarity": "Trainer Gallery Rare Holo",
+      "flavorText": "It draws symbols with the fluid that oozes from the tip of its tail. Depending on the symbol, Smeargle fanatics will pay big money for them.",
+      "nationalPokedexNumbers": [
+        235
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "F",
+      "images": {
+        "small": "https://images.pokemontcg.io/swsh12tg/TG10.png",
+        "large": "https://images.pokemontcg.io/swsh12tg/TG10_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swsh12tg-TG10",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 0.81,
+            "mid": 2.75,
+            "high": 999.99,
+            "market": 2.45,
+            "directLow": 2.96
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swsh12tg-TG10",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 2.1,
+          "lowPrice": 0.5,
+          "trendPrice": 2.06,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 1,
+          "avg1": 2.37,
+          "avg7": 2.12,
+          "avg30": 2.21,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swsh12tg-TG11",
+      "name": "Altaria",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Stage 1"
+      ],
+      "hp": "110",
+      "types": [
+        "Colorless"
+      ],
+      "evolvesFrom": "Swablu",
+      "attacks": [
+        {
+          "name": "Magical Echo",
+          "cost": [
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "",
+          "text": "Move all damage counters from 1 of your Benched Pokémon to your opponent's Active Pokémon."
+        },
+        {
+          "name": "Blasting Wind",
+          "cost": [
+            "Colorless",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "90",
+          "text": ""
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Lightning",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Fighting",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "set": {
+        "id": "swsh12tg",
+        "name": "Silver Tempest Trainer Gallery",
+        "series": "Sword & Shield",
+        "printedTotal": 30,
+        "total": 30,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "SIT",
+        "releaseDate": "2022/11/11",
+        "updatedAt": "2022/11/11 11:45:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swsh12tg/symbol.png",
+          "logo": "https://images.pokemontcg.io/swsh12tg/logo.png"
+        }
+      },
+      "number": "TG11",
+      "artist": "Yuu Nishida",
+      "rarity": "Trainer Gallery Rare Holo",
+      "flavorText": "As it flies in a calm and relaxed manner, Altaria performs a humming song that would enrapture any audience.",
+      "nationalPokedexNumbers": [
+        334
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "F",
+      "images": {
+        "small": "https://images.pokemontcg.io/swsh12tg/TG11.png",
+        "large": "https://images.pokemontcg.io/swsh12tg/TG11_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swsh12tg-TG11",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 3,
+            "mid": 4.75,
+            "high": 25,
+            "market": 3.94,
+            "directLow": 3.93
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swsh12tg-TG11",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 4.18,
+          "lowPrice": 2.79,
+          "trendPrice": 4.13,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 2.9,
+          "avg1": 5.49,
+          "avg7": 3.97,
+          "avg30": 4.2,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swsh12tg-TG12",
+      "name": "Kricketune V",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic",
+        "V"
+      ],
+      "hp": "180",
+      "types": [
+        "Grass"
+      ],
+      "rules": [
+        "V rule: When your Pokémon V is Knocked Out, your opponent takes 2 Prize cards."
+      ],
+      "abilities": [
+        {
+          "name": "Exciting Stage",
+          "text": "Once during your turn, you may draw cards until you have 3 cards in your hand. If this Pokémon is in the Active Spot, you may draw cards until you have 4 cards in your hand instead. You can't use more than 1 Exciting Stage Ability each turn.",
+          "type": "Ability"
+        }
+      ],
+      "attacks": [
+        {
+          "name": "X-Scissor",
+          "cost": [
+            "Grass",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "80+",
+          "text": "Flip a coin. If heads, this attack does 80 more damage."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Fire",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "set": {
+        "id": "swsh12tg",
+        "name": "Silver Tempest Trainer Gallery",
+        "series": "Sword & Shield",
+        "printedTotal": 30,
+        "total": 30,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "SIT",
+        "releaseDate": "2022/11/11",
+        "updatedAt": "2022/11/11 11:45:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swsh12tg/symbol.png",
+          "logo": "https://images.pokemontcg.io/swsh12tg/logo.png"
+        }
+      },
+      "number": "TG12",
+      "artist": "HYOGONOSUKE",
+      "rarity": "Rare Holo V",
+      "nationalPokedexNumbers": [
+        402
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "E",
+      "images": {
+        "small": "https://images.pokemontcg.io/swsh12tg/TG12.png",
+        "large": "https://images.pokemontcg.io/swsh12tg/TG12_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swsh12tg-TG12",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 2.82,
+            "mid": 4,
+            "high": 20,
+            "market": 4,
+            "directLow": 5.62
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swsh12tg-TG12",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 4.86,
+          "lowPrice": 2,
+          "trendPrice": 4.37,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 3.5,
+          "avg1": 5.4,
+          "avg7": 5.03,
+          "avg30": 5.14,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swsh12tg-TG13",
+      "name": "Serperior V",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic",
+        "V"
+      ],
+      "hp": "210",
+      "types": [
+        "Grass"
+      ],
+      "rules": [
+        "V rule: When your Pokémon V is Knocked Out, your opponent takes 2 Prize cards."
+      ],
+      "attacks": [
+        {
+          "name": "Noble Light",
+          "cost": [
+            "Colorless"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "",
+          "text": "Heal 30 damage from each Pokémon (both yours and your opponent's)."
+        },
+        {
+          "name": "Solar Beam",
+          "cost": [
+            "Grass",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "120",
+          "text": ""
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Fire",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "set": {
+        "id": "swsh12tg",
+        "name": "Silver Tempest Trainer Gallery",
+        "series": "Sword & Shield",
+        "printedTotal": 30,
+        "total": 30,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "SIT",
+        "releaseDate": "2022/11/11",
+        "updatedAt": "2022/11/11 11:45:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swsh12tg/symbol.png",
+          "logo": "https://images.pokemontcg.io/swsh12tg/logo.png"
+        }
+      },
+      "number": "TG13",
+      "artist": "Teeziro",
+      "rarity": "Rare Holo V",
+      "nationalPokedexNumbers": [
+        497
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "F",
+      "images": {
+        "small": "https://images.pokemontcg.io/swsh12tg/TG13.png",
+        "large": "https://images.pokemontcg.io/swsh12tg/TG13_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swsh12tg-TG13",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 13.81,
+            "mid": 16.9,
+            "high": 49,
+            "market": 15.62,
+            "directLow": 14.79
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swsh12tg-TG13",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 16.75,
+          "lowPrice": 8,
+          "trendPrice": 15.59,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 9.99,
+          "avg1": 14.95,
+          "avg7": 15.55,
+          "avg30": 16.41,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swsh12tg-TG14",
+      "name": "Blaziken V",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic",
+        "V",
+        "Rapid Strike"
+      ],
+      "hp": "210",
+      "types": [
+        "Fire"
+      ],
+      "rules": [
+        "V rule: When your Pokémon V is Knocked Out, your opponent takes 2 Prize cards."
+      ],
+      "attacks": [
+        {
+          "name": "High Jump Kick",
+          "cost": [
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "50",
+          "text": ""
+        },
+        {
+          "name": "Fire Spin",
+          "cost": [
+            "Fire",
+            "Fire",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 4,
+          "damage": "210",
+          "text": "Discard 2 Energy from this Pokémon."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Water",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "set": {
+        "id": "swsh12tg",
+        "name": "Silver Tempest Trainer Gallery",
+        "series": "Sword & Shield",
+        "printedTotal": 30,
+        "total": 30,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "SIT",
+        "releaseDate": "2022/11/11",
+        "updatedAt": "2022/11/11 11:45:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swsh12tg/symbol.png",
+          "logo": "https://images.pokemontcg.io/swsh12tg/logo.png"
+        }
+      },
+      "number": "TG14",
+      "artist": "nagimiso",
+      "rarity": "Rare Holo V",
+      "nationalPokedexNumbers": [
+        257
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "E",
+      "images": {
+        "small": "https://images.pokemontcg.io/swsh12tg/TG14.png",
+        "large": "https://images.pokemontcg.io/swsh12tg/TG14_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swsh12tg-TG14",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 19.99,
+            "mid": 26.45,
+            "high": 85,
+            "market": 24.5,
+            "directLow": 23.36
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swsh12tg-TG14",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 18.93,
+          "lowPrice": 9.77,
+          "trendPrice": 18.79,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 14.5,
+          "avg1": 14.85,
+          "avg7": 19.64,
+          "avg30": 19.28,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swsh12tg-TG15",
+      "name": "Blaziken VMAX",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "VMAX",
+        "Rapid Strike"
+      ],
+      "hp": "320",
+      "types": [
+        "Fire"
+      ],
+      "evolvesFrom": "Blaziken V",
+      "rules": [
+        "VMAX rule: When your Pokémon VMAX is Knocked Out, your opponent takes 3 Prize cards."
+      ],
+      "attacks": [
+        {
+          "name": "Clutch",
+          "cost": [
+            "Fire"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "60",
+          "text": "During your opponent's next turn, the Defending Pokémon can't retreat."
+        },
+        {
+          "name": "Max Blaze",
+          "cost": [
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "130",
+          "text": "Choose up to 2 of your Benched Rapid Strike Pokémon and attach an Energy card from your discard pile to each of them."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Water",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "set": {
+        "id": "swsh12tg",
+        "name": "Silver Tempest Trainer Gallery",
+        "series": "Sword & Shield",
+        "printedTotal": 30,
+        "total": 30,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "SIT",
+        "releaseDate": "2022/11/11",
+        "updatedAt": "2022/11/11 11:45:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swsh12tg/symbol.png",
+          "logo": "https://images.pokemontcg.io/swsh12tg/logo.png"
+        }
+      },
+      "number": "TG15",
+      "artist": "KIYOTAKA OSHIYAMA",
+      "rarity": "Rare Holo VMAX",
+      "nationalPokedexNumbers": [
+        257
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "E",
+      "images": {
+        "small": "https://images.pokemontcg.io/swsh12tg/TG15.png",
+        "large": "https://images.pokemontcg.io/swsh12tg/TG15_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swsh12tg-TG15",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 24,
+            "mid": 29.15,
+            "high": 79.95,
+            "market": 26.59,
+            "directLow": 26.59
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swsh12tg-TG15",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 17.52,
+          "lowPrice": 7.9,
+          "trendPrice": 12.87,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 12.5,
+          "avg1": 12.33,
+          "avg7": 16.25,
+          "avg30": 19.85,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swsh12tg-TG16",
+      "name": "Zeraora V",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic",
+        "V",
+        "Rapid Strike"
+      ],
+      "hp": "210",
+      "types": [
+        "Lightning"
+      ],
+      "rules": [
+        "V rule: When your Pokémon V is Knocked Out, your opponent takes 2 Prize cards."
+      ],
+      "attacks": [
+        {
+          "name": "Cross Fist",
+          "cost": [
+            "Lightning",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "100",
+          "text": "If 1 of your other Rapid Strike Pokémon used an attack during your last turn, this attack also does 160 damage to 1 of your opponent's Benched Pokémon. (Don't apply Weakness and Resistance for Benched Pokémon.)"
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Fighting",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "set": {
+        "id": "swsh12tg",
+        "name": "Silver Tempest Trainer Gallery",
+        "series": "Sword & Shield",
+        "printedTotal": 30,
+        "total": 30,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "SIT",
+        "releaseDate": "2022/11/11",
+        "updatedAt": "2022/11/11 11:45:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swsh12tg/symbol.png",
+          "logo": "https://images.pokemontcg.io/swsh12tg/logo.png"
+        }
+      },
+      "number": "TG16",
+      "artist": "yuu",
+      "rarity": "Rare Holo V",
+      "nationalPokedexNumbers": [
+        807
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "E",
+      "images": {
+        "small": "https://images.pokemontcg.io/swsh12tg/TG16.png",
+        "large": "https://images.pokemontcg.io/swsh12tg/TG16_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swsh12tg-TG16",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 6.52,
+            "mid": 9.37,
+            "high": 40,
+            "market": 8.57,
+            "directLow": 9.46
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swsh12tg-TG16",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 10.49,
+          "lowPrice": 4.99,
+          "trendPrice": 12.12,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 4.99,
+          "avg1": 7.45,
+          "avg7": 10.64,
+          "avg30": 10.85,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swsh12tg-TG17",
+      "name": "Mawile V",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic",
+        "V"
+      ],
+      "hp": "200",
+      "types": [
+        "Psychic"
+      ],
+      "rules": [
+        "V rule: When your Pokémon V is Knocked Out, your opponent takes 2 Prize cards."
+      ],
+      "attacks": [
+        {
+          "name": "Pouty Slap",
+          "cost": [
+            "Psychic"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "30",
+          "text": "Flip a coin. If heads, discard an Energy from your opponent's Active Pokémon."
+        },
+        {
+          "name": "Chomp Down",
+          "cost": [
+            "Colorless",
+            "Colorless",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "100",
+          "text": "Discard a random card from your opponent's hand."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Metal",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "set": {
+        "id": "swsh12tg",
+        "name": "Silver Tempest Trainer Gallery",
+        "series": "Sword & Shield",
+        "printedTotal": 30,
+        "total": 30,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "SIT",
+        "releaseDate": "2022/11/11",
+        "updatedAt": "2022/11/11 11:45:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swsh12tg/symbol.png",
+          "logo": "https://images.pokemontcg.io/swsh12tg/logo.png"
+        }
+      },
+      "number": "TG17",
+      "artist": "saino misaki",
+      "rarity": "Rare Holo V",
+      "nationalPokedexNumbers": [
+        303
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "F",
+      "images": {
+        "small": "https://images.pokemontcg.io/swsh12tg/TG17.png",
+        "large": "https://images.pokemontcg.io/swsh12tg/TG17_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swsh12tg-TG17",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 6.99,
+            "mid": 8.51,
+            "high": 25.09,
+            "market": 7.96,
+            "directLow": 11.89
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swsh12tg-TG17",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 9.74,
+          "lowPrice": 6.5,
+          "trendPrice": 10.22,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 6.5,
+          "avg1": 9.35,
+          "avg7": 9.79,
+          "avg30": 10,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swsh12tg-TG18",
+      "name": "Corviknight V",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic",
+        "V"
+      ],
+      "hp": "210",
+      "types": [
+        "Metal"
+      ],
+      "rules": [
+        "V rule: When your Pokémon V is Knocked Out, your opponent takes 2 Prize cards."
+      ],
+      "attacks": [
+        {
+          "name": "Clutch",
+          "cost": [
+            "Metal"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "30",
+          "text": "During your opponent's next turn, the Defending Pokémon can't retreat."
+        },
+        {
+          "name": "Sky Hurricane",
+          "cost": [
+            "Metal",
+            "Metal",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "190",
+          "text": "During your next turn, this Pokémon can't use Sky Hurricane."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Fire",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Grass",
+          "value": "-30"
+        }
+      ],
+      "retreatCost": [
+        "Colorless"
+      ],
+      "convertedRetreatCost": 1,
+      "set": {
+        "id": "swsh12tg",
+        "name": "Silver Tempest Trainer Gallery",
+        "series": "Sword & Shield",
+        "printedTotal": 30,
+        "total": 30,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "SIT",
+        "releaseDate": "2022/11/11",
+        "updatedAt": "2022/11/11 11:45:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swsh12tg/symbol.png",
+          "logo": "https://images.pokemontcg.io/swsh12tg/logo.png"
+        }
+      },
+      "number": "TG18",
+      "artist": "KIYOTAKA OSHIYAMA",
+      "rarity": "Rare Holo V",
+      "nationalPokedexNumbers": [
+        823
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "E",
+      "images": {
+        "small": "https://images.pokemontcg.io/swsh12tg/TG18.png",
+        "large": "https://images.pokemontcg.io/swsh12tg/TG18_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swsh12tg-TG18",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 7.25,
+            "mid": 9.5,
+            "high": 34.99,
+            "market": 8.68,
+            "directLow": 11.69
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swsh12tg-TG18",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 7.44,
+          "lowPrice": 2,
+          "trendPrice": 7.57,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 3.87,
+          "avg1": 7.14,
+          "avg7": 6.95,
+          "avg30": 7.58,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swsh12tg-TG19",
+      "name": "Corviknight VMAX",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "VMAX"
+      ],
+      "hp": "320",
+      "types": [
+        "Metal"
+      ],
+      "evolvesFrom": "Corviknight V",
+      "rules": [
+        "VMAX rule: When your Pokémon VMAX is Knocked Out, your opponent takes 3 Prize cards."
+      ],
+      "abilities": [
+        {
+          "name": "Lustrous Body",
+          "text": "Prevent all effects of your opponent's Pokémon's Abilities done to this Pokémon.",
+          "type": "Ability"
+        }
+      ],
+      "attacks": [
+        {
+          "name": "G-Max Hurricane",
+          "cost": [
+            "Metal",
+            "Metal",
+            "Colorless"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "240",
+          "text": "During your next turn, this Pokémon can't use G-Max Hurricane."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Fire",
+          "value": "×2"
+        }
+      ],
+      "resistances": [
+        {
+          "type": "Grass",
+          "value": "-30"
+        }
+      ],
+      "set": {
+        "id": "swsh12tg",
+        "name": "Silver Tempest Trainer Gallery",
+        "series": "Sword & Shield",
+        "printedTotal": 30,
+        "total": 30,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "SIT",
+        "releaseDate": "2022/11/11",
+        "updatedAt": "2022/11/11 11:45:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swsh12tg/symbol.png",
+          "logo": "https://images.pokemontcg.io/swsh12tg/logo.png"
+        }
+      },
+      "number": "TG19",
+      "artist": "Shigenori Negishi",
+      "rarity": "Rare Holo VMAX",
+      "nationalPokedexNumbers": [
+        823
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "E",
+      "images": {
+        "small": "https://images.pokemontcg.io/swsh12tg/TG19.png",
+        "large": "https://images.pokemontcg.io/swsh12tg/TG19_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swsh12tg-TG19",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 5.2,
+            "mid": 7.58,
+            "high": 26.61,
+            "market": 7.18,
+            "directLow": 9.99
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swsh12tg-TG19",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 5.99,
+          "lowPrice": 1.49,
+          "trendPrice": 6.26,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 3.5,
+          "avg1": 5.47,
+          "avg7": 6.31,
+          "avg30": 6.31,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swsh12tg-TG20",
+      "name": "Rayquaza VMAX",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "VMAX",
+        "Rapid Strike"
+      ],
+      "hp": "320",
+      "types": [
+        "Dragon"
+      ],
+      "evolvesFrom": "Rayquaza V",
+      "rules": [
+        "VMAX rule: When your Pokémon VMAX is Knocked Out, your opponent takes 3 Prize cards."
+      ],
+      "abilities": [
+        {
+          "name": "Azure Pulse",
+          "text": "Once during your turn, you may discard your hand and draw 3 cards.",
+          "type": "Ability"
+        }
+      ],
+      "attacks": [
+        {
+          "name": "Max Burst",
+          "cost": [
+            "Fire",
+            "Lightning"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "20+",
+          "text": "You may discard any amount of basic Fire Energy or any amount of basic Lightning Energy from this Pokémon. This attack does 80 more damage for each card you discarded in this way."
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "set": {
+        "id": "swsh12tg",
+        "name": "Silver Tempest Trainer Gallery",
+        "series": "Sword & Shield",
+        "printedTotal": 30,
+        "total": 30,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "SIT",
+        "releaseDate": "2022/11/11",
+        "updatedAt": "2022/11/11 11:45:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swsh12tg/symbol.png",
+          "logo": "https://images.pokemontcg.io/swsh12tg/logo.png"
+        }
+      },
+      "number": "TG20",
+      "artist": "Hideki Ishikawa",
+      "rarity": "Rare Holo VMAX",
+      "nationalPokedexNumbers": [
+        384
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "E",
+      "images": {
+        "small": "https://images.pokemontcg.io/swsh12tg/TG20.png",
+        "large": "https://images.pokemontcg.io/swsh12tg/TG20_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swsh12tg-TG20",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 107.21,
+            "mid": 135.7,
+            "high": 185,
+            "market": 119.92,
+            "directLow": 135.24
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swsh12tg-TG20",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 96.73,
+          "lowPrice": 35,
+          "trendPrice": 91.02,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 62,
+          "avg1": 75.25,
+          "avg7": 76.35,
+          "avg30": 97.66,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swsh12tg-TG21",
+      "name": "Duraludon VMAX",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "VMAX",
+        "Single Strike"
+      ],
+      "hp": "330",
+      "types": [
+        "Dragon"
+      ],
+      "evolvesFrom": "Duraludon V",
+      "rules": [
+        "VMAX rule: When your Pokémon VMAX is Knocked Out, your opponent takes 3 Prize cards."
+      ],
+      "abilities": [
+        {
+          "name": "Skyscraper",
+          "text": "Prevent all damage done to this Pokémon by attacks from your opponent's Pokémon that have Special Energy attached.",
+          "type": "Ability"
+        }
+      ],
+      "attacks": [
+        {
+          "name": "G-Max Pulverization",
+          "cost": [
+            "Fighting",
+            "Metal",
+            "Metal"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "220",
+          "text": "This attack's damage isn't affected by any effects on your opponent's Active Pokémon."
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 3,
+      "set": {
+        "id": "swsh12tg",
+        "name": "Silver Tempest Trainer Gallery",
+        "series": "Sword & Shield",
+        "printedTotal": 30,
+        "total": 30,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "SIT",
+        "releaseDate": "2022/11/11",
+        "updatedAt": "2022/11/11 11:45:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swsh12tg/symbol.png",
+          "logo": "https://images.pokemontcg.io/swsh12tg/logo.png"
+        }
+      },
+      "number": "TG21",
+      "artist": "AKIRA EGAWA",
+      "rarity": "Rare Holo VMAX",
+      "nationalPokedexNumbers": [
+        884
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "E",
+      "images": {
+        "small": "https://images.pokemontcg.io/swsh12tg/TG21.png",
+        "large": "https://images.pokemontcg.io/swsh12tg/TG21_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swsh12tg-TG21",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 7.97,
+            "mid": 9.95,
+            "high": 28.99,
+            "market": 9.58,
+            "directLow": 11.4
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swsh12tg-TG21",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 9.39,
+          "lowPrice": 6.49,
+          "trendPrice": 8.39,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 6.49,
+          "avg1": 7,
+          "avg7": 8.83,
+          "avg30": 9.17,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swsh12tg-TG22",
+      "name": "Blissey V",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "Basic",
+        "V"
+      ],
+      "hp": "250",
+      "types": [
+        "Colorless"
+      ],
+      "rules": [
+        "V rule: When your Pokémon V is Knocked Out, your opponent takes 2 Prize cards."
+      ],
+      "abilities": [
+        {
+          "name": "Natural Cure",
+          "text": "Whenever you attach an Energy card from your hand to this Pokémon, remove all Special Conditions from it.",
+          "type": "Ability"
+        }
+      ],
+      "attacks": [
+        {
+          "name": "Blissful Blast",
+          "cost": [
+            "Colorless"
+          ],
+          "convertedEnergyCost": 1,
+          "damage": "10+",
+          "text": "This attack does 30 more damage for each Energy attached to this Pokémon. If you did any damage with this attack, you may attach up to 3 Energy cards from your discard pile to this Pokémon."
+        }
+      ],
+      "weaknesses": [
+        {
+          "type": "Fighting",
+          "value": "×2"
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless",
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 4,
+      "set": {
+        "id": "swsh12tg",
+        "name": "Silver Tempest Trainer Gallery",
+        "series": "Sword & Shield",
+        "printedTotal": 30,
+        "total": 30,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "SIT",
+        "releaseDate": "2022/11/11",
+        "updatedAt": "2022/11/11 11:45:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swsh12tg/symbol.png",
+          "logo": "https://images.pokemontcg.io/swsh12tg/logo.png"
+        }
+      },
+      "number": "TG22",
+      "artist": "You Iribi",
+      "rarity": "Rare Holo V",
+      "nationalPokedexNumbers": [
+        242
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "E",
+      "images": {
+        "small": "https://images.pokemontcg.io/swsh12tg/TG22.png",
+        "large": "https://images.pokemontcg.io/swsh12tg/TG22_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swsh12tg-TG22",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 10,
+            "mid": 14,
+            "high": 39.99,
+            "market": 13.43,
+            "directLow": 14
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swsh12tg-TG22",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 10.82,
+          "lowPrice": 4,
+          "trendPrice": 8.95,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 5.99,
+          "avg1": 11.49,
+          "avg7": 9.14,
+          "avg30": 10.74,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swsh12tg-TG23",
+      "name": "Friends in Galar",
+      "supertype": "Trainer",
+      "subtypes": [
+        "Supporter"
+      ],
+      "rules": [
+        "Draw 3 cards.",
+        "You may play only 1 Supporter card during your turn."
+      ],
+      "set": {
+        "id": "swsh12tg",
+        "name": "Silver Tempest Trainer Gallery",
+        "series": "Sword & Shield",
+        "printedTotal": 30,
+        "total": 30,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "SIT",
+        "releaseDate": "2022/11/11",
+        "updatedAt": "2022/11/11 11:45:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swsh12tg/symbol.png",
+          "logo": "https://images.pokemontcg.io/swsh12tg/logo.png"
+        }
+      },
+      "number": "TG23",
+      "artist": "Sanosuke Sakuma",
+      "rarity": "Rare Ultra",
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "E",
+      "images": {
+        "small": "https://images.pokemontcg.io/swsh12tg/TG23.png",
+        "large": "https://images.pokemontcg.io/swsh12tg/TG23_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swsh12tg-TG23",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 6,
+            "mid": 8,
+            "high": 711,
+            "market": 7.56,
+            "directLow": 10.33
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swsh12tg-TG23",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 6.31,
+          "lowPrice": 1.79,
+          "trendPrice": 6.04,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 2.89,
+          "avg1": 6.69,
+          "avg7": 5.58,
+          "avg30": 6.2,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swsh12tg-TG24",
+      "name": "Gordie",
+      "supertype": "Trainer",
+      "subtypes": [
+        "Supporter"
+      ],
+      "rules": [
+        "Look at the top 7 cards of your deck. You may reveal any number of Energy cards you find there and put them into your hand. Shuffle the other cards back into your deck.",
+        "You may play only 1 Supporter card during your turn."
+      ],
+      "set": {
+        "id": "swsh12tg",
+        "name": "Silver Tempest Trainer Gallery",
+        "series": "Sword & Shield",
+        "printedTotal": 30,
+        "total": 30,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "SIT",
+        "releaseDate": "2022/11/11",
+        "updatedAt": "2022/11/11 11:45:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swsh12tg/symbol.png",
+          "logo": "https://images.pokemontcg.io/swsh12tg/logo.png"
+        }
+      },
+      "number": "TG24",
+      "artist": "Ryuta Fuse",
+      "rarity": "Rare Ultra",
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "E",
+      "images": {
+        "small": "https://images.pokemontcg.io/swsh12tg/TG24.png",
+        "large": "https://images.pokemontcg.io/swsh12tg/TG24_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swsh12tg-TG24",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 0.8,
+            "mid": 1.68,
+            "high": 19.99,
+            "market": 1.57,
+            "directLow": 2.42
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swsh12tg-TG24",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 2.13,
+          "lowPrice": 0.99,
+          "trendPrice": 2.33,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.99,
+          "avg1": 1.45,
+          "avg7": 1.9,
+          "avg30": 2.14,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swsh12tg-TG25",
+      "name": "Judge",
+      "supertype": "Trainer",
+      "subtypes": [
+        "Supporter"
+      ],
+      "rules": [
+        "Each player shuffles their hand into their deck and draws 4 cards.",
+        "You may play only 1 Supporter card during your turn."
+      ],
+      "set": {
+        "id": "swsh12tg",
+        "name": "Silver Tempest Trainer Gallery",
+        "series": "Sword & Shield",
+        "printedTotal": 30,
+        "total": 30,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "SIT",
+        "releaseDate": "2022/11/11",
+        "updatedAt": "2022/11/11 11:45:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swsh12tg/symbol.png",
+          "logo": "https://images.pokemontcg.io/swsh12tg/logo.png"
+        }
+      },
+      "number": "TG25",
+      "artist": "Ryuta Fuse",
+      "rarity": "Rare Ultra",
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "E",
+      "images": {
+        "small": "https://images.pokemontcg.io/swsh12tg/TG25.png",
+        "large": "https://images.pokemontcg.io/swsh12tg/TG25_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swsh12tg-TG25",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 1.65,
+            "mid": 2.69,
+            "high": 170,
+            "market": 2.33,
+            "directLow": 3.47
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swsh12tg-TG25",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 2.92,
+          "lowPrice": 1,
+          "trendPrice": 2.79,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 1,
+          "avg1": 3,
+          "avg7": 2.69,
+          "avg30": 3.03,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swsh12tg-TG26",
+      "name": "Professor Burnet",
+      "supertype": "Trainer",
+      "subtypes": [
+        "Supporter"
+      ],
+      "rules": [
+        "Search your deck for up to 2 cards and discard them. Then, shuffle your deck.",
+        "You may play only 1 Supporter card during your turn."
+      ],
+      "set": {
+        "id": "swsh12tg",
+        "name": "Silver Tempest Trainer Gallery",
+        "series": "Sword & Shield",
+        "printedTotal": 30,
+        "total": 30,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "SIT",
+        "releaseDate": "2022/11/11",
+        "updatedAt": "2022/11/11 11:45:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swsh12tg/symbol.png",
+          "logo": "https://images.pokemontcg.io/swsh12tg/logo.png"
+        }
+      },
+      "number": "TG26",
+      "artist": "kirisAki",
+      "rarity": "Rare Ultra",
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "E",
+      "images": {
+        "small": "https://images.pokemontcg.io/swsh12tg/TG26.png",
+        "large": "https://images.pokemontcg.io/swsh12tg/TG26_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swsh12tg-TG26",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 2.45,
+            "mid": 3.5,
+            "high": 20,
+            "market": 3.27,
+            "directLow": 4.91
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swsh12tg-TG26",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 3.5,
+          "lowPrice": 1.85,
+          "trendPrice": 2.99,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 1.85,
+          "avg1": 3.96,
+          "avg7": 3.16,
+          "avg30": 3.53,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swsh12tg-TG27",
+      "name": "Raihan",
+      "supertype": "Trainer",
+      "subtypes": [
+        "Supporter"
+      ],
+      "rules": [
+        "You can play this card only if any of your Pokémon were Knocked Out during your opponent's last turn. Attach a basic Energy card from your discard pile to 1 of your Pokémon. If you do, search your deck for a card and put it into your hand. Then, shuffle your deck.",
+        "You may play only 1 Supporter card during your turn."
+      ],
+      "set": {
+        "id": "swsh12tg",
+        "name": "Silver Tempest Trainer Gallery",
+        "series": "Sword & Shield",
+        "printedTotal": 30,
+        "total": 30,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "SIT",
+        "releaseDate": "2022/11/11",
+        "updatedAt": "2022/11/11 11:45:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swsh12tg/symbol.png",
+          "logo": "https://images.pokemontcg.io/swsh12tg/logo.png"
+        }
+      },
+      "number": "TG27",
+      "artist": "take",
+      "rarity": "Rare Ultra",
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "E",
+      "images": {
+        "small": "https://images.pokemontcg.io/swsh12tg/TG27.png",
+        "large": "https://images.pokemontcg.io/swsh12tg/TG27_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swsh12tg-TG27",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 2,
+            "mid": 2.99,
+            "high": 19.99,
+            "market": 2.7,
+            "directLow": 3.52
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swsh12tg-TG27",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 2.73,
+          "lowPrice": 0.75,
+          "trendPrice": 2.68,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.75,
+          "avg1": 3.66,
+          "avg7": 2.92,
+          "avg30": 2.81,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swsh12tg-TG28",
+      "name": "Sordward & Shielbert",
+      "supertype": "Trainer",
+      "subtypes": [
+        "Supporter"
+      ],
+      "rules": [
+        "Choose a Trainer card from your discard pile. Then, ask your opponent if you may put it into your hand. If yes, put that card into your hand. If no, draw 3 cards.",
+        "You may play only 1 Supporter card during your turn."
+      ],
+      "set": {
+        "id": "swsh12tg",
+        "name": "Silver Tempest Trainer Gallery",
+        "series": "Sword & Shield",
+        "printedTotal": 30,
+        "total": 30,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "SIT",
+        "releaseDate": "2022/11/11",
+        "updatedAt": "2022/11/11 11:45:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swsh12tg/symbol.png",
+          "logo": "https://images.pokemontcg.io/swsh12tg/logo.png"
+        }
+      },
+      "number": "TG28",
+      "artist": "nagimiso",
+      "rarity": "Rare Ultra",
+      "legalities": {
+        "unlimited": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "D",
+      "images": {
+        "small": "https://images.pokemontcg.io/swsh12tg/TG28.png",
+        "large": "https://images.pokemontcg.io/swsh12tg/TG28_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swsh12tg-TG28",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 0.99,
+            "mid": 1.96,
+            "high": 20,
+            "market": 1.73,
+            "directLow": 2.73
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swsh12tg-TG28",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 2.77,
+          "lowPrice": 0.7,
+          "trendPrice": 1.93,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.7,
+          "avg1": 1.45,
+          "avg7": 1.98,
+          "avg30": 2.62,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swsh12tg-TG29",
+      "name": "Rayquaza VMAX",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "VMAX",
+        "Rapid Strike"
+      ],
+      "hp": "320",
+      "types": [
+        "Dragon"
+      ],
+      "evolvesFrom": "Rayquaza V",
+      "rules": [
+        "VMAX rule: When your Pokémon VMAX is Knocked Out, your opponent takes 3 Prize cards."
+      ],
+      "abilities": [
+        {
+          "name": "Azure Pulse",
+          "text": "Once during your turn, you may discard your hand and draw 3 cards.",
+          "type": "Ability"
+        }
+      ],
+      "attacks": [
+        {
+          "name": "Max Burst",
+          "cost": [
+            "Fire",
+            "Lightning"
+          ],
+          "convertedEnergyCost": 2,
+          "damage": "20+",
+          "text": "You may discard any amount of basic Fire Energy or any amount of basic Lightning Energy from this Pokémon. This attack does 80 more damage for each card you discarded in this way."
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 2,
+      "set": {
+        "id": "swsh12tg",
+        "name": "Silver Tempest Trainer Gallery",
+        "series": "Sword & Shield",
+        "printedTotal": 30,
+        "total": 30,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "SIT",
+        "releaseDate": "2022/11/11",
+        "updatedAt": "2022/11/11 11:45:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swsh12tg/symbol.png",
+          "logo": "https://images.pokemontcg.io/swsh12tg/logo.png"
+        }
+      },
+      "number": "TG29",
+      "artist": "PLANETA Mochizuki",
+      "rarity": "Rare Secret",
+      "nationalPokedexNumbers": [
+        384
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "E",
+      "images": {
+        "small": "https://images.pokemontcg.io/swsh12tg/TG29.png",
+        "large": "https://images.pokemontcg.io/swsh12tg/TG29_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swsh12tg-TG29",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 16.49,
+            "mid": 20.64,
+            "high": 49.98,
+            "market": 19.36,
+            "directLow": 19.36
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swsh12tg-TG29",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 10.26,
+          "lowPrice": 5.5,
+          "trendPrice": 10.74,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 5.5,
+          "avg1": 8.08,
+          "avg7": 10.1,
+          "avg30": 10.42,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    },
+    {
+      "id": "swsh12tg-TG30",
+      "name": "Duraludon VMAX",
+      "supertype": "Pokémon",
+      "subtypes": [
+        "VMAX",
+        "Single Strike"
+      ],
+      "hp": "330",
+      "types": [
+        "Dragon"
+      ],
+      "evolvesFrom": "Duraludon V",
+      "rules": [
+        "VMAX rule: When your Pokémon VMAX is Knocked Out, your opponent takes 3 Prize cards."
+      ],
+      "abilities": [
+        {
+          "name": "Skyscraper",
+          "text": "Prevent all damage done to this Pokémon by attacks from your opponent's Pokémon that have Special Energy attached.",
+          "type": "Ability"
+        }
+      ],
+      "attacks": [
+        {
+          "name": "G-Max Pulverization",
+          "cost": [
+            "Fighting",
+            "Metal",
+            "Metal"
+          ],
+          "convertedEnergyCost": 3,
+          "damage": "220",
+          "text": "This attack's damage isn't affected by any effects on your opponent's Active Pokémon."
+        }
+      ],
+      "retreatCost": [
+        "Colorless",
+        "Colorless",
+        "Colorless"
+      ],
+      "convertedRetreatCost": 3,
+      "set": {
+        "id": "swsh12tg",
+        "name": "Silver Tempest Trainer Gallery",
+        "series": "Sword & Shield",
+        "printedTotal": 30,
+        "total": 30,
+        "legalities": {
+          "unlimited": "Legal",
+          "standard": "Legal",
+          "expanded": "Legal"
+        },
+        "ptcgoCode": "SIT",
+        "releaseDate": "2022/11/11",
+        "updatedAt": "2022/11/11 11:45:00",
+        "images": {
+          "symbol": "https://images.pokemontcg.io/swsh12tg/symbol.png",
+          "logo": "https://images.pokemontcg.io/swsh12tg/logo.png"
+        }
+      },
+      "number": "TG30",
+      "artist": "PLANETA Mochizuki",
+      "rarity": "Rare Secret",
+      "nationalPokedexNumbers": [
+        884
+      ],
+      "legalities": {
+        "unlimited": "Legal",
+        "standard": "Legal",
+        "expanded": "Legal"
+      },
+      "regulationMark": "E",
+      "images": {
+        "small": "https://images.pokemontcg.io/swsh12tg/TG30.png",
+        "large": "https://images.pokemontcg.io/swsh12tg/TG30_hires.png"
+      },
+      "tcgplayer": {
+        "url": "https://prices.pokemontcg.io/tcgplayer/swsh12tg-TG30",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "holofoil": {
+            "low": 1.69,
+            "mid": 3.73,
+            "high": 20,
+            "market": 2.8,
+            "directLow": 3.29
+          }
+        }
+      },
+      "cardmarket": {
+        "url": "https://prices.pokemontcg.io/cardmarket/swsh12tg-TG30",
+        "updatedAt": "2025/12/05",
+        "prices": {
+          "averageSellPrice": 1.84,
+          "lowPrice": 0.9,
+          "trendPrice": 1.73,
+          "germanProLow": 0,
+          "suggestedPrice": 0,
+          "reverseHoloSell": 0,
+          "reverseHoloLow": 0,
+          "reverseHoloTrend": 0,
+          "lowPriceExPlus": 0.93,
+          "avg1": 1.49,
+          "avg7": 1.65,
+          "avg30": 1.83,
+          "reverseHoloAvg1": 0,
+          "reverseHoloAvg7": 0,
+          "reverseHoloAvg30": 0
+        }
+      }
+    }
+  ],
+  "totalCount": 30
 }

@@ -1,11 +1,11 @@
 "use client";
 
 import { Suspense, lazy } from 'react';
-import { useEffect, useState, useCallback} from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import { useSearchParams } from "next/navigation";
-import { 
-  fetchCardsBySet, 
-  fetchSetDetails, 
+import {
+  fetchCardsBySet,
+  fetchSetDetails,
   searchCardsByType,
 } from "@/app/lib/api/pokemon";
 import { PokemonCard, PokemonSet } from "@/app/lib/api/types";
@@ -14,7 +14,7 @@ import { CircularProgress, Box } from "@mui/material";
 import SetHeader from "@/app/components/SetHeader";
 import SetSearchbar from "@/app/components/SetSearchbar";
 import HeaderToggleButton from "@/app/components/HeaderToggleButton";
-import ToTopButton from "@/app/components/ToTopButton"; 
+import ToTopButton from "@/app/components/ToTopButton";
 import CardFilters from "@/app/components/CardFilters";
 import { useLanguage } from "@/context/LanguageContext";
 import { Typography } from "@mui/material";
@@ -26,7 +26,7 @@ function PokeDexContent() {
   const { t } = useLanguage();
   const searchParams = useSearchParams();
   const [headerVisible, setHeaderVisible] = useState(true);
-  
+
   const [setId, setSetId] = useState<string | null>(null);
   const [cards, setCards] = useState<PokemonCard[]>([]);
   const [setInfo, setSetInfo] = useState<PokemonSet | null>(null);
@@ -37,7 +37,7 @@ function PokeDexContent() {
   const [displayedCards, setDisplayedCards] = useState<PokemonCard[]>([]);
   const [sortOption, setSortOption] = useState("number-asc");
   const [selectedType, setSelectedType] = useState("All Types");
-  
+
   const [isPokemonSearch, setIsPokemonSearch] = useState(false);
   const [isGlobalSearch, setIsGlobalSearch] = useState(false);
   const [globalSearchTerm, setGlobalSearchTerm] = useState('');
@@ -45,8 +45,30 @@ function PokeDexContent() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalResults, setTotalResults] = useState(0);
   const [totalPages, setTotalPages] = useState(1);
-  const [pageSize] = useState(24);
+  const [pageSize, setPageSize] = useState(24);
   const [hasMore, setHasMore] = useState(false);
+  const observerTarget = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      entries => {
+        if (entries[0].isIntersecting && hasMore && !loadingMore) {
+          handleLoadMore();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (observerTarget.current) {
+      observer.observe(observerTarget.current);
+    }
+
+    return () => {
+      if (observerTarget.current) {
+        observer.unobserve(observerTarget.current);
+      }
+    };
+  }, [hasMore, loadingMore]);
 
   useEffect(() => {
     const pokemonSearchParam = searchParams.get("pokemonSearch");
@@ -54,24 +76,32 @@ function PokeDexContent() {
       setPokemonSearchTerm(pokemonSearchParam);
       setIsPokemonSearch(true);
       setIsGlobalSearch(false);
-      setSetId(null); 
-    } 
+      setSetId(null);
+    }
     else {
       const globalSearchParam = searchParams.get("globalSearch");
       if (globalSearchParam) {
         setGlobalSearchTerm(globalSearchParam);
         setIsGlobalSearch(true);
         setIsPokemonSearch(false);
-        setSetId(null); 
+        setSetId(null);
       } else {
         setIsGlobalSearch(false);
         setIsPokemonSearch(false);
         setGlobalSearchTerm('');
         setPokemonSearchTerm('');
-        setSetId(searchParams.get("setId"));
+        const newSetId = searchParams.get("setId");
+        setSetId(newSetId);
+
+        // Load All logic: access specific set -> load 1000. Search -> 50.
+        if (newSetId) {
+          setPageSize(1000);
+        } else {
+          setPageSize(50);
+        }
       }
     }
-    
+
     setCurrentPage(1);
     setCards([]);
     setDisplayedCards([]);
@@ -84,11 +114,11 @@ function PokeDexContent() {
         setSetInfo(null);
         return;
       }
-      
+
       try {
         const fetchedSetInfo = await fetchSetDetails(setId);
         setSetInfo(fetchedSetInfo);
-        
+
         // Update document title when set info is loaded
         if (fetchedSetInfo && fetchedSetInfo.name) {
           document.title = `${fetchedSetInfo.name} - MoonDex`;
@@ -100,53 +130,53 @@ function PokeDexContent() {
 
     loadSetInfo();
   }, [setId, isGlobalSearch, isPokemonSearch]);
-  
+
   const loadCards = useCallback(async (page = 1, append = false) => {
     if (!setId && !isGlobalSearch && !isPokemonSearch) return;
-    
+
     if (page === 1) {
       setLoading(true);
     } else {
       setLoadingMore(true);
     }
-    
+
     try {
       if (isPokemonSearch) {
         const results = await searchCardsByType(pokemonSearchTerm, "all", page, pageSize);
         const calculatedTotalPages = Math.ceil(results.totalCount / results.pageSize);
-        
+
         if (append) {
           setCards(prev => [...prev, ...results.cards]);
         } else {
           setCards(results.cards);
         }
-        
+
         setTotalResults(results.totalCount);
         setHasMore(page < calculatedTotalPages);
         setTotalPages(calculatedTotalPages);
       } else if (isGlobalSearch) {
         const results = await searchCardsByType(globalSearchTerm, "all", page, pageSize);
         const calculatedTotalPages = Math.ceil(results.totalCount / results.pageSize);
-        
+
         if (append) {
           setCards(prev => [...prev, ...results.cards]);
         } else {
           setCards(results.cards);
         }
-        
+
         setTotalResults(results.totalCount);
         setHasMore(page < calculatedTotalPages);
         setTotalPages(calculatedTotalPages);
       } else {
         const results = await fetchCardsBySet(setId!, searchTerm, "all", page, pageSize);
         const calculatedTotalPages = Math.ceil(results.totalCount / results.pageSize);
-        
+
         if (append) {
           setCards(prev => [...prev, ...results.cards]);
         } else {
           setCards(results.cards);
         }
-        
+
         setTotalResults(results.totalCount);
         setHasMore(page < calculatedTotalPages);
         setTotalPages(calculatedTotalPages);
@@ -158,15 +188,15 @@ function PokeDexContent() {
       setLoadingMore(false);
     }
   }, [
-    setId, 
-    searchTerm, 
-    isGlobalSearch, 
-    isPokemonSearch, 
-    globalSearchTerm, 
+    setId,
+    searchTerm,
+    isGlobalSearch,
+    isPokemonSearch,
+    globalSearchTerm,
     pokemonSearchTerm,
     pageSize
   ]);
-  
+
   useEffect(() => {
     loadCards(1, false);
   }, [loadCards]);
@@ -176,23 +206,23 @@ function PokeDexContent() {
       setDisplayedCards([]);
       return;
     }
-    
+
     let filteredCards = [...cards];
-    
+
     if (selectedType !== "All Types") {
-      filteredCards = filteredCards.filter(card => 
-        card.types && card.types.includes(selectedType)
-      );
+      filteredCards = filteredCards.filter((card) => {
+        return card.types && card.types.includes(selectedType);
+      });
     }
-    
+
     const sortedCards = sortCards(filteredCards, sortOption);
     setDisplayedCards(sortedCards);
-    
+
     if (!loading && !loadingMore) {
       setIsSearching(false);
     }
   }, [cards, sortOption, selectedType, loading, loadingMore]);
-  
+
   useEffect(() => {
     // Update title based on search/set info
     if (setId && setInfo && setInfo.name) {
@@ -204,16 +234,16 @@ function PokeDexContent() {
     } else {
       document.title = "MoonDex";
     }
-    
+
     return () => {
       // Reset title when component unmounts
       document.title = "MoonDex";
     };
   }, [setId, setInfo, isGlobalSearch, isPokemonSearch, pokemonSearchTerm, globalSearchTerm]);
-  
+
   const handleSearch = useCallback((term: string) => {
-    if (isGlobalSearch || isPokemonSearch) return; 
-    
+    if (isGlobalSearch || isPokemonSearch) return;
+
     setIsSearching(true);
     setSearchTerm(term);
 
@@ -232,7 +262,7 @@ function PokeDexContent() {
   const handleSortChange = (value: string) => {
     setSortOption(value);
   };
-  
+
   const handleTypeChange = (type: string) => {
     setSelectedType(type);
   };
@@ -241,18 +271,18 @@ function PokeDexContent() {
     return (
       <div className="text-center py-12">
         <p className="text-lg text-gray-300">
-          {isPokemonSearch 
+          {isPokemonSearch
             ? `${t("search.noResults")} "${pokemonSearchTerm}".`
-            : isGlobalSearch 
+            : isGlobalSearch
               ? `${t("search.noResults")} "${globalSearchTerm}".`
               : selectedType !== "All Types"
                 ? `${t("search.noResults")} ${selectedType} ${t("search.typeCards")}${searchTerm ? ` ${t("search.for")} "${searchTerm}"` : ""}.`
-                : searchTerm 
-                  ? `${t("search.noResults")} ${t("search.for")} "${searchTerm}".` 
+                : searchTerm
+                  ? `${t("search.noResults")} ${t("search.for")} "${searchTerm}".`
                   : t("search.noResults")}
         </p>
         {(isPokemonSearch || isGlobalSearch || searchTerm || selectedType !== "All Types") && (
-          <button 
+          <button
             onClick={() => {
               if (isPokemonSearch || isGlobalSearch) {
                 window.history.back();
@@ -264,10 +294,10 @@ function PokeDexContent() {
             }}
             className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors"
           >
-            {isPokemonSearch || isGlobalSearch 
-              ? t("app.backToHome") 
-              : selectedType !== "All Types" 
-                ? "Show All Types" 
+            {isPokemonSearch || isGlobalSearch
+              ? t("app.backToHome")
+              : selectedType !== "All Types"
+                ? "Show All Types"
                 : t("search.clear")}
           </button>
         )}
@@ -283,7 +313,7 @@ function PokeDexContent() {
         </div>
       );
     }
-    
+
     if (isSearching) {
       return (
         <div className="flex justify-center items-center h-64">
@@ -291,9 +321,10 @@ function PokeDexContent() {
         </div>
       );
     }
-    
+
     return null;
   };
+
 
   if (!setId && !isGlobalSearch && !isPokemonSearch) {
     return (
@@ -304,16 +335,16 @@ function PokeDexContent() {
   }
 
   const loadingState = renderLoadingState();
-  
+
   return (
     <div className="container mx-auto px-2 sm:px-4 py-2 sm:py-4">
       <div className="sticky top-0 z-10 bg-[#1A1A1A] pb-2 sm:pb-4">
         {!isPokemonSearch && !isGlobalSearch && setInfo && (
           <div className="relative pt-0">
-            {headerVisible && <SetHeader setInfo={setInfo} />}
-            
-            <HeaderToggleButton 
-              isVisible={headerVisible} 
+            {headerVisible && <SetHeader setInfo={setInfo} cards={cards} />}
+
+            <HeaderToggleButton
+              isVisible={headerVisible}
               onClick={() => setHeaderVisible(!headerVisible)}
               setName={setInfo.name}
             />
@@ -329,19 +360,19 @@ function PokeDexContent() {
             {t("search.resultsFor")} &quot;{globalSearchTerm}&quot;
           </h1>
         ) : null}
-        
+
         {!isGlobalSearch && !isPokemonSearch && (
           <div className="pb-2 sm:pb-4 px-2">
             <div className="flex flex-col sm:flex-row gap-3 items-center">
               <div className="w-full sm:w-8/12">
-                <SetSearchbar 
-                  onSearch={handleSearch} 
+                <SetSearchbar
+                  onSearch={handleSearch}
                   value={searchTerm}
                   placeholder={t("search.set.placeholder")}
                   isLoading={isSearching || loading}
                 />
               </div>
-              
+
               {!loading && cards.length > 0 && (
                 <div className="w-full sm:w-4/12 flex justify-center sm:justify-end">
                   <CardFilters
@@ -357,7 +388,7 @@ function PokeDexContent() {
           </div>
         )}
       </div>
-      
+
       {loadingState || (
         <>
           {displayedCards.length === 0 ? (
@@ -365,18 +396,20 @@ function PokeDexContent() {
           ) : (
             <div className="px-2">
               <p className="mb-2 sm:mb-4 text-sm sm:text-base text-gray-400">
-                {displayedCards.length} {displayedCards.length === 1 ? t("set.cards").slice(0, -1) : t("set.cards")} {t("search.found")}
+                {totalResults} {totalResults === 1 ? t("set.cards").slice(0, -1) : t("set.cards")} {t("search.found")}
                 {selectedType !== "All Types" && ` (${selectedType} ${t("filter.type").toLowerCase()})`}
-                {isPokemonSearch 
+                {isPokemonSearch
                   ? ` ${t("search.for")} "${pokemonSearchTerm}"`
-                  : isGlobalSearch 
-                    ? ` ${t("search.for")} "${globalSearchTerm}"` 
+                  : isGlobalSearch
+                    ? ` ${t("search.for")} "${globalSearchTerm}"`
                     : searchTerm && ` ${t("search.for")} "${searchTerm}"`}
-                {totalResults > displayedCards.length && selectedType === "All Types" && ` (${displayedCards.length} ${t("search.loaded")})`}
+                <span className="ml-2 opacity-75">
+                  ({t("search.showing")} {displayedCards.length} {t("search.of")} {totalResults})
+                </span>
               </p>
-              
+
               <Suspense fallback={
-                <Box 
+                <Box
                   sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 4, minHeight: '300px' }}
                 >
                   <CircularProgress sx={{ color: "#8A3F3F" }} />
@@ -384,7 +417,7 @@ function PokeDexContent() {
               }>
                 <CardGrid cards={displayedCards} baseRoute="/pokedex" />
               </Suspense>
-              
+
               {hasMore && (
                 <div className="flex justify-center mt-8">
                   <button
@@ -403,6 +436,9 @@ function PokeDexContent() {
                   </button>
                 </div>
               )}
+
+              {/* Invisible element for infinite scroll observation */}
+              {hasMore && <div ref={observerTarget} className="h-10 w-full" />}
             </div>
           )}
         </>

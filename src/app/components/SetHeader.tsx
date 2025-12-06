@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { fetchCardsBySet } from "@/app/lib/api/pokemon";
-import { PokemonSet} from "@/app/lib/api/types";
+// import { fetchCardsBySet } from "@/app/lib/api/pokemon"; // Removed internal fetch
+import { PokemonSet, PokemonCard } from "@/app/lib/api/types";
 import { formatDate } from "@/app/lib/utils";
 import { CircularProgress } from "@mui/material";
 import Image from "next/image";
@@ -10,19 +10,21 @@ import { useLanguage } from "@/context/LanguageContext";
 
 interface SetHeaderProps {
   setInfo: PokemonSet;
+  cards: PokemonCard[];
 }
 
-export default function SetHeader({ setInfo }: SetHeaderProps) {
+export default function SetHeader({ setInfo, cards }: SetHeaderProps) {
   const { t } = useLanguage();
   const [totalValue, setTotalValue] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const calculateSetValue = async () => {
+    const calculateSetValue = () => {
       setLoading(true);
       try {
-        const response = await fetchCardsBySet(setInfo.id);
-        const cards = response.cards;
+        // Use passed cards directly
+        // const response = await fetchCardsBySet(setInfo.id);
+        // const cards = response.cards;
 
         let sum = 0;
         let validPrices = 0;
@@ -32,7 +34,7 @@ export default function SetHeader({ setInfo }: SetHeaderProps) {
             card.cardmarket?.prices?.trendPrice ||
             card.cardmarket?.prices?.averageSellPrice ||
             card.cardmarket?.prices?.lowPrice ||
-            card.tcgplayer?.prices?.normal?.market || 
+            card.tcgplayer?.prices?.normal?.market ||
             card.tcgplayer?.prices?.normal?.low;
 
           if (price && price > 0) {
@@ -54,8 +56,10 @@ export default function SetHeader({ setInfo }: SetHeaderProps) {
       }
     };
 
-    calculateSetValue();
-  }, [setInfo.id]);
+    if (cards && cards.length > 0) {
+      calculateSetValue();
+    }
+  }, [cards, setInfo.id]);
 
   return (
     <div
@@ -71,16 +75,16 @@ export default function SetHeader({ setInfo }: SetHeaderProps) {
       <div className="flex flex-col md:flex-row items-center gap-4">
         {/* Set Logo */}
         <div className="flex-shrink-0">
-        {setInfo.images?.logo && (
-        <div className="h-16 md:h-20 relative">
-          <Image
-            src={setInfo.images.logo}
-            alt={`${setInfo.name} logo`}
-            width={80} 
-            height={80} 
-            className="h-full object-contain"
-          />
-        </div>
+          {setInfo.images?.logo && (
+            <div className="h-16 md:h-20 relative">
+              <Image
+                src={setInfo.images.logo}
+                alt={`${setInfo.name} logo`}
+                width={80}
+                height={80}
+                className="h-full object-contain"
+              />
+            </div>
           )}
         </div>
 
@@ -134,11 +138,10 @@ export default function SetHeader({ setInfo }: SetHeaderProps) {
           {Object.entries(setInfo.legalities).map(([format, status]) => (
             <span
               key={format}
-              className={`px-2 py-0.5 text-xs rounded ${
-                status === "Legal"
+              className={`px-2 py-0.5 text-xs rounded ${status === "Legal"
                   ? "bg-green-900 bg-opacity-20 text-green-400 border border-green-800"
                   : "bg-red-900 bg-opacity-20 text-red-400 border border-red-800"
-              }`}
+                }`}
             >
               {format.charAt(0).toUpperCase() + format.slice(1)}: {status}
             </span>
